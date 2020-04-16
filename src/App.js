@@ -10,9 +10,9 @@ import Feed from './layouts/Feed';
 import Sidebar from './layouts/Sidebar';
 
 const Container = styled.div`
-	width: 100vw;
-	height: 100vh;
-	background: red;
+	width: 100%;
+	height: 100%;
+	background: #dae0e6;
 `;
 
 function App() {
