@@ -37,4 +37,11 @@ img {
 	height: auto;
 }
 
+button,
+button:active,
+input:active,
+input {
+	outline: none;
+}
+
 /*//////////// RESET ////////////*/
