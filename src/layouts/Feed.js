@@ -10,6 +10,8 @@ export default function Feed() {
 	return (
 		<Container>
 			<Post />
+			<Post />
+			<Post />
 		</Container>
 	);
 }

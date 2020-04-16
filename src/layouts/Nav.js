@@ -42,7 +42,6 @@ const button = styled.button`
 	text-align: center;
 	text-transform: uppercase;
 	line-height: 24px;
-	white-space: nowrap;
 	margin: 0 4px;
 	&&:hover {
 		cursor: pointer;
