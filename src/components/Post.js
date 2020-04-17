@@ -37,7 +37,8 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h2`
-	padding: 0 0 20px 40px;
+	padding: 0 8px 20px 40px;
+	font-size: 20px;
 `;
 
 const JoinContainer = styled.div`
@@ -54,6 +55,15 @@ const JoinBtn = styled.button`
 	background-color: #0079d3;
 	border: 1px solid white;
 	border-radius: 4px;
+	margin-bottom: 8px;
+	float: right;
+`;
+
+const LinkPreview = styled.div`
+	width: 142px;
+	height: 98px;
+	background: lightgray;
+	margin-top: 32px;
 `;
 
 const ActionContainer = styled.div`
@@ -79,7 +89,7 @@ const Comment = styled(ActionButton)``;
 const Share = styled(ActionButton)``;
 const Save = styled(ActionButton)``;
 
-export default function Post() {
+export default function Post({ title, subreddit, author, id, url }) {
 	return (
 		<Container>
 			<VoteArrowContainer>
@@ -91,17 +101,13 @@ export default function Post() {
 
 			<ContentContainer>
 				<InfoContainer>
-					<p>slash r subreddit</p>
+					<p>{subreddit}</p>
 					<p>•</p>
-					<p>Posted by username</p>
+					<p>Posted by {author}</p>
 					<p>awards</p>
 				</InfoContainer>
 
-				<Title>
-					TIL of the unofficial Russian book The Last Ringbearer which
-					describes The Lord of the Rings trilogy from Sauron's point
-					of view and portrays Mordor as the good guys
-				</Title>
+				<Title>{title}</Title>
 
 				<ActionContainer>
 					<Comment>comment</Comment>
@@ -112,6 +118,7 @@ export default function Post() {
 
 			<JoinContainer>
 				<JoinBtn>+ Join</JoinBtn>
+				<LinkPreview></LinkPreview>
 			</JoinContainer>
 		</Container>
 	);

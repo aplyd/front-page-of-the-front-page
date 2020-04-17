@@ -6,12 +6,21 @@ const Container = styled.div`
 	grid-column: 1;
 `;
 
-export default function Feed() {
+export default function Feed({ data }) {
 	return (
 		<Container>
-			<Post />
-			<Post />
-			<Post />
+			{data &&
+				data.map((post) => {
+					return (
+						<Post
+							title={post.data.title}
+							subreddit={post.data.subreddit_name_prefixed}
+							author={post.data.author}
+							key={post.data.id}
+							url={post.data.url}
+						/>
+					);
+				})}
 		</Container>
 	);
 }

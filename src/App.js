@@ -18,20 +18,22 @@ const Container = styled.div`
 function App() {
 	const [data, setData] = useState();
 
-	const getFrontPageData = () => {
-		axios
-			.get('https://www.reddit.com/.json')
-			.then((res) => setData(res.data.data.children))
-			.catch((err) => console.log(err));
-	};
+	useEffect(() => {
+		const getFrontPageData = () => {
+			axios
+				.get('https://www.reddit.com/.json')
+				.then((res) => setData(res.data.data.children))
+				.catch((err) => console.log(err));
+		};
 
-	getFrontPageData();
+		getFrontPageData();
+	}, [data]);
 
 	return (
 		<React.Fragment>
 			<Container>
 				<Nav />
-				<FeedContainer>
+				<FeedContainer data={data}>
 					<FeedFilter />
 					<Sidebar />
 					<Feed />
