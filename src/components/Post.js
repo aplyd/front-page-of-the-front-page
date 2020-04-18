@@ -6,30 +6,36 @@ const Container = styled.div`
 	background: white;
 	border: 1px solid lightgray;
 	border-radius: 4px;
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 10px;
+	display: grid;
+	grid-template-columns: 40px 1fr 154px;
+	grid-template-rows: 1fr 32px;
+	margin-bottom: 12px;
+`;
+
+const VoteArrowContainer = styled.div`
+	height: 100%;
+
+	color: gray;
+	grid-column: 1;
+	&& > div {
+		padding: 20px 0 0 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 `;
 
 const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-`;
-
-const VoteArrowContainer = styled.div`
-	padding: 8px 4px 8px 4px;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	width: 32px;
-	align-items: center;
-	color: gray;
+	grid-column: 2;
 `;
 
 const InfoContainer = styled.div`
 	display: flex;
 	flex-direction: row;
-	padding: 8px 8px 8px 40px;
+	padding: 8px 8px 8px 30px;
+	grid-column: 3;
 	&& > p {
 		padding-right: 8px;
 		color: gray;
@@ -37,7 +43,7 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h2`
-	padding: 0 8px 20px 40px;
+	padding: 4px 8px 20px 30px;
 	font-size: 20px;
 `;
 
@@ -64,13 +70,18 @@ const LinkPreview = styled.div`
 	height: 98px;
 	background: lightgray;
 	margin-top: 32px;
+	background: white;
+	border: 1px solid #0079d3;
+	border-radius: 4px;
 `;
 
 const ActionContainer = styled.div`
 	display: flex;
 	flex-direction: row;
-	padding-left: 40px;
+	padding-left: 30px;
 	border: none;
+	grid-column: 2;
+	grid-row: 2;
 `;
 
 const ActionButton = styled.button`
@@ -89,14 +100,16 @@ const Comment = styled(ActionButton)``;
 const Share = styled(ActionButton)``;
 const Save = styled(ActionButton)``;
 
-export default function Post({ title, subreddit, author, id, url }) {
+export default function Post({ title, subreddit, author, preview, url }) {
 	return (
 		<Container>
 			<VoteArrowContainer>
 				{/* <VoteArrows></VoteArrows> */}
-				<p>^</p>
-				<p>30.1k</p>
-				<p>V</p>
+				<div>
+					<p>^</p>
+					<p>30.1k</p>
+					<p>V</p>
+				</div>
 			</VoteArrowContainer>
 
 			<ContentContainer>
@@ -108,17 +121,17 @@ export default function Post({ title, subreddit, author, id, url }) {
 				</InfoContainer>
 
 				<Title>{title}</Title>
-
-				<ActionContainer>
-					<Comment>comment</Comment>
-					<Share>share</Share>
-					<Save>save</Save>
-				</ActionContainer>
 			</ContentContainer>
+
+			<ActionContainer>
+				<Comment>comment</Comment>
+				<Share>share</Share>
+				<Save>save</Save>
+			</ActionContainer>
 
 			<JoinContainer>
 				<JoinBtn>+ Join</JoinBtn>
-				<LinkPreview></LinkPreview>
+				<LinkPreview src={preview ? preview : null}></LinkPreview>
 			</JoinContainer>
 		</Container>
 	);

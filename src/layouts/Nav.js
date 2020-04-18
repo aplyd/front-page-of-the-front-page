@@ -60,14 +60,16 @@ const SignInBtn = styled(button)`
 	border: 1px solid white;
 `;
 
-export default function Nav() {
+export default function Nav({ loadRedditData }) {
 	return (
 		<Container>
 			<Circle />
 
-			<Search type="text" placeholder="search" />
+			<Search type="text" placeholder="Search" />
 
-			<LoginBtn type="button">log in</LoginBtn>
+			<LoginBtn type="button" onClick={loadRedditData}>
+				log in
+			</LoginBtn>
 			<SignInBtn type="button">sign up</SignInBtn>
 		</Container>
 	);

@@ -6,11 +6,11 @@ const Container = styled.div`
 	grid-column: 1;
 `;
 
-export default function Feed({ data }) {
+export default function Feed({ redditData, posts }) {
 	return (
 		<Container>
-			{data &&
-				data.map((post) => {
+			{posts &&
+				posts.map((post) => {
 					return (
 						<Post
 							title={post.data.title}
@@ -18,6 +18,9 @@ export default function Feed({ data }) {
 							author={post.data.author}
 							key={post.data.id}
 							url={post.data.url}
+							preview={
+								post.data.preview ? post.data.preview : null
+							}
 						/>
 					);
 				})}
