@@ -32,12 +32,13 @@ const usePosts = () => {
 			.catch((err) => console.log(err))
 			.finally(() => setPosts(newPosts));
 	}, []);
+
+	return posts;
 };
 
 function App() {
 	const [redditData, setRedditData] = useState();
 	const posts = usePosts();
-	console.log(posts);
 
 	const loadRedditData = () => {
 		// firebase.firestore().collection('posts').add({
