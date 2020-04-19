@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import FeedFilter from './FeedFilter';
+import FeedSort from './FeedSort';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
 
@@ -26,7 +26,7 @@ export default function FeedContainer({ redditData, posts }) {
 
 	return (
 		<Container>
-			<FeedFilter />
+			<FeedSort/> 
 			{width > 960 ? <Sidebar /> : null}
 			<Feed redditData={redditData} posts={posts} />
 		</Container>

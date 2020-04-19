@@ -8,6 +8,7 @@ const Container = styled.div`
 	flex-direction: row;
 	align-items: center;
 	padding: 0 20px;
+	font-family: ${(props) => props.theme.font.family[0]};
 `;
 
 const Circle = styled.div`
@@ -23,9 +24,9 @@ const Search = styled.input`
 	height: 36px;
 	width: 100%;
 	border-radius: 4px;
-	border: none;
 	font-size: 16px;
 	text-indent: 10px;
+	border: none;
 	max-width: 598px;
 	margin: 0 auto;
 	&&:hover {
@@ -33,31 +34,18 @@ const Search = styled.input`
 	}
 `;
 
-const button = styled.button`
-	width: auto;
-	height: auto;
-	border-radius: 4px;
-	padding: 3px 16px 3px 16px;
-	font-size: 12px;
-	text-align: center;
-	text-transform: uppercase;
-	line-height: 24px;
-	margin: 0 4px;
-	&&:hover {
-		cursor: pointer;
-	}
-`;
-
-const LoginBtn = styled(button)`
-	color: #0079d3;
+const LoginBtn = styled.button`
+	color: ${(props) => props.theme.colors.blue};
 	background-color: white;
-	border: 1px solid #0079d3;
+	border: 1px solid ${(props) => props.theme.colors.blue};
+	line-height: 24px;
 `;
 
-const SignInBtn = styled(button)`
+const SignInBtn = styled.button`
 	color: white;
-	background-color: #0079d3;
+	background-color: ${(props) => props.theme.colors.blue};
 	border: 1px solid white;
+	line-height: 24px;
 `;
 
 export default function Nav({ loadRedditData }) {

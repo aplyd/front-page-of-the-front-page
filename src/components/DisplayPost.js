@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { roundedGreyBorder } from '../GlobalStyle';
 
 const Container = styled.div`
 	width: 100%;
-	background: white;
-	border: 1px solid lightgray;
-	border-radius: 4px;
+	${roundedGreyBorder}
 	display: grid;
 	grid-template-columns: 40px 1fr 154px;
 	grid-template-rows: 1fr 32px;
@@ -100,7 +99,13 @@ const Comment = styled(ActionButton)``;
 const Share = styled(ActionButton)``;
 const Save = styled(ActionButton)``;
 
-export default function Post({ title, subreddit, author, preview, url }) {
+export default function DisplayPost({
+	title,
+	subreddit,
+	author,
+	preview,
+	url,
+}) {
 	return (
 		<Container>
 			<VoteArrowContainer>
