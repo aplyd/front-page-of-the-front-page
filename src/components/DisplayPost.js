@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
+import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 
 const Container = styled.div`
 	width: 100%;
@@ -99,6 +100,18 @@ const Comment = styled(ActionButton)``;
 const Share = styled(ActionButton)``;
 const Save = styled(ActionButton)``;
 
+const Vote = styled.p`
+	font-size: ${(props) => props.theme.font.size.xs};
+	padding: 6px 0;
+`;
+
+const SVG = styled.svg`
+	&&:hover {
+		color: ${(props) => props.theme.colors.red};
+		background-color: ${(props) => props.theme.colors.lightGray};
+	}
+`;
+
 export default function DisplayPost({
 	title,
 	subreddit,
@@ -109,11 +122,11 @@ export default function DisplayPost({
 	return (
 		<Container>
 			<VoteArrowContainer>
-				{/* <VoteArrows></VoteArrows> */}
+				{/* <VoteArros></VoteArros> */}
 				<div>
-					<p>^</p>
-					<p>30.1k</p>
-					<p>V</p>
+					<SVG as={GoArrowUp} />
+					<Vote>30.1k</Vote>
+					<SVG as={GoArrowDown} />
 				</div>
 			</VoteArrowContainer>
 

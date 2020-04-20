@@ -7,12 +7,6 @@ const Container = styled.div`
 `;
 
 export default function Feed({ redditData, posts }) {
-	const sortPosts = () => {
-		//TODO - add timestamps to posts and sort before mapping over to display
-	};
-
-	const result = '2' - 2;
-	console.log(result);
 	return (
 		<Container>
 			{posts &&
@@ -23,6 +17,7 @@ export default function Feed({ redditData, posts }) {
 							// subreddit={post.data.subreddit_name_prefixed}
 							// author={post.data.author}
 							key={post.id}
+							id={post.id}
 							// url={post.data.url}
 							// preview={
 							// 	post.preview ? post.preview : null

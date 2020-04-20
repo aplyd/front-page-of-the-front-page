@@ -7,13 +7,13 @@ const theme = {
 		blue: '#0079d3',
 		black: '#000',
 		gray: '#707070',
-		lightGray: '#404040',
+		lightGray: 'rgb(215, 215, 215)',
 		backgroundBlue: '#dae0e6',
 	},
 	font: {
 		family: ['"IBM Plex Sans", sans-serif'],
 		size: {
-			xs: '14px',
+			xs: '12px',
 			s: '16px',
 			m: '18px',
 			l: '20px',
