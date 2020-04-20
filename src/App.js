@@ -29,7 +29,7 @@ export const Container = styled.div`
 const SORT_OPTIONS = {
 	TIME_ASC: { column: 'timestamp', direction: 'asc' },
 	TIME_DESC: { column: 'timestamp', direction: 'desc' },
-	// VOTE_ASC: { column: 'vote', direction: 'asc' },
+	VOTE_ASC: { column: 'vote', direction: 'asc' },
 };
 
 function App() {
@@ -39,6 +39,7 @@ function App() {
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 
+	//if user doesn't exist, create user
 	useEffect(() => {
 		const storeUser = () => {
 			if (!localStorage.getItem('user')) {
@@ -51,9 +52,9 @@ function App() {
 		return () => storeUser();
 	}, [user]);
 
+	//get posts from firebase
 	useEffect(() => {
 		const newPosts = [];
-		// console.log(SORT_OPTIONS[sortBy].column);
 		const subscribe = () => {
 			firebase
 				.firestore()
