@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import firebase from '../firebase';
+import { useHistory } from 'react-router-dom';
 
 const FormContainer = styled.form`
 	padding: 20px;
@@ -29,23 +30,28 @@ const CancelBtn = styled(Button)``;
 const SubmitBtn = styled(Button)``;
 
 //TODO - trigger rerender of App.js after posting
-export default function CreatePost(props) {
+export default function CreatePost({ props, setUpdatePosts }) {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
+	const history = useHistory();
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 
-		firebase.firestore().collection('posts').add({
-			title,
-			postText,
-			timestamp: Date.now(),
-		});
-
+		firebase
+			.firestore()
+			.collection('posts')
+			.add({
+				title,
+				postText,
+				timestamp: Date.now(),
+			})
+			.then(() => {
+				setUpdatePosts(Date.now());
+				history.push('/');
+			});
 		setTitle('');
 		setPostText('');
-
-		props.updatePosts(Date.now());
 	};
 
 	return (

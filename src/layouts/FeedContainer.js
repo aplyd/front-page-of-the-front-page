@@ -26,7 +26,7 @@ export default function FeedContainer({ redditData, posts }) {
 
 	return (
 		<Container>
-			<FeedSort/> 
+			<FeedSort />
 			{width > 960 ? <Sidebar /> : null}
 			<Feed redditData={redditData} posts={posts} />
 		</Container>

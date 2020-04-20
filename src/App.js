@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -8,8 +9,10 @@ import Nav from './layouts/Nav';
 import FeedContainer from './layouts/FeedContainer';
 import CreatePost from './components/CreatePost';
 import { GlobalStyle } from './GlobalStyle';
+import Submit from './pages/Submit';
+import Home from './pages/Home';
 
-const Container = styled.div`
+export const Container = styled.div`
 	width: 100%;
 	height: 100%;
 	background: ${(props) => props.theme.colors.backgroundBlue};
@@ -20,9 +23,9 @@ const Container = styled.div`
 //https://www.reddit.com/r/redditdev/comments/34t0df/creating_account_through_api/
 
 function App() {
-	const [redditData, setRedditData] = useState();
+	const [redditData, setRedditData] = useState([]);
 	const [posts, setPosts] = useState([]);
-	const [updatePosts, setUpdatePosts] = useState(false);
+	const [updatePosts, setUpdatePosts] = useState();
 
 	useEffect(() => {
 		const newPosts = [];
@@ -55,20 +58,34 @@ function App() {
 		// 		.then((res) => setRedditData(res.data.data.children))
 		// 		.catch((err) => console.log(err));
 		// }, []);
+		console.log('load');
 	};
 
 	return (
-		<React.Fragment>
+		<Router>
 			<GlobalStyle />
-			<Container>
-				<Nav loadRedditData={loadRedditData} />
-				<CreatePost updatePosts={setUpdatePosts} />
-				<FeedContainer
-					redditData={redditData}
-					posts={posts}
-				></FeedContainer>
-			</Container>
-		</React.Fragment>
+			<Switch>
+				<Route
+					exact
+					path="/"
+					component={(props) => (
+						<Home
+							{...props}
+							loadRedditData={loadRedditData}
+							posts={posts}
+							redditData={redditData}
+						/>
+					)}
+				/>
+				<Route
+					exact
+					path="/submit"
+					component={(props) => (
+						<Submit {...props} setUpdatePosts={setUpdatePosts} />
+					)}
+				/>
+			</Switch>
+		</Router>
 	);
 }
 
