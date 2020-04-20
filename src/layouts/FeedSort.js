@@ -25,18 +25,12 @@ const Container = styled.div`
 	}
 `;
 
-const SORT_OPTIONS = {
-	TIME_ASC: { column: 'time', direction: 'asc' },
-	TIME_DESC: { column: 'time', direction: 'desc' },
-	VOTE_ASC: { column: 'vote', direction: 'asc' },
-};
-
-export default function FeedSort() {
+export default function FeedSort({ sortPosts }) {
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 
 	return (
 		<Container>
-			<div onChange={(e) => setSortBy(e.target.value)}>
+			<div onChange={(e) => sortPosts(e.target.value)}>
 				<label>
 					new
 					<input type="radio" name="sort" value="TIME_ASC" />

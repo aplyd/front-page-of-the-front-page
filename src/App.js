@@ -19,20 +19,32 @@ export const Container = styled.div`
 `;
 
 //TODO - get official reddit api?
-//TODO - if you dont have a reddit account, you can comment and it will create an account w username and pass
+//TODO - if you dont have a reddit account, you can comment anon (CREATE ANON ABILITY)
 //https://www.reddit.com/r/redditdev/comments/34t0df/creating_account_through_api/
+
+const SORT_OPTIONS = {
+	TIME_ASC: { column: 'timestamp', direction: 'asc' },
+	TIME_DESC: { column: 'timestamp', direction: 'desc' },
+	// VOTE_ASC: { column: 'vote', direction: 'asc' },
+};
 
 function App() {
 	const [redditData, setRedditData] = useState([]);
 	const [posts, setPosts] = useState([]);
 	const [updatePosts, setUpdatePosts] = useState();
+	const [sortBy, setSortBy] = useState('TIME_ASC');
 
 	useEffect(() => {
 		const newPosts = [];
+		// console.log(SORT_OPTIONS[sortBy].column);
 		const subscribe = () => {
 			firebase
 				.firestore()
 				.collection('posts')
+				.orderBy(
+					SORT_OPTIONS[sortBy].column,
+					SORT_OPTIONS[sortBy].direction
+				)
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
@@ -44,7 +56,7 @@ function App() {
 		};
 		subscribe();
 		return () => subscribe();
-	}, [updatePosts]);
+	}, [sortBy, updatePosts]);
 
 	const loadRedditData = () => {
 		// firebase.firestore().collection('posts').add({
@@ -61,6 +73,11 @@ function App() {
 		console.log('load');
 	};
 
+	const sortPosts = (sortBy) => {
+		setSortBy(sortBy);
+		setUpdatePosts(Date.now());
+	};
+
 	return (
 		<Router>
 			<GlobalStyle />
@@ -74,6 +91,7 @@ function App() {
 							loadRedditData={loadRedditData}
 							posts={posts}
 							redditData={redditData}
+							sortPosts={sortPosts}
 						/>
 					)}
 				/>
