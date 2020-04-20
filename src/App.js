@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import styled from 'styled-components';
 import firebase from './firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 import Nav from './layouts/Nav';
 import FeedContainer from './layouts/FeedContainer';
@@ -29,10 +30,23 @@ const SORT_OPTIONS = {
 };
 
 function App() {
+	const Context = createContext({});
+	const [user, setUser] = useState(uuidv4());
 	const [redditData, setRedditData] = useState([]);
 	const [posts, setPosts] = useState([]);
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
+
+	useEffect(() => {
+		const storeUser = () => {
+			if (!localStorage.getItem('user')) {
+				localStorage.setItem('user', user);
+			}
+		};
+
+		storeUser();
+		return () => storeUser();
+	}, []);
 
 	useEffect(() => {
 		const newPosts = [];
@@ -79,31 +93,36 @@ function App() {
 	};
 
 	return (
-		<Router>
-			<GlobalStyle />
-			<Switch>
-				<Route
-					exact
-					path="/"
-					component={(props) => (
-						<Home
-							{...props}
-							loadRedditData={loadRedditData}
-							posts={posts}
-							redditData={redditData}
-							sortPosts={sortPosts}
-						/>
-					)}
-				/>
-				<Route
-					exact
-					path="/submit"
-					component={(props) => (
-						<Submit {...props} setUpdatePosts={setUpdatePosts} />
-					)}
-				/>
-			</Switch>
-		</Router>
+		<Context.Provider>
+			<Router>
+				<GlobalStyle />
+				<Switch>
+					<Route
+						exact
+						path="/"
+						component={(props) => (
+							<Home
+								{...props}
+								loadRedditData={loadRedditData}
+								posts={posts}
+								redditData={redditData}
+								sortPosts={sortPosts}
+							/>
+						)}
+					/>
+					<Route
+						exact
+						path="/submit"
+						component={(props) => (
+							<Submit
+								{...props}
+								setUpdatePosts={setUpdatePosts}
+							/>
+						)}
+					/>
+				</Switch>
+			</Router>
+		</Context.Provider>
 	);
 }
 
