@@ -21,13 +21,20 @@ export default function FeedContainer({ redditData, posts, sortPosts }) {
 	const [width, setWidth] = useState(window.innerWidth);
 
 	useEffect(() => {
-		window.addEventListener('resize', () => setWidth(window.innerWidth));
+		const handleResize = () => {
+			setWidth(window.innerWidth);
+		};
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
 	}, []);
 
 	return (
 		<Container>
 			<FeedSort sortPosts={sortPosts} />
 			{width > 960 ? <Sidebar /> : null}
+			{/* <Sidebar style={width > 960 ? null : 'visibility: hidden'} /> */}
 			<Feed redditData={redditData} posts={posts} />
 		</Container>
 	);

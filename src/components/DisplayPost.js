@@ -102,7 +102,7 @@ const Save = styled(ActionButton)``;
 
 const Vote = styled.p`
 	font-size: ${(props) => props.theme.font.size.xs};
-	padding: 6yarnpx 0;
+	padding: 6px 0;
 `;
 
 const SVG = styled.svg`

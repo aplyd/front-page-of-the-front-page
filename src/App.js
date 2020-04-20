@@ -93,7 +93,7 @@ function App() {
 	};
 
 	return (
-		<Context.Provider>
+		<Context.Provider value={{ posts }}>
 			<Router>
 				<GlobalStyle />
 				<Switch>
