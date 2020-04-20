@@ -1,17 +1,15 @@
-import React, { useState, useEffect, createContext } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import axios from 'axios';
+// import axios from 'axios';
 import styled from 'styled-components';
 import firebase from './firebase';
 import { v4 as uuidv4 } from 'uuid';
 
-import Nav from './layouts/Nav';
-import FeedContainer from './layouts/FeedContainer';
-import CreatePost from './components/CreatePost';
 import { GlobalStyle } from './GlobalStyle';
 import Submit from './pages/Submit';
 import Home from './pages/Home';
+import { PostContext } from './PostContext';
 
 export const Container = styled.div`
 	width: 100%;
@@ -23,6 +21,11 @@ export const Container = styled.div`
 //TODO - if you dont have a reddit account, you can comment anon (CREATE ANON ABILITY)
 //https://www.reddit.com/r/redditdev/comments/34t0df/creating_account_through_api/
 
+//	NO SUBREDDITS - ONLY FRONT PAGE
+//	ANON COMMENT, POST ABILITY
+//	LATER - USER ACCOUNTS
+// 	PAGES - HOME, SUBMIT, VIEWPOSTS
+
 const SORT_OPTIONS = {
 	TIME_ASC: { column: 'timestamp', direction: 'asc' },
 	TIME_DESC: { column: 'timestamp', direction: 'desc' },
@@ -30,8 +33,7 @@ const SORT_OPTIONS = {
 };
 
 function App() {
-	const Context = createContext({});
-	const [user, setUser] = useState(uuidv4());
+	const [user, setUser] = useState();
 	const [redditData, setRedditData] = useState([]);
 	const [posts, setPosts] = useState([]);
 	const [updatePosts, setUpdatePosts] = useState();
@@ -40,13 +42,14 @@ function App() {
 	useEffect(() => {
 		const storeUser = () => {
 			if (!localStorage.getItem('user')) {
+				setUser(uuidv4());
 				localStorage.setItem('user', user);
 			}
 		};
 
 		storeUser();
 		return () => storeUser();
-	}, []);
+	}, [user]);
 
 	useEffect(() => {
 		const newPosts = [];
@@ -93,7 +96,7 @@ function App() {
 	};
 
 	return (
-		<Context.Provider value={{ posts }}>
+		<PostContext.Provider value={{ posts, user, setUpdatePosts }}>
 			<Router>
 				<GlobalStyle />
 				<Switch>
@@ -122,7 +125,7 @@ function App() {
 					/>
 				</Switch>
 			</Router>
-		</Context.Provider>
+		</PostContext.Provider>
 	);
 }
 

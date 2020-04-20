@@ -45,6 +45,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 				title,
 				postText,
 				timestamp: Date.now(),
+				vote: 0,
 			})
 			.then(() => {
 				setUpdatePosts(Date.now());
@@ -59,10 +60,12 @@ export default function CreatePost({ props, setUpdatePosts }) {
 			<TitleInput
 				type="text"
 				value={title}
+				required
 				onChange={(e) => setTitle(e.currentTarget.value)}
 			></TitleInput>
 			<TextInput
 				value={postText}
+				required
 				onChange={(e) => setPostText(e.currentTarget.value)}
 			></TextInput>
 			<CancelBtn type="button">Cancel</CancelBtn>

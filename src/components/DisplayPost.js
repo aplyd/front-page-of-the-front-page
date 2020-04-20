@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { PostContext } from '../PostContext';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
+import firebase from '../firebase';
 
 const Container = styled.div`
 	width: 100%;
@@ -117,16 +119,36 @@ export default function DisplayPost({
 	subreddit,
 	author,
 	preview,
-	url,
+	vote,
+	id,
 }) {
+	const { user, setUpdatePosts } = useContext(PostContext);
+	//TODO - make sure user can only up/down vote once
+	const castVote = (direction) => {
+		let newVoteCount;
+
+		direction === 'up'
+			? (newVoteCount = vote + 1)
+			: (newVoteCount = vote - 1);
+
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(id)
+			.update({
+				vote: newVoteCount,
+			})
+			.then(() => setUpdatePosts(Date.now()))
+			.catch((err) => console.log(err));
+	};
+
 	return (
 		<Container>
 			<VoteArrowContainer>
-				{/* <VoteArros></VoteArros> */}
 				<div>
-					<SVG as={GoArrowUp} />
-					<Vote>30.1k</Vote>
-					<SVG as={GoArrowDown} />
+					<SVG as={GoArrowUp} onClick={() => castVote('up')} />
+					<Vote>{vote}</Vote>
+					<SVG as={GoArrowDown} onClick={() => castVote('down')} />
 				</div>
 			</VoteArrowContainer>
 
@@ -134,8 +156,8 @@ export default function DisplayPost({
 				<InfoContainer>
 					<p>{subreddit}</p>
 					<p>•</p>
-					<p>Posted by {author}</p>
-					<p>awards</p>
+					<p>Posted by{author}</p>
+					<p>anon</p>
 				</InfoContainer>
 
 				<Title>{title}</Title>

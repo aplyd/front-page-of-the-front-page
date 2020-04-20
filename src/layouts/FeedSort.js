@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 
@@ -26,8 +26,6 @@ const Container = styled.div`
 `;
 
 export default function FeedSort({ sortPosts }) {
-	const [sortBy, setSortBy] = useState('TIME_ASC');
-
 	return (
 		<Container>
 			<div onChange={(e) => sortPosts(e.target.value)}>

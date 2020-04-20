@@ -34,7 +34,6 @@ export default function FeedContainer({ redditData, posts, sortPosts }) {
 		<Container>
 			<FeedSort sortPosts={sortPosts} />
 			{width > 960 ? <Sidebar /> : null}
-			{/* <Sidebar style={width > 960 ? null : 'visibility: hidden'} /> */}
 			<Feed redditData={redditData} posts={posts} />
 		</Container>
 	);

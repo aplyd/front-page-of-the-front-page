@@ -18,6 +18,7 @@ export default function Feed({ redditData, posts }) {
 							// author={post.data.author}
 							key={post.id}
 							id={post.id}
+							vote={post.vote}
 							// url={post.data.url}
 							// preview={
 							// 	post.preview ? post.preview : null
