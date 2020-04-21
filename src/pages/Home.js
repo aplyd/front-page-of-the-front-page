@@ -4,24 +4,35 @@ import Nav from '../layouts/Nav';
 import FeedContainer from '../layouts/FeedContainer';
 import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
+import LogIn from '../components/LogIn';
+import SignUp from '../components/SignUp';
 
 export default function Home({ redditData, posts, sortPosts, sortBy }) {
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	// const [isModalOpen, setIsModalOpen] = useState(false);
+	const [modalContent, setModalContent] = useState(null);
 
-	const logIn = () => {
-		setIsModalOpen(true);
-	};
-
-	const signUp = () => {
-		setIsModalOpen(true);
+	const displayModal = () => {
+		if (modalContent === 'login') {
+			return (
+				<Modal closeModal={() => setModalContent(null)}>
+					<LogIn />
+				</Modal>
+			);
+		} else if (modalContent === 'signup') {
+			return (
+				<Modal closeModal={() => setModalContent(null)}>
+					<SignUp />
+				</Modal>
+			);
+		} else {
+			return null;
+		}
 	};
 
 	return (
 		<Container>
-			{isModalOpen ? (
-				<Modal closeModal={() => setIsModalOpen(false)} />
-			) : null}
-			<Nav logIn={logIn} signUp={signUp} />
+			{displayModal()}
+			<Nav openModal={setModalContent} />
 			<button>
 				<Link to="/submit">Create Post</Link>
 			</button>

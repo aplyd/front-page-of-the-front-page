@@ -24,7 +24,7 @@ const Foreground = styled.div`
 	padding: 10px;
 `;
 
-export default function Modal({ closeModal }) {
+export default function Modal({ closeModal, children }) {
 	useEffect(() => {
 		document.body.style.overflow = 'hidden';
 		return () => (document.body.style.overflow = 'unset');
@@ -32,7 +32,9 @@ export default function Modal({ closeModal }) {
 
 	return (
 		<Background onClick={closeModal}>
-			<Foreground onClick={(e) => e.stopPropagation()}></Foreground>
+			<Foreground onClick={(e) => e.stopPropagation()}>
+				{children}
+			</Foreground>
 		</Background>
 	);
 }

@@ -48,17 +48,17 @@ const SignInBtn = styled.button`
 	line-height: 24px;
 `;
 
-export default function Nav({ logIn, signUp }) {
+export default function Nav({ openModal }) {
 	return (
 		<Container>
 			<Circle />
 
 			<Search type="text" placeholder="Search" />
 
-			<LoginBtn type="button" onClick={logIn}>
+			<LoginBtn type="button" onClick={() => openModal('login')}>
 				log in
 			</LoginBtn>
-			<SignInBtn type="button" onClick={signUp}>
+			<SignInBtn type="button" onClick={() => openModal('signup')}>
 				sign up
 			</SignInBtn>
 		</Container>
