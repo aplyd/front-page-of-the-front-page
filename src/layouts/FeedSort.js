@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 
@@ -14,7 +14,10 @@ const HiddenInput = styled.input`
 `;
 
 const Label = styled.label`
-	color: ${(props) => props.theme.colors.gray};
+	color: ${(props) =>
+		props.sortBy === props.children[1].props.value
+			? props.theme.colors.blue
+			: null};
 	&:hover {
 		color: ${(props) => props.theme.colors.blue};
 		cursor: pointer;
@@ -25,28 +28,21 @@ const NewLabel = styled(Label)``;
 const OldLabel = styled(Label)``;
 const TopLabel = styled(Label)``;
 
-export default function FeedSort({ sortPosts }) {
+export default function FeedSort({ sortPosts, sortBy }) {
 	return (
 		<Container>
 			<div onChange={(e) => sortPosts(e.target.value)}>
-				<NewLabel style={{}}>
+				<NewLabel sortBy={sortBy}>
 					new
 					<HiddenInput type="radio" name="sort" value="TIME_ASC" />
-					<span className="difficulty-radio"></span>
 				</NewLabel>
-				<OldLabel
-				// style={this.state.difficulty === 'medium' ? selected : null}
-				>
+				<OldLabel sortBy={sortBy}>
 					old
 					<HiddenInput type="radio" name="sort" value="TIME_DESC" />
-					<span className="difficulty-radio"></span>
 				</OldLabel>
-				<TopLabel
-				// style={this.state.difficulty === 'hard' ? selected : null}
-				>
+				<TopLabel sortBy={sortBy}>
 					top
 					<HiddenInput type="radio" name="sort" value="VOTE_ASC" />
-					<span className="difficulty-radio"></span>
 				</TopLabel>
 			</div>
 		</Container>
