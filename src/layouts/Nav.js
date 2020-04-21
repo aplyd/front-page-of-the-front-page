@@ -48,17 +48,19 @@ const SignInBtn = styled.button`
 	line-height: 24px;
 `;
 
-export default function Nav({ loadRedditData }) {
+export default function Nav({ logIn, signUp }) {
 	return (
 		<Container>
 			<Circle />
 
 			<Search type="text" placeholder="Search" />
 
-			<LoginBtn type="button" onClick={loadRedditData}>
+			<LoginBtn type="button" onClick={logIn}>
 				log in
 			</LoginBtn>
-			<SignInBtn type="button">sign up</SignInBtn>
+			<SignInBtn type="button" onClick={signUp}>
+				sign up
+			</SignInBtn>
 		</Container>
 	);
 }

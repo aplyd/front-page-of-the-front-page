@@ -17,7 +17,12 @@ const Container = styled.div`
 	}
 `;
 
-export default function FeedContainer({ redditData, posts, sortPosts }) {
+export default function FeedContainer({
+	redditData,
+	posts,
+	sortPosts,
+	sortBy,
+}) {
 	const [width, setWidth] = useState(window.innerWidth);
 
 	useEffect(() => {
@@ -32,7 +37,7 @@ export default function FeedContainer({ redditData, posts, sortPosts }) {
 
 	return (
 		<Container>
-			<FeedSort sortPosts={sortPosts} />
+			<FeedSort sortPosts={sortPosts} sortBy={sortBy} />
 			{width > 960 ? <Sidebar /> : null}
 			<Feed redditData={redditData} posts={posts} />
 		</Container>

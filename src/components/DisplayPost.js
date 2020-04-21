@@ -41,6 +41,7 @@ const InfoContainer = styled.div`
 	&& > p {
 		padding-right: 8px;
 		color: gray;
+		cursor: default;
 	}
 `;
 
@@ -86,6 +87,7 @@ const ActionContainer = styled.div`
 	grid-row: 2;
 `;
 
+//fix padding
 const ActionButton = styled.button`
 	background: white;
 	color: gray;
@@ -105,12 +107,14 @@ const Save = styled(ActionButton)``;
 const Vote = styled.p`
 	font-size: ${(props) => props.theme.font.size.xs};
 	padding: 6px 0;
+	cursor: default;
 `;
 
 const SVG = styled.svg`
 	&&:hover {
 		color: ${(props) => props.theme.colors.red};
 		background-color: ${(props) => props.theme.colors.lightGray};
+		cursor: pointer;
 	}
 `;
 

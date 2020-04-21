@@ -40,17 +40,29 @@ function App() {
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 
 	//if user doesn't exist, create user
-	useEffect(() => {
-		const storeUser = () => {
-			if (!localStorage.getItem('user')) {
-				setUser(uuidv4());
-				localStorage.setItem('user', user);
-			}
-		};
+	// useEffect(() => {
+	// 	const storeUser = () => {
+	// 		// if (!localStorage.getItem('user')) {
+	// 		// 	setUser(uuidv4());
+	// 		// 	localStorage.setItem('user', user);
+	// 		// }
+	// 		firebase
+	// 			.auth()
+	// 			.createUserWithEmailAndPassword(
+	// 				'thelifegoods@gmail.com',
+	// 				'123456abc'
+	// 			)
+	// 			.catch(function (error) {
+	// 				// Handle Errors here.
+	// 				console.log(error.code);
+	// 				console.log(error.message);
+	// 				// ...
+	// 			});
+	// 	};
 
-		storeUser();
-		return () => storeUser();
-	}, [user]);
+	// 	storeUser();
+	// 	return () => storeUser();
+	// }, [user]);
 
 	//get posts from firebase
 	useEffect(() => {
@@ -111,6 +123,7 @@ function App() {
 								posts={posts}
 								redditData={redditData}
 								sortPosts={sortPosts}
+								sortBy={sortBy}
 							/>
 						)}
 					/>

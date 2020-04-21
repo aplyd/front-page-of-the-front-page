@@ -16,11 +16,12 @@ button {
     width: auto;
 	height: auto;
 	border-radius: 4px;
-	padding: 3px 16px 3px 16px;
+	padding: 4px 22px 4px 22px;
 	font-size: 12px;
 	text-align: center;
 	text-transform: uppercase;
 	margin: 0 4px;
+	cursor: pointer;
 	&&:hover {
 		cursor: pointer;
 	}
