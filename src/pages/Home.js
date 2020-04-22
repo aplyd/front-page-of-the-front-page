@@ -39,12 +39,8 @@ export default function Home({ redditData, posts, sortPosts, sortBy }) {
 	return (
 		<Container>
 			{displayModal()}
-			<Nav openModal={setModalContent} />
-			{user.isSignedIn ? (
-				<button>
-					<Link to="/submit">Create Post</Link>
-				</button>
-			) : null}
+			<Nav openModal={setModalContent} closeModal={setModalContent} />
+
 			<FeedContainer
 				redditData={redditData}
 				posts={posts}

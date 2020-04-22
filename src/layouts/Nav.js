@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { PostContext } from '../PostContext';
+import firebase from '../firebase';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 	background: white;
@@ -48,19 +51,60 @@ const SignInBtn = styled.button`
 	line-height: 24px;
 `;
 
-export default function Nav({ openModal }) {
+export default function Nav({ openModal, closeModal }) {
+	const { user } = useContext(PostContext);
+
+	const logOutUser = () => {
+		firebase
+			.auth()
+			.signOut()
+			.then(
+				() => {
+					console.log('Signed Out', user);
+					closeModal(null);
+				},
+				(error) => {
+					console.error('Sign Out Error', error);
+				}
+			);
+	};
+
+	const displayLoggedInStatus = () => {
+		if (user.isSignedIn) {
+			return (
+				<React.Fragment>
+					<LoginBtn type="button">
+						<Link to="/submit">Create Post</Link>
+					</LoginBtn>
+					<SignInBtn type="button" onClick={() => logOutUser()}>
+						log out
+					</SignInBtn>
+				</React.Fragment>
+			);
+		} else {
+			return (
+				<React.Fragment>
+					<LoginBtn type="button" onClick={() => openModal('login')}>
+						log in
+					</LoginBtn>
+					<SignInBtn
+						type="button"
+						onClick={() => openModal('signup')}
+					>
+						sign up
+					</SignInBtn>
+				</React.Fragment>
+			);
+		}
+	};
+
 	return (
 		<Container>
 			<Circle />
 
 			<Search type="text" placeholder="Search" />
 
-			<LoginBtn type="button" onClick={() => openModal('login')}>
-				log in
-			</LoginBtn>
-			<SignInBtn type="button" onClick={() => openModal('signup')}>
-				sign up
-			</SignInBtn>
+			{displayLoggedInStatus()}
 		</Container>
 	);
 }

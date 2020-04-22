@@ -11,18 +11,14 @@ export default function Feed({ redditData, posts }) {
 		<Container>
 			{posts &&
 				posts.map((post) => {
+					console.log(post.id);
 					return (
+						//using the Date.now because without it, im getting duplicate keys when sorting
 						<DisplayPost
 							title={post.title}
-							// subreddit={post.data.subreddit_name_prefixed}
-							// author={post.data.author}
-							key={post.id}
+							key={post.id + Date.now()}
 							id={post.id}
 							vote={post.vote}
-							// url={post.data.url}
-							// preview={
-							// 	post.preview ? post.preview : null
-							// }
 						/>
 					);
 				})}

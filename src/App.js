@@ -103,7 +103,10 @@ function App() {
 					});
 				})
 				.catch((err) => console.log(err))
-				.finally(() => setPosts(newPosts));
+				.finally(() => {
+					getUser();
+					setPosts(newPosts);
+				});
 		};
 		subscribe();
 		return () => subscribe();
@@ -113,10 +116,22 @@ function App() {
 		firebase
 			.auth()
 			.createUserWithEmailAndPassword(e, p)
+			.then(() => logInExistingUser(e, p))
 			.catch((error) => {
 				console.log(error.code);
 				console.log(error.message);
 			});
+	};
+
+	const getUser = () => {
+		const user = firebase.auth().currentUser;
+		console.log(user);
+		setUser({
+			isSignedIn: true,
+			id: user.uid,
+			username: user.displayName,
+			votes: [],
+		});
 	};
 
 	const logInExistingUser = (e, p) => {
@@ -124,14 +139,7 @@ function App() {
 			.auth()
 			.signInWithEmailAndPassword(e, p)
 			.then(() => {
-				const user = firebase.auth().currentUser;
-				console.log(user);
-				setUser({
-					isSignedIn: true,
-					id: user.uid,
-					username: user.displayName,
-					votes: [],
-				});
+				getUser();
 			})
 			.catch((error) => {
 				console.log(error.code);
