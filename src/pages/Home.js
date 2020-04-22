@@ -10,6 +10,8 @@ import SignUp from '../components/LogIn';
 export default function Home({ redditData, posts, sortPosts, sortBy }) {
 	const [modalContent, setModalContent] = useState('login');
 
+	const showLogIn = () => console.log('log');
+
 	const displayModal = () => {
 		if (modalContent === 'login') {
 			return (
@@ -19,8 +21,11 @@ export default function Home({ redditData, posts, sortPosts, sortBy }) {
 			);
 		} else if (modalContent === 'signup') {
 			return (
-				<Modal closeModal={() => setModalContent(null)}>
-					<SignUp />
+				<Modal
+					closeModal={() => setModalContent(null)}
+					showLogIn={showLogIn}
+				>
+					<SignUp showLogIn={showLogIn} />
 				</Modal>
 			);
 		} else {

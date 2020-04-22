@@ -59,6 +59,8 @@ export default function Modal({ closeModal, children }) {
 		return () => (document.body.style.overflow = 'unset');
 	}, []);
 
+	const showLogIn = () => console.log('log');
+
 	return (
 		<Background onClick={closeModal}>
 			<Foreground onClick={(e) => e.stopPropagation()}>

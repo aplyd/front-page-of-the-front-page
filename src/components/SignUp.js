@@ -58,10 +58,18 @@ const P2 = styled.p`
 	color: ${(props) => props.theme.colors.blue};
 `;
 
-export default function SignUp({ viewLogIn }) {
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+export default function SignUp({ showLogIn }) {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const { userEmail, userPassword } = useContext(PostContext);
+
+	const createUser = (e) => {
+		e.preventDefault();
+		console.log(email, password);
+
+		setEmail('');
+		setPassword('');
+	};
 
 	return (
 		<WordsContainer>
@@ -69,13 +77,26 @@ export default function SignUp({ viewLogIn }) {
 				By having an account, you can join, vote, and comment on all
 				your favorite content.
 			</Title>
-			<form>
-				<EmailInput type="text" focus required placeholder="Email" />
-				<PasswordInput type="text" required placeholder="Password" />
+			<form onSubmit={createUser}>
+				<EmailInput
+					type="text"
+					focus
+					required
+					placeholder="Email"
+					vale={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
+				<PasswordInput
+					type="text"
+					required
+					placeholder="Password"
+					vale={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
 				<SignUpBtn type="submit">Sign Up</SignUpBtn>
 			</form>
 			<P1>Already have an account?</P1>
-			<P2 onClick={() => viewLogIn('login')}>LOG IN</P2>
+			<P2 onClick={showLogIn}>LOG IN</P2>
 		</WordsContainer>
 	);
 }
