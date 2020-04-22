@@ -14,13 +14,19 @@ export default function Home({ redditData, posts, sortPosts, sortBy }) {
 		if (modalContent === 'login') {
 			return (
 				<Modal closeModal={() => setModalContent(null)}>
-					<LogIn showSignUp={() => setModalContent('signup')} />
+					<LogIn
+						showSignUp={() => setModalContent('signup')}
+						closeModal={() => setModalContent(null)}
+					/>
 				</Modal>
 			);
 		} else if (modalContent === 'signup') {
 			return (
 				<Modal closeModal={() => setModalContent(null)}>
-					<SignUp showLogIn={() => setModalContent('login')} />
+					<SignUp
+						showLogIn={() => setModalContent('login')}
+						closeModal={() => setModalContent(null)}
+					/>
 				</Modal>
 			);
 		} else {

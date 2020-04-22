@@ -58,7 +58,7 @@ const P2 = styled.p`
 	color: ${(props) => props.theme.colors.blue};
 `;
 
-export default function LogIn({ showSignUp }) {
+export default function LogIn({ showSignUp, closeModal }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const { userEmail, userPassword } = useContext(PostContext);
@@ -69,6 +69,7 @@ export default function LogIn({ showSignUp }) {
 
 		setEmail('');
 		setPassword('');
+		closeModal();
 	};
 
 	return (

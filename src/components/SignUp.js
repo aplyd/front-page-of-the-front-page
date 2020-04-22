@@ -58,17 +58,17 @@ const P2 = styled.p`
 	color: ${(props) => props.theme.colors.blue};
 `;
 
-export default function SignUp({ showLogIn }) {
+export default function SignUp({ showLogIn, closeModal }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { userEmail, userPassword } = useContext(PostContext);
+	const { createUserAccount } = useContext(PostContext);
 
 	const createUser = (e) => {
 		e.preventDefault();
-		console.log(email, password);
-
+		createUserAccount(email, password);
 		setEmail('');
 		setPassword('');
+		closeModal();
 	};
 
 	return (

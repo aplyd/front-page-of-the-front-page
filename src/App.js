@@ -39,7 +39,7 @@ function App() {
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 
-	//if user doesn't exist, create user
+	// if user doesn't exist, create user
 	// useEffect(() => {
 	// 	const storeUser = () => {
 	// 		// if (!localStorage.getItem('user')) {
@@ -48,21 +48,19 @@ function App() {
 	// 		// }
 	// 		firebase
 	// 			.auth()
-	// 			.createUserWithEmailAndPassword(
-	// 				'thelifegoods@gmail.com',
-	// 				'123456abc'
-	// 			)
+	// 			.createUserWithEmailAndPassword(userEmail, userPassword)
 	// 			.catch(function (error) {
 	// 				// Handle Errors here.
 	// 				console.log(error.code);
 	// 				console.log(error.message);
 	// 				// ...
 	// 			});
+	// 		console.log('from app', userEmail, userPassword);
 	// 	};
 
 	// 	storeUser();
 	// 	return () => storeUser();
-	// }, [user]);
+	// }, [userEmail, userPassword]);
 
 	//get posts from firebase
 	useEffect(() => {
@@ -103,13 +101,30 @@ function App() {
 		console.log('load');
 	};
 
+	const createUserAccount = (e, p) => {
+		firebase
+			.auth()
+			.createUserWithEmailAndPassword(e, p)
+			.catch(function (error) {
+				console.log(error.code);
+				console.log(error.message);
+			});
+	};
+
 	const sortPosts = (sortBy) => {
 		setSortBy(sortBy);
 		setUpdatePosts(Date.now());
 	};
 
 	return (
-		<PostContext.Provider value={{ posts, user, setUpdatePosts }}>
+		<PostContext.Provider
+			value={{
+				posts,
+				user,
+				setUpdatePosts,
+				createUserAccount,
+			}}
+		>
 			<Router>
 				<GlobalStyle />
 				<Switch>
