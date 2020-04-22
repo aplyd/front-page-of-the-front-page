@@ -4,28 +4,23 @@ import Nav from '../layouts/Nav';
 import FeedContainer from '../layouts/FeedContainer';
 import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
-import LogIn from '../components/SignUp';
-import SignUp from '../components/LogIn';
+import LogIn from '../components/LogIn';
+import SignUp from '../components/SignUp';
 
 export default function Home({ redditData, posts, sortPosts, sortBy }) {
-	const [modalContent, setModalContent] = useState('login');
-
-	const showLogIn = () => console.log('log');
+	const [modalContent, setModalContent] = useState(null);
 
 	const displayModal = () => {
 		if (modalContent === 'login') {
 			return (
 				<Modal closeModal={() => setModalContent(null)}>
-					<LogIn />
+					<LogIn showSignUp={() => setModalContent('signup')} />
 				</Modal>
 			);
 		} else if (modalContent === 'signup') {
 			return (
-				<Modal
-					closeModal={() => setModalContent(null)}
-					showLogIn={showLogIn}
-				>
-					<SignUp showLogIn={showLogIn} />
+				<Modal closeModal={() => setModalContent(null)}>
+					<SignUp showLogIn={() => setModalContent('login')} />
 				</Modal>
 			);
 		} else {

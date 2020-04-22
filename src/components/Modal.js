@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { IoMdClose } from 'react-icons/io';
 
 const Background = styled.div`
 	height: 100%;
@@ -51,6 +52,18 @@ const Content = styled.div`
 const CloseContainer = styled.div`
 	width: 100%;
 	height: 240px;
+	position: relative;
+`;
+
+const Close = styled.svg`
+	position: absolute;
+	top: 12px;
+	right: 16px;
+	font-size: 30px;
+	color: ${(props) => props.theme.colors.gray};
+	&&:hover {
+		cursor: pointer;
+	}
 `;
 
 export default function Modal({ closeModal, children }) {
@@ -59,15 +72,15 @@ export default function Modal({ closeModal, children }) {
 		return () => (document.body.style.overflow = 'unset');
 	}, []);
 
-	const showLogIn = () => console.log('log');
-
 	return (
 		<Background onClick={closeModal}>
 			<Foreground onClick={(e) => e.stopPropagation()}>
 				<Container>
 					<Art />
 					<Content>
-						<CloseContainer />
+						<CloseContainer>
+							<Close as={IoMdClose} onClick={closeModal} />
+						</CloseContainer>
 						{children}
 					</Content>
 				</Container>

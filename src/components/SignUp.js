@@ -96,7 +96,7 @@ export default function SignUp({ showLogIn }) {
 				<SignUpBtn type="submit">Sign Up</SignUpBtn>
 			</form>
 			<P1>Already have an account?</P1>
-			<P2 onClick={showLogIn}>LOG IN</P2>
+			<P2 onClick={() => showLogIn()}>LOG IN</P2>
 		</WordsContainer>
 	);
 }
