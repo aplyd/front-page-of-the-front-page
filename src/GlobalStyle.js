@@ -27,15 +27,15 @@ button {
 	}
 
 
-    input:not([type]), input[type="text"] {
-    height: 36px;
+input:not([type]), input[type="text"] {
+	height: 36px;
 	width: 100%;
 	border-radius: 4px;
-    font-size: 16px;
+	font-size: 16px;
 	text-indent: 10px;
+	outline: none;
+	border: none;
 }
-
-
 
 }
 

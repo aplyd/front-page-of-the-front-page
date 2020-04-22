@@ -4,12 +4,11 @@ import Nav from '../layouts/Nav';
 import FeedContainer from '../layouts/FeedContainer';
 import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
-import LogIn from '../components/LogIn';
-import SignUp from '../components/SignUp';
+import LogIn from '../components/SignUp';
+import SignUp from '../components/LogIn';
 
 export default function Home({ redditData, posts, sortPosts, sortBy }) {
-	// const [isModalOpen, setIsModalOpen] = useState(false);
-	const [modalContent, setModalContent] = useState(null);
+	const [modalContent, setModalContent] = useState('login');
 
 	const displayModal = () => {
 		if (modalContent === 'login') {

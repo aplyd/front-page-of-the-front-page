@@ -9,6 +9,7 @@ const theme = {
 		gray: '#707070',
 		lightGray: 'rgb(215, 215, 215)',
 		backgroundBlue: '#dae0e6',
+		lightBlue: '#3394dc',
 	},
 	font: {
 		family: ['"IBM Plex Sans", sans-serif'],

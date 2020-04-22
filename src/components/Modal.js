@@ -21,7 +21,36 @@ const Foreground = styled.div`
 	margin: auto;
 	border-radius: 4px;
 	background: white;
-	padding: 10px;
+`;
+
+const Container = styled.div`
+	border-radius: 4px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+`;
+
+const Art = styled.div`
+	height: 100%;
+	width: 130px;
+	background: rgba(0, 0, 0, 0);
+	background-color: lightgrey;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+`;
+
+const Content = styled.div`
+	height: 540px;
+	width: 100%;
+	margin: 5px 5px 5px 0;
+	display: flex;
+	flex-direction: column;
+`;
+
+const CloseContainer = styled.div`
+	width: 100%;
+	height: 240px;
 `;
 
 export default function Modal({ closeModal, children }) {
@@ -33,7 +62,13 @@ export default function Modal({ closeModal, children }) {
 	return (
 		<Background onClick={closeModal}>
 			<Foreground onClick={(e) => e.stopPropagation()}>
-				{children}
+				<Container>
+					<Art />
+					<Content>
+						<CloseContainer />
+						{children}
+					</Content>
+				</Container>
 			</Foreground>
 		</Background>
 	);
