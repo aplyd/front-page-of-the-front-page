@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container } from '../App';
 import Nav from '../layouts/Nav';
 import FeedContainer from '../layouts/FeedContainer';
@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 import Modal from '../components/Modal';
 import LogIn from '../components/LogIn';
 import SignUp from '../components/SignUp';
+import { PostContext } from '../PostContext';
 
 export default function Home({ redditData, posts, sortPosts, sortBy }) {
 	const [modalContent, setModalContent] = useState(null);
+	const { user } = useContext(PostContext);
 
 	const displayModal = () => {
 		if (modalContent === 'login') {
@@ -38,9 +40,11 @@ export default function Home({ redditData, posts, sortPosts, sortBy }) {
 		<Container>
 			{displayModal()}
 			<Nav openModal={setModalContent} />
-			<button>
-				<Link to="/submit">Create Post</Link>
-			</button>
+			{user.isSignedIn ? (
+				<button>
+					<Link to="/submit">Create Post</Link>
+				</button>
+			) : null}
 			<FeedContainer
 				redditData={redditData}
 				posts={posts}

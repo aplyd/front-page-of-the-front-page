@@ -26,6 +26,52 @@ export const Container = styled.div`
 //	LATER - USER ACCOUNTS
 // 	PAGES - HOME, SUBMIT, VIEWPOSTS
 
+// if user doesn't exist, create user
+// useEffect(() => {
+// 	if (!localStorage.getItem('tempUser') && !firebase.auth().currentUser) {
+// 		firebase
+// 			.auth()
+// 			.signInAnonymously()
+// 			.then(() => {
+// 				localStorage.setItem(
+// 					'tempUser',
+// 					JSON.stringify(firebase.auth().currentUser)
+// 				);
+// 			})
+// 			.catch((error) => {
+// 				console.log(error.code);
+// 				console.log(error.message);
+// 			});
+// 	} else {
+// 		//do something
+// 	}
+// }, []);
+
+const loadRedditData = () => {
+	// firebase.firestore().collection('posts').add({
+	// 	title: 'hahaha',
+	// 	userID: 'fdsafdsafas',
+	// 	vote: 34,
+	// });
+	// useEffect(() => {
+	// 	axios
+	// 		.get('https://www.reddit.com/.json')
+	// 		.then((res) => setRedditData(res.data.data.children))
+	// 		.catch((err) => console.log(err));
+	// }, []);
+};
+
+// firebase.auth().onAuthStateChanged((user) => {
+// 	if (user.isAnonymous) {
+// 		setUser({
+// 			id: user.uid,
+// 			isAnonymous: true,
+// 		});
+// 	} else {
+// 		console.log(user);
+// 	}
+// });
+
 const SORT_OPTIONS = {
 	TIME_ASC: { column: 'timestamp', direction: 'asc' },
 	TIME_DESC: { column: 'timestamp', direction: 'desc' },
@@ -33,34 +79,11 @@ const SORT_OPTIONS = {
 };
 
 function App() {
-	const [user, setUser] = useState();
+	const [user, setUser] = useState({});
 	const [redditData, setRedditData] = useState([]);
 	const [posts, setPosts] = useState([]);
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
-
-	// if user doesn't exist, create user
-	// useEffect(() => {
-	// 	const storeUser = () => {
-	// 		// if (!localStorage.getItem('user')) {
-	// 		// 	setUser(uuidv4());
-	// 		// 	localStorage.setItem('user', user);
-	// 		// }
-	// 		firebase
-	// 			.auth()
-	// 			.createUserWithEmailAndPassword(userEmail, userPassword)
-	// 			.catch(function (error) {
-	// 				// Handle Errors here.
-	// 				console.log(error.code);
-	// 				console.log(error.message);
-	// 				// ...
-	// 			});
-	// 		console.log('from app', userEmail, userPassword);
-	// 	};
-
-	// 	storeUser();
-	// 	return () => storeUser();
-	// }, [userEmail, userPassword]);
 
 	//get posts from firebase
 	useEffect(() => {
@@ -86,26 +109,31 @@ function App() {
 		return () => subscribe();
 	}, [sortBy, updatePosts]);
 
-	const loadRedditData = () => {
-		// firebase.firestore().collection('posts').add({
-		// 	title: 'hahaha',
-		// 	userID: 'fdsafdsafas',
-		// 	vote: 34,
-		// });
-		// useEffect(() => {
-		// 	axios
-		// 		.get('https://www.reddit.com/.json')
-		// 		.then((res) => setRedditData(res.data.data.children))
-		// 		.catch((err) => console.log(err));
-		// }, []);
-		console.log('load');
-	};
-
 	const createUserAccount = (e, p) => {
 		firebase
 			.auth()
 			.createUserWithEmailAndPassword(e, p)
-			.catch(function (error) {
+			.catch((error) => {
+				console.log(error.code);
+				console.log(error.message);
+			});
+	};
+
+	const logInExistingUser = (e, p) => {
+		firebase
+			.auth()
+			.signInWithEmailAndPassword(e, p)
+			.then(() => {
+				const user = firebase.auth().currentUser;
+				console.log(user);
+				setUser({
+					isSignedIn: true,
+					id: user.uid,
+					username: user.displayName,
+					votes: [],
+				});
+			})
+			.catch((error) => {
 				console.log(error.code);
 				console.log(error.message);
 			});
@@ -121,8 +149,10 @@ function App() {
 			value={{
 				posts,
 				user,
+				setUser,
 				setUpdatePosts,
 				createUserAccount,
+				logInExistingUser,
 			}}
 		>
 			<Router>

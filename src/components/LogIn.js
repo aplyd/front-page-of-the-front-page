@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
+import firebase from '../firebase';
 
 const WordsContainer = styled.div`
 	width: 432px;
@@ -22,7 +23,7 @@ const Input = styled.input`
 	text-indent: 4px;
 `;
 
-const EmailInput = styled(Input)`
+const UsernameInput = styled(Input)`
 	margin-bottom: 24px;
 `;
 const PasswordInput = styled(Input)``;
@@ -30,7 +31,7 @@ const Title = styled.h3`
 	margin-bottom: 16px;
 `;
 
-const SignUpBtn = styled.button`
+const SignInBtn = styled.button`
 	width: 178px;
 	height: 40px;
 	padding: 8px;
@@ -46,6 +47,10 @@ const SignUpBtn = styled.button`
 	}
 `;
 
+const LogOutBtn = styled(SignInBtn)`
+	background: ${(props) => props.theme.colors.red};
+`;
+
 const P1 = styled.p`
 	display: inline;
 	margin-right: 4px;
@@ -59,39 +64,56 @@ const P2 = styled.p`
 `;
 
 export default function LogIn({ showSignUp, closeModal }) {
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const { userEmail, userPassword } = useContext(PostContext);
+	const { logInExistingUser, user } = useContext(PostContext);
 
-	const createUser = (e) => {
+	const logInUser = (e) => {
 		e.preventDefault();
-		console.log(email, password);
-
-		setEmail('');
+		logInExistingUser(username, password);
+		setUsername('');
 		setPassword('');
 		closeModal();
+	};
+
+	const logOutUser = () => {
+		firebase
+			.auth()
+			.signOut()
+			.then(
+				() => {
+					console.log('Signed Out', user);
+					closeModal();
+				},
+				(error) => {
+					console.error('Sign Out Error', error);
+				}
+			);
 	};
 
 	return (
 		<WordsContainer>
 			<Title>Sign In</Title>
-			<form onSubmit={createUser}>
-				<EmailInput
+			<form onSubmit={logInUser}>
+				<UsernameInput
 					type="text"
 					focus
 					required
-					placeholder="Email"
-					vale={email}
-					onChange={(e) => setEmail(e.target.value)}
+					placeholder="Username"
+					vale={username}
+					onChange={(e) => setUsername(e.target.value)}
 				/>
 				<PasswordInput
-					type="text"
+					type="password"
 					required
 					placeholder="Password"
 					vale={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<SignUpBtn type="submit">Sign In</SignUpBtn>
+				<SignInBtn type="submit">Sign In</SignInBtn>
+				<LogOutBtn type="button" onClick={logOutUser}>
+					Log Out
+				</LogOutBtn>
 			</form>
 			<P1>Don't have an account?</P1>
 			<P2 onClick={() => showSignUp()}>SIGN UP</P2>

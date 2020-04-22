@@ -22,7 +22,7 @@ const Input = styled.input`
 	text-indent: 4px;
 `;
 
-const EmailInput = styled(Input)`
+const UserNameInput = styled(Input)`
 	margin-bottom: 24px;
 `;
 const PasswordInput = styled(Input)``;
@@ -59,14 +59,14 @@ const P2 = styled.p`
 `;
 
 export default function SignUp({ showLogIn, closeModal }) {
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const { createUserAccount } = useContext(PostContext);
 
 	const createUser = (e) => {
 		e.preventDefault();
-		createUserAccount(email, password);
-		setEmail('');
+		createUserAccount(username, password);
+		setUsername('');
 		setPassword('');
 		closeModal();
 	};
@@ -78,16 +78,16 @@ export default function SignUp({ showLogIn, closeModal }) {
 				your favorite content.
 			</Title>
 			<form onSubmit={createUser}>
-				<EmailInput
+				<UserNameInput
 					type="text"
 					focus
 					required
-					placeholder="Email"
-					vale={email}
-					onChange={(e) => setEmail(e.target.value)}
+					placeholder="Username"
+					vale={username}
+					onChange={(e) => setUsername(e.target.value)}
 				/>
 				<PasswordInput
-					type="text"
+					type="password"
 					required
 					placeholder="Password"
 					vale={password}
