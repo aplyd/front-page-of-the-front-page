@@ -161,22 +161,28 @@ function App() {
 	};
 
 	//login, save userObj
-	const logInExistingUser = (email, password, saveInfo) => {
+	const logInExistingUser = (email, password) => {
+		let userInfo;
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
 			.then(() => {
-				// if (saveInfo) {
-				// 	const fbUserInfo = firebase.auth().currentUser;
-				// 	setUser({
-				// 		email,
-				// 		username: fbUserInfo.displayName,
-				// 		votes: [],
-				// 	});
-				// }
+				userInfo = firebase.auth().currentUser;
 			})
-			.catch((err) => console.log(err.code, err.message));
+			.catch((err) => console.log(err.code, err.message))
+			.finally(() => {
+				setUser({
+					email,
+					password,
+					username: userInfo.displayName,
+					isSignedIn: true,
+					isAnonymous: false,
+					votes: [],
+				});
+			});
 	};
+
+	const updateLoggedInUser = async () => {};
 
 	const sortPosts = (sortBy) => {
 		setSortBy(sortBy);

@@ -1,7 +1,6 @@
 import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
-import firebase from '../firebase';
 
 import useInitialFocus from '../hooks/useInitialFocus';
 
@@ -25,7 +24,7 @@ const Input = styled.input`
 	text-indent: 4px;
 `;
 
-const UsernameInput = styled(Input)`
+const EmailInput = styled(Input)`
 	margin-bottom: 24px;
 `;
 const PasswordInput = styled(Input)``;
@@ -62,53 +61,32 @@ const P2 = styled.p`
 `;
 
 export default function LogIn({ showSignUp, closeModal }) {
-	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { logInExistingUser, setUser, user } = useContext(PostContext);
+	const { logInExistingUser } = useContext(PostContext);
 	const input = useRef(null);
 	useInitialFocus(input);
 
 	const logInUser = (e) => {
 		e.preventDefault();
-		//third param is for saving user object and rerendering
-		logInExistingUser(username, password, true);
+		logInExistingUser(email, password);
 
-		//trying to trigger rerender when logging in here instead
-		let newUser = { ...user };
-		newUser.username = username;
-		setUser(newUser);
-
-		setUsername('');
+		setEmail('');
 		setPassword('');
 		closeModal();
-	};
-
-	const logOutUser = () => {
-		firebase
-			.auth()
-			.signOut()
-			.then(
-				() => {
-					console.log('Signed Out');
-					closeModal();
-				},
-				(error) => {
-					console.error('Sign Out Error', error);
-				}
-			);
 	};
 
 	return (
 		<WordsContainer>
 			<Title>Sign In</Title>
 			<form onSubmit={logInUser}>
-				<UsernameInput
+				<EmailInput
 					type="text"
 					focus
 					required
-					placeholder="Username"
-					vale={username}
-					onChange={(e) => setUsername(e.target.value)}
+					placeholder="Email"
+					vale={email}
+					onChange={(e) => setEmail(e.target.value)}
 					ref={input}
 				/>
 				<PasswordInput
