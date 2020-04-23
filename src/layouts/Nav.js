@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import firebase from '../firebase';
@@ -44,6 +44,13 @@ const LoginBtn = styled.button`
 	line-height: 24px;
 `;
 
+const SubmitLink = styled.a`
+	color: ${(props) => props.theme.colors.blue};
+	&&:hover && :active {
+		color: ${(props) => props.theme.colors.blue};
+	}
+`;
+
 const SignInBtn = styled.button`
 	color: white;
 	background-color: ${(props) => props.theme.colors.blue};
@@ -52,7 +59,7 @@ const SignInBtn = styled.button`
 `;
 
 export default function Nav({ openModal, closeModal }) {
-	const { user } = useContext(PostContext);
+	const { user, setUser } = useContext(PostContext);
 
 	const logOutUser = () => {
 		firebase
@@ -62,6 +69,7 @@ export default function Nav({ openModal, closeModal }) {
 				() => {
 					console.log('Signed Out', user);
 					closeModal(null);
+					setUser(false);
 				},
 				(error) => {
 					console.error('Sign Out Error', error);
@@ -74,7 +82,9 @@ export default function Nav({ openModal, closeModal }) {
 			return (
 				<React.Fragment>
 					<LoginBtn type="button">
-						<Link to="/submit">Create Post</Link>
+						<SubmitLink as={Link} to="/submit">
+							Create Post
+						</SubmitLink>
 					</LoginBtn>
 					<SignInBtn type="button" onClick={() => logOutUser()}>
 						log out

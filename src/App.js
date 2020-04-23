@@ -104,7 +104,14 @@ function App() {
 				})
 				.catch((err) => console.log(err))
 				.finally(() => {
-					getUser();
+					const userInfo = firebase.auth().currentUser;
+					if (userInfo)
+						setUser({
+							isSignedIn: true,
+							id: userInfo.uid,
+							username: userInfo.displayName,
+							votes: [],
+						});
 					setPosts(newPosts);
 				});
 		};
@@ -123,23 +130,18 @@ function App() {
 			});
 	};
 
-	const getUser = () => {
-		const user = firebase.auth().currentUser;
-		console.log(user);
-		setUser({
-			isSignedIn: true,
-			id: user.uid,
-			username: user.displayName,
-			votes: [],
-		});
-	};
-
 	const logInExistingUser = (e, p) => {
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(e, p)
 			.then(() => {
-				getUser();
+				const user = firebase.auth().currentUser;
+				setUser({
+					isSignedIn: true,
+					id: user.uid,
+					username: user.displayName,
+					votes: [],
+				});
 			})
 			.catch((error) => {
 				console.log(error.code);
