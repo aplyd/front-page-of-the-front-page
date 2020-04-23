@@ -78,6 +78,16 @@ const SORT_OPTIONS = {
 	VOTE_ASC: { column: 'vote', direction: 'asc' },
 };
 
+// const user_state_object = {
+// 	username,
+// 	email,
+// 	password,
+// 	id,
+// 	isSignedIn: true,
+// 	isAnonymous: false,
+// 	votes: [],
+// }
+
 function App() {
 	const [user, setUser] = useState({});
 	const [redditData, setRedditData] = useState([]);
@@ -104,15 +114,6 @@ function App() {
 				})
 				.catch((err) => console.log(err))
 				.finally(() => {
-					//this probably shouldn't be here
-					const userInfo = firebase.auth().currentUser;
-					if (userInfo)
-						setUser({
-							isSignedIn: true,
-							id: userInfo.uid,
-							username: userInfo.displayName,
-							votes: [],
-						});
 					setPosts(newPosts);
 				});
 		};
@@ -120,36 +121,43 @@ function App() {
 		return () => subscribe();
 	}, [sortBy, updatePosts]);
 
+	useEffect(() => {}, [user]);
+
 	//validate on frontend first to see if username/email available?
 	//create, login, update username, save userObj
 	const createUserAccount = async (username, email, password) => {
-		firebase
-			.auth()
-			.createUserWithEmailAndPassword(email, password)
-			.then(() => logInExistingUser(email, password))
-			.catch((err) => console.log(err.code, err.message));
-		firebase
-			.auth()
-			.signInWithEmailAndPassword(email, password)
-			.catch((err) => console.log(err.code, err.message))
-			.finally(() => {
-				const userInfo = firebase.auth().currentUser;
-				userInfo
-					.updateProfile({
-						displayName: username,
-					})
-					.then(() => {
-						setUser({
-							isSignedIn: true,
-							id: userInfo.uid,
-							username,
-							votes: [],
-							posts: [],
-						});
-						console.log(user);
-					})
-					.catch((err) => console.log(err));
-			});
+		const createAndGetUser = async () => {
+			try {
+				await firebase
+					.auth()
+					.createUserWithEmailAndPassword(email, password)
+					.catch((err) => console.log(err.code, err.message));
+				await firebase
+					.auth()
+					.signInWithEmailAndPassword(email, password)
+					.catch((err) => console.log(err.code, err.message));
+			} catch (err) {
+				console.log(err);
+			}
+			return firebase.auth().currentUser;
+		};
+
+		const userInfo = await createAndGetUser();
+		await userInfo
+			.updateProfile({
+				displayName: username,
+			})
+			.then(() => {
+				setUser({
+					email,
+					password,
+					username,
+					isSignedIn: true,
+					isAnonymous: false,
+					votes: [],
+				});
+			})
+			.catch((err) => console.log(err));
 	};
 
 	//login, save userObj
@@ -158,14 +166,14 @@ function App() {
 			.auth()
 			.signInWithEmailAndPassword(email, password)
 			.then(() => {
-				if (saveInfo) {
-					const fbUserInfo = firebase.auth().currentUser;
-					setUser({
-						email,
-						username: fbUserInfo.displayName,
-						votes: [],
-					});
-				}
+				// if (saveInfo) {
+				// 	const fbUserInfo = firebase.auth().currentUser;
+				// 	setUser({
+				// 		email,
+				// 		username: fbUserInfo.displayName,
+				// 		votes: [],
+				// 	});
+				// }
 			})
 			.catch((err) => console.log(err.code, err.message));
 	};
