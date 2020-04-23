@@ -11,7 +11,6 @@ export default function Feed({ redditData, posts }) {
 		<Container>
 			{posts &&
 				posts.map((post) => {
-					console.log(post.id);
 					return (
 						//using the Date.now because without it, im getting duplicate keys when sorting
 						<DisplayPost

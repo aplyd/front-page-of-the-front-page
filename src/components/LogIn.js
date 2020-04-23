@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import firebase from '../firebase';
+
+import useInitialFocus from '../hooks/useInitialFocus';
 
 const WordsContainer = styled.div`
 	width: 432px;
@@ -47,10 +49,6 @@ const SignInBtn = styled.button`
 	}
 `;
 
-const LogOutBtn = styled(SignInBtn)`
-	background: ${(props) => props.theme.colors.red};
-`;
-
 const P1 = styled.p`
 	display: inline;
 	margin-right: 4px;
@@ -66,11 +64,20 @@ const P2 = styled.p`
 export default function LogIn({ showSignUp, closeModal }) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const { logInExistingUser, user } = useContext(PostContext);
+	const { logInExistingUser, setUser, user } = useContext(PostContext);
+	const input = useRef(null);
+	useInitialFocus(input);
 
 	const logInUser = (e) => {
 		e.preventDefault();
-		logInExistingUser(username, password);
+		//third param is for saving user object and rerendering
+		logInExistingUser(username, password, true);
+
+		//trying to trigger rerender when logging in here instead
+		let newUser = { ...user };
+		newUser.username = username;
+		setUser(newUser);
+
 		setUsername('');
 		setPassword('');
 		closeModal();
@@ -82,7 +89,7 @@ export default function LogIn({ showSignUp, closeModal }) {
 			.signOut()
 			.then(
 				() => {
-					console.log('Signed Out', user);
+					console.log('Signed Out');
 					closeModal();
 				},
 				(error) => {
@@ -102,6 +109,7 @@ export default function LogIn({ showSignUp, closeModal }) {
 					placeholder="Username"
 					vale={username}
 					onChange={(e) => setUsername(e.target.value)}
+					ref={input}
 				/>
 				<PasswordInput
 					type="password"
@@ -111,9 +119,6 @@ export default function LogIn({ showSignUp, closeModal }) {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<SignInBtn type="submit">Sign In</SignInBtn>
-				<LogOutBtn type="button" onClick={logOutUser}>
-					Log Out
-				</LogOutBtn>
 			</form>
 			<P1>Don't have an account?</P1>
 			<P2 onClick={() => showSignUp()}>SIGN UP</P2>

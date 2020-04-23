@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
+import useInitialFocus from '../hooks/useInitialFocus';
 
 const WordsContainer = styled.div`
 	width: 432px;
@@ -26,6 +27,7 @@ const UserNameInput = styled(Input)`
 	margin-bottom: 24px;
 `;
 const PasswordInput = styled(Input)``;
+const EmailInput = styled(Input)``;
 const Title = styled.h3`
 	margin-bottom: 16px;
 `;
@@ -61,11 +63,14 @@ const P2 = styled.p`
 export default function SignUp({ showLogIn, closeModal }) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('');
 	const { createUserAccount } = useContext(PostContext);
+	const input = useRef(null);
+	useInitialFocus(input);
 
 	const createUser = (e) => {
 		e.preventDefault();
-		createUserAccount(username, password);
+		createUserAccount(username, email, password);
 		setUsername('');
 		setPassword('');
 		closeModal();
@@ -84,7 +89,17 @@ export default function SignUp({ showLogIn, closeModal }) {
 					required
 					placeholder="Username"
 					vale={username}
+					ref={input}
 					onChange={(e) => setUsername(e.target.value)}
+				/>
+
+				<EmailInput
+					type="text"
+					focus
+					required
+					placeholder="Email"
+					vale={email}
+					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<PasswordInput
 					type="password"

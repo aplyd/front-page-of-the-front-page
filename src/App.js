@@ -104,6 +104,7 @@ function App() {
 				})
 				.catch((err) => console.log(err))
 				.finally(() => {
+					//this probably shouldn't be here
 					const userInfo = firebase.auth().currentUser;
 					if (userInfo)
 						setUser({
@@ -119,34 +120,54 @@ function App() {
 		return () => subscribe();
 	}, [sortBy, updatePosts]);
 
-	const createUserAccount = (e, p) => {
+	//validate on frontend first to see if username/email available?
+	//create, login, update username, save userObj
+	const createUserAccount = async (username, email, password) => {
 		firebase
 			.auth()
-			.createUserWithEmailAndPassword(e, p)
-			.then(() => logInExistingUser(e, p))
-			.catch((error) => {
-				console.log(error.code);
-				console.log(error.message);
+			.createUserWithEmailAndPassword(email, password)
+			.then(() => logInExistingUser(email, password))
+			.catch((err) => console.log(err.code, err.message));
+		firebase
+			.auth()
+			.signInWithEmailAndPassword(email, password)
+			.catch((err) => console.log(err.code, err.message))
+			.finally(() => {
+				const userInfo = firebase.auth().currentUser;
+				userInfo
+					.updateProfile({
+						displayName: username,
+					})
+					.then(() => {
+						setUser({
+							isSignedIn: true,
+							id: userInfo.uid,
+							username,
+							votes: [],
+							posts: [],
+						});
+						console.log(user);
+					})
+					.catch((err) => console.log(err));
 			});
 	};
 
-	const logInExistingUser = (e, p) => {
+	//login, save userObj
+	const logInExistingUser = (email, password, saveInfo) => {
 		firebase
 			.auth()
-			.signInWithEmailAndPassword(e, p)
+			.signInWithEmailAndPassword(email, password)
 			.then(() => {
-				const user = firebase.auth().currentUser;
-				setUser({
-					isSignedIn: true,
-					id: user.uid,
-					username: user.displayName,
-					votes: [],
-				});
+				if (saveInfo) {
+					const fbUserInfo = firebase.auth().currentUser;
+					setUser({
+						email,
+						username: fbUserInfo.displayName,
+						votes: [],
+					});
+				}
 			})
-			.catch((error) => {
-				console.log(error.code);
-				console.log(error.message);
-			});
+			.catch((err) => console.log(err.code, err.message));
 	};
 
 	const sortPosts = (sortBy) => {
