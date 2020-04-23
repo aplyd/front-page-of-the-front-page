@@ -126,6 +126,7 @@ function App() {
 	//validate on frontend first to see if username/email available?
 	//create, login, update username, save userObj
 	const createUserAccount = async (username, email, password) => {
+		//create and log in
 		const createAndGetUser = async () => {
 			try {
 				await firebase
@@ -142,6 +143,7 @@ function App() {
 			return firebase.auth().currentUser;
 		};
 
+		//update display name and add to user object
 		const userInfo = await createAndGetUser();
 		await userInfo
 			.updateProfile({
@@ -152,10 +154,22 @@ function App() {
 					email,
 					password,
 					username,
+					uid: userInfo.uid,
 					isSignedIn: true,
 					isAnonymous: false,
 					votes: [],
 				});
+			})
+			.catch((err) => console.log(err));
+
+		await firebase
+			.firestore()
+			.collection('users')
+			.add({
+				username,
+				uid: userInfo.uid,
+				posts: [],
+				votes: [],
 			})
 			.catch((err) => console.log(err));
 	};
