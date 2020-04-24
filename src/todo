@@ -1,31 +1,31 @@
-(()) sign up and log in form validation
+((1)) create post page
+    - display comments
+    - style
+
+((2)) add comment abilities for users
+    - form validation
+
+((3)) sign up and log in form validation
     - store username in usernames firebase doc
     - check firebase to make sure username not taken (oh god)
     - check length min + max
     - handle errors logging in by displaying error
 
-(()) when creating a post, save it to their user object in firebase
+((4)) when creating a post, save it to their user object in firebase
+    - post form validation
 
-(()) FIX: openModal (from /submit) is not a function when user is not logged in. 
-    - add nav functions to context for submit page
+((5)) add upvote abilities 
+    - limit upvotes to +1 -1
+    - store upvoted posts in user object so it displays their upvoted items when logged in
+
 
 (()) allow for login via username by getting their email from firebase?
 
 (()) handle search input
 
-(()) add comment abilities for users
-
-(()) add upvote abilities 
-    - limit upvotes to +1 -1
-    - store upvoted posts in user object so it displays their upvoted items when logged in
-
 (()) style FeedSort component
 
 (()) style submit post page
-
-(()) create post page
-    -display comments
-    - style
 
 (()) add content to sidebar and display 
 

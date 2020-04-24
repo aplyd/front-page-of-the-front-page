@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import firebase from '../firebase';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 	width: 100%;
@@ -127,6 +128,8 @@ export default function DisplayPost({
 	id,
 }) {
 	const { user, setUpdatePosts } = useContext(PostContext);
+	const url = title.replace(/\s+/g, '-').toLowerCase();
+
 	//TODO - make sure user can only up/down vote once
 	const castVote = (direction) => {
 		let newVoteCount;
@@ -164,7 +167,9 @@ export default function DisplayPost({
 					<p>anon</p>
 				</InfoContainer>
 
-				<Title>{title}</Title>
+				<Title as={Link} to={`/comments/${url}`}>
+					{title}
+				</Title>
 			</ContentContainer>
 
 			<ActionContainer>

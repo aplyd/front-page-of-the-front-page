@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { GlobalStyle } from './GlobalStyle';
 import Submit from './pages/Submit';
 import Home from './pages/Home';
+import Comments from './pages/Comments';
 import { PostContext } from './PostContext';
 import { SORT_OPTIONS } from './utils';
 import Nav from './layouts/Nav';
@@ -157,6 +158,11 @@ function App() {
 								setUpdatePosts={setUpdatePosts}
 							/>
 						)}
+					/>
+					<Route
+						exact
+						path="/comments/:post"
+						component={(props) => <Comments {...props} />}
 					/>
 				</Switch>
 			</Router>
