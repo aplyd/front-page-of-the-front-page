@@ -10,6 +10,11 @@ import { GlobalStyle } from './GlobalStyle';
 import Submit from './pages/Submit';
 import Home from './pages/Home';
 import { PostContext } from './PostContext';
+import { SORT_OPTIONS } from './utils';
+import Nav from './layouts/Nav';
+import Modal from './components/Modal';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
 
 export const Container = styled.div`
 	width: 100%;
@@ -35,26 +40,10 @@ const loadRedditData = () => {
 	// }, []);
 };
 
-// firebase.auth().onAuthStateChanged((user) => {
-// 	if (user.isAnonymous) {
-// 		setUser({
-// 			id: user.uid,
-// 			isAnonymous: true,
-// 		});
-// 	} else {
-// 		console.log(user);
-// 	}
-// });
-
-const SORT_OPTIONS = {
-	TIME_ASC: { column: 'timestamp', direction: 'asc' },
-	TIME_DESC: { column: 'timestamp', direction: 'desc' },
-	VOTE_ASC: { column: 'vote', direction: 'asc' },
-};
-
 function App() {
 	const [user, setUser] = useState({});
 	const [redditData, setRedditData] = useState([]);
+	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
@@ -107,6 +96,30 @@ function App() {
 		setUpdatePosts(Date.now());
 	};
 
+	const displayModal = () => {
+		if (modalContent === 'login') {
+			return (
+				<Modal closeModal={() => setModalContent(null)}>
+					<LogIn
+						showSignUp={() => setModalContent('signup')}
+						closeModal={() => setModalContent(null)}
+					/>
+				</Modal>
+			);
+		} else if (modalContent === 'signup') {
+			return (
+				<Modal closeModal={() => setModalContent(null)}>
+					<SignUp
+						showLogIn={() => setModalContent('login')}
+						closeModal={() => setModalContent(null)}
+					/>
+				</Modal>
+			);
+		} else {
+			return null;
+		}
+	};
+
 	return (
 		<PostContext.Provider
 			value={{
@@ -118,6 +131,8 @@ function App() {
 		>
 			<Router>
 				<GlobalStyle />
+				{displayModal()}
+				<Nav openModal={setModalContent} closeModal={setModalContent} />
 				<Switch>
 					<Route
 						exact

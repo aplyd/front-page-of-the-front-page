@@ -38,22 +38,25 @@ export default function CreatePost({ props, setUpdatePosts }) {
 	const onSubmit = (e) => {
 		e.preventDefault();
 
-		firebase
-			.firestore()
-			.collection('posts')
-			.add({
-				title,
-				postText,
-				timestamp: Date.now(),
-				vote: 0,
-				// author
-			})
-			.then(() => {
-				setUpdatePosts(Date.now());
-				history.push('/');
-			});
-		setTitle('');
-		setPostText('');
+		if (window.user) {
+			firebase
+				.firestore()
+				.collection('posts')
+				.add({
+					title,
+					postText,
+					timestamp: Date.now(),
+					vote: 0,
+					author: window.user.username,
+				})
+				.then(() => {
+					setUpdatePosts(Date.now());
+					history.push('/');
+				});
+
+			setTitle('');
+			setPostText('');
+		}
 	};
 
 	return (
