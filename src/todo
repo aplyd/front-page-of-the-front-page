@@ -1,18 +1,22 @@
-((1)) create post page
+((1)) c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
     - display comments
     - style
 
-((2)) add comment abilities for users
+
+((2)) w̶h̶e̶n̶ ̶c̶r̶e̶a̶t̶i̶n̶g̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶s̶a̶v̶e̶ ̶i̶t̶ ̶t̶o̶ ̶t̶h̶e̶i̶r̶ ̶u̶s̶e̶r̶ ̶o̶b̶j̶e̶c̶t̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
+    -̶ ̶a̶d̶d̶ ̶t̶h̶e̶i̶r̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶t̶o̶ ̶t̶h̶e̶ ̶p̶o̶s̶t̶ ̶i̶n̶ ̶p̶o̶s̶t̶s̶ ̶o̶b̶j̶e̶c̶t̶
+    - post form validation
+    -̶ ̶r̶e̶t̶r̶i̶e̶v̶e̶ ̶p̶o̶s̶t̶s̶ ̶a̶n̶d̶ ̶v̶o̶t̶e̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
+   
+
+((3)) add comment abilities for users
     - form validation
 
-((3)) sign up and log in form validation
+((4)) sign up and log in form validation
     - store username in usernames firebase doc
     - check firebase to make sure username not taken (oh god)
     - check length min + max
     - handle errors logging in by displaying error
-
-((4)) when creating a post, save it to their user object in firebase
-    - post form validation
 
 ((5)) add upvote abilities 
     - limit upvotes to +1 -1

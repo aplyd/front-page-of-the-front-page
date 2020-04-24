@@ -49,6 +49,7 @@ const InfoContainer = styled.div`
 const Title = styled.h2`
 	padding: 4px 8px 20px 30px;
 	font-size: 20px;
+	color: black;
 `;
 
 const JoinContainer = styled.div`

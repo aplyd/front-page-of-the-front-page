@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import firebase from '../firebase';
 import { useHistory } from 'react-router-dom';
+import { PostContext } from '../PostContext';
+import { v4 as uuidv4 } from 'uuid';
 
 const FormContainer = styled.form`
 	padding: 20px;
@@ -33,25 +35,70 @@ const SubmitBtn = styled(Button)``;
 export default function CreatePost({ props, setUpdatePosts }) {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
+	const { user, setUser } = useContext(PostContext);
 	const history = useHistory();
 
 	const onSubmit = (e) => {
+		const timestamp = Date.now();
+		const postID = uuidv4();
 		e.preventDefault();
 
 		if (window.user) {
 			firebase
 				.firestore()
 				.collection('posts')
-				.add({
+				.doc(postID)
+				.set({
 					title,
 					postText,
-					timestamp: Date.now(),
-					vote: 0,
-					author: window.user.username,
+					timestamp,
+					vote: 1,
+					author: user.username,
 				})
 				.then(() => {
 					setUpdatePosts(Date.now());
 					history.push('/');
+				});
+
+			firebase
+				.firestore()
+				.collection('users')
+				.doc(window.user.uid)
+				.update({
+					posts: [
+						...user.posts,
+						{
+							title,
+							postText,
+							timestamp,
+							postID,
+							uid: window.user.uid,
+						},
+					],
+				});
+
+			firebase
+				.firestore()
+				.collection('users')
+				.doc(window.user.uid)
+				.get()
+				.then((res) => {
+					const data = res.data();
+					setUser({
+						...data,
+						posts: [
+							...user.posts,
+							{
+								postID,
+								postText,
+								title,
+								timestamp,
+								isSignedIn: true,
+								isAnonymous: false,
+								uid: window.user.uid,
+							},
+						],
+					});
 				});
 
 			setTitle('');
