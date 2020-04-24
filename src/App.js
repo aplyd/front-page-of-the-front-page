@@ -21,32 +21,6 @@ export const Container = styled.div`
 //TODO - if you dont have a reddit account, you can comment anon (CREATE ANON ABILITY)
 //https://www.reddit.com/r/redditdev/comments/34t0df/creating_account_through_api/
 
-//	NO SUBREDDITS - ONLY FRONT PAGE
-//	ANON COMMENT, POST ABILITY
-//	LATER - USER ACCOUNTS
-// 	PAGES - HOME, SUBMIT, VIEWPOSTS
-
-// if user doesn't exist, create user
-// useEffect(() => {
-// 	if (!localStorage.getItem('tempUser') && !firebase.auth().currentUser) {
-// 		firebase
-// 			.auth()
-// 			.signInAnonymously()
-// 			.then(() => {
-// 				localStorage.setItem(
-// 					'tempUser',
-// 					JSON.stringify(firebase.auth().currentUser)
-// 				);
-// 			})
-// 			.catch((error) => {
-// 				console.log(error.code);
-// 				console.log(error.message);
-// 			});
-// 	} else {
-// 		//do something
-// 	}
-// }, []);
-
 const loadRedditData = () => {
 	// firebase.firestore().collection('posts').add({
 	// 	title: 'hahaha',
@@ -78,16 +52,6 @@ const SORT_OPTIONS = {
 	VOTE_ASC: { column: 'vote', direction: 'asc' },
 };
 
-// const user_state_object = {
-// 	username,
-// 	email,
-// 	password,
-// 	id,
-// 	isSignedIn: true,
-// 	isAnonymous: false,
-// 	votes: [],
-// }
-
 function App() {
 	const [user, setUser] = useState({});
 	const [redditData, setRedditData] = useState([]);
@@ -95,8 +59,8 @@ function App() {
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 
-	//get posts from firebase
 	useEffect(() => {
+		//get posts from firebase
 		const newPosts = [];
 		const subscribe = () => {
 			firebase
@@ -121,82 +85,22 @@ function App() {
 		return () => subscribe();
 	}, [sortBy, updatePosts]);
 
-	useEffect(() => {}, [user]);
-
-	//validate on frontend first to see if username/email available?
-	//create, login, update username, save userObj
-	const createUserAccount = async (username, email, password) => {
-		//create and log in
-		const createAndGetUser = async () => {
-			try {
-				await firebase
-					.auth()
-					.createUserWithEmailAndPassword(email, password)
-					.catch((err) => console.log(err.code, err.message));
-				await firebase
-					.auth()
-					.signInWithEmailAndPassword(email, password)
-					.catch((err) => console.log(err.code, err.message));
-			} catch (err) {
-				console.log(err);
-			}
-			return firebase.auth().currentUser;
-		};
-
-		//update display name and add to user object
-		const userInfo = await createAndGetUser();
-		await userInfo
-			.updateProfile({
-				displayName: username,
-			})
-			.then(() => {
-				setUser({
-					email,
-					password,
-					username,
-					uid: userInfo.uid,
-					isSignedIn: true,
-					isAnonymous: false,
-					votes: [],
-				});
-			})
-			.catch((err) => console.log(err));
-
-		await firebase
-			.firestore()
-			.collection('users')
-			.add({
-				username,
+	//store logged in user in state or create anonymous user
+	useEffect(() => {
+		const userInfo = window.user;
+		console.log(userInfo);
+		if (userInfo) {
+			setUser({
+				username: userInfo.displayName,
+				email: userInfo.email,
 				uid: userInfo.uid,
-				posts: [],
-				votes: [],
-			})
-			.catch((err) => console.log(err));
-	};
-
-	//login, save userObj
-	const logInExistingUser = (email, password) => {
-		let userInfo;
-		firebase
-			.auth()
-			.signInWithEmailAndPassword(email, password)
-			.then(() => {
-				userInfo = firebase.auth().currentUser;
-			})
-			.catch((err) => console.log(err.code, err.message))
-			.finally(() => {
-				setUser({
-					email,
-					password,
-					username: userInfo.displayName,
-					isSignedIn: true,
-					isAnonymous: false,
-					votes: [],
-				});
+				isSignedIn: true,
+				isAnonymous: false,
 			});
-	};
-
-	const updateLoggedInUser = async () => {};
+		} else {
+			//handle anonymous sign in later
+		}
+	}, []);
 
 	const sortPosts = (sortBy) => {
 		setSortBy(sortBy);
@@ -210,8 +114,6 @@ function App() {
 				user,
 				setUser,
 				setUpdatePosts,
-				createUserAccount,
-				logInExistingUser,
 			}}
 		>
 			<Router>

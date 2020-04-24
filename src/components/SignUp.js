@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import useInitialFocus from '../hooks/useInitialFocus';
+import { createUserAccount } from '../firebase';
 
 const WordsContainer = styled.div`
 	width: 432px;
@@ -64,13 +65,13 @@ export default function SignUp({ showLogIn, closeModal }) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
-	const { createUserAccount } = useContext(PostContext);
+	const { setUser } = useContext(PostContext);
 	const input = useRef(null);
 	useInitialFocus(input);
 
 	const createUser = (e) => {
 		e.preventDefault();
-		createUserAccount(username, email, password);
+		createUserAccount(username, email, password, setUser);
 		setUsername('');
 		setPassword('');
 		closeModal();

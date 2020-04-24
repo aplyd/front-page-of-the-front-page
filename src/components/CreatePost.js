@@ -46,6 +46,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 				postText,
 				timestamp: Date.now(),
 				vote: 0,
+				// author
 			})
 			.then(() => {
 				setUpdatePosts(Date.now());

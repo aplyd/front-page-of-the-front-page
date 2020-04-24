@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
+import { logInExistingUser } from '../firebase';
 
 import useInitialFocus from '../hooks/useInitialFocus';
 
@@ -63,13 +64,13 @@ const P2 = styled.p`
 export default function LogIn({ showSignUp, closeModal }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { logInExistingUser } = useContext(PostContext);
+	const { setUser } = useContext(PostContext);
 	const input = useRef(null);
 	useInitialFocus(input);
 
 	const logInUser = (e) => {
 		e.preventDefault();
-		logInExistingUser(email, password);
+		logInExistingUser(email, password, setUser);
 
 		setEmail('');
 		setPassword('');

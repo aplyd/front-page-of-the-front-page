@@ -6,6 +6,8 @@
 
 - when creating a post, save it to their user object in firebase
 
+- allow for login via username by getting their email from firebase?
+
 - add comment abilities for users
 
 - add upvote abilities 
