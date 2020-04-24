@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FeedSort from './FeedSort';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 
 const Container = styled.div`
 	max-width: 960px;
@@ -24,16 +25,7 @@ export default function FeedContainer({
 	sortBy,
 }) {
 	const [width, setWidth] = useState(window.innerWidth);
-
-	useEffect(() => {
-		const handleResize = () => {
-			setWidth(window.innerWidth);
-		};
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
+	useWindowWidth(setWidth);
 
 	return (
 		<Container>
