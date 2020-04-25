@@ -13,6 +13,7 @@ export default function Home({ redditData, posts, sortPosts, sortBy }) {
 				posts={posts}
 				sortPosts={sortPosts}
 				sortBy={sortBy}
+				displayFeedSort={true}
 			></FeedContainer>
 		</Container>
 	);

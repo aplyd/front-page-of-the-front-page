@@ -6,7 +6,7 @@ const Container = styled.div`
 	grid-column: 1;
 `;
 
-export default function Feed({ redditData, posts }) {
+export default function Feed({ redditData, posts, children }) {
 	console.log(posts);
 	return (
 		<Container>
@@ -22,6 +22,7 @@ export default function Feed({ redditData, posts }) {
 						/>
 					);
 				})}
+			{children}
 		</Container>
 	);
 }

@@ -23,15 +23,19 @@ export default function FeedContainer({
 	posts,
 	sortPosts,
 	sortBy,
+	displayFeedSort,
+	children,
 }) {
 	const [width, setWidth] = useState(window.innerWidth);
 	useWindowWidth(setWidth);
 
 	return (
 		<Container>
-			<FeedSort sortPosts={sortPosts} sortBy={sortBy} />
+			{displayFeedSort ? (
+				<FeedSort sortPosts={sortPosts} sortBy={sortBy} />
+			) : null}
 			{width > 960 ? <Sidebar /> : null}
-			<Feed redditData={redditData} posts={posts} />
+			<Feed redditData={redditData} posts={posts} children={children} />
 		</Container>
 	);
 }

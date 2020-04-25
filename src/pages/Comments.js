@@ -5,12 +5,12 @@ import FeedContainer from '../layouts/FeedContainer';
 import { Container } from '../App';
 import Feed from '../layouts/Feed';
 import Sidebar from '../layouts/Sidebar';
-import { useWindowWidth } from '../hooks/useWindowWidth';
+// import { useWindowWidth } from '../hooks/useWindowWidth';
 import { PostContext } from '../PostContext';
 
 export default function Comments() {
 	const [width, setWidth] = useState(window.innerWidth);
-	useWindowWidth(setWidth);
+	// useWindowWidth(setWidth);
 	const { postTitle } = useParams();
 	const { posts } = useContext(PostContext);
 
@@ -29,10 +29,9 @@ export default function Comments() {
 
 	return (
 		<Container>
-			<FeedContainer>
-				{width > 960 ? <Sidebar /> : null}
-				<Feed posts={posts[0]} />
-				<h1>hello</h1>
+			<FeedContainer posts={tempPost} displayFeedSort={false}>
+				{/* {width > 960 ? <Sidebar /> : null} */}
+				{/* <Feed posts={tempPost} displayFeedSort={false} /> */}
 			</FeedContainer>
 		</Container>
 	);
