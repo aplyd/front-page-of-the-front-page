@@ -31,11 +31,15 @@ export default function FeedContainer({
 
 	return (
 		<Container>
-			{displayFeedSort ? (
-				<FeedSort sortPosts={sortPosts} sortBy={sortBy} />
-			) : null}
+			{displayFeedSort
+				? [
+						<FeedSort sortPosts={sortPosts} sortBy={sortBy} />,
+						<Feed redditData={redditData} posts={posts} />,
+				  ]
+				: null}
+
 			{width > 960 ? <Sidebar /> : null}
-			<Feed redditData={redditData} posts={posts} children={children} />
+			{children}
 		</Container>
 	);
 }

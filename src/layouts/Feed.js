@@ -19,6 +19,7 @@ export default function Feed({ redditData, posts, children }) {
 							key={post.id + Date.now()}
 							id={post.id}
 							vote={post.vote}
+							timestamp={post.timestamp}
 						/>
 					);
 				})}

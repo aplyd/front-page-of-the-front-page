@@ -5,6 +5,7 @@ import { roundedGreyBorder } from '../GlobalStyle';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import firebase from '../firebase';
 import { Link } from 'react-router-dom';
+import formatDistance from 'date-fns/formatDistance';
 
 const Container = styled.div`
 	width: 100%;
@@ -15,29 +16,29 @@ const Container = styled.div`
 	margin-bottom: 12px;
 `;
 
-const VoteArrowContainer = styled.div`
+export const VoteArrowContainer = styled.div`
 	height: 100%;
 
 	color: gray;
 	grid-column: 1;
 	&& > div {
-		padding: 20px 0 0 20px;
+		padding: 20px 0 0 8px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 `;
 
-const ContentContainer = styled.div`
+export const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	grid-column: 2;
 `;
 
-const InfoContainer = styled.div`
+export const InfoContainer = styled.div`
 	display: flex;
 	flex-direction: row;
-	padding: 8px 8px 8px 30px;
+	padding: 8px 8px 8px 16px;
 	grid-column: 3;
 	&& > p {
 		padding-right: 8px;
@@ -46,18 +47,18 @@ const InfoContainer = styled.div`
 	}
 `;
 
-const Title = styled.h2`
-	padding: 4px 8px 20px 30px;
+export const Title = styled.h2`
+	padding: 4px 8px 20px 16px;
 	font-size: 20px;
 	color: black;
 `;
 
-const JoinContainer = styled.div`
+export const JoinContainer = styled.div`
 	width: 140px;
 	padding: 8px 8px 0 0;
 `;
 
-const JoinBtn = styled.button`
+export const JoinBtn = styled.button`
 	padding: 3px 12px;
 	font-size: 12px;
 	text-align: center;
@@ -70,7 +71,7 @@ const JoinBtn = styled.button`
 	float: right;
 `;
 
-const LinkPreview = styled.div`
+export const LinkPreview = styled.div`
 	width: 142px;
 	height: 98px;
 	background: lightgray;
@@ -80,17 +81,17 @@ const LinkPreview = styled.div`
 	border-radius: 4px;
 `;
 
-const ActionContainer = styled.div`
+export const ActionContainer = styled.div`
 	display: flex;
 	flex-direction: row;
-	padding-left: 30px;
+	padding-left: 16px;
 	border: none;
 	grid-column: 2;
 	grid-row: 2;
 `;
 
 //fix padding
-const ActionButton = styled.button`
+export const ActionButton = styled.button`
 	background: white;
 	color: gray;
 	font-size: 12px;
@@ -104,15 +105,14 @@ const ActionButton = styled.button`
 `;
 const Comment = styled(ActionButton)``;
 const Share = styled(ActionButton)``;
-const Save = styled(ActionButton)``;
 
-const Vote = styled.p`
+export const Vote = styled.p`
 	font-size: ${(props) => props.theme.font.size.xs};
 	padding: 6px 0;
 	cursor: default;
 `;
 
-const SVG = styled.svg`
+export const SVG = styled.svg`
 	&&:hover {
 		color: ${(props) => props.theme.colors.red};
 		background-color: ${(props) => props.theme.colors.lightGray};
@@ -127,6 +127,7 @@ export default function DisplayPost({
 	preview,
 	vote,
 	id,
+	timestamp,
 }) {
 	const { user, setUpdatePosts } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
@@ -162,10 +163,15 @@ export default function DisplayPost({
 
 			<ContentContainer>
 				<InfoContainer>
-					<p>{subreddit}</p>
 					<p>•</p>
 					<p>Posted by{author}</p>
 					<p>anon</p>
+					<p>
+						{formatDistance(Date.now(), timestamp, {
+							includeSeconds: true,
+						})}{' '}
+						ago
+					</p>
 				</InfoContainer>
 
 				<Title as={Link} to={`/comments/${url}`}>
@@ -176,7 +182,6 @@ export default function DisplayPost({
 			<ActionContainer>
 				<Comment>comment</Comment>
 				<Share>share</Share>
-				<Save>save</Save>
 			</ActionContainer>
 
 			<JoinContainer>
