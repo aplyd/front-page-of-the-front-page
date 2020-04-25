@@ -7,7 +7,6 @@ const Container = styled.div`
 `;
 
 export default function Feed({ redditData, posts, children }) {
-	console.log(posts);
 	return (
 		<Container>
 			{posts &&

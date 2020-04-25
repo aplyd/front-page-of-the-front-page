@@ -38,17 +38,18 @@ export const ContentContainer = styled.div`
 export const InfoContainer = styled.div`
 	display: flex;
 	flex-direction: row;
-	padding: 8px 8px 8px 16px;
+	padding: 8px 8px 4px 8px;
 	grid-column: 3;
 	&& > p {
 		padding-right: 8px;
 		color: gray;
 		cursor: default;
+		font-size: 12px;
 	}
 `;
 
 export const Title = styled.h2`
-	padding: 4px 8px 20px 16px;
+	padding: 4px 8px 20px 8px;
 	font-size: 20px;
 	color: black;
 `;
@@ -84,7 +85,7 @@ export const LinkPreview = styled.div`
 export const ActionContainer = styled.div`
 	display: flex;
 	flex-direction: row;
-	padding-left: 16px;
+	padding-left: 8px;
 	border: none;
 	grid-column: 2;
 	grid-row: 2;
@@ -92,12 +93,14 @@ export const ActionContainer = styled.div`
 
 //fix padding
 export const ActionButton = styled.button`
+	text-transform: capitalize;
 	background: white;
 	color: gray;
 	font-size: 12px;
 	border-radius: 4px;
 	outline: none;
 	border: none;
+	margin: 0;
 	&&:hover {
 		cursor: pointer;
 		background: lightgray;
@@ -163,7 +166,6 @@ export default function DisplayPost({
 
 			<ContentContainer>
 				<InfoContainer>
-					<p>•</p>
 					<p>Posted by{author}</p>
 					<p>anon</p>
 					<p>
