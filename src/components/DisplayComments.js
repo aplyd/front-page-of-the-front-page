@@ -2,6 +2,7 @@ import React from 'react';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
 import { VoteArrowContainer, SVG, ActionButton } from './DisplayPost';
+import formatDistance from 'date-fns/formatDistance';
 
 const Container = styled.div`
 	grid-column: 1 / 3;
@@ -38,46 +39,45 @@ const BtnContainer = styled.div`
 	bottom: 4px;
 	left: 0;
 `;
-const Btn = styled(ActionButton)``;
+const Btn = styled(ActionButton)`
+	cursor: default;
+`;
 
-const tempComment = {
-	author: 'RookyNumbs',
-	points: 4,
-	body: '70-80%!?? 51% accuracy and you can become fabulously wealthy.',
-	timestamp: Date.now(),
-};
+//TODO - use parentIndex in the comment to see where the next comment exists. if parentIndex = 0, uh
 
-let tempComments = [];
-
-for (let i = 0; i < 12; i++) {
-	tempComments.push(tempComment);
-}
-
-export default function DisplayComments() {
+export default function DisplayComments({ comments }) {
 	return (
 		<Container>
-			{tempComments.map((c, index) => {
-				return (
-					<Card index={index} key={index}>
-						<VoteArrowContainer>
-							<div>
-								<SVG as={GoArrowUp}></SVG>
-								<SVG as={GoArrowDown}></SVG>
-							</div>
-						</VoteArrowContainer>
-						<ContentContainer>
-							<CommentInfo>
-								{c.author} {c.points} points - {c.timestamp} ago
-							</CommentInfo>
-							<CommentBody>{c.body}</CommentBody>
-							<BtnContainer>
-								<Btn>Comment</Btn>
-								<Btn>Share</Btn>
-							</BtnContainer>
-						</ContentContainer>
-					</Card>
-				);
-			})}
+			{comments &&
+				comments.map((comment, index) => {
+					return (
+						<Card index={index} key={index}>
+							<VoteArrowContainer>
+								<div>
+									<SVG as={GoArrowUp}></SVG>
+									<SVG as={GoArrowDown}></SVG>
+								</div>
+							</VoteArrowContainer>
+							<ContentContainer>
+								<CommentInfo>
+									{comment.username} {comment.points} points -{' '}
+									{formatDistance(
+										Date.now(),
+										comment.timestamp
+									)}{' '}
+									ago
+								</CommentInfo>
+								<CommentBody>
+									{comment.commentInput}
+								</CommentBody>
+								<BtnContainer>
+									<Btn>Reply</Btn>
+									<Btn>Share</Btn>
+								</BtnContainer>
+							</ContentContainer>
+						</Card>
+					);
+				})}
 		</Container>
 	);
 }

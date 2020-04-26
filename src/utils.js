@@ -3,3 +3,21 @@ export const SORT_OPTIONS = {
 	TIME_DESC: { column: 'timestamp', direction: 'desc' },
 	VOTE_ASC: { column: 'vote', direction: 'asc' },
 };
+
+export const Comment = ({
+	commentInput = '',
+	timestamp = Date.now(),
+	username = '',
+	points = 1,
+	replies = [],
+	parent = '',
+	parentIndex = 0,
+} = {}) => ({
+	commentInput,
+	timestamp,
+	points,
+	replies,
+	parent,
+	parentIndex,
+	username,
+});

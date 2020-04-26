@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { roundedGreyBorder } from '../GlobalStyle';
 import formatDistance from 'date-fns/formatDistance';
 import DisplayComments from './DisplayComments';
 import useInitialFocus from '../hooks/useInitialFocus';
+import { Comment } from '../utils';
+import { PostContext } from '../PostContext';
 import firebase from '../firebase';
 import {
 	VoteArrowContainer,
@@ -94,22 +96,23 @@ const SortByContainer = styled.div`
 `;
 
 export default function PostContent({ post, id }) {
-	const { vote, author, title, postText, timestamp } = post[0];
 	const [commentInput, setCommentInput] = useState();
+	const {
+		user: { username },
+	} = useContext(PostContext);
 
-	useEffect(() => {
+	console.log(username);
+
+	const submitTopLevelComment = () => {
+		let newComment = Comment({ commentInput, username });
 		firebase
 			.firestore()
 			.collection('posts')
 			.doc(id)
-			.get()
-			.then((content) => {
-				console.log(content);
-			});
-	}, []);
-
-	const submitTopLevelComment = () => {
-		firebase.firestore().collections();
+			.update({
+				comments: [newComment],
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (
@@ -118,7 +121,7 @@ export default function PostContent({ post, id }) {
 				<div>
 					{/* <SVG as={GoArrowUp} onClick={() => castVote('up')} /> */}
 					<SVG as={GoArrowUp} />
-					<Vote>{vote}</Vote>
+					{/* <Vote>{post.vote}</Vote> */}
 					<SVG as={GoArrowDown} />
 					{/* <SVG as={GoArrowDown} onClick={() => castVote('down')} /> */}
 				</div>
@@ -126,16 +129,18 @@ export default function PostContent({ post, id }) {
 
 			<ContentContainer>
 				<InfoContainer>
-					<p>Posted by {author}</p>
+					<p>Posted by {post.author}</p>
 					<p>
-						{formatDistance(Date.now(), timestamp, {
-							includeSeconds: true,
-						})}{' '}
+						{post.timestamp
+							? formatDistance(Date.now(), post.timestamp, {
+									includeSeconds: true,
+							  })
+							: null}{' '}
 						ago
 					</p>
 				</InfoContainer>
-				<Title>{title}</Title>
-				<Body>{postText}</Body>
+				<Title>{post.title}</Title>
+				<Body>{post.postText}</Body>
 			</ContentContainer>
 
 			<ActionContainer>
@@ -143,7 +148,7 @@ export default function PostContent({ post, id }) {
 				<Share>share</Share>
 			</ActionContainer>
 
-			{/* show/hide below component when user is logged in */}
+			{/* TODO show/hide below component when user is logged in */}
 			<CommentInputContainer>
 				<CommentAsDisplayName>
 					Comment as displayName
@@ -165,7 +170,7 @@ export default function PostContent({ post, id }) {
 				{/* TODO*/}
 			</SortByContainer>
 
-			<DisplayComments />
+			<DisplayComments comments={post.comments} />
 		</Container>
 	);
 }

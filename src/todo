@@ -7,6 +7,7 @@
     - post form validation
     -̶ ̶r̶e̶t̶r̶i̶e̶v̶e̶ ̶p̶o̶s̶t̶s̶ ̶a̶n̶d̶ ̶v̶o̶t̶e̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
    
+(()) display username for post (remove 'anon')
 
 ((3)) add comment abilities for users
     - create data structure in firebase and store comment
