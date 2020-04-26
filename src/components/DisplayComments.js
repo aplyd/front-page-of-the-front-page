@@ -39,9 +39,7 @@ const BtnContainer = styled.div`
 	bottom: 4px;
 	left: 0;
 `;
-const Btn = styled(ActionButton)`
-	cursor: default;
-`;
+const Btn = styled(ActionButton)``;
 
 //TODO - use parentIndex in the comment to see where the next comment exists. if parentIndex = 0, uh
 
@@ -72,7 +70,9 @@ export default function DisplayComments({ comments }) {
 								</CommentBody>
 								<BtnContainer>
 									<Btn>Reply</Btn>
-									<Btn>Share</Btn>
+									<Btn style={{ cursor: 'no-drop' }}>
+										Share
+									</Btn>
 								</BtnContainer>
 							</ContentContainer>
 						</Card>

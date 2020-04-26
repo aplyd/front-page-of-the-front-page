@@ -9,6 +9,12 @@ const Container = styled.div`
 export default function Feed({ redditData, posts, children }) {
 	return (
 		<Container>
+			<DisplayPost
+				title={'Welcome to the front page of the front page'}
+				pinned={true}
+				author={'Austin // aplyd'}
+				timestamp={Date.now()}
+			/>
 			{posts &&
 				posts.map((post) => {
 					return (
@@ -19,6 +25,7 @@ export default function Feed({ redditData, posts, children }) {
 							id={post.id}
 							vote={post.vote}
 							timestamp={post.timestamp}
+							author={post.author}
 						/>
 					);
 				})}

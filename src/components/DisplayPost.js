@@ -33,6 +33,7 @@ export const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	grid-column: 2;
+	grid-row: 1;
 `;
 
 export const InfoContainer = styled.div`
@@ -107,7 +108,12 @@ export const ActionButton = styled.button`
 	}
 `;
 const Comment = styled(ActionButton)``;
-const Share = styled(ActionButton)``;
+const Share = styled(ActionButton)`
+	cursor: no-drop;
+	&&:hover {
+		cursor: no-drop;
+	}
+`;
 
 export const Vote = styled.p`
 	font-size: ${(props) => props.theme.font.size.xs};
@@ -123,6 +129,15 @@ export const SVG = styled.svg`
 	}
 `;
 
+const Pinned = styled.p`
+	grid-column: 2;
+	grid-row: 1;
+	color: ${(props) => props.theme.colors.grey};
+	font-size: 10px;
+	text-transform: uppercase;
+	padding: 6px 0 6px 8px;
+`;
+
 export default function DisplayPost({
 	title,
 	author,
@@ -130,6 +145,7 @@ export default function DisplayPost({
 	vote,
 	id,
 	timestamp,
+	pinned,
 }) {
 	const { setUpdatePosts } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
@@ -164,9 +180,9 @@ export default function DisplayPost({
 			</VoteArrowContainer>
 
 			<ContentContainer>
+				{pinned ? <Pinned>Pinned by moderators</Pinned> : null}
 				<InfoContainer>
-					<p>Posted by{author}</p>
-					<p>anon</p>
+					<p>Posted by {author} </p>
 					<p>
 						{formatDistance(Date.now(), timestamp, {
 							includeSeconds: true,
@@ -189,7 +205,7 @@ export default function DisplayPost({
 				</Title>
 			</ContentContainer>
 
-			<ActionContainer>
+			<ActionContainer pinned={pinned}>
 				<Comment>comment</Comment>
 				<Share>share</Share>
 			</ActionContainer>
