@@ -54,31 +54,30 @@ for (let i = 0; i < 12; i++) {
 }
 
 export default function DisplayComments() {
-	const displayCard = (author, title, points, timestamp) => {
-		const allComments = tempComments.map((c, index) => {
-			return (
-				<Card index={index}>
-					<VoteArrowContainer>
-						<div>
-							<SVG as={GoArrowUp}></SVG>
-							<SVG as={GoArrowDown}></SVG>
-						</div>
-					</VoteArrowContainer>
-					<ContentContainer>
-						<CommentInfo>
-							{c.author} {c.points} points - {c.timestamp} ago
-						</CommentInfo>
-						<CommentBody>{c.body}</CommentBody>
-						<BtnContainer>
-							<Btn>Comment</Btn>
-							<Btn>Share</Btn>
-						</BtnContainer>
-					</ContentContainer>
-				</Card>
-			);
-		});
-		return allComments;
-	};
-
-	return <Container>{displayCard()}</Container>;
+	return (
+		<Container>
+			{tempComments.map((c, index) => {
+				return (
+					<Card index={index} key={index}>
+						<VoteArrowContainer>
+							<div>
+								<SVG as={GoArrowUp}></SVG>
+								<SVG as={GoArrowDown}></SVG>
+							</div>
+						</VoteArrowContainer>
+						<ContentContainer>
+							<CommentInfo>
+								{c.author} {c.points} points - {c.timestamp} ago
+							</CommentInfo>
+							<CommentBody>{c.body}</CommentBody>
+							<BtnContainer>
+								<Btn>Comment</Btn>
+								<Btn>Share</Btn>
+							</BtnContainer>
+						</ContentContainer>
+					</Card>
+				);
+			})}
+		</Container>
+	);
 }

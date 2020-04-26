@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+// import { useParams } from 'react-router-dom';
 import FeedContainer from '../layouts/FeedContainer';
 import { Container } from '../App';
-import { PostContext } from '../PostContext';
+// import { PostContext } from '../PostContext';
 import PostContent from '../components/PostContent';
+import { useLocation } from 'react-router';
 
 const tempComments = [];
 
@@ -22,14 +22,17 @@ const tempPost = [
 ];
 
 export default function Comments() {
-	const [width, setWidth] = useState(window.innerWidth);
-	const { postTitle } = useParams();
-	const { posts } = useContext(PostContext);
+	// const [width, setWidth] = useState(window.innerWidth);
+	// const { postTitle } = useParams();
+	// const { posts } = useContext(PostContext);
+	const {
+		state: { id },
+	} = useLocation();
 
 	return (
 		<Container>
 			<FeedContainer displayFeedSort={false}>
-				<PostContent post={tempPost} />
+				<PostContent post={tempPost} id={id} />
 			</FeedContainer>
 		</Container>
 	);

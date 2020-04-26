@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { roundedGreyBorder } from '../GlobalStyle';
 import formatDistance from 'date-fns/formatDistance';
 import DisplayComments from './DisplayComments';
+import useInitialFocus from '../hooks/useInitialFocus';
+import firebase from '../firebase';
 import {
 	VoteArrowContainer,
 	SVG,
@@ -26,7 +28,6 @@ const Container = styled.div`
 
 const CommentAction = styled(ActionButton)``;
 const Share = styled(ActionButton)``;
-const Save = styled(ActionButton)``;
 
 const Body = styled.p`
 	padding: 4px 64px 8px 8px;
@@ -92,12 +93,25 @@ const SortByContainer = styled.div`
 	}
 `;
 
-export default function PostContent({ post }) {
+export default function PostContent({ post, id }) {
 	const { vote, author, title, postText, timestamp } = post[0];
+	const [commentInput, setCommentInput] = useState();
 
-	const displayComments = () => {};
+	useEffect(() => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(id)
+			.get()
+			.then((content) => {
+				console.log(content);
+			});
+	}, []);
 
-	console.log(post);
+	const submitTopLevelComment = () => {
+		firebase.firestore().collections();
+	};
+
 	return (
 		<Container>
 			<VoteArrowContainer>
@@ -120,7 +134,6 @@ export default function PostContent({ post }) {
 						ago
 					</p>
 				</InfoContainer>
-
 				<Title>{title}</Title>
 				<Body>{postText}</Body>
 			</ContentContainer>
@@ -129,20 +142,29 @@ export default function PostContent({ post }) {
 				<CommentAction>comment</CommentAction>
 				<Share>share</Share>
 			</ActionContainer>
+
 			{/* show/hide below component when user is logged in */}
 			<CommentInputContainer>
 				<CommentAsDisplayName>
 					Comment as displayName
 				</CommentAsDisplayName>
 				<CommentTextAreaContainer>
-					<CommentTextArea placeholder="What are your thoughts?"></CommentTextArea>
-					<CommentBtn>comment</CommentBtn>
+					<CommentTextArea
+						placeholder="What are your thoughts?"
+						value={commentInput}
+						onChange={(e) => setCommentInput(e.target.value)}
+					></CommentTextArea>
+					<CommentBtn type="button" onClick={submitTopLevelComment}>
+						comment
+					</CommentBtn>
 				</CommentTextAreaContainer>
 			</CommentInputContainer>
+
 			<SortByContainer>
 				<p>sort by</p>
 				{/* TODO*/}
 			</SortByContainer>
+
 			<DisplayComments />
 		</Container>
 	);

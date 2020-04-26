@@ -125,14 +125,13 @@ export const SVG = styled.svg`
 
 export default function DisplayPost({
 	title,
-	subreddit,
 	author,
 	preview,
 	vote,
 	id,
 	timestamp,
 }) {
-	const { user, setUpdatePosts } = useContext(PostContext);
+	const { setUpdatePosts } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
 
 	//TODO - make sure user can only up/down vote once
@@ -176,7 +175,16 @@ export default function DisplayPost({
 					</p>
 				</InfoContainer>
 
-				<Title as={Link} to={`/comments/${url}`}>
+				<Title
+					as={Link}
+					to={{
+						pathname: `/comments/${url}`,
+						state: {
+							id: id,
+						},
+					}}
+					id={id}
+				>
 					{title}
 				</Title>
 			</ContentContainer>

@@ -1,7 +1,6 @@
 ((1)) c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
-    - display comments
-    - style
-
+    -̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶
+    -̶ ̶s̶t̶y̶l̶e̶
 
 ((2)) w̶h̶e̶n̶ ̶c̶r̶e̶a̶t̶i̶n̶g̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶s̶a̶v̶e̶ ̶i̶t̶ ̶t̶o̶ ̶t̶h̶e̶i̶r̶ ̶u̶s̶e̶r̶ ̶o̶b̶j̶e̶c̶t̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
     -̶ ̶a̶d̶d̶ ̶t̶h̶e̶i̶r̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶t̶o̶ ̶t̶h̶e̶ ̶p̶o̶s̶t̶ ̶i̶n̶ ̶p̶o̶s̶t̶s̶ ̶o̶b̶j̶e̶c̶t̶
@@ -10,6 +9,7 @@
    
 
 ((3)) add comment abilities for users
+    - create data structure in firebase and store comment
     - form validation
 
 ((4)) sign up and log in form validation

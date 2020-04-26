@@ -15,6 +15,7 @@ const Background = styled.div`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	z-index: 1000;
 `;
 const Foreground = styled.div`
 	height: 550px;

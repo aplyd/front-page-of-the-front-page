@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import FeedSort from './FeedSort';
 import Sidebar from './Sidebar';
@@ -33,8 +33,16 @@ export default function FeedContainer({
 		<Container>
 			{displayFeedSort
 				? [
-						<FeedSort sortPosts={sortPosts} sortBy={sortBy} />,
-						<Feed redditData={redditData} posts={posts} />,
+						<FeedSort
+							sortPosts={sortPosts}
+							sortBy={sortBy}
+							key={'sort posts'}
+						/>,
+						<Feed
+							redditData={redditData}
+							posts={posts}
+							key={'feed'}
+						/>,
 				  ]
 				: null}
 

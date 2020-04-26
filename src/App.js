@@ -4,7 +4,7 @@ import './App.css';
 // import axios from 'axios';
 import styled from 'styled-components';
 import firebase from './firebase';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 import { GlobalStyle } from './GlobalStyle';
 import Submit from './pages/Submit';

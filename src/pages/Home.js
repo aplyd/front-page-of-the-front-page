@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Container } from '../App';
 import FeedContainer from '../layouts/FeedContainer';
-import { PostContext } from '../PostContext';
 
 export default function Home({ redditData, posts, sortPosts, sortBy }) {
-	const { user } = useContext(PostContext); //?
-
 	return (
 		<Container>
 			<FeedContainer
