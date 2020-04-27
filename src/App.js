@@ -78,7 +78,6 @@ function App() {
 	//store logged in user in state or create anonymous user
 	useEffect(() => {
 		const userInfo = window.user;
-		console.log(userInfo);
 		if (userInfo) {
 			setUser({
 				username: userInfo.displayName,

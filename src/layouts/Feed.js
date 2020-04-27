@@ -14,6 +14,7 @@ export default function Feed({ redditData, posts, children }) {
 				pinned={true}
 				author={'Austin // aplyd'}
 				timestamp={Date.now()}
+				id={'pinned'}
 			/>
 			{posts &&
 				posts.map((post) => {

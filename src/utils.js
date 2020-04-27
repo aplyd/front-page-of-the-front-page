@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const SORT_OPTIONS = {
 	TIME_ASC: { column: 'timestamp', direction: 'asc' },
 	TIME_DESC: { column: 'timestamp', direction: 'desc' },
@@ -10,14 +12,12 @@ export const Comment = ({
 	username = '',
 	points = 1,
 	replies = [],
-	parent = '',
-	parentIndex = 0,
+	id = uuidv4(),
 } = {}) => ({
 	commentInput,
 	timestamp,
 	points,
 	replies,
-	parent,
-	parentIndex,
 	username,
+	id,
 });

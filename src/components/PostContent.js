@@ -18,6 +18,7 @@ import {
 	ActionButton,
 	Vote,
 } from './DisplayPost';
+import { v4 as uuidv4 } from 'uuid';
 
 const Container = styled.div`
 	width: 100%;
@@ -95,13 +96,15 @@ const SortByContainer = styled.div`
 	}
 `;
 
+const CommentContainer = styled.div`
+	grid-column: 1 / 3;
+`;
+
 export default function PostContent({ post, id }) {
 	const [commentInput, setCommentInput] = useState();
 	const {
 		user: { username },
 	} = useContext(PostContext);
-
-	console.log(username);
 
 	const submitTopLevelComment = () => {
 		let newComment = Comment({ commentInput, username });
@@ -110,7 +113,7 @@ export default function PostContent({ post, id }) {
 			.collection('posts')
 			.doc(id)
 			.update({
-				comments: [newComment],
+				comments: [...post.comments, newComment],
 			})
 			.catch((err) => console.log(err));
 	};
@@ -144,7 +147,10 @@ export default function PostContent({ post, id }) {
 			</ContentContainer>
 
 			<ActionContainer>
-				<CommentAction>comment</CommentAction>
+				<CommentAction>
+					{post.comments.length}{' '}
+					{post.comments.length > 1 ? 'comments' : 'comment'}
+				</CommentAction>
 				<Share>share</Share>
 			</ActionContainer>
 
@@ -170,7 +176,12 @@ export default function PostContent({ post, id }) {
 				{/* TODO*/}
 			</SortByContainer>
 
-			<DisplayComments comments={post.comments} />
+			{/* <DisplayComments comments={post.comments} /> */}
+			<CommentContainer>
+				{post.comments.map((comment) => {
+					return <DisplayComments comment={comment} key={uuidv4()} />;
+				})}
+			</CommentContainer>
 		</Container>
 	);
 }

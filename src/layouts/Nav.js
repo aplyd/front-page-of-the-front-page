@@ -83,7 +83,7 @@ export default function Nav({ openModal, closeModal }) {
 	};
 
 	const displayLoggedInStatus = () => {
-		if (user.isSignedIn) {
+		if (window.user) {
 			return (
 				<React.Fragment>
 					<LoginBtn type="button">
@@ -115,7 +115,7 @@ export default function Nav({ openModal, closeModal }) {
 
 	return (
 		<Container>
-			<Circle />
+			<Circle as={Link} to="/" />
 
 			<Search type="text" placeholder="Search" />
 

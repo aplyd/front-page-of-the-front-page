@@ -7,21 +7,63 @@ import PostContent from '../components/PostContent';
 import { useLocation } from 'react-router';
 import firebase from '../firebase';
 
-const tempPost = {
-	id: '',
-	title: '',
-	author: '',
-	vote: 0,
-	timestamp: '',
-	postText: '',
-	comments: [],
+const zeroA2 = {
+	username: 'RookyNumbs',
+	points: 4,
+	commentInput: 'zero A 2',
+	timestamp: Date.now(),
+	replies: [],
 };
 
-const tempComment = {
-	author: 'RookyNumbs',
+const zeroA1 = {
+	username: 'RookyNumbs',
 	points: 4,
-	body: '70-80%!?? 51% accuracy and you can become fabulously wealthy.',
+	commentInput: 'zero A 1',
 	timestamp: Date.now(),
+	replies: [],
+};
+
+const zeroB = {
+	username: 'RookyNumbs',
+	points: 4,
+	commentInput: 'zero B',
+	timestamp: Date.now(),
+	replies: [],
+};
+
+const zeroA = {
+	username: 'RookyNumbs',
+	points: 4,
+	commentInput: 'zero A',
+	timestamp: Date.now(),
+	replies: [zeroA1, zeroA2],
+};
+
+const zero = {
+	username: 'RookyNumbs',
+	points: 4,
+	commentInput: 'zero',
+	timestamp: Date.now(),
+	replies: [zeroA, zeroB],
+};
+
+const one = {
+	username: 'RookyNumbs',
+	points: 4,
+	commentInput: 'one',
+	timestamp: Date.now(),
+	replies: [],
+};
+
+//dont forget to set this back to empty strings
+const tempPost = {
+	id: 1,
+	title: 'Welcome to the front page of the front page',
+	author: '',
+	vote: 0,
+	timestamp: Date.now(),
+	postText: '',
+	comments: [zero, one],
 };
 
 export default function Comments() {
@@ -33,16 +75,16 @@ export default function Comments() {
 		state: { id },
 	} = useLocation();
 
-	useEffect(() => {
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(id)
-			.get()
-			.then((content) => {
-				setPostData(content.data());
-			});
-	}, [id]);
+	// useEffect(() => {
+	// 	firebase
+	// 		.firestore()
+	// 		.collection('posts')
+	// 		.doc(id)
+	// 		.get()
+	// 		.then((content) => {
+	// 			setPostData(content.data());
+	// 		});
+	// }, [id]);
 
 	return (
 		<Container>

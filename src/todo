@@ -7,11 +7,13 @@
     - post form validation
     -̶ ̶r̶e̶t̶r̶i̶e̶v̶e̶ ̶p̶o̶s̶t̶s̶ ̶a̶n̶d̶ ̶v̶o̶t̶e̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
    
-(()) display username for post (remove 'anon')
+d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶p̶o̶s̶t̶ ̶(̶r̶e̶m̶o̶v̶e̶ ̶'̶a̶n̶o̶n̶'̶)̶
 
 ((3)) add comment abilities for users
     - create data structure in firebase and store comment
-    - form validation
+    - fetch comments from firebase after submitting
+    - form validation?
+    - in displayComments, show author username color black
 
 ((4)) sign up and log in form validation
     - store username in usernames firebase doc
