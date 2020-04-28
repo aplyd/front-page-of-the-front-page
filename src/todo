@@ -1,33 +1,27 @@
-((!!!)) c̶h̶a̶n̶g̶e̶ ̶a̶l̶l̶ ̶"̶a̶u̶t̶h̶o̶r̶"̶ ̶i̶n̶s̶t̶a̶n̶c̶e̶s̶ ̶t̶o̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶
+((NEXT))
+    - rerender/refresh comment page after submitting a comment
+    - ability to reply to comments
+        - correctly store the reply in firebase
+    -̶ ̶a̶d̶d̶ ̶a̶ ̶c̶a̶n̶c̶e̶l̶ ̶b̶u̶t̶t̶o̶n̶ ̶i̶n̶s̶i̶d̶e̶ ̶t̶h̶e̶ ̶r̶e̶p̶l̶y̶ ̶i̶n̶p̶u̶t̶ ̶t̶o̶ ̶c̶l̶o̶s̶e̶ ̶i̶n̶p̶u̶t̶
+    - afer making a post, make sure user stays logged in
 
-((1)) c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
-    -̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶
-    -̶ ̶s̶t̶y̶l̶e̶
-
-((2)) w̶h̶e̶n̶ ̶c̶r̶e̶a̶t̶i̶n̶g̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶s̶a̶v̶e̶ ̶i̶t̶ ̶t̶o̶ ̶t̶h̶e̶i̶r̶ ̶u̶s̶e̶r̶ ̶o̶b̶j̶e̶c̶t̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
-    -̶ ̶a̶d̶d̶ ̶t̶h̶e̶i̶r̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶t̶o̶ ̶t̶h̶e̶ ̶p̶o̶s̶t̶ ̶i̶n̶ ̶p̶o̶s̶t̶s̶ ̶o̶b̶j̶e̶c̶t̶
-    - post form validation
-    -̶ ̶r̶e̶t̶r̶i̶e̶v̶e̶ ̶p̶o̶s̶t̶s̶ ̶a̶n̶d̶ ̶v̶o̶t̶e̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
-   
-d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶p̶o̶s̶t̶ ̶(̶r̶e̶m̶o̶v̶e̶ ̶'̶a̶n̶o̶n̶'̶)̶
-
-((3)) add comment abilities for users
-    - create data structure in firebase and store comment
-    - fetch comments from firebase after submitting
+((2)) a̶d̶d̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶f̶o̶r̶ ̶u̶s̶e̶r̶s̶
+    -̶ ̶c̶r̶e̶a̶t̶e̶ ̶d̶a̶t̶a̶ ̶s̶t̶r̶u̶c̶t̶u̶r̶e̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶n̶d̶ ̶s̶t̶o̶r̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶
+    -̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶f̶t̶e̶r̶ ̶s̶u̶b̶m̶i̶t̶t̶i̶n̶g̶
     - form validation?
     - in displayComments, show username color black
     - show username for "comment as ____"
-    - hide comment input unless logged in
+    -̶ ̶h̶i̶d̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶i̶n̶p̶u̶t̶ ̶u̶n̶l̶e̶s̶s̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
     -̶ ̶l̶i̶n̶e̶ ̶u̶p̶ ̶l̶e̶f̶t̶ ̶e̶d̶g̶e̶ ̶o̶f̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶b̶o̶x̶,̶ ̶p̶o̶s̶t̶ ̶b̶o̶d̶y̶,̶ ̶e̶t̶c̶.̶
 
-((4)) sign up and log in form validation
-    - store username in usernames firebase doc
+((3)) sign up and log in form validation
+    -̶ ̶s̶t̶o̶r̶e̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶s̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶d̶o̶c̶
     - check firebase to make sure username not taken (oh god)
     - check length min + max
     - handle errors logging in by displaying error
     - trigger nav rerender on log out
 
-((5)) add upvote abilities 
+((4)) add upvote abilities 
     - limit upvotes to +1 -1
     - store upvoted posts in user object so it displays their upvoted items when logged in
 

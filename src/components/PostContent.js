@@ -108,12 +108,14 @@ export default function PostContent({ post, id, user }) {
 		user: { username },
 	} = useContext(PostContext);
 
+	console.log(post);
+
 	const submitTopLevelComment = () => {
 		let newComment = Comment({ commentInput, username });
 		firebase
 			.firestore()
 			.collection('posts')
-			.doc(id)
+			.doc(post.id)
 			.update({
 				comments: [...post.comments, newComment],
 			})

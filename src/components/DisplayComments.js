@@ -60,6 +60,21 @@ const ReplyInputContainer = styled.div`
 	}};
 `;
 
+const CancelBtn = styled.button`
+	position: absolute;
+	bottom: 8px;
+	right: 116px;
+	color: ${(props) => props.theme.colors.blue};
+	padding: 6px 18px;
+	background: white;
+	text-transform: uppercase;
+	outline: none;
+	border: none;
+	&&:hover {
+		color: ${(props) => props.theme.colors.lightBlue};
+	}
+`;
+
 export default function DisplayComments({
 	comment: { username, points, timestamp, commentInput, id, replies, depth },
 	post,
@@ -96,6 +111,12 @@ export default function DisplayComments({
 							value={replyInput}
 							onChange={(e) => setReplyInput(e.target.value)}
 						></CommentTextArea>
+						<CancelBtn
+							type="button"
+							onClick={() => setIsReplyContainerOpen(false)}
+						>
+							cancel
+						</CancelBtn>
 						<CommentBtn
 							type="button"
 							onClick={submitReply}
