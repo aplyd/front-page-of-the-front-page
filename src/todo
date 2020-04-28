@@ -14,6 +14,7 @@ d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶p̶o̶s̶t̶ ̶(�
     - fetch comments from firebase after submitting
     - form validation?
     - in displayComments, show author username color black
+    - line up left edge of comment box, post body, etc.
 
 ((4)) sign up and log in form validation
     - store username in usernames firebase doc
@@ -25,6 +26,7 @@ d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶p̶o̶s̶t̶ ̶(�
     - limit upvotes to +1 -1
     - store upvoted posts in user object so it displays their upvoted items when logged in
 
+(()) allow for deleting you're own comments by replacing the text with [deleted]
 
 (()) allow for login via username by getting their email from firebase?
 

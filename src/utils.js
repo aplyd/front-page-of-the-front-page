@@ -13,6 +13,7 @@ export const Comment = ({
 	points = 1,
 	replies = [],
 	id = uuidv4(),
+	depth = 0,
 } = {}) => ({
 	commentInput,
 	timestamp,
@@ -20,4 +21,5 @@ export const Comment = ({
 	replies,
 	username,
 	id,
+	depth,
 });

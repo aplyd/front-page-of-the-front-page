@@ -40,6 +40,7 @@ const CommentInputContainer = styled.div`
 	grid-column: 2;
 	margin-right: 64px;
 	margin-top: 16px;
+	padding-left: 8px;
 `;
 
 const CommentAsDisplayName = styled.p`
@@ -88,6 +89,7 @@ const CommentBtn = styled.button`
 const SortByContainer = styled.div`
 	grid-column: 2;
 	margin-top: 24px;
+	padding-left: 8px;
 	margin-bottom: 48px;
 	&& > p {
 		font-size: 12px;
@@ -179,7 +181,13 @@ export default function PostContent({ post, id }) {
 			{/* <DisplayComments comments={post.comments} /> */}
 			<CommentContainer>
 				{post.comments.map((comment) => {
-					return <DisplayComments comment={comment} key={uuidv4()} />;
+					return (
+						<DisplayComments
+							comment={comment}
+							key={uuidv4()}
+							post={post}
+						/>
+					);
 				})}
 			</CommentContainer>
 		</Container>
