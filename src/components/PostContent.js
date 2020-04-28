@@ -48,7 +48,7 @@ const CommentAsDisplayName = styled.p`
 	padding-top: 8px;
 `;
 
-const CommentTextAreaContainer = styled.div`
+export const CommentTextAreaContainer = styled.div`
 	margin-top: 4px;
 	padding-left: 8px;
 	border-radius: 4px;
@@ -59,7 +59,7 @@ const CommentTextAreaContainer = styled.div`
 	position: relative;
 `;
 
-const CommentTextArea = styled.textarea`
+export const CommentTextArea = styled.textarea`
 	width: 100%;
 	font-size: 14px;
 	min-height: 86px;
@@ -73,7 +73,7 @@ const CommentTextArea = styled.textarea`
 	}
 `;
 
-const CommentBtn = styled.button`
+export const CommentBtn = styled.button`
 	position: absolute;
 	bottom: 8px;
 	right: 8px;

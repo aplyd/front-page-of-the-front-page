@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
 import { VoteArrowContainer, SVG, ActionButton } from './DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
+import {
+	CommentInputContainer,
+	CommentTextAreaContainer,
+	CommentTextArea,
+	CommentBtn,
+} from './PostContent';
 
 const Card = styled.div`
 	display: grid;
@@ -33,6 +39,7 @@ const CommentInfo = styled.p`
 const CommentBody = styled.p`
 	margin-bottom: 32px;
 	padding-left: 8px;
+	padding-right: 48px;
 `;
 
 const BtnContainer = styled.div`
@@ -42,15 +49,27 @@ const BtnContainer = styled.div`
 `;
 const Btn = styled(ActionButton)``;
 
-//TODO - use parentIndex in the comment to see where the next comment exists. if parentIndex = 0, uh
+const ReplyInputContainer = styled.div`
+	grid-column: 2;
+	margin-right: 64px;
+	margin-top: 16px;
+	padding-left: ${(props) => {
+		let val = props.depth * 28 + 76;
+		val = val.toString() + 'px';
+		return val;
+	}};
+`;
 
 export default function DisplayComments({
 	comment: { username, points, timestamp, commentInput, id, replies, depth },
 	post,
 }) {
-	const openReplyInput = (target) => {
+	const [replyInput, setReplyInput] = useState();
+	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
+
+	const openReplyInput = () => {
 		if (window.user) {
-			console.log(target);
+			setIsReplyContainerOpen(true);
 		}
 	};
 
@@ -64,6 +83,31 @@ export default function DisplayComments({
 				comments: [...post.comments, newComment],
 			})
 			.catch((err) => console.log(err));
+	};
+
+	const displayReplyContainer = () => {
+		if (window.user) {
+			return (
+				<ReplyInputContainer depth={depth}>
+					<CommentTextAreaContainer>
+						<CommentTextArea
+							placeholder="What are your thoughts?"
+							value={replyInput}
+							onChange={(e) => setReplyInput(e.target.value)}
+						></CommentTextArea>
+						<CommentBtn
+							type="button"
+							onClick={submitReply}
+							isSignedIn={window.user}
+						>
+							comment
+						</CommentBtn>
+					</CommentTextAreaContainer>
+				</ReplyInputContainer>
+			);
+		} else {
+			return null;
+		}
 	};
 
 	return (
@@ -85,7 +129,8 @@ export default function DisplayComments({
 					<BtnContainer>
 						{/* WORKING HERE TO GET BOTH ID AND DEPTH ON REPLY ELEMENT */}
 						<Btn
-							data-reply-info={depth && id}
+							data-depth={depth}
+							data-username={points}
 							onClick={(e) => openReplyInput(e.target)}
 						>
 							Reply
@@ -94,6 +139,8 @@ export default function DisplayComments({
 					</BtnContainer>
 				</ContentContainer>
 			</Card>
+			{isReplyContainerOpen ? displayReplyContainer() : null}
+
 			{/* recursively rendering to display unknown amount of replies */}
 			{replies &&
 				replies.map((reply) => {

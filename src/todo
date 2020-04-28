@@ -14,13 +14,14 @@ d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶p̶o̶s̶t̶ ̶(�
     - fetch comments from firebase after submitting
     - form validation?
     - in displayComments, show author username color black
-    - line up left edge of comment box, post body, etc.
+    -̶ ̶l̶i̶n̶e̶ ̶u̶p̶ ̶l̶e̶f̶t̶ ̶e̶d̶g̶e̶ ̶o̶f̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶b̶o̶x̶,̶ ̶p̶o̶s̶t̶ ̶b̶o̶d̶y̶,̶ ̶e̶t̶c̶.̶
 
 ((4)) sign up and log in form validation
     - store username in usernames firebase doc
     - check firebase to make sure username not taken (oh god)
     - check length min + max
     - handle errors logging in by displaying error
+    - trigger nav rerender on log out
 
 ((5)) add upvote abilities 
     - limit upvotes to +1 -1
