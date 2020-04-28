@@ -140,7 +140,7 @@ const Pinned = styled.p`
 
 export default function DisplayPost({
 	title,
-	author,
+	username,
 	preview,
 	vote,
 	id,
@@ -182,7 +182,7 @@ export default function DisplayPost({
 			<ContentContainer>
 				{pinned ? <Pinned>Pinned by moderators</Pinned> : null}
 				<InfoContainer>
-					<p>Posted by {author} </p>
+					<p>Posted by {username} </p>
 					<p>
 						{formatDistance(Date.now(), timestamp, {
 							includeSeconds: true,

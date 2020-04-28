@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 // import { useParams } from 'react-router-dom';
 import FeedContainer from '../layouts/FeedContainer';
 import { Container } from '../App';
-// import { PostContext } from '../PostContext';
+import { PostContext } from '../PostContext';
 import PostContent from '../components/PostContent';
 import { useLocation } from 'react-router';
 import firebase from '../firebase';
@@ -71,7 +71,7 @@ import firebase from '../firebase';
 const tempPost = {
 	id: 1,
 	title: '',
-	author: '',
+	username: '',
 	vote: 0,
 	timestamp: '',
 	postText: '',
@@ -81,27 +81,36 @@ const tempPost = {
 export default function Comments() {
 	// const [width, setWidth] = useState(window.innerWidth);
 	// const { postTitle } = useParams();
-	// const { posts } = useContext(PostContext);
+	const { user } = useContext(PostContext);
 	const [postData, setPostData] = useState();
 	const {
 		state: { id },
 	} = useLocation();
 
 	useEffect(() => {
+		let mounted = true;
 		firebase
 			.firestore()
 			.collection('posts')
 			.doc(id)
 			.get()
 			.then((content) => {
-				setPostData(content.data());
-			});
-	}, [id]);
+				if (mounted) {
+					setPostData(content.data());
+				}
+			})
+			.catch((err) => console.log('Error getting post data', err));
+
+		return () => (mounted = false);
+	}, [setPostData, id]);
 
 	return (
 		<Container>
 			<FeedContainer displayFeedSort={false}>
-				<PostContent post={postData ? postData : tempPost} id={id} />
+				<PostContent
+					post={postData ? postData : tempPost}
+					user={user}
+				/>
 			</FeedContainer>
 		</Container>
 	);

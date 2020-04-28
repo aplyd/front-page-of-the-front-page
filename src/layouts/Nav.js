@@ -59,12 +59,7 @@ const SignInBtn = styled.button`
 `;
 
 export default function Nav({ openModal, closeModal }) {
-	// const [render, setRender] = useState()
 	const { user, setUser } = useContext(PostContext);
-
-	// useEffect(() => {
-	// 	setRender(user)
-	// }, [user]);
 
 	const logOutUser = () => {
 		firebase
@@ -83,7 +78,7 @@ export default function Nav({ openModal, closeModal }) {
 	};
 
 	const displayLoggedInStatus = () => {
-		if (window.user) {
+		if (user.isSignedIn) {
 			return (
 				<React.Fragment>
 					<LoginBtn type="button">

@@ -63,12 +63,13 @@ const ReplyInputContainer = styled.div`
 export default function DisplayComments({
 	comment: { username, points, timestamp, commentInput, id, replies, depth },
 	post,
+	user,
 }) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
 
 	const openReplyInput = () => {
-		if (window.user) {
+		if (user.isSignedIn) {
 			setIsReplyContainerOpen(true);
 		}
 	};
@@ -86,7 +87,7 @@ export default function DisplayComments({
 	};
 
 	const displayReplyContainer = () => {
-		if (window.user) {
+		if (user.isSignedIn) {
 			return (
 				<ReplyInputContainer depth={depth}>
 					<CommentTextAreaContainer>
@@ -98,7 +99,7 @@ export default function DisplayComments({
 						<CommentBtn
 							type="button"
 							onClick={submitReply}
-							isSignedIn={window.user}
+							isSignedIn={user}
 						>
 							comment
 						</CommentBtn>
@@ -127,7 +128,6 @@ export default function DisplayComments({
 					</CommentInfo>
 					<CommentBody>{commentInput}</CommentBody>
 					<BtnContainer>
-						{/* WORKING HERE TO GET BOTH ID AND DEPTH ON REPLY ELEMENT */}
 						<Btn
 							data-depth={depth}
 							data-username={points}

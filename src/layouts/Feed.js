@@ -12,7 +12,7 @@ export default function Feed({ redditData, posts, children }) {
 			<DisplayPost
 				title={'Welcome to the front page of the front page'}
 				pinned={true}
-				author={'Austin // aplyd'}
+				username={'Austin // aplyd'}
 				timestamp={Date.now()}
 				id={'pinned'}
 			/>
@@ -26,7 +26,7 @@ export default function Feed({ redditData, posts, children }) {
 							id={post.id}
 							vote={post.vote}
 							timestamp={post.timestamp}
-							author={post.author}
+							username={post.username}
 						/>
 					);
 				})}

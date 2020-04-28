@@ -43,7 +43,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 		const postID = uuidv4();
 		e.preventDefault();
 
-		if (window.user) {
+		if (user) {
 			firebase
 				.firestore()
 				.collection('posts')
@@ -53,7 +53,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 					postText,
 					timestamp,
 					vote: 1,
-					author: user.username,
+					username: user.username,
 					comments: [],
 				})
 				.then(() => {
@@ -64,7 +64,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 			firebase
 				.firestore()
 				.collection('users')
-				.doc(window.user.uid)
+				.doc(user.uid)
 				.update({
 					posts: [
 						...user.posts,
@@ -73,7 +73,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 							postText,
 							timestamp,
 							postID,
-							uid: window.user.uid,
+							uid: user.uid,
 						},
 					],
 				});
@@ -81,7 +81,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 			firebase
 				.firestore()
 				.collection('users')
-				.doc(window.user.uid)
+				.doc(user.uid)
 				.get()
 				.then((res) => {
 					const data = res.data();
@@ -96,7 +96,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 								timestamp,
 								isSignedIn: true,
 								isAnonymous: false,
-								uid: window.user.uid,
+								uid: user.uid,
 							},
 						],
 					});

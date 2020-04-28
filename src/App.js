@@ -79,16 +79,28 @@ function App() {
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged(function (user) {
 			window.user = user;
-			setUser({
-				sername: user.displayName,
-				email: user.email,
-				uid: user.uid,
-				isSignedIn: true,
-				isAnonymous: false,
-			});
-			// Step 1:
-			//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
-			//  If there is a user, log out out user details for debugging purposes.
+			if (user) {
+				firebase
+					.firestore()
+					.collection('users')
+					.doc(window.user.uid)
+					.get()
+					.then((res) => {
+						const data = res.data();
+						setUser({
+							username: user.displayName,
+							email: user.email,
+							uid: user.uid,
+							isSignedIn: true,
+							isAnonymous: false,
+							posts: data.posts,
+							votes: data.votes,
+						});
+					});
+			} else {
+				//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
+				//maybe
+			}
 		});
 	}, []);
 

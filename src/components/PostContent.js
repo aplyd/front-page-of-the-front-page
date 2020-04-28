@@ -69,7 +69,7 @@ export const CommentTextArea = styled.textarea`
 	outline: none;
 	border: none;
 	&&:hover {
-		/* try to style comment div with this is focused ???? */
+		/* TODO try to style comment div with this is focused ???? */
 	}
 `;
 
@@ -102,7 +102,7 @@ const CommentContainer = styled.div`
 	grid-column: 1 / 3;
 `;
 
-export default function PostContent({ post, id }) {
+export default function PostContent({ post, id, user }) {
 	const [commentInput, setCommentInput] = useState();
 	const {
 		user: { username },
@@ -134,7 +134,7 @@ export default function PostContent({ post, id }) {
 
 			<ContentContainer>
 				<InfoContainer>
-					<p>Posted by {post.author}</p>
+					<p>Posted by {post.username}</p>
 					<p>
 						{post.timestamp
 							? formatDistance(Date.now(), post.timestamp, {
@@ -156,29 +156,32 @@ export default function PostContent({ post, id }) {
 				<Share>share</Share>
 			</ActionContainer>
 
-			{/* TODO show/hide below component when user is logged in */}
-			<CommentInputContainer>
-				<CommentAsDisplayName>
-					Comment as displayName
-				</CommentAsDisplayName>
-				<CommentTextAreaContainer>
-					<CommentTextArea
-						placeholder="What are your thoughts?"
-						value={commentInput}
-						onChange={(e) => setCommentInput(e.target.value)}
-					></CommentTextArea>
-					<CommentBtn type="button" onClick={submitTopLevelComment}>
-						comment
-					</CommentBtn>
-				</CommentTextAreaContainer>
-			</CommentInputContainer>
+			{user.isSignedIn ? (
+				<CommentInputContainer>
+					<CommentAsDisplayName>
+						Comment as displayName
+					</CommentAsDisplayName>
+					<CommentTextAreaContainer>
+						<CommentTextArea
+							placeholder="What are your thoughts?"
+							value={commentInput}
+							onChange={(e) => setCommentInput(e.target.value)}
+						></CommentTextArea>
+						<CommentBtn
+							type="button"
+							onClick={submitTopLevelComment}
+						>
+							comment
+						</CommentBtn>
+					</CommentTextAreaContainer>
+				</CommentInputContainer>
+			) : null}
 
 			<SortByContainer>
 				<p>sort by</p>
 				{/* TODO*/}
 			</SortByContainer>
 
-			{/* <DisplayComments comments={post.comments} /> */}
 			<CommentContainer>
 				{post.comments.map((comment) => {
 					return (
@@ -186,6 +189,7 @@ export default function PostContent({ post, id }) {
 							comment={comment}
 							key={uuidv4()}
 							post={post}
+							user={user}
 						/>
 					);
 				})}
