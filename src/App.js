@@ -75,20 +75,21 @@ function App() {
 		return () => subscribe();
 	}, [sortBy, updatePosts]);
 
-	//store logged in user in state or create anonymous user
+	//detect user
 	useEffect(() => {
-		const userInfo = window.user;
-		if (userInfo) {
+		firebase.auth().onAuthStateChanged(function (user) {
+			window.user = user;
 			setUser({
-				username: userInfo.displayName,
-				email: userInfo.email,
-				uid: userInfo.uid,
+				sername: user.displayName,
+				email: user.email,
+				uid: user.uid,
 				isSignedIn: true,
 				isAnonymous: false,
 			});
-		} else {
-			//handle anonymous sign in later
-		}
+			// Step 1:
+			//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
+			//  If there is a user, log out out user details for debugging purposes.
+		});
 	}, []);
 
 	const sortPosts = (sortBy) => {

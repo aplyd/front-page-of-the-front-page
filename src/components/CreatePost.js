@@ -31,7 +31,7 @@ const Button = styled.button`
 const CancelBtn = styled(Button)``;
 const SubmitBtn = styled(Button)``;
 
-//TODO - trigger rerender of App.js after posting
+//TODO - trigger rerender of App.js after posting ??
 export default function CreatePost({ props, setUpdatePosts }) {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
