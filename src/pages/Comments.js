@@ -75,7 +75,7 @@ const tempPost = {
 	vote: 0,
 	timestamp: '',
 	postText: '',
-	comments: [],
+	replies: [],
 };
 
 export default function Comments() {

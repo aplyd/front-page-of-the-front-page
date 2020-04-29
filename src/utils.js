@@ -23,3 +23,15 @@ export const Comment = ({
 	id,
 	depth,
 });
+
+export const insertReply = (object, targetId, replyToAdd) => {
+	if (object.id === targetId) {
+		object.replies.push(replyToAdd);
+		console.log(replyToAdd);
+	} else {
+		object.replies.forEach((obj) => {
+			insertReply(obj, targetId, replyToAdd);
+		});
+	}
+	return object;
+};

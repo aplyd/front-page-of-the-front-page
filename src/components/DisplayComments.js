@@ -3,7 +3,7 @@ import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
 import { VoteArrowContainer, SVG, ActionButton } from './DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
-import { getReplyObject } from '../utils';
+import { insertReply } from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
 import {
@@ -88,17 +88,13 @@ export default function DisplayComments({
 	const openReplyInput = () => {
 		if (user.isSignedIn) {
 			setIsReplyContainerOpen(true);
-			let allComments = post.comments;
-
-			let foundObj = getReplyObject(allComments, id);
-			console.log(foundObj);
 		}
 	};
 
 	const submitReply = () => {
 		let newComment = Comment({ commentInput, username });
 		//stuck here, how do i locate where the commment will be placed when the depth will be unknown
-		let allComments = post.comments;
+		let allComments = post.replies;
 
 		console.log(allComments);
 

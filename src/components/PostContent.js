@@ -117,7 +117,7 @@ export default function PostContent({ post, id, user }) {
 			.collection('posts')
 			.doc(post.id)
 			.update({
-				comments: [...post.comments, newComment],
+				replies: [...post.replies, newComment],
 			})
 			.catch((err) => console.log(err));
 	};
@@ -152,8 +152,8 @@ export default function PostContent({ post, id, user }) {
 
 			<ActionContainer>
 				<CommentAction>
-					{post.comments.length}{' '}
-					{post.comments.length > 1 ? 'comments' : 'comment'}
+					{post.replies.length}{' '}
+					{post.replies.length > 1 ? 'comments' : 'comment'}
 				</CommentAction>
 				<Share>share</Share>
 			</ActionContainer>
@@ -185,7 +185,7 @@ export default function PostContent({ post, id, user }) {
 			</SortByContainer>
 
 			<CommentContainer>
-				{post.comments.map((comment, index) => {
+				{post.replies.map((comment, index) => {
 					return (
 						<DisplayComments
 							comment={comment}

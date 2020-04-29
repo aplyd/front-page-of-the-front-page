@@ -54,7 +54,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 					timestamp,
 					vote: 1,
 					username: user.username,
-					comments: [],
+					replies: [],
 					id: postID,
 				})
 				.then(() => {
