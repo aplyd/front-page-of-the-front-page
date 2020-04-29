@@ -185,13 +185,14 @@ export default function PostContent({ post, id, user }) {
 			</SortByContainer>
 
 			<CommentContainer>
-				{post.comments.map((comment) => {
+				{post.comments.map((comment, index) => {
 					return (
 						<DisplayComments
 							comment={comment}
 							key={uuidv4()}
 							post={post}
 							user={user}
+							topLevelCommentIndex={index}
 						/>
 					);
 				})}

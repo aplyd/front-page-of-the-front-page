@@ -3,6 +3,7 @@ import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
 import { VoteArrowContainer, SVG, ActionButton } from './DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
+import { getReplyObject } from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
 import {
@@ -79,6 +80,7 @@ export default function DisplayComments({
 	comment: { username, points, timestamp, commentInput, id, replies, depth },
 	post,
 	user,
+	topLevelCommentIndex,
 }) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
@@ -86,19 +88,28 @@ export default function DisplayComments({
 	const openReplyInput = () => {
 		if (user.isSignedIn) {
 			setIsReplyContainerOpen(true);
+			let allComments = post.comments;
+
+			let foundObj = getReplyObject(allComments, id);
+			console.log(foundObj);
 		}
 	};
 
 	const submitReply = () => {
 		let newComment = Comment({ commentInput, username });
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(id)
-			.update({
-				comments: [...post.comments, newComment],
-			})
-			.catch((err) => console.log(err));
+		//stuck here, how do i locate where the commment will be placed when the depth will be unknown
+		let allComments = post.comments;
+
+		console.log(allComments);
+
+		// firebase
+		// 	.firestore()
+		// 	.collection('posts')
+		// 	.doc(id)
+		// 	.update({
+		// 		comments:
+		// 	})
+		// 	.catch((err) => console.log(err));
 	};
 
 	const displayReplyContainer = () => {
