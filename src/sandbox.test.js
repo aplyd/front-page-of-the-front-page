@@ -74,24 +74,10 @@ const tempPost = {
 	vote: 0,
 	timestamp: '',
 	postText: '',
-	comments: [zero, one],
-};
-
-const secondaryTempPost = {
-	id: 1,
-	title: '',
-	username: '',
-	vote: 0,
-	timestamp: '',
-	postText: '',
-	comments: [zeroA1, zeroA2],
+	replies: [zero, one],
 };
 
 test('test the test', () => {
 	console.log(tempPost);
-	expect(getParentObject(tempPost, 6)).toStrictEqual(zeroA1);
-});
-
-test.only('test function to use recursively', () => {
-	expect(getParentObject(secondaryTempPost, 7)).toBe(true);
+	expect(getParentObject(tempPost, 6)).toBe(true);
 });
