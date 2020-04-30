@@ -83,8 +83,9 @@ export default function Comments() {
 	// const { postTitle } = useParams();
 	const { user } = useContext(PostContext);
 	const [postData, setPostData] = useState();
+	//id, below, not to be confused with user id or post author id lmao why
 	const {
-		state: { id },
+		state: { postId },
 	} = useLocation();
 
 	useEffect(() => {
@@ -92,7 +93,7 @@ export default function Comments() {
 		firebase
 			.firestore()
 			.collection('posts')
-			.doc(id)
+			.doc(postId)
 			.get()
 			.then((content) => {
 				if (mounted) {
@@ -102,7 +103,7 @@ export default function Comments() {
 			.catch((err) => console.log('Error getting post data', err));
 
 		return () => (mounted = false);
-	}, [setPostData, id]);
+	}, [setPostData, postId]);
 
 	return (
 		<Container>

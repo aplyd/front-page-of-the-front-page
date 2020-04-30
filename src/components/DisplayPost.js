@@ -196,7 +196,7 @@ export default function DisplayPost({
 					to={{
 						pathname: `/comments/${url}`,
 						state: {
-							id: id,
+							postId: id,
 						},
 					}}
 					id={id}

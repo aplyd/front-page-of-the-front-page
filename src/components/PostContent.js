@@ -102,15 +102,11 @@ const CommentContainer = styled.div`
 	grid-column: 1 / 3;
 `;
 
-export default function PostContent({ post, id, user }) {
+export default function PostContent({ post, user }) {
 	const [commentInput, setCommentInput] = useState();
-	const {
-		user: { username },
-	} = useContext(PostContext);
-
-	console.log(post);
 
 	const submitTopLevelComment = () => {
+		const { username } = user;
 		let newComment = Comment({ commentInput, username });
 		firebase
 			.firestore()
@@ -192,7 +188,6 @@ export default function PostContent({ post, id, user }) {
 							key={uuidv4()}
 							post={post}
 							user={user}
-							topLevelCommentIndex={index}
 						/>
 					);
 				})}

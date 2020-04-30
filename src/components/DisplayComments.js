@@ -76,24 +76,15 @@ const CancelBtn = styled.button`
 	}
 `;
 
-export default function DisplayComments({
-	comment: { username, points, timestamp, commentInput, id, replies, depth },
-	post,
-	user,
-	topLevelCommentIndex,
-}) {
+export default function DisplayComments({ comment, post, user }) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
 
-	const openReplyInput = () => {
-		if (user.isSignedIn) {
-			setIsReplyContainerOpen(true);
-		}
-	};
-
 	const submitReply = () => {
-		depth = depth + 1;
-		commentInput = replyInput;
+		const depth = comment.depth + 1;
+		const commentInput = replyInput;
+		const username = user.username;
+		const id = post.id;
 		const newComment = Comment({ commentInput, username, depth });
 		const withNewReply = insertReply(post, id, newComment);
 
@@ -111,7 +102,7 @@ export default function DisplayComments({
 	const displayReplyContainer = () => {
 		if (user.isSignedIn) {
 			return (
-				<ReplyInputContainer depth={depth}>
+				<ReplyInputContainer depth={comment.depth}>
 					<CommentTextAreaContainer>
 						<CommentTextArea
 							placeholder="What are your thoughts?"
@@ -141,7 +132,7 @@ export default function DisplayComments({
 
 	return (
 		<React.Fragment>
-			<Card depth={depth}>
+			<Card depth={comment.depth}>
 				<VoteArrowContainer>
 					<div>
 						<SVG as={GoArrowUp}></SVG>
@@ -151,16 +142,12 @@ export default function DisplayComments({
 				<ContentContainer>
 					<CommentInfo>
 						{/*TODO style comment.username black*/}
-						{username} {points} points -{' '}
+						{comment.username} {comment.points} points -{' '}
 						{/* {formatDistance(Date.now(), timestamp)} ago */}
 					</CommentInfo>
-					<CommentBody>{commentInput}</CommentBody>
+					<CommentBody>{comment.commentInput}</CommentBody>
 					<BtnContainer>
-						<Btn
-							data-depth={depth}
-							data-username={points}
-							onClick={(e) => openReplyInput(e.target)}
-						>
+						<Btn onClick={(e) => setIsReplyContainerOpen(true)}>
 							Reply
 						</Btn>
 						<Btn style={{ cursor: 'no-drop' }}>Share</Btn>
@@ -170,9 +157,16 @@ export default function DisplayComments({
 			{isReplyContainerOpen ? displayReplyContainer() : null}
 
 			{/* recursively rendering to display unknown amount of replies */}
-			{replies &&
-				replies.map((reply) => {
-					return <DisplayComments comment={reply} key={uuidv4()} />;
+			{comment.replies &&
+				comment.replies.map((reply) => {
+					return (
+						<DisplayComments
+							comment={reply}
+							key={uuidv4()}
+							post={post}
+							user={user}
+						/>
+					);
 				})}
 		</React.Fragment>
 	);
