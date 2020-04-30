@@ -3,7 +3,7 @@ import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
 import { VoteArrowContainer, SVG, ActionButton } from './DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
-import { insertReply } from '../utils';
+import { insertReply, Comment } from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
 import {
@@ -92,20 +92,20 @@ export default function DisplayComments({
 	};
 
 	const submitReply = () => {
-		let newComment = Comment({ commentInput, username });
-		//stuck here, how do i locate where the commment will be placed when the depth will be unknown
-		let allComments = post.replies;
+		depth = depth + 1;
+		commentInput = replyInput;
+		const newComment = Comment({ commentInput, username, depth });
+		const withNewReply = insertReply(post, id, newComment);
 
-		console.log(allComments);
-
-		// firebase
-		// 	.firestore()
-		// 	.collection('posts')
-		// 	.doc(id)
-		// 	.update({
-		// 		comments:
-		// 	})
-		// 	.catch((err) => console.log(err));
+		//insert reply function finds the correct id and adds the new comment to its replies
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.update({
+				replies: withNewReply,
+			})
+			.catch((err) => console.log(err));
 	};
 
 	const displayReplyContainer = () => {

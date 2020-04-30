@@ -33,5 +33,5 @@ export const insertReply = (object, targetId, replyToAdd) => {
 			insertReply(obj, targetId, replyToAdd);
 		});
 	}
-	return object;
+	return object.replies;
 };
