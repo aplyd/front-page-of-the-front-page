@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { roundedGreyBorder } from '../GlobalStyle';
@@ -6,7 +6,6 @@ import formatDistance from 'date-fns/formatDistance';
 import DisplayComments from './DisplayComments';
 import useInitialFocus from '../hooks/useInitialFocus';
 import { Comment } from '../utils';
-import { PostContext } from '../PostContext';
 import firebase from '../firebase';
 import {
 	VoteArrowContainer,
@@ -149,7 +148,7 @@ export default function PostContent({ post, user }) {
 			<ActionContainer>
 				<CommentAction>
 					{post.replies.length}{' '}
-					{post.replies.length > 1 ? 'comments' : 'comment'}
+					{post.replies.length === 1 ? 'comment' : 'comments'}
 				</CommentAction>
 				<Share>share</Share>
 			</ActionContainer>

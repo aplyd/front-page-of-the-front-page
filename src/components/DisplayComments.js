@@ -141,9 +141,9 @@ export default function DisplayComments({ comment, post, user }) {
 				</VoteArrowContainer>
 				<ContentContainer>
 					<CommentInfo>
-						{/*TODO style comment.username black*/}
-						{comment.username} {comment.points} points -{' '}
-						{/* {formatDistance(Date.now(), timestamp)} ago */}
+						{comment.username} {comment.points}{' '}
+						{comment.points === 1 ? 'point' : 'points'} •{' '}
+						{formatDistance(Date.now(), comment.timestamp)} ago
 					</CommentInfo>
 					<CommentBody>{comment.commentInput}</CommentBody>
 					<BtnContainer>

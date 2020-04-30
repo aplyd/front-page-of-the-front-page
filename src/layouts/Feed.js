@@ -27,6 +27,7 @@ export default function Feed({ redditData, posts, children }) {
 							vote={post.vote}
 							timestamp={post.timestamp}
 							username={post.username}
+							post={post}
 						/>
 					);
 				})}

@@ -4,7 +4,7 @@ import FeedContainer from '../layouts/FeedContainer';
 import { Container } from '../App';
 import { PostContext } from '../PostContext';
 import PostContent from '../components/PostContent';
-import { useLocation } from 'react-router';
+import { useParams } from 'react-router';
 import firebase from '../firebase';
 
 const zeroA2 = {
@@ -84,16 +84,14 @@ export default function Comments() {
 	const { user } = useContext(PostContext);
 	const [postData, setPostData] = useState();
 	//id, below, not to be confused with user id or post author id lmao why
-	const {
-		state: { postId },
-	} = useLocation();
+	const { id } = useParams();
 
 	useEffect(() => {
 		let mounted = true;
 		firebase
 			.firestore()
 			.collection('posts')
-			.doc(postId)
+			.doc(id)
 			.get()
 			.then((content) => {
 				if (mounted) {
@@ -103,7 +101,7 @@ export default function Comments() {
 			.catch((err) => console.log('Error getting post data', err));
 
 		return () => (mounted = false);
-	}, [setPostData, postId]);
+	}, [setPostData, id]);
 
 	return (
 		<Container>

@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import firebase from '../firebase';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import formatDistance from 'date-fns/formatDistance';
+import { countReplies } from '../utils';
 
 const Container = styled.div`
 	width: 100%;
@@ -146,12 +147,16 @@ export default function DisplayPost({
 	id,
 	timestamp,
 	pinned,
+	post,
 }) {
 	const { setUpdatePosts } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
+	const commentCount = post ? countReplies(post) : null;
+	const history = useHistory();
 
 	//TODO - make sure user can only up/down vote once
-	const castVote = (direction) => {
+	const castVote = (event, direction) => {
+		event.stopPropagation();
 		let newVoteCount;
 
 		direction === 'up'
@@ -169,13 +174,22 @@ export default function DisplayPost({
 			.catch((err) => console.log(err));
 	};
 
+	const handleClick = (event) => {
+		console.log(event.target);
+
+		history.push(`/comments/${url}/${post.id}`);
+	};
+
 	return (
-		<Container>
+		<Container onClick={handleClick}>
 			<VoteArrowContainer>
 				<div>
-					<SVG as={GoArrowUp} onClick={() => castVote('up')} />
+					<SVG as={GoArrowUp} onClick={(e) => castVote(e, 'up')} />
 					<Vote>{vote}</Vote>
-					<SVG as={GoArrowDown} onClick={() => castVote('down')} />
+					<SVG
+						as={GoArrowDown}
+						onClick={(e) => castVote(e, 'down')}
+					/>
 				</div>
 			</VoteArrowContainer>
 
@@ -192,21 +206,23 @@ export default function DisplayPost({
 				</InfoContainer>
 
 				<Title
-					as={Link}
-					to={{
-						pathname: `/comments/${url}`,
-						state: {
-							postId: id,
-						},
-					}}
-					id={id}
+				// as={Link}
+				// to={{
+				// 	pathname: `/comments/${url}`,
+				// 	state: {
+				// 		postId: id,
+				// 	},
+				// }}
+				// id={id}
 				>
 					{title}
 				</Title>
 			</ContentContainer>
 
 			<ActionContainer pinned={pinned}>
-				<Comment>comment</Comment>
+				<Comment>
+					{commentCount} {commentCount === 1 ? 'comment' : 'comments'}
+				</Comment>
 				<Share>share</Share>
 			</ActionContainer>
 

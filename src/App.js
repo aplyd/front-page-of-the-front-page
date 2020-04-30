@@ -173,7 +173,7 @@ function App() {
 					/>
 					<Route
 						exact
-						path="/comments/:post"
+						path="/comments/:post/:id"
 						component={(props) => <Comments {...props} />}
 					/>
 				</Switch>
