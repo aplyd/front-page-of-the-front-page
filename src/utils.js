@@ -35,3 +35,18 @@ export const insertReply = (object, targetId, replyToAdd) => {
 	}
 	return object.replies;
 };
+
+export const countReplies = (object) => {
+	let counter = 0;
+	const count = (object) => {
+		for (let i = 0; i < object.replies.length; i++) {
+			counter++;
+			if (object.replies[i].replies.length > 0) {
+				count(object.replies[i]);
+			}
+		}
+	};
+
+	count(object);
+	return counter;
+};
