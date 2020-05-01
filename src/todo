@@ -1,9 +1,9 @@
 ((NEXT))
     - rerender/refresh comment page after submitting a comment
-    - ability to reply to comments
-        - correctly store the reply in firebase
+    -̶ ̶a̶b̶i̶l̶i̶t̶y̶ ̶t̶o̶ ̶r̶e̶p̶l̶y̶ ̶t̶o̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶
+        -̶ ̶c̶o̶r̶r̶e̶c̶t̶l̶y̶ ̶s̶t̶o̶r̶e̶ ̶t̶h̶e̶ ̶r̶e̶p̶l̶y̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
     -̶ ̶a̶d̶d̶ ̶a̶ ̶c̶a̶n̶c̶e̶l̶ ̶b̶u̶t̶t̶o̶n̶ ̶i̶n̶s̶i̶d̶e̶ ̶t̶h̶e̶ ̶r̶e̶p̶l̶y̶ ̶i̶n̶p̶u̶t̶ ̶t̶o̶ ̶c̶l̶o̶s̶e̶ ̶i̶n̶p̶u̶t̶
-    - afer making a post, make sure user stays logged in
+    -̶ ̶a̶f̶e̶r̶ ̶m̶a̶k̶i̶n̶g̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶m̶a̶k̶e̶ ̶s̶u̶r̶e̶ ̶u̶s̶e̶r̶ ̶s̶t̶a̶y̶s̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
 
 ((2)) a̶d̶d̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶f̶o̶r̶ ̶u̶s̶e̶r̶s̶
     -̶ ̶c̶r̶e̶a̶t̶e̶ ̶d̶a̶t̶a̶ ̶s̶t̶r̶u̶c̶t̶u̶r̶e̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶n̶d̶ ̶s̶t̶o̶r̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶
@@ -19,22 +19,19 @@
     - check firebase to make sure username not taken (oh god)
     - check length min + max
     - handle errors logging in by displaying error
-    - trigger nav rerender on log out
+    -̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶n̶a̶v̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶ ̶o̶n̶ ̶l̶o̶g̶ ̶o̶u̶t̶
 
 ((4)) add upvote abilities 
     - limit upvotes to +1 -1
     - store upvoted posts in user object so it displays their upvoted items when logged in
 
+(()) create 404 page
 (()) allow for deleting you're own comments by replacing the text with [deleted]
-
+(()) allow for editing comments
 (()) allow for login via username by getting their email from firebase?
-
 (()) handle search input
-
 (()) style FeedSort component
-
 (()) style submit post page
-
 (()) add content to sidebar and display 
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]

@@ -94,7 +94,7 @@ export default function Comments({
 		if (!postData) {
 			viewPostComments(id);
 		}
-	}, [id]);
+	}, [id, postData]);
 
 	return (
 		<Container>

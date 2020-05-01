@@ -16,6 +16,7 @@ import Nav from './layouts/Nav';
 import Modal from './components/Modal';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
+import notFound404 from './pages/NotFound404';
 
 export const Container = styled.div`
 	width: 100%;
@@ -202,6 +203,7 @@ function App() {
 							/>
 						)}
 					/>
+					<Route component={notFound404} />
 				</Switch>
 			</Router>
 		</PostContext.Provider>
