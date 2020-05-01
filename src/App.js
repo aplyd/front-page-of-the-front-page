@@ -110,6 +110,7 @@ function App() {
 
 	//get comments from selected post and
 	const viewPostComments = (id) => {
+		console.log('running post comments func');
 		firebase
 			.firestore()
 			.collection('posts')
@@ -197,6 +198,7 @@ function App() {
 								{...props}
 								setModalContent={setModalContent}
 								postData={postData}
+								viewPostComments={viewPostComments}
 							/>
 						)}
 					/>

@@ -78,29 +78,23 @@ const tempPost = {
 	replies: [],
 };
 
-export default function Comments({ setModalContent, currentPost, postData }) {
+export default function Comments({
+	setModalContent,
+	currentPost,
+	postData,
+	viewPostComments,
+}) {
 	// const [width, setWidth] = useState(window.innerWidth);
 	// const { postTitle } = useParams();
 	const { user } = useContext(PostContext);
 	//id, below, not to be confused with user id or post author id lmao why
-	// const { id } = useParams();
-	console.log('comments rerenders');
+	const { id } = useParams();
 
-	// useEffect(() => {
-	// 	let mounted = true;
-	// 	if (mounted) {
-	// 		firebase
-	// 			.firestore()
-	// 			.collection('posts')
-	// 			.doc(id)
-	// 			.get()
-	// 			.then((content) => {
-	// 				setPostData(content.data());
-	// 			})
-	// 			.catch((err) => console.log('Error getting post data', err));
-	// 	}
-	// 	return () => (mounted = false);
-	// }, [setPostData, id]);
+	useEffect(() => {
+		if (!postData) {
+			viewPostComments(id);
+		}
+	}, [id]);
 
 	return (
 		<Container>
