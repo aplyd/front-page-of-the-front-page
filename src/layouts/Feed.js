@@ -6,7 +6,12 @@ const Container = styled.div`
 	grid-column: 1;
 `;
 
-export default function Feed({ redditData, posts, children }) {
+export default function Feed({
+	redditData,
+	posts,
+	children,
+	viewPostComments,
+}) {
 	return (
 		<Container>
 			<DisplayPost
@@ -28,6 +33,7 @@ export default function Feed({ redditData, posts, children }) {
 							timestamp={post.timestamp}
 							username={post.username}
 							post={post}
+							viewPostComments={viewPostComments}
 						/>
 					);
 				})}

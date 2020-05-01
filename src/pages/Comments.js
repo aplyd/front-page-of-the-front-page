@@ -78,30 +78,29 @@ const tempPost = {
 	replies: [],
 };
 
-export default function Comments() {
+export default function Comments({ setModalContent, currentPost, postData }) {
 	// const [width, setWidth] = useState(window.innerWidth);
 	// const { postTitle } = useParams();
 	const { user } = useContext(PostContext);
-	const [postData, setPostData] = useState();
 	//id, below, not to be confused with user id or post author id lmao why
-	const { id } = useParams();
+	// const { id } = useParams();
+	console.log('comments rerenders');
 
-	useEffect(() => {
-		let mounted = true;
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(id)
-			.get()
-			.then((content) => {
-				if (mounted) {
-					setPostData(content.data());
-				}
-			})
-			.catch((err) => console.log('Error getting post data', err));
-
-		return () => (mounted = false);
-	}, [setPostData, id]);
+	// useEffect(() => {
+	// 	let mounted = true;
+	// 	if (mounted) {
+	// 		firebase
+	// 			.firestore()
+	// 			.collection('posts')
+	// 			.doc(id)
+	// 			.get()
+	// 			.then((content) => {
+	// 				setPostData(content.data());
+	// 			})
+	// 			.catch((err) => console.log('Error getting post data', err));
+	// 	}
+	// 	return () => (mounted = false);
+	// }, [setPostData, id]);
 
 	return (
 		<Container>
@@ -109,6 +108,7 @@ export default function Comments() {
 				<PostContent
 					post={postData ? postData : tempPost}
 					user={user}
+					setModalContent={setModalContent}
 				/>
 			</FeedContainer>
 		</Container>

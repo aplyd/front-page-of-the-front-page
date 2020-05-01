@@ -120,7 +120,7 @@ const LoginSigninBtnContainer = styled.div`
 	right: 48px;
 `;
 
-export default function PostContent({ post, user }) {
+export default function PostContent({ post, user, setModalContent }) {
 	const [commentInput, setCommentInput] = useState();
 	const [width, setWidth] = useState();
 	useWindowWidth(setWidth);
@@ -198,8 +198,14 @@ export default function PostContent({ post, user }) {
 					<Prompt>Log in or sign up to leave a comment</Prompt>
 					{width > 560 ? (
 						<LoginSigninBtnContainer>
-							<LoginBtn>Log In</LoginBtn>
-							<SignInBtn>Sign Up</SignInBtn>
+							<LoginBtn onClick={() => setModalContent('login')}>
+								Log In
+							</LoginBtn>
+							<SignInBtn
+								onClick={() => setModalContent('signup')}
+							>
+								Sign Up
+							</SignInBtn>
 						</LoginSigninBtnContainer>
 					) : null}
 				</LogInPrompt>

@@ -26,6 +26,7 @@ export default function FeedContainer({
 	sortBy,
 	displayFeedSort,
 	children,
+	viewPostComments,
 }) {
 	const [width, setWidth] = useState(window.innerWidth);
 	useWindowWidth(setWidth);
@@ -45,6 +46,7 @@ export default function FeedContainer({
 							redditData={redditData}
 							posts={posts}
 							key={'feed'}
+							viewPostComments={viewPostComments}
 						/>,
 				  ]
 				: null}

@@ -46,11 +46,15 @@ function App() {
 	const [redditData, setRedditData] = useState([]);
 	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
+	//this is literally only here to trigger a rerender to
+	//correctly display sorted posts
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
+	//adding this to fetch the needed post comments when clicked
+	const [postData, setPostData] = useState();
 
+	//get list of posts from firebase for front page
 	useEffect(() => {
-		//get posts from firebase
 		const newPosts = [];
 		const subscribe = () => {
 			firebase
@@ -103,6 +107,19 @@ function App() {
 			}
 		});
 	}, []);
+
+	//get comments from selected post and
+	const viewPostComments = (id) => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(id)
+			.get()
+			.then((content) => {
+				setPostData(content.data());
+			})
+			.catch((err) => console.log('Error getting post data', err));
+	};
 
 	const sortPosts = (sortBy) => {
 		setSortBy(sortBy);
@@ -158,6 +175,7 @@ function App() {
 								redditData={redditData}
 								sortPosts={sortPosts}
 								sortBy={sortBy}
+								viewPostComments={viewPostComments}
 							/>
 						)}
 					/>
@@ -174,7 +192,13 @@ function App() {
 					<Route
 						exact
 						path="/comments/:post/:id"
-						component={(props) => <Comments {...props} />}
+						component={(props) => (
+							<Comments
+								{...props}
+								setModalContent={setModalContent}
+								postData={postData}
+							/>
+						)}
 					/>
 				</Switch>
 			</Router>

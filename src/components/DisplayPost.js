@@ -152,6 +152,7 @@ export default function DisplayPost({
 	timestamp,
 	pinned,
 	post,
+	viewPostComments,
 }) {
 	const { setUpdatePosts } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
@@ -179,8 +180,7 @@ export default function DisplayPost({
 	};
 
 	const handleClick = (event) => {
-		console.log(event.target);
-
+		viewPostComments(post.id);
 		history.push(`/comments/${url}/${post.id}`);
 	};
 
