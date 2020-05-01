@@ -1,5 +1,5 @@
 ((NEXT))
-    - rerender/refresh comment page after submitting a comment
+    -̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶/̶r̶e̶f̶r̶e̶s̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶p̶a̶g̶e̶ ̶a̶f̶t̶e̶r̶ ̶s̶u̶b̶m̶i̶t̶t̶i̶n̶g̶ ̶a̶ ̶c̶o̶m̶m̶e̶n̶t̶
     -̶ ̶a̶b̶i̶l̶i̶t̶y̶ ̶t̶o̶ ̶r̶e̶p̶l̶y̶ ̶t̶o̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶
         -̶ ̶c̶o̶r̶r̶e̶c̶t̶l̶y̶ ̶s̶t̶o̶r̶e̶ ̶t̶h̶e̶ ̶r̶e̶p̶l̶y̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶
     -̶ ̶a̶d̶d̶ ̶a̶ ̶c̶a̶n̶c̶e̶l̶ ̶b̶u̶t̶t̶o̶n̶ ̶i̶n̶s̶i̶d̶e̶ ̶t̶h̶e̶ ̶r̶e̶p̶l̶y̶ ̶i̶n̶p̶u̶t̶ ̶t̶o̶ ̶c̶l̶o̶s̶e̶ ̶i̶n̶p̶u̶t̶
@@ -24,6 +24,9 @@
 ((4)) add upvote abilities 
     - limit upvotes to +1 -1
     - store upvoted posts in user object so it displays their upvoted items when logged in
+
+((5)) sort comments via highest upvotes
+    - add sorting ability
 
 (()) create 404 page
 (()) allow for deleting you're own comments by replacing the text with [deleted]

@@ -120,7 +120,12 @@ const LoginSigninBtnContainer = styled.div`
 	right: 48px;
 `;
 
-export default function PostContent({ post, user, setModalContent }) {
+export default function PostContent({
+	post,
+	user,
+	setModalContent,
+	viewPostComments,
+}) {
 	const [commentInput, setCommentInput] = useState();
 	const [width, setWidth] = useState();
 	useWindowWidth(setWidth);
@@ -135,6 +140,7 @@ export default function PostContent({ post, user, setModalContent }) {
 			.update({
 				replies: [...post.replies, newComment],
 			})
+			.then(viewPostComments(post.id))
 			.catch((err) => console.log(err));
 	};
 
@@ -224,6 +230,7 @@ export default function PostContent({ post, user, setModalContent }) {
 							key={uuidv4()}
 							post={post}
 							user={user}
+							viewPostComments={viewPostComments}
 						/>
 					);
 				})}

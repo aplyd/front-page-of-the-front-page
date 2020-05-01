@@ -6,7 +6,6 @@ import { PostContext } from '../PostContext';
 import PostContent from '../components/PostContent';
 import { useParams } from 'react-router';
 
-//dont forget to set this back to empty strings
 const tempPost = {
 	id: 1,
 	title: '',
@@ -42,6 +41,7 @@ export default function Comments({
 					post={postData ? postData : tempPost}
 					user={user}
 					setModalContent={setModalContent}
+					viewPostComments={viewPostComments}
 				/>
 			</FeedContainer>
 		</Container>

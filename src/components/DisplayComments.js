@@ -76,7 +76,12 @@ const CancelBtn = styled.button`
 	}
 `;
 
-export default function DisplayComments({ comment, post, user }) {
+export default function DisplayComments({
+	comment,
+	post,
+	user,
+	viewPostComments,
+}) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
 
@@ -96,6 +101,7 @@ export default function DisplayComments({ comment, post, user }) {
 			.update({
 				replies: withNewReply,
 			})
+			.then(viewPostComments(post.id))
 			.catch((err) => console.log(err));
 	};
 
@@ -165,6 +171,7 @@ export default function DisplayComments({ comment, post, user }) {
 							key={uuidv4()}
 							post={post}
 							user={user}
+							viewPostComments={viewPostComments}
 						/>
 					);
 				})}
