@@ -37,11 +37,15 @@ const Search = styled.input`
 	}
 `;
 
-const LoginBtn = styled.button`
+export const LoginBtn = styled.button`
 	color: ${(props) => props.theme.colors.blue};
 	background-color: white;
 	border: 1px solid ${(props) => props.theme.colors.blue};
 	line-height: 24px;
+	:hover {
+		color: ${(props) => props.theme.colors.lightBlue};
+		border: 1px solid ${(props) => props.theme.colors.lightBlue};
+	}
 `;
 
 const SubmitLink = styled.a`
@@ -51,11 +55,14 @@ const SubmitLink = styled.a`
 	}
 `;
 
-const SignInBtn = styled.button`
+export const SignInBtn = styled.button`
 	color: white;
 	background-color: ${(props) => props.theme.colors.blue};
 	border: 1px solid white;
 	line-height: 24px;
+	:hover {
+		background-color: ${(props) => props.theme.colors.lightBlue};
+	}
 `;
 
 export default function Nav({ openModal, closeModal }) {

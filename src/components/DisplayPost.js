@@ -15,6 +15,10 @@ const Container = styled.div`
 	grid-template-columns: 40px 1fr 154px;
 	grid-template-rows: 1fr 32px;
 	margin-bottom: 12px;
+	cursor: pointer;
+	:hover {
+		border: solid 1px rgb(137, 137, 137);
+	}
 `;
 
 export const VoteArrowContainer = styled.div`

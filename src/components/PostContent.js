@@ -5,8 +5,10 @@ import { roundedGreyBorder } from '../GlobalStyle';
 import formatDistance from 'date-fns/formatDistance';
 import DisplayComments from './DisplayComments';
 import useInitialFocus from '../hooks/useInitialFocus';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 import { Comment } from '../utils';
 import firebase from '../firebase';
+import { LoginBtn, SignInBtn } from '../layouts/Nav';
 import {
 	VoteArrowContainer,
 	SVG,
@@ -101,8 +103,27 @@ const CommentContainer = styled.div`
 	grid-column: 1 / 3;
 `;
 
+const LogInPrompt = styled.div`
+	grid-column: 2;
+	margin: 16px 0 0 12px;
+	padding: 12px 8px;
+	position: relative;
+`;
+const Prompt = styled.p`
+	display: inline;
+	color: ${(props) => props.theme.colors.gray};
+`;
+
+const LoginSigninBtnContainer = styled.div`
+	display: inline;
+	position: absolute;
+	right: 48px;
+`;
+
 export default function PostContent({ post, user }) {
 	const [commentInput, setCommentInput] = useState();
+	const [width, setWidth] = useState();
+	useWindowWidth(setWidth);
 
 	const submitTopLevelComment = () => {
 		const { username } = user;
@@ -172,7 +193,17 @@ export default function PostContent({ post, user }) {
 						</CommentBtn>
 					</CommentTextAreaContainer>
 				</CommentInputContainer>
-			) : null}
+			) : (
+				<LogInPrompt>
+					<Prompt>Log in or sign up to leave a comment</Prompt>
+					{width > 560 ? (
+						<LoginSigninBtnContainer>
+							<LoginBtn>Log In</LoginBtn>
+							<SignInBtn>Sign Up</SignInBtn>
+						</LoginSigninBtnContainer>
+					) : null}
+				</LogInPrompt>
+			)}
 
 			<SortByContainer>
 				<p>sort by</p>

@@ -6,6 +6,7 @@ import Feed from './Feed';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 
 const Container = styled.div`
+	width: calc(100% - 32px);
 	max-width: 960px;
 	margin: 0 auto;
 	display: grid;
@@ -29,6 +30,8 @@ export default function FeedContainer({
 	const [width, setWidth] = useState(window.innerWidth);
 	useWindowWidth(setWidth);
 
+	//conditionally displaying Feed/FeedSort because the Comments page
+	//uses this component without FeedSort
 	return (
 		<Container>
 			{displayFeedSort
