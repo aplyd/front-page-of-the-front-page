@@ -28,6 +28,11 @@
 ((5)) sort comments via highest upvotes
     - add sorting ability
 
+((6)) edit nav for mobile (hide login, signup buttons and instead have user icon)
+    - add user icon in navbar when user is logged in
+    - small dropdown to log out, display username, etc.
+
+
 (()) create 404 page
 (()) allow for deleting you're own comments by replacing the text with [deleted]
 (()) allow for editing comments
