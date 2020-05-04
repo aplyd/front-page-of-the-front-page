@@ -125,8 +125,12 @@ export default function CreatePost({ props, setUpdatePosts }) {
 				.get()
 				.then((res) => {
 					const data = res.data();
+					console.log(data);
+					console.log(user);
 					setUser({
 						...data,
+						isSignedIn: true,
+						isAnonymous: false,
 						posts: [
 							...user.posts,
 							{
@@ -134,8 +138,6 @@ export default function CreatePost({ props, setUpdatePosts }) {
 								postText,
 								title,
 								timestamp,
-								isSignedIn: true,
-								isAnonymous: false,
 								uid: user.uid,
 							},
 						],
@@ -145,6 +147,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 			setTitle('');
 			setPostText('');
 		} else {
+			//this shouldn't ever happen because 'create a post' is only visible when signed in
 			alert('you must sign in to create a post :)');
 		}
 	};

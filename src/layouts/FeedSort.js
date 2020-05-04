@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
+import { GiSevenPointedStar } from 'react-icons/gi';
+import { BsBarChartFill } from 'react-icons/bs';
+import { RiTimeLine } from 'react-icons/ri';
 
 //TODO - conditionally render styles based on input checked
 const Container = styled.div`
@@ -17,34 +20,80 @@ const Label = styled.label`
 	color: ${(props) =>
 		props.sortBy === props.children[1].props.value
 			? props.theme.colors.blue
-			: null};
+			: props.theme.colors.gray};
 	&:hover {
 		color: ${(props) => props.theme.colors.blue};
 		cursor: pointer;
 	}
 `;
 
-const NewLabel = styled(Label)``;
-const OldLabel = styled(Label)``;
-const TopLabel = styled(Label)``;
+const LabelDiv = styled.div`
+	padding: 16px;
+`;
+
+const NewLabel = styled(Label)`
+	font-size: 16px;
+	padding-right: 12px;
+`;
+const OldLabel = styled(Label)`
+	padding-right: 12px;
+`;
+const TopLabel = styled(Label)`
+	padding-right: 12px;
+`;
+
+const SVG = styled.svg`
+	margin-right: 2px;
+	padding-top: 2px;
+	color: ${(props) =>
+		props.sortby === props.value
+			? props.theme.colors.blue
+			: props.theme.colors.grey};
+	&&:hover {
+		color: ${(props) => props.theme.colors.blue};
+	}
+`;
+
+const TopSVG = styled(SVG)`
+	${TopLabel}:hover & {
+		fill: ${(props) => props.theme.colors.blue};
+	}
+`;
+const NewSVG = styled(SVG)`
+	${NewLabel}:hover & {
+		fill: ${(props) => props.theme.colors.blue};
+	}
+`;
+const OldSVG = styled(SVG)`
+	${OldLabel}:hover & {
+		fill: ${(props) => props.theme.colors.blue};
+	}
+`;
 
 export default function FeedSort({ sortPosts, sortBy }) {
 	return (
 		<Container>
-			<div onChange={(e) => sortPosts(e.target.value)}>
-				<NewLabel sortBy={sortBy}>
-					new
-					<HiddenInput type="radio" name="sort" value="TIME_ASC" />
-				</NewLabel>
-				<OldLabel sortBy={sortBy}>
-					old
-					<HiddenInput type="radio" name="sort" value="TIME_DESC" />
-				</OldLabel>
+			<LabelDiv onChange={(e) => sortPosts(e.target.value)}>
+				<TopSVG as={BsBarChartFill} value="VOTE_ASC" sortby={sortBy} />
 				<TopLabel sortBy={sortBy}>
-					top
+					Top
 					<HiddenInput type="radio" name="sort" value="VOTE_ASC" />
 				</TopLabel>
-			</div>
+				<NewSVG
+					as={GiSevenPointedStar}
+					value="TIME_ASC"
+					sortby={sortBy}
+				/>
+				<NewLabel sortBy={sortBy}>
+					New
+					<HiddenInput type="radio" name="sort" value="TIME_ASC" />
+				</NewLabel>
+				<OldSVG as={RiTimeLine} value="TIME_DESC" sortby={sortBy} />
+				<OldLabel sortBy={sortBy}>
+					Old
+					<HiddenInput type="radio" name="sort" value="TIME_DESC" />
+				</OldLabel>
+			</LabelDiv>
 		</Container>
 	);
 }
