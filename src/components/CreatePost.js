@@ -6,32 +6,34 @@ import { PostContext } from '../PostContext';
 import { v4 as uuidv4 } from 'uuid';
 
 const FormContainer = styled.form`
-	padding: 12 0px;
+	position: relative;
 `;
 
 const TitleInput = styled.input`
-	width: 100%;
+	width: calc(100% - 42px);
 	text-indent: 10px;
 	border-radius: 4px;
 	font-size: 16px;
 	outline: none;
-	border: none;
 	padding: 8px;
-	margin-bottom: 16px;
+	margin: 8px 8px 16px 12px;
+	border: solid 0.5px white;
 	&&:focus,
 	:hover {
 		border: solid 0.5px black;
 	}
 `;
 const TextInput = styled.textarea`
-	width: 100%;
-	padding: 18px 12px 12px 12px;
+	width: calc(100% - 42px);
+	padding: 8px;
+	margin-left: 12px;
+	margin-bottom: 92px;
 	text-indent: 10px;
 	border-radius: 4px;
 	min-height: 122px;
 	font-size: 16px;
 	outline: none;
-	border: none;
+	border: solid 0.5px white;
 	&&:focus,
 	:hover {
 		border: solid 0.5px black;
@@ -43,21 +45,27 @@ const CancelBtn = styled.button`
 	background-color: white;
 	border: 1px solid ${(props) => props.theme.colors.blue};
 	line-height: 24px;
+	display: inline;
+	position: absolute;
+	right: 90px;
+	bottom: 52px;
 	:hover {
 		color: ${(props) => props.theme.colors.lightBlue};
 		border: 1px solid ${(props) => props.theme.colors.lightBlue};
 	}
-	display: inline;
 `;
 const SubmitBtn = styled.button`
 	color: white;
 	background-color: ${(props) => props.theme.colors.blue};
 	border: 1px solid white;
 	line-height: 24px;
+	display: inline;
+	position: absolute;
+	right: 8px;
+	bottom: 52px;
 	:hover {
 		background-color: ${(props) => props.theme.colors.lightBlue};
 	}
-	display: inline;
 `;
 
 //TODO - trigger rerender of App.js after posting ??
