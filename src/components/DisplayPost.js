@@ -7,12 +7,13 @@ import firebase from '../firebase';
 import { Link, useHistory } from 'react-router-dom';
 import formatDistance from 'date-fns/formatDistance';
 import { countReplies } from '../utils';
+import { FaCommentAlt } from 'react-icons/fa';
 
 const Container = styled.div`
 	width: 100%;
 	${roundedGreyBorder}
 	display: grid;
-	grid-template-columns: 40px 1fr 154px;
+	grid-template-columns: 40px 1fr;
 	grid-template-rows: 1fr 32px;
 	margin-bottom: 12px;
 	cursor: pointer;
@@ -23,7 +24,6 @@ const Container = styled.div`
 
 export const VoteArrowContainer = styled.div`
 	height: 100%;
-
 	color: gray;
 	grid-column: 1;
 	&& > div {
@@ -97,7 +97,6 @@ export const ActionContainer = styled.div`
 	grid-row: 2;
 `;
 
-//fix padding
 export const ActionButton = styled.button`
 	text-transform: capitalize;
 	background: white;
@@ -106,13 +105,16 @@ export const ActionButton = styled.button`
 	border-radius: 4px;
 	outline: none;
 	border: none;
-	margin: 0;
+	padding: 0 4px;
+	margin-right: 8px;
 	&&:hover {
 		cursor: pointer;
 		background: lightgray;
 	}
 `;
-const Comment = styled(ActionButton)``;
+const Comment = styled(ActionButton)`
+	vertical-align: middle;
+`;
 const Share = styled(ActionButton)`
 	cursor: no-drop;
 	&&:hover {
@@ -132,6 +134,12 @@ export const SVG = styled.svg`
 		background-color: ${(props) => props.theme.colors.lightGray};
 		cursor: pointer;
 	}
+`;
+
+const CommentSVG = styled.svg`
+	position: relative;
+	top: 2.5px;
+	left: 0px;
 `;
 
 const Pinned = styled.p`
@@ -200,7 +208,7 @@ export default function DisplayPost({
 			<ContentContainer>
 				{pinned ? <Pinned>Pinned by moderators</Pinned> : null}
 				<InfoContainer>
-					<p>Posted by {username} </p>
+					<p>Posted by {username}</p>
 					<p>
 						{formatDistance(Date.now(), timestamp, {
 							includeSeconds: true,
@@ -225,15 +233,17 @@ export default function DisplayPost({
 
 			<ActionContainer pinned={pinned}>
 				<Comment>
-					{commentCount} {commentCount === 1 ? 'comment' : 'comments'}
+					<CommentSVG as={FaCommentAlt} />
+					{'  ' + commentCount}{' '}
+					{commentCount === 1 ? 'comment' : 'comments'}
 				</Comment>
 				<Share>share</Share>
 			</ActionContainer>
 
-			<JoinContainer>
+			{/* <JoinContainer>
 				<JoinBtn>+ Join</JoinBtn>
 				<LinkPreview src={preview ? preview : null}></LinkPreview>
-			</JoinContainer>
+			</JoinContainer> */}
 		</Container>
 	);
 }

@@ -164,10 +164,9 @@ export default function CreatePost({ props, setUpdatePosts }) {
 			></TitleInput>
 			<TextInput
 				value={postText}
-				required
 				onChange={(e) => setPostText(e.currentTarget.value)}
 				placeholder="Text (optional)"
-				maxLength="2000"
+				maxLength="1600"
 			></TextInput>
 			<CancelBtn type="button">Cancel</CancelBtn>
 			<SubmitBtn type="submit">Post</SubmitBtn>

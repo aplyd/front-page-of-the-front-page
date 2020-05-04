@@ -89,6 +89,7 @@ export default function LogIn({ showSignUp, closeModal }) {
 					vale={email}
 					onChange={(e) => setEmail(e.target.value)}
 					ref={input}
+					maxLength="64"
 				/>
 				<PasswordInput
 					type="password"
@@ -96,6 +97,7 @@ export default function LogIn({ showSignUp, closeModal }) {
 					placeholder="Password"
 					vale={password}
 					onChange={(e) => setPassword(e.target.value)}
+					maxLength="128"
 				/>
 				<SignInBtn type="submit">Sign In</SignInBtn>
 			</form>

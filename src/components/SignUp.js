@@ -92,6 +92,7 @@ export default function SignUp({ showLogIn, closeModal }) {
 					vale={username}
 					ref={input}
 					onChange={(e) => setUsername(e.target.value)}
+					maxLength="15"
 				/>
 
 				<EmailInput
@@ -101,6 +102,7 @@ export default function SignUp({ showLogIn, closeModal }) {
 					placeholder="Email"
 					vale={email}
 					onChange={(e) => setEmail(e.target.value)}
+					maxLength="64"
 				/>
 				<PasswordInput
 					type="password"
@@ -108,6 +110,7 @@ export default function SignUp({ showLogIn, closeModal }) {
 					placeholder="Password"
 					vale={password}
 					onChange={(e) => setPassword(e.target.value)}
+					maxLength="128"
 				/>
 				<SignUpBtn type="submit">Sign Up</SignUpBtn>
 			</form>
