@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import firebase from '../firebase';
 import { Link } from 'react-router-dom';
+import { useSearchBarPosition } from '../hooks/useSearchBarPosition';
 
 const Container = styled.div`
 	background: white;
@@ -68,17 +69,25 @@ export const SignInBtn = styled.button`
 const SearchResultsDropDown = styled.div`
 	position: absolute;
 	height: 100px;
-	width: 100px;
+	width: ${(props) => props.width + 'px'};
+	top: ${(props) => props.top + 'px'};
+	left: ${(props) => props.left + 'px'};
 	background: pink;
+	z-index: 1000;
 `;
 
 export default function Nav({ openModal, closeModal }) {
 	const { user, setUser, posts } = useContext(PostContext);
 	const [searchInput, setSearchInput] = useState('');
+	const searchBarRef = useRef(null);
+	const {
+		searchBarWidth,
+		searchBarBottom,
+		searchBarLeft,
+	} = useSearchBarPosition(searchBarRef);
 
 	const handleSearchInput = (input) => {
 		setSearchInput(input);
-		console.log(searchInput);
 
 		// if (searchInput.length > 1) {
 		// 	console.log('filter');
@@ -154,9 +163,14 @@ export default function Nav({ openModal, closeModal }) {
 				placeholder="Search"
 				onChange={(e) => handleSearchInput(e.target.value)}
 				value={searchInput}
+				ref={searchBarRef}
 			/>
 
-			<SearchResultsDropDown></SearchResultsDropDown>
+			<SearchResultsDropDown
+				top={searchBarBottom ? searchBarBottom : 0}
+				left={searchBarLeft ? searchBarLeft : 0}
+				width={searchBarWidth ? searchBarWidth : 0}
+			></SearchResultsDropDown>
 
 			{displayLoggedInStatus()}
 		</Container>
