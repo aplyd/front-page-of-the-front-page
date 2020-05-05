@@ -48,7 +48,7 @@ function App() {
 	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
 	//this is literally only here to trigger a rerender to
-	//correctly display sorted posts
+	//correctly display sorted posts - will probably remove when refactored correctly
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked

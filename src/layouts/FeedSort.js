@@ -77,8 +77,8 @@ const TopSVG = styled(SVG)`
 	position: relative;
 	top: 2px;
 	right: 0;
-	${SVG}:hover & {
-		fill: rebeccapurple;
+	${TopLabel}:hover & {
+		font-size: 100px;
 	}
 `;
 const NewSVG = styled(SVG)`

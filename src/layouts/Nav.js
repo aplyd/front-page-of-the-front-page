@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import firebase from '../firebase';
@@ -29,7 +29,7 @@ const Search = styled.input`
 	border-radius: 4px;
 	font-size: 16px;
 	text-indent: 10px;
-	border: none;
+	border: 0.5px solid rgb(0, 121, 211);
 	max-width: 598px;
 	margin: 0 auto;
 	&&:hover {
@@ -65,8 +65,38 @@ export const SignInBtn = styled.button`
 	}
 `;
 
+const SearchResultsDropDown = styled.div`
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	background: pink;
+`;
+
 export default function Nav({ openModal, closeModal }) {
-	const { user, setUser } = useContext(PostContext);
+	const { user, setUser, posts } = useContext(PostContext);
+	const [searchInput, setSearchInput] = useState('');
+
+	const handleSearchInput = (input) => {
+		setSearchInput(input);
+		console.log(searchInput);
+
+		// if (searchInput.length > 1) {
+		// 	console.log('filter');
+		// 	const results = posts.filter((post) => {
+		// 		const search = searchInput.toLowerCase();
+		// 		const title = post.title.toLowerCase();
+		// 		const body = post.postText.toLowerCase();
+		// 		if (
+		// 			title.indexOf(search) === -1 ||
+		// 			body.indexOf(search) === -1
+		// 		) {
+		// 			return false;
+		// 		}
+		// 		return true;
+		// 	});
+		// 	console.log(results);
+		// }
+	};
 
 	const logOutUser = () => {
 		firebase
@@ -119,7 +149,14 @@ export default function Nav({ openModal, closeModal }) {
 		<Container>
 			<Circle as={Link} to="/" />
 
-			<Search type="text" placeholder="Search" />
+			<Search
+				type="text"
+				placeholder="Search"
+				onChange={(e) => handleSearchInput(e.target.value)}
+				value={searchInput}
+			/>
+
+			<SearchResultsDropDown></SearchResultsDropDown>
 
 			{displayLoggedInStatus()}
 		</Container>
