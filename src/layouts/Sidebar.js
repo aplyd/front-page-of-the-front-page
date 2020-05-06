@@ -1,14 +1,36 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const Container = styled.div`
-	grid-column: 2;
-	grid-row: 1 / span 2;
-	background: white;
-	border: 1px solid lightgray;
-	border-radius: 4px;
-`;
+import React, { useEffect, useState } from 'react';
+import * as S from './Sidebar.style';
+import firebase from '../firebase';
 
 export default function Sidebar() {
-	return <Container></Container>;
+	const [userCount, setUserCount] = useState();
+
+	// useEffect(() => {
+	// 	firebase
+	// 		.firestore()
+	// 		.collection('user')
+	// 		.get()
+	// 		.then((x) => {
+	// 			const users = x.map((user) => x.data());
+	// 			console.log(users);
+	// 		});
+	// }, []);
+
+	return (
+		<S.Container>
+			<S.AboutCommunityDiv>
+				<p>About Community</p>
+			</S.AboutCommunityDiv>
+			<S.Description>
+				Welcome to the front page of the front page! This was built by
+				me, Austin Ftacnik, for my final project of The Odin Project
+				JavaScript course. If you haven't figured it out yet, this is a
+				simplified clone of popular website and was built for learning
+				purposes, not to replace said site. If you have any questions or
+				comments, feel free to contact via Github or Twitter. <br />
+				<br />
+				Cheers.
+			</S.Description>
+		</S.Container>
+	);
 }
