@@ -10,17 +10,16 @@
     -̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶f̶t̶e̶r̶ ̶s̶u̶b̶m̶i̶t̶t̶i̶n̶g̶
     - form validation?
     - in displayComments, show username color black
-    - show username for "comment as ____"
+    -̶ ̶s̶h̶o̶w̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶"̶c̶o̶m̶m̶e̶n̶t̶ ̶a̶s̶ ̶_̶_̶_̶_̶"̶
     -̶ ̶h̶i̶d̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶i̶n̶p̶u̶t̶ ̶u̶n̶l̶e̶s̶s̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
     -̶ ̶l̶i̶n̶e̶ ̶u̶p̶ ̶l̶e̶f̶t̶ ̶e̶d̶g̶e̶ ̶o̶f̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶b̶o̶x̶,̶ ̶p̶o̶s̶t̶ ̶b̶o̶d̶y̶,̶ ̶e̶t̶c̶.̶
 
-(()) handle search input!!
+(̶(̶)̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶s̶e̶a̶r̶c̶h̶ ̶i̶n̶p̶u̶t̶!̶!̶
 
-((3)) sign up and log in form validation
+(̶(̶3̶)̶)̶ ̶s̶i̶g̶n̶ ̶u̶p̶ ̶a̶n̶d̶ ̶l̶o̶g̶ ̶i̶n̶ ̶f̶o̶r̶m̶ ̶v̶a̶l̶i̶d̶a̶t̶i̶o̶n̶
     -̶ ̶s̶t̶o̶r̶e̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶s̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶d̶o̶c̶
     - check firebase to make sure username not taken (oh god)
-    - check length min + max
-    - handle errors logging in by displaying error
+    -̶ ̶c̶h̶e̶c̶k̶ ̶l̶e̶n̶g̶t̶h̶ ̶m̶i̶n̶ ̶+̶ ̶m̶a̶x̶
     -̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶n̶a̶v̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶ ̶o̶n̶ ̶l̶o̶g̶ ̶o̶u̶t̶
 
 ((4)) add upvote abilities 
@@ -34,17 +33,18 @@
     - add user icon in navbar when user is logged in
     - small dropdown to log out, display username, etc.
 
-
-(̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
-(()) create 404 page
-(()) allow for deleting you're own comments by replacing the text with [deleted]
-(()) allow for editing comments
-(()) allow for login via username by getting their email from firebase
-(()) style FeedSort component
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
-(()) add content to sidebar and display 
+(̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
+(̶(̶)̶)̶ ̶c̶r̶e̶a̶t̶e̶ ̶4̶0̶4̶ ̶p̶a̶g̶e̶
+(̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶F̶e̶e̶d̶S̶o̶r̶t̶ ̶c̶o̶m̶p̶o̶n̶e̶n̶t̶
+(()) handle errors logging in by displaying error
+(()) allow for deleting you're own comments by replacing the text with [deleted]
+(()) add content to sidebar
+(()) limit displayPosts to most recent 25
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
 () display imgur photos/gifs
 () handle link sharing?
 () add tensorFlow to detect toxic posts/comments
+() allow for editing comments
+() allow for login via username by getting their email from firebase (make request, search through all user objects to get email)

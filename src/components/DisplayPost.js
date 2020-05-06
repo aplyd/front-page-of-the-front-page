@@ -217,18 +217,7 @@ export default function DisplayPost({
 					</p>
 				</InfoContainer>
 
-				<Title
-				// as={Link}
-				// to={{
-				// 	pathname: `/comments/${url}`,
-				// 	state: {
-				// 		postId: id,
-				// 	},
-				// }}
-				// id={id}
-				>
-					{title}
-				</Title>
+				<Title>{title}</Title>
 			</ContentContainer>
 
 			<ActionContainer pinned={pinned}>

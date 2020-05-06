@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import firebase from '../firebase';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSearchBarPosition } from '../hooks/useSearchBarPosition';
 import { filterPosts } from '../utils';
 
@@ -69,6 +69,8 @@ export const SignInBtn = styled.button`
 
 const SearchResultsDropDown = styled.div`
 	position: absolute;
+	max-height: 360px;
+	overflow: scroll;
 	width: ${(props) => props.width + 'px'};
 	top: ${(props) => props.top + 'px'};
 	left: ${(props) => props.left + 'px'};
@@ -80,20 +82,33 @@ const SearchResultsDropDown = styled.div`
 `;
 
 const ResultCard = styled.div`
-	min-height: 32px;
+	height: 90px;
+	overflow: hidden;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-bottom: 8px;
 	border-bottom-right-radius: 4px;
 	border-bottom-left-radius: 4px;
+	cursor: pointer;
+	&&:hover {
+		background: ${(props) => props.theme.colors.veryLightGray};
+	}
 `;
 
 const ResultTitle = styled.div`
 	color: ${(props) => props.theme.colors.blue};
+	font-size: ${(props) => props.theme.font.size.m};
+	padding: 12px 0 4px 0;
+	cursor: pointer;
 `;
 
 const ResultContent = styled.div`
 	color: ${(props) => props.theme.colors.gray};
+	padding: 0 0 0 0;
+	cursor: pointer;
 `;
 
-export default function Nav({ openModal, closeModal }) {
+export default function Nav({ openModal, closeModal, viewPostComments }) {
 	const { user, setUser, posts } = useContext(PostContext);
 	const [searchInput, setSearchInput] = useState('');
 	const searchBarRef = useRef(null);
@@ -105,6 +120,7 @@ export default function Nav({ openModal, closeModal }) {
 	//dont forget to set back to false
 	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
+	const history = useHistory();
 
 	const handleSearchInput = (input) => {
 		setAreSearchResultsOpen(true);
@@ -114,8 +130,11 @@ export default function Nav({ openModal, closeModal }) {
 		setSearchResults(results);
 	};
 
-	const viewSearchResult = () => {
-		console.log('clicky');
+	const viewSearchResult = (postId, url) => {
+		viewPostComments(postId);
+		history.push(`/comments/${url}/${postId}`);
+		setAreSearchResultsOpen(false);
+		setSearchInput('');
 	};
 
 	const logOutUser = () => {
@@ -133,6 +152,8 @@ export default function Nav({ openModal, closeModal }) {
 				}
 			);
 	};
+
+	const removeSearchInputFocus = (e) => {};
 
 	const displayLoggedInStatus = () => {
 		if (user.isSignedIn) {
@@ -175,7 +196,7 @@ export default function Nav({ openModal, closeModal }) {
 				onChange={(e) => handleSearchInput(e.target.value)}
 				value={searchInput}
 				ref={searchBarRef}
-				onBlur={() => setAreSearchResultsOpen(false)}
+				// onBlur={removeSearchInputFocus}
 			/>
 
 			{areSearchResultsOpen && (
@@ -184,13 +205,20 @@ export default function Nav({ openModal, closeModal }) {
 					left={searchBarLeft}
 					width={searchBarWidth}
 				>
-					{searchResults &&
+					{searchInput.length > 0 &&
 						searchResults.map((post, index) => {
-							console.log(post);
+							const url = post.title
+								.replace(/\s+/g, '-')
+								.toLowerCase();
 							return (
-								<ResultCard key={index}>
+								<ResultCard
+									key={index}
+									onClick={() =>
+										viewSearchResult(post.id, url)
+									}
+								>
 									<ResultTitle>{post.title}</ResultTitle>
-									<ResultContent onClick={viewSearchResult}>
+									<ResultContent>
 										{post.postText}
 									</ResultContent>
 								</ResultCard>

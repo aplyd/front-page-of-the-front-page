@@ -165,7 +165,11 @@ function App() {
 			<Router>
 				<GlobalStyle />
 				{displayModal()}
-				<Nav openModal={setModalContent} closeModal={setModalContent} />
+				<Nav
+					openModal={setModalContent}
+					closeModal={setModalContent}
+					viewPostComments={viewPostComments}
+				/>
 				<Switch>
 					<Route
 						exact

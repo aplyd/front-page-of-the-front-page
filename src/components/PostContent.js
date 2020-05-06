@@ -183,7 +183,7 @@ export default function PostContent({
 			{user.isSignedIn ? (
 				<CommentInputContainer>
 					<CommentAsDisplayName>
-						Comment as displayName
+						Comment as {user.username}
 					</CommentAsDisplayName>
 					<CommentTextAreaContainer>
 						<CommentTextArea
