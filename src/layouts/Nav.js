@@ -69,17 +69,28 @@ export const SignInBtn = styled.button`
 
 const SearchResultsDropDown = styled.div`
 	position: absolute;
-	height: 100px;
 	width: ${(props) => props.width + 'px'};
 	top: ${(props) => props.top + 'px'};
 	left: ${(props) => props.left + 'px'};
-	background: pink;
+	background: white;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
 	z-index: 1000;
 `;
 
 const ResultCard = styled.div`
-	height: 40px;
-	background: green;
+	min-height: 32px;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+`;
+
+const ResultTitle = styled.div`
+	color: ${(props) => props.theme.colors.blue};
+`;
+
+const ResultContent = styled.div`
+	color: ${(props) => props.theme.colors.gray};
 `;
 
 export default function Nav({ openModal, closeModal }) {
@@ -92,7 +103,7 @@ export default function Nav({ openModal, closeModal }) {
 		searchBarLeft,
 	} = useSearchBarPosition(searchBarRef, user.isSignedIn);
 	//dont forget to set back to false
-	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(true);
+	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
 
 	const handleSearchInput = (input) => {
@@ -101,6 +112,10 @@ export default function Nav({ openModal, closeModal }) {
 
 		const results = filterPosts(posts, searchInput);
 		setSearchResults(results);
+	};
+
+	const viewSearchResult = () => {
+		console.log('clicky');
 	};
 
 	const logOutUser = () => {
@@ -150,8 +165,6 @@ export default function Nav({ openModal, closeModal }) {
 		}
 	};
 
-	const displayResults = () => {};
-
 	return (
 		<Container>
 			<Circle as={Link} to="/" />
@@ -176,7 +189,10 @@ export default function Nav({ openModal, closeModal }) {
 							console.log(post);
 							return (
 								<ResultCard key={index}>
-									<h4>{post.title}</h4>
+									<ResultTitle>{post.title}</ResultTitle>
+									<ResultContent onClick={viewSearchResult}>
+										{post.postText}
+									</ResultContent>
 								</ResultCard>
 							);
 						})}
