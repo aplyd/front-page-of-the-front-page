@@ -84,7 +84,8 @@ export default function Nav({ openModal, closeModal }) {
 		searchBarWidth,
 		searchBarBottom,
 		searchBarLeft,
-	} = useSearchBarPosition(searchBarRef);
+	} = useSearchBarPosition(searchBarRef, user.isSignedIn);
+	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(false);
 
 	const handleSearchInput = (input) => {
 		setSearchInput(input);
@@ -164,13 +165,17 @@ export default function Nav({ openModal, closeModal }) {
 				onChange={(e) => handleSearchInput(e.target.value)}
 				value={searchInput}
 				ref={searchBarRef}
+				onFocus={() => setAreSearchResultsOpen(true)}
+				onBlur={() => setAreSearchResultsOpen(false)}
 			/>
 
-			<SearchResultsDropDown
-				top={searchBarBottom ? searchBarBottom : 0}
-				left={searchBarLeft ? searchBarLeft : 0}
-				width={searchBarWidth ? searchBarWidth : 0}
-			></SearchResultsDropDown>
+			{areSearchResultsOpen && (
+				<SearchResultsDropDown
+					top={searchBarBottom ? searchBarBottom : 0}
+					left={searchBarLeft ? searchBarLeft : 0}
+					width={searchBarWidth ? searchBarWidth : 0}
+				></SearchResultsDropDown>
+			)}
 
 			{displayLoggedInStatus()}
 		</Container>
