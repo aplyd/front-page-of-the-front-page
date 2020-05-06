@@ -1,7 +1,5 @@
 //recursively searches post comments to find which comment to reply to
 
-import { IoIosReturnLeft } from 'react-icons/io';
-
 // let targetObject = false;
 // export const getParentObject = (object, targetId, replyToAdd) => {
 // 	for (let i = 0; i < object.replies.length; i++) {
@@ -42,4 +40,19 @@ export const countReplies = (object) => {
 
 	count(object);
 	return counter;
+};
+
+export const filterPosts = (postsArr, search) => {
+	const results = postsArr.filter((post) => {
+		console.log(post.title);
+		if (
+			post.title.indexOf(search) !== -1 ||
+			post.postText.indexOf(search) !== -1
+		) {
+			return true;
+		}
+		return false;
+	});
+
+	return results;
 };

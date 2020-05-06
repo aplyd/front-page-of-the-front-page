@@ -1,9 +1,9 @@
 import { useLayoutEffect, useState } from 'react';
 
 export const useSearchBarPosition = (ref, dep) => {
-	const [searchBarBottom, setSearchBarBottom] = useState();
-	const [searchBarWidth, setSearchBarWidth] = useState();
-	const [searchBarLeft, setSearchBarLeft] = useState();
+	const [searchBarBottom, setSearchBarBottom] = useState(0);
+	const [searchBarWidth, setSearchBarWidth] = useState(0);
+	const [searchBarLeft, setSearchBarLeft] = useState(0);
 
 	useLayoutEffect(() => {
 		function updatePostion() {

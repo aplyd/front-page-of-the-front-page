@@ -50,3 +50,17 @@ export const countReplies = (object) => {
 	count(object);
 	return counter;
 };
+
+export const filterPosts = (postsArr, search) => {
+	const results = postsArr.filter((post) => {
+		if (
+			post.title.indexOf(search) !== -1 ||
+			post.postText.indexOf(search) !== -1
+		) {
+			return true;
+		}
+		return false;
+	});
+
+	return results;
+};

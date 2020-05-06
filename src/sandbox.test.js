@@ -1,4 +1,4 @@
-import { insertReply, countReplies } from './sandbox';
+import { insertReply, countReplies, filterPosts } from './sandbox';
 
 const zeroA2 = {
 	id: 7,
@@ -84,6 +84,93 @@ const tempPost = {
 // 	expect(added).toStrictEqual(tempPost2);
 // });
 
-test.only('check counting', () => {
+test('check counting', () => {
 	expect(countReplies(tempPost)).toBe(6);
+});
+
+const postsArr = [
+	{
+		id: 'abc0a514-8b99-4907-b3e7-fe8f9760affe',
+		vote: 1,
+		username: 'austin',
+		title:
+			'this is a super long title to see how it displays on the front page lmaooooo lets goo my dudes',
+		timestamp: 1588632983733,
+		postText: 'I thought this was optional ya ho',
+	},
+	{
+		id: '89d2d96e-4fff-4da5-b3c2-13ed975db2fc',
+		replies: [],
+		postText: 'what r u waiting for',
+		vote: 1,
+		username: 'austin',
+		timestamp: 1588631863098,
+		title: 'something dumb',
+	},
+	{
+		id: '26e0da6b-9044-493c-845e-9e0be467f48a',
+		vote: 1,
+		username: 'austin',
+		timestamp: 1588631622400,
+		title: 'new posterb',
+		replies: [],
+		postText: 'sarah jean michellle late',
+	},
+	{
+		id: '12658748-8aed-44c2-a207-1375ff29a338',
+		replies: [],
+		postText: 'watcha know about it son',
+		vote: 1,
+		username: 'austin',
+		title: 'beans in jeans',
+		timestamp: 1588628609982,
+	},
+	{
+		id: 'eea3a24e-352c-4cff-b3c9-f25086e4a88a',
+		postText: 'its not too late, its never too late',
+		vote: 1,
+		username: 'austin',
+		title: 'sk8 or die late',
+		timestamp: 1588627523841,
+	},
+	{
+		id: '6421785e-8bcd-4cd4-8b85-77d25d603f13',
+		vote: 4,
+		username: 'austin',
+		title: 'cheesebrgg late',
+		timestamp: 1588215356657,
+		postText: 'in pants',
+	},
+];
+
+const filteredArr = [
+	{
+		id: '26e0da6b-9044-493c-845e-9e0be467f48a',
+		vote: 1,
+		username: 'austin',
+		timestamp: 1588631622400,
+		title: 'new posterb',
+		replies: [],
+		postText: 'sarah jean michellle late',
+	},
+	{
+		id: 'eea3a24e-352c-4cff-b3c9-f25086e4a88a',
+		postText: 'its not too late, its never too late',
+		vote: 1,
+		username: 'austin',
+		title: 'sk8 or die late',
+		timestamp: 1588627523841,
+	},
+	{
+		id: '6421785e-8bcd-4cd4-8b85-77d25d603f13',
+		vote: 4,
+		username: 'austin',
+		title: 'cheesebrgg late',
+		timestamp: 1588215356657,
+		postText: 'in pants',
+	},
+];
+
+test.only('hello its me', () => {
+	expect(filterPosts(postsArr, 'late')).toStrictEqual(filteredArr);
 });

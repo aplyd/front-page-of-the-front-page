@@ -4,6 +4,7 @@ import { PostContext } from '../PostContext';
 import firebase from '../firebase';
 import { Link } from 'react-router-dom';
 import { useSearchBarPosition } from '../hooks/useSearchBarPosition';
+import { filterPosts } from '../utils';
 
 const Container = styled.div`
 	background: white;
@@ -76,6 +77,11 @@ const SearchResultsDropDown = styled.div`
 	z-index: 1000;
 `;
 
+const ResultCard = styled.div`
+	height: 40px;
+	background: green;
+`;
+
 export default function Nav({ openModal, closeModal }) {
 	const { user, setUser, posts } = useContext(PostContext);
 	const [searchInput, setSearchInput] = useState('');
@@ -85,27 +91,16 @@ export default function Nav({ openModal, closeModal }) {
 		searchBarBottom,
 		searchBarLeft,
 	} = useSearchBarPosition(searchBarRef, user.isSignedIn);
-	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(false);
+	//dont forget to set back to false
+	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(true);
+	const [searchResults, setSearchResults] = useState([]);
 
 	const handleSearchInput = (input) => {
+		setAreSearchResultsOpen(true);
 		setSearchInput(input);
 
-		// if (searchInput.length > 1) {
-		// 	console.log('filter');
-		// 	const results = posts.filter((post) => {
-		// 		const search = searchInput.toLowerCase();
-		// 		const title = post.title.toLowerCase();
-		// 		const body = post.postText.toLowerCase();
-		// 		if (
-		// 			title.indexOf(search) === -1 ||
-		// 			body.indexOf(search) === -1
-		// 		) {
-		// 			return false;
-		// 		}
-		// 		return true;
-		// 	});
-		// 	console.log(results);
-		// }
+		const results = filterPosts(posts, searchInput);
+		setSearchResults(results);
 	};
 
 	const logOutUser = () => {
@@ -155,6 +150,8 @@ export default function Nav({ openModal, closeModal }) {
 		}
 	};
 
+	const displayResults = () => {};
+
 	return (
 		<Container>
 			<Circle as={Link} to="/" />
@@ -165,16 +162,25 @@ export default function Nav({ openModal, closeModal }) {
 				onChange={(e) => handleSearchInput(e.target.value)}
 				value={searchInput}
 				ref={searchBarRef}
-				onFocus={() => setAreSearchResultsOpen(true)}
 				onBlur={() => setAreSearchResultsOpen(false)}
 			/>
 
 			{areSearchResultsOpen && (
 				<SearchResultsDropDown
-					top={searchBarBottom ? searchBarBottom : 0}
-					left={searchBarLeft ? searchBarLeft : 0}
-					width={searchBarWidth ? searchBarWidth : 0}
-				></SearchResultsDropDown>
+					top={searchBarBottom}
+					left={searchBarLeft}
+					width={searchBarWidth}
+				>
+					{searchResults &&
+						searchResults.map((post, index) => {
+							console.log(post);
+							return (
+								<ResultCard key={index}>
+									<h4>{post.title}</h4>
+								</ResultCard>
+							);
+						})}
+				</SearchResultsDropDown>
 			)}
 
 			{displayLoggedInStatus()}
