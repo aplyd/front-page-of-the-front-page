@@ -14,6 +14,7 @@ export const Comment = ({
 	replies = [],
 	id = uuidv4(),
 	depth = 0,
+	deleted = false,
 } = {}) => ({
 	commentInput,
 	timestamp,
@@ -22,7 +23,21 @@ export const Comment = ({
 	username,
 	id,
 	depth,
+	deleted,
 });
+
+export const setCommentAsDeleted = (object, targetId) => {
+	if (object.id === targetId) {
+		object.deleted = true;
+		console.log(object);
+	} else {
+		object.replies.forEach((obj) => {
+			setCommentAsDeleted(obj, targetId);
+		});
+	}
+
+	return object.replies;
+};
 
 export const insertReply = (object, targetId, replyToAdd) => {
 	if (object.id === targetId) {

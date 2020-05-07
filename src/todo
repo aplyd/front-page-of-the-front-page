@@ -18,7 +18,7 @@
 
 (̶(̶3̶)̶)̶ ̶s̶i̶g̶n̶ ̶u̶p̶ ̶a̶n̶d̶ ̶l̶o̶g̶ ̶i̶n̶ ̶f̶o̶r̶m̶ ̶v̶a̶l̶i̶d̶a̶t̶i̶o̶n̶
     -̶ ̶s̶t̶o̶r̶e̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶s̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶d̶o̶c̶
-    - check firebase to make sure username not taken (oh god)
+    - check firebase to make sure username not taken (oh god)?
     -̶ ̶c̶h̶e̶c̶k̶ ̶l̶e̶n̶g̶t̶h̶ ̶m̶i̶n̶ ̶+̶ ̶m̶a̶x̶
     -̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶n̶a̶v̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶ ̶o̶n̶ ̶l̶o̶g̶ ̶o̶u̶t̶
 
@@ -34,6 +34,7 @@
     - small dropdown to log out, display username, etc.
 
 (()) finish sidebar content
+    - load user and post count to display
     - when on mobile, sidebar becomes a pinned posts 
     - add a "more resources" section for links to social media
     - add a "more info" with technologies used

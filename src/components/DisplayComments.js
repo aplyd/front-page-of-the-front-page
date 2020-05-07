@@ -3,7 +3,7 @@ import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
 import { VoteArrowContainer, SVG, ActionButton } from './DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
-import { insertReply, Comment } from '../utils';
+import { insertReply, Comment, setCommentAsDeleted } from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
 import {
@@ -91,9 +91,9 @@ export default function DisplayComments({
 		const username = user.username;
 		const id = post.id;
 		const newComment = Comment({ commentInput, username, depth });
+		//insert reply function finds the correct id and adds the new comment to its replies
 		const withNewReply = insertReply(post, id, newComment);
 
-		//insert reply function finds the correct id and adds the new comment to its replies
 		firebase
 			.firestore()
 			.collection('posts')
@@ -101,7 +101,19 @@ export default function DisplayComments({
 			.update({
 				replies: withNewReply,
 			})
-			.then(viewPostComments(post.id))
+			.then(() => viewPostComments(post.id))
+			.catch((err) => console.log(err));
+	};
+
+	const deleteComment = () => {
+		const withDeleted = setCommentAsDeleted(post, comment.id);
+
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.update({ replies: withDeleted })
+			.then(() => viewPostComments(post.id))
 			.catch((err) => console.log(err));
 	};
 
@@ -147,16 +159,22 @@ export default function DisplayComments({
 				</VoteArrowContainer>
 				<ContentContainer>
 					<CommentInfo>
-						{comment.username} {comment.points}{' '}
+						{comment.deleted ? '[deleted]' : comment.username}{' '}
+						{comment.points}{' '}
 						{comment.points === 1 ? 'point' : 'points'} •{' '}
 						{formatDistance(Date.now(), comment.timestamp)} ago
 					</CommentInfo>
-					<CommentBody>{comment.commentInput}</CommentBody>
+					<CommentBody>
+						{comment.deleted ? '[deleted]' : comment.commentInput}
+					</CommentBody>
 					<BtnContainer>
 						<Btn onClick={(e) => setIsReplyContainerOpen(true)}>
 							Reply
 						</Btn>
 						<Btn style={{ cursor: 'no-drop' }}>Share</Btn>
+						{user.username === comment.username ? (
+							<Btn onClick={() => deleteComment()}>Delete</Btn>
+						) : null}
 					</BtnContainer>
 				</ContentContainer>
 			</Card>
