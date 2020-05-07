@@ -33,6 +33,11 @@
     - add user icon in navbar when user is logged in
     - small dropdown to log out, display username, etc.
 
+(()) finish sidebar content
+    - when on mobile, sidebar becomes a pinned posts 
+    - add a "more resources" section for links to social media
+    - add a "more info" with technologies used
+
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
 (̶(̶)̶)̶ ̶c̶r̶e̶a̶t̶e̶ ̶4̶0̶4̶ ̶p̶a̶g̶e̶
