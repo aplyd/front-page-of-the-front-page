@@ -22,7 +22,7 @@ const AboutProjectDiv = styled.div`
 `;
 
 const Description = styled.p`
-	padding: 16px 12px 12px 12px;
+	padding: 0 12px 12px 12px;
 	color: black;
 	font-size: 13px;
 	line-height: 1.4em;
@@ -35,18 +35,27 @@ const Description = styled.p`
 const UserCount = styled.div`
 	display: inline-block;
 	padding: 12px;
+	width: 88px;
 `;
 
-const Members = styled.p``;
-const MembersNum = styled.p``;
+const MembersNum = styled.p`
+	font-size: ${(props) => props.theme.font.size.m};
+`;
+const Members = styled.p`
+	font-size: ${(props) => props.theme.font.size.xs};
+`;
 
 const PostCount = styled.div`
 	display: inline-block;
 	padding: 12px;
 `;
 
-const Posts = styled.p``;
-const PostsNum = styled.p``;
+const PostsNum = styled.p`
+	font-size: ${(props) => props.theme.font.size.m};
+`;
+const Posts = styled.p`
+	font-size: ${(props) => props.theme.font.size.xs};
+`;
 
 const CreationDate = styled.div`
 	display: inline;

@@ -48,6 +48,7 @@
 (()) limit displayPosts to most recent 25
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
+() refactor all components to have seperate .style file and in their own folder 
 () display imgur photos/gifs
 () handle link sharing?
 () add tensorFlow to detect toxic posts/comments
