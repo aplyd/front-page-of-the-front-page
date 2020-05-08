@@ -24,9 +24,10 @@ export default function SidebarAboutProject() {
 				>
 					The Odin Project
 				</a>{' '}
-				JavaScript course. This is a simplified clone of popular website
-				and was built for learning purposes, not to replace said site.
-				If you have any questions or comments, feel free to contact via{' '}
+				JavaScript course. This is a simplified clone of a popular
+				website and was built for learning purposes, not to replace said
+				site. If you have any questions or comments, feel free to
+				contact via{' '}
 				<a
 					href="https://github.com/aplyd"
 					target="_blank"

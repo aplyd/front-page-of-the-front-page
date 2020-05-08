@@ -22,14 +22,14 @@
     -̶ ̶c̶h̶e̶c̶k̶ ̶l̶e̶n̶g̶t̶h̶ ̶m̶i̶n̶ ̶+̶ ̶m̶a̶x̶
     -̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶n̶a̶v̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶ ̶o̶n̶ ̶l̶o̶g̶ ̶o̶u̶t̶
 
-(()) add "no results found in search option"
+(̶(̶)̶)̶ ̶a̶d̶d̶ ̶"̶n̶o̶ ̶r̶e̶s̶u̶l̶t̶s̶ ̶f̶o̶u̶n̶d̶ ̶i̶n̶ ̶s̶e̶a̶r̶c̶h̶ ̶o̶p̶t̶i̶o̶n̶"̶
 
 ((4)) add upvote abilities 
     - limit upvotes to +1 -1 
     - store upvoted posts in user object so it displays their upvoted items when logged in
 
 ((5)) sort comments via highest upvotes
-    - add sorting ability
+    - add sorting ability ??????
 
 ((6)) edit nav for mobile (hide login, signup buttons and instead have user icon)
     - add user icon in navbar when user is logged in
@@ -40,6 +40,10 @@
     - when on mobile, sidebar becomes a pinned posts 
     - add a "more resources" section for links to social media
     - add a "more info" with technologies used
+
+((styling))
+    - fix comment, share, delete button padding size
+    - 
 
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
@@ -54,6 +58,9 @@
             possibly get only a list of posts without replies for the front page and only load
             replies when post is clicked. also, figure out how to use the snapshot to listen for updates
             as opposed to forcing api requests. 
+
+            - when viewing a post, another firebase request is not needed because i already have the 
+            comments stored in posts context
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 

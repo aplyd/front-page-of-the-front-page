@@ -14,17 +14,18 @@ export default function Feed({
 }) {
 	return (
 		<Container>
+			{/* to display a pinned post in the future 
 			<DisplayPost
 				title={'Welcome to the front page of the front page'}
 				pinned={true}
 				username={'Austin // aplyd'}
 				timestamp={Date.now()}
 				id={'pinned'}
-			/>
+			/> */}
 			{posts &&
 				posts.map((post) => {
 					return (
-						//using the Date.now because without it, im getting duplicate keys when sorting. fix later?
+						//using the Date.now because without it, im getting duplicate keys when sorting. fix later... hopefully
 						<DisplayPost
 							title={post.title}
 							key={post.id + Date.now()}

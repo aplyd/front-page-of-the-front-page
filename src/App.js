@@ -104,7 +104,7 @@ function App() {
 					});
 			} else {
 				//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
-				//maybe
+				// maybe
 			}
 		});
 	}, []);

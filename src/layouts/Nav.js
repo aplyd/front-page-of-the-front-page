@@ -1,10 +1,11 @@
-import React, { useContext, useState, useRef, useLayoutEffect } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import firebase from '../firebase';
 import { Link, useHistory } from 'react-router-dom';
 import { useSearchBarPosition } from '../hooks/useSearchBarPosition';
 import { filterPosts } from '../utils';
+import { BsFillPersonFill } from 'react-icons/bs';
 
 const Container = styled.div`
 	background: white;
@@ -108,6 +109,40 @@ const ResultContent = styled.div`
 	cursor: pointer;
 `;
 
+const ProfileContainer = styled.div`
+	padding-left: 10px;
+	display: flex;
+	flex-direction: row;
+`;
+
+const ProfileDropdown = styled.div`
+	position: absolute;
+	top: ${(props) => props.top + 'px'};
+	right: 0px;
+	width: 240px;
+	border-radius: 4px;
+	box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
+	z-index: 1000;
+`;
+
+const SVG = styled.svg`
+	color: ${(props) => props.theme.colors.grey};
+	font-size: 28px;
+	cursor: pointer;
+`;
+
+const ProfileItem = styled.div`
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	background: white;
+	cursor: pointer;
+	&&:hover {
+		background: ${(props) => props.theme.colors.blue};
+		color: white;
+	}
+`;
+
 export default function Nav({ openModal, closeModal, viewPostComments }) {
 	const { user, setUser, posts } = useContext(PostContext);
 	const [searchInput, setSearchInput] = useState('');
@@ -120,6 +155,7 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 	//dont forget to set back to false
 	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
+	const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 	const history = useHistory();
 
 	const handleSearchInput = (input) => {
@@ -184,8 +220,6 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 		}
 	};
 
-	const displaySearchResults = () => {};
-
 	return (
 		<Container>
 			<Circle as={Link} to="/" />
@@ -237,6 +271,27 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 			)}
 
 			{displayLoggedInStatus()}
+			<ProfileContainer>
+				<SVG
+					as={BsFillPersonFill}
+					onClick={() =>
+						setIsProfileDropdownOpen(!isProfileDropdownOpen)
+					}
+				/>
+			</ProfileContainer>
+			{isProfileDropdownOpen ? (
+				<ProfileDropdown
+					top={searchBarBottom}
+					onMouseLeave={() => setIsProfileDropdownOpen(false)}
+				>
+					<ProfileItem>
+						<p>username:</p>
+					</ProfileItem>
+					<ProfileItem>
+						<p>sign up/login</p>
+					</ProfileItem>
+				</ProfileDropdown>
+			) : null}
 		</Container>
 	);
 }
