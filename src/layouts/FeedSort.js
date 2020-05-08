@@ -19,7 +19,10 @@ const HiddenInput = styled.input`
 const Label = styled.label`
 	padding-right: 12px;
 	cursor: pointer;
-	color: ${(props) => props.theme.colors.grey};
+	color: ${(props) =>
+		props.sortby === props.value
+			? props.theme.colors.blue
+			: props.theme.colors.grey};
 `;
 
 const LabelDiv = styled.div`
@@ -37,7 +40,10 @@ const SVG = styled.svg`
 	top: 2px;
 	right: 0;
 	cursor: pointer;
-	color: ${(props) => props.theme.colors.grey};
+	color: ${(props) =>
+		props.sortby === props.value
+			? props.theme.colors.blue
+			: props.theme.colors.grey};
 `;
 
 const TopSVG = styled(SVG)``;
@@ -83,8 +89,12 @@ export default function FeedSort({ sortPosts, sortBy }) {
 		<Container>
 			<LabelDiv onChange={(e) => sortPosts(e.target.value)}>
 				<TopContainer value="VOTE_ASC" sortby={sortBy}>
-					<TopSVG as={BsBarChartFill} />
-					<TopLabel>
+					<TopSVG
+						as={BsBarChartFill}
+						sortby={sortBy}
+						value="VOTE_ASC"
+					/>
+					<TopLabel sortby={sortBy} value="VOTE_ASC">
 						Top
 						<HiddenInput
 							type="radio"
@@ -95,8 +105,12 @@ export default function FeedSort({ sortPosts, sortBy }) {
 				</TopContainer>
 
 				<NewContainer value="TIME_ASC" sortby={sortBy}>
-					<NewSVG as={GiSevenPointedStar} />
-					<NewLabel>
+					<NewSVG
+						as={GiSevenPointedStar}
+						sortby={sortBy}
+						value="TIME_ASC"
+					/>
+					<NewLabel sortby={sortBy} value="TIME_ASC">
 						New
 						<HiddenInput
 							type="radio"
@@ -107,8 +121,8 @@ export default function FeedSort({ sortPosts, sortBy }) {
 				</NewContainer>
 
 				<OldContainer value="TIME_DESC" sortby={sortBy}>
-					<OldSVG as={RiTimeLine} />
-					<OldLabel>
+					<OldSVG as={RiTimeLine} sortby={sortBy} value="TIME_DESC" />
+					<OldLabel sortby={sortBy} value="TIME_DESC">
 						Old
 						<HiddenInput
 							type="radio"
