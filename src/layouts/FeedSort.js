@@ -17,84 +17,64 @@ const HiddenInput = styled.input`
 `;
 
 const Label = styled.label`
-	color: ${(props) =>
-		props.sortBy === props.children[1].props.value
-			? props.theme.colors.blue
-			: props.theme.colors.gray};
-	&:hover {
-		color: ${(props) => props.theme.colors.blue};
-		cursor: pointer;
-	}
+	padding-right: 12px;
+	cursor: pointer;
+	color: ${(props) => props.theme.colors.grey};
 `;
 
 const LabelDiv = styled.div`
 	padding: 16px;
 `;
 
+const NewLabel = styled(Label)``;
+const OldLabel = styled(Label)``;
+const TopLabel = styled(Label)``;
+
+const SVG = styled.svg`
+	margin-right: 2px;
+	padding-top: 2px;
+	position: relative;
+	top: 2px;
+	right: 0;
+	cursor: pointer;
+	color: ${(props) => props.theme.colors.grey};
+`;
+
+const TopSVG = styled(SVG)``;
+const NewSVG = styled(SVG)``;
+const OldSVG = styled(SVG)``;
+
 const NewContainer = styled.div`
 	display: inline;
 	&&:hover {
-		color: ${(props) => props.theme.colors.blue};
+		${NewSVG} {
+			color: ${(props) => props.theme.colors.blue};
+		}
+		${NewLabel} {
+			color: ${(props) => props.theme.colors.blue};
+		}
 	}
 `;
 const OldContainer = styled.div`
 	display: inline;
 	&&:hover {
-		color: ${(props) => props.theme.colors.blue};
+		${OldSVG} {
+			color: ${(props) => props.theme.colors.blue};
+		}
+		${OldLabel} {
+			color: ${(props) => props.theme.colors.blue};
+		}
 	}
 `;
 const TopContainer = styled.div`
 	display: inline;
 	&&:hover {
-		color: ${(props) => props.theme.colors.blue};
-	}
-`;
-
-const NewLabel = styled(Label)`
-	font-size: 16px;
-	padding-right: 12px;
-`;
-const OldLabel = styled(Label)`
-	padding-right: 12px;
-`;
-const TopLabel = styled(Label)`
-	padding-right: 12px;
-`;
-
-const SVG = styled.svg`
-	margin-right: 2px;
-	padding-top: 2px;
-	color: ${(props) =>
-		props.sortby === props.value
-			? props.theme.colors.blue
-			: props.theme.colors.grey};
-	&&:hover {
-		color: ${(props) => props.theme.colors.blue};
-	}
-`;
-
-const TopSVG = styled(SVG)`
-	position: relative;
-	top: 2px;
-	right: 0;
-	${TopLabel}:hover & {
-		font-size: 100px;
-	}
-`;
-const NewSVG = styled(SVG)`
-	position: relative;
-	top: 2px;
-	right: 0;
-	${NewLabel}:hover & {
-		fill: ${(props) => props.theme.colors.blue};
-	}
-`;
-const OldSVG = styled(SVG)`
-	position: relative;
-	top: 2px;
-	right: 0;
-	${OldLabel}:hover & {
-		fill: ${(props) => props.theme.colors.blue};
+		${TopSVG} {
+			color: ${(props) => props.theme.colors.blue};
+		}
+		${TopLabel} {
+			color: ${(props) => props.theme.colors.blue};
+		}
 	}
 `;
 
@@ -102,13 +82,9 @@ export default function FeedSort({ sortPosts, sortBy }) {
 	return (
 		<Container>
 			<LabelDiv onChange={(e) => sortPosts(e.target.value)}>
-				<TopContainer>
-					<TopSVG
-						as={BsBarChartFill}
-						value="VOTE_ASC"
-						sortby={sortBy}
-					/>
-					<TopLabel sortBy={sortBy}>
+				<TopContainer value="VOTE_ASC" sortby={sortBy}>
+					<TopSVG as={BsBarChartFill} />
+					<TopLabel>
 						Top
 						<HiddenInput
 							type="radio"
@@ -118,13 +94,9 @@ export default function FeedSort({ sortPosts, sortBy }) {
 					</TopLabel>
 				</TopContainer>
 
-				<NewContainer>
-					<NewSVG
-						as={GiSevenPointedStar}
-						value="TIME_ASC"
-						sortby={sortBy}
-					/>
-					<NewLabel sortBy={sortBy}>
+				<NewContainer value="TIME_ASC" sortby={sortBy}>
+					<NewSVG as={GiSevenPointedStar} />
+					<NewLabel>
 						New
 						<HiddenInput
 							type="radio"
@@ -134,9 +106,9 @@ export default function FeedSort({ sortPosts, sortBy }) {
 					</NewLabel>
 				</NewContainer>
 
-				<OldContainer>
-					<OldSVG as={RiTimeLine} value="TIME_DESC" sortby={sortBy} />
-					<OldLabel sortBy={sortBy}>
+				<OldContainer value="TIME_DESC" sortby={sortBy}>
+					<OldSVG as={RiTimeLine} />
+					<OldLabel>
 						Old
 						<HiddenInput
 							type="radio"

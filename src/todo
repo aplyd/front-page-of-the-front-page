@@ -18,7 +18,7 @@
 
 (̶(̶3̶)̶)̶ ̶s̶i̶g̶n̶ ̶u̶p̶ ̶a̶n̶d̶ ̶l̶o̶g̶ ̶i̶n̶ ̶f̶o̶r̶m̶ ̶v̶a̶l̶i̶d̶a̶t̶i̶o̶n̶
     -̶ ̶s̶t̶o̶r̶e̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶s̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶d̶o̶c̶
-    - check firebase to make sure username not taken (oh god)?
+    - check firebase to make sure username not taken (oh god)???
     -̶ ̶c̶h̶e̶c̶k̶ ̶l̶e̶n̶g̶t̶h̶ ̶m̶i̶n̶ ̶+̶ ̶m̶a̶x̶
     -̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶n̶a̶v̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶ ̶o̶n̶ ̶l̶o̶g̶ ̶o̶u̶t̶
 
@@ -43,10 +43,15 @@
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
 (̶(̶)̶)̶ ̶c̶r̶e̶a̶t̶e̶ ̶4̶0̶4̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶F̶e̶e̶d̶S̶o̶r̶t̶ ̶c̶o̶m̶p̶o̶n̶e̶n̶t̶
+(̶(̶)̶)̶ ̶a̶l̶l̶o̶w̶ ̶f̶o̶r̶ ̶d̶e̶l̶e̶t̶i̶n̶g̶ ̶y̶o̶u̶'̶r̶e̶ ̶o̶w̶n̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶b̶y̶ ̶r̶e̶p̶l̶a̶c̶i̶n̶g̶ ̶t̶h̶e̶ ̶t̶e̶x̶t̶ ̶w̶i̶t̶h̶ ̶[̶d̶e̶l̶e̶t̶e̶d̶]̶
 (()) handle errors logging in by displaying error
-(()) allow for deleting you're own comments by replacing the text with [deleted]
 (()) add content to sidebar
 (()) limit displayPosts to most recent 25
+
+(((!!!))) need to manage network requests (firebase api calls).
+            possibly get only a list of posts without replies for the front page and only load
+            replies when post is clicked. also, figure out how to use the snapshot to listen for updates
+            as opposed to forcing api requests. 
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 
