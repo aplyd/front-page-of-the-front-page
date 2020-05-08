@@ -153,8 +153,6 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 			);
 	};
 
-	const removeSearchInputFocus = (e) => {};
-
 	const displayLoggedInStatus = () => {
 		if (user.isSignedIn) {
 			return (
@@ -186,6 +184,8 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 		}
 	};
 
+	const displaySearchResults = () => {};
+
 	return (
 		<Container>
 			<Circle as={Link} to="/" />
@@ -205,7 +205,15 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 					left={searchBarLeft}
 					width={searchBarWidth}
 				>
-					{searchInput.length > 0 &&
+					{/* this is the least readable code ive ever written */}
+					{/* it checks if there are search results and then either */}
+					{/* displays no results found, the results or nothing */}
+					{searchInput.length > 0 && searchResults.length === 0 ? (
+						<ResultCard key="no-results">
+							<ResultTitle></ResultTitle>
+							<ResultContent>No results found...</ResultContent>
+						</ResultCard>
+					) : searchInput.length > 0 ? (
 						searchResults.map((post, index) => {
 							const url = post.title
 								.replace(/\s+/g, '-')
@@ -223,7 +231,8 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 									</ResultContent>
 								</ResultCard>
 							);
-						})}
+						})
+					) : null}
 				</SearchResultsDropDown>
 			)}
 

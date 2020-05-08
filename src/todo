@@ -22,8 +22,10 @@
     -̶ ̶c̶h̶e̶c̶k̶ ̶l̶e̶n̶g̶t̶h̶ ̶m̶i̶n̶ ̶+̶ ̶m̶a̶x̶
     -̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶n̶a̶v̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶ ̶o̶n̶ ̶l̶o̶g̶ ̶o̶u̶t̶
 
+(()) add "no results found in search option"
+
 ((4)) add upvote abilities 
-    - limit upvotes to +1 -1
+    - limit upvotes to +1 -1 
     - store upvoted posts in user object so it displays their upvoted items when logged in
 
 ((5)) sort comments via highest upvotes
