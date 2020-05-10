@@ -240,8 +240,9 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 					width={searchBarWidth}
 				>
 					{/* this is the least readable code ive ever written */}
-					{/* it checks if there are search results and then either */}
-					{/* displays no results found, the results or nothing */}
+					{/* it checks if there are search results and then */}
+					{/* displays "no results found", the results or nothing */}
+					{/* nested ternary */}
 					{searchInput.length > 0 && searchResults.length === 0 ? (
 						<ResultCard key="no-results">
 							<ResultTitle></ResultTitle>
