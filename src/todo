@@ -29,7 +29,7 @@
     - store upvoted posts in user object so it displays their upvoted items when logged in
 
 ((5)) sort comments via highest upvotes
-    - add sorting ability ??????
+    -̶ ̶a̶d̶d̶ ̶s̶o̶r̶t̶i̶n̶g̶ ̶a̶b̶i̶l̶i̶t̶y̶
 
 ((6)) edit nav for mobile (hide login, signup buttons and instead have user icon)
     - add user icon in navbar when user is logged in
