@@ -7,7 +7,6 @@ import { insertReply, Comment, setCommentAsDeleted } from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
 import {
-	CommentInputContainer,
 	CommentTextAreaContainer,
 	CommentTextArea,
 	CommentBtn,

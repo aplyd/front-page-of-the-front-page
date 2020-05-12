@@ -124,8 +124,10 @@ const Share = styled(ActionButton)`
 
 export const Vote = styled.p`
 	font-size: ${(props) => props.theme.font.size.xs};
+	color: black;
 	padding: 6px 0;
 	cursor: default;
+	font-weight: bold;
 `;
 
 export const SVG = styled.svg`

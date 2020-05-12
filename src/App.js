@@ -111,14 +111,12 @@ function App() {
 
 	//get comments from selected post and
 	const viewPostComments = (id) => {
-		console.log('running post comments func');
 		firebase
 			.firestore()
 			.collection('posts')
 			.doc(id)
 			.get()
 			.then((content) => {
-				console.log(content);
 				setPostData(content.data());
 			})
 			.catch((err) => console.log('Error getting post data', err));

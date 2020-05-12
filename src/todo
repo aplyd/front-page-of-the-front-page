@@ -35,6 +35,8 @@
     - add user icon in navbar when user is logged in
     - small dropdown to log out, display username, etc.
 
+((7)) create "create a post" feed item displayed when logged in
+
 (()) finish sidebar content
     - load user and post count to display
     - when on mobile, sidebar becomes a pinned posts 
@@ -43,7 +45,7 @@
 
 ((styling))
     - fix comment, share, delete button padding size
-    - 
+    - add icons to comments page
 
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶

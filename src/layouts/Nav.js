@@ -6,6 +6,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSearchBarPosition } from '../hooks/useSearchBarPosition';
 import { filterPosts } from '../utils';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { FiLogIn } from 'react-icons/fi';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Container = styled.div`
 	background: white;
@@ -131,15 +133,32 @@ const SVG = styled.svg`
 	cursor: pointer;
 `;
 
+const SVGlogin = styled.svg`
+	position: relative;
+	font-size: 20px;
+	cursor: pointer;
+	color: ${(props) => props.theme.colors.grey};
+`;
+
 const ProfileItem = styled.div`
 	height: 60px;
-	display: flex;
-	flex-direction: row;
 	background: white;
-	cursor: pointer;
+	cursor: ${(props) => (props.action ? 'pointer' : null)};
 	&&:hover {
 		background: ${(props) => props.theme.colors.blue};
 		color: white;
+		${SVGlogin} {
+			color: white;
+		}
+	}
+	&& > div {
+		display: flex;
+		flex-direction: row;
+		padding-top: 20px;
+		padding-left: 16px;
+	}
+	&& > div > p {
+		padding-left: 16px;
 	}
 `;
 
@@ -285,11 +304,28 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 					top={searchBarBottom}
 					onMouseLeave={() => setIsProfileDropdownOpen(false)}
 				>
-					<ProfileItem>
-						<p>username:</p>
-					</ProfileItem>
-					<ProfileItem>
-						<p>sign up/login</p>
+					{user.isSignedIn ? (
+						<ProfileItem>
+							<div>
+								<SVGlogin as={FaUserCircle} />
+								<p>{user.username}</p>
+							</div>
+						</ProfileItem>
+					) : null}
+					<ProfileItem
+						action={'true'}
+						onClick={() =>
+							user.isSignedIn ? logOutUser() : openModal('login')
+						}
+					>
+						<div>
+							<SVGlogin as={FiLogIn} />
+							<p>
+								{user.isSignedIn
+									? 'Log Out'
+									: 'Log In / Sign Up'}
+							</p>
+						</div>
 					</ProfileItem>
 				</ProfileDropdown>
 			) : null}
