@@ -22,6 +22,7 @@ export const Container = styled.div`
 	width: 100%;
 	min-height: 100vh;
 	background: ${(props) => props.theme.colors.backgroundBlue};
+	padding-top: 48px;
 `;
 
 //TODO - get official reddit api?

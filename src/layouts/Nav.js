@@ -8,6 +8,7 @@ import { filterPosts } from '../utils';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { FiLogIn } from 'react-icons/fi';
 import { FaUserCircle } from 'react-icons/fa';
+import { IoIosCreate } from 'react-icons/io';
 
 const Container = styled.div`
 	background: white;
@@ -17,6 +18,11 @@ const Container = styled.div`
 	align-items: center;
 	padding: 0 20px;
 	font-family: ${(props) => props.theme.font.family[0]};
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
 `;
 
 const Circle = styled.div`
@@ -29,7 +35,7 @@ const Circle = styled.div`
 `;
 
 const Search = styled.input`
-	height: 36px;
+	height: 34px;
 	width: 100%;
 	border-radius: 4px;
 	font-size: 16px;
@@ -47,6 +53,7 @@ export const LoginBtn = styled.button`
 	background-color: white;
 	border: 1px solid ${(props) => props.theme.colors.blue};
 	line-height: 24px;
+	margin-left: 16px;
 	:hover {
 		color: ${(props) => props.theme.colors.lightBlue};
 		border: 1px solid ${(props) => props.theme.colors.lightBlue};
@@ -120,28 +127,37 @@ const ProfileContainer = styled.div`
 const ProfileDropdown = styled.div`
 	position: absolute;
 	top: ${(props) => props.top + 'px'};
-	right: 0px;
-	width: 240px;
+	right: 8px;
+	width: 200px;
 	border-radius: 4px;
 	box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
 	z-index: 1000;
+	&& > div:first-child {
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+	}
+	&& > div:last-child {
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+	}
 `;
 
 const SVG = styled.svg`
 	color: ${(props) => props.theme.colors.grey};
-	font-size: 28px;
+	font-size: 32px;
 	cursor: pointer;
 `;
 
 const SVGlogin = styled.svg`
 	position: relative;
-	font-size: 20px;
+	font-size: 16px;
 	cursor: pointer;
+	top: 1px;
 	color: ${(props) => props.theme.colors.grey};
 `;
 
 const ProfileItem = styled.div`
-	height: 60px;
+	height: 45px;
 	background: white;
 	cursor: ${(props) => (props.action ? 'pointer' : null)};
 	&&:hover {
@@ -154,12 +170,19 @@ const ProfileItem = styled.div`
 	&& > div {
 		display: flex;
 		flex-direction: row;
-		padding-top: 20px;
+		padding-top: 14px;
 		padding-left: 16px;
+		border-radius: 4px;
 	}
 	&& > div > p {
 		padding-left: 16px;
+		font-size: 14px;
 	}
+`;
+
+const Title = styled.h2`
+	padding-right: 16px;
+	cursor: pointer;
 `;
 
 export default function Nav({ openModal, closeModal, viewPostComments }) {
@@ -210,18 +233,7 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 
 	const displayLoggedInStatus = () => {
 		if (user.isSignedIn) {
-			return (
-				<React.Fragment>
-					<LoginBtn type="button">
-						<SubmitLink as={Link} to="/submit">
-							Create Post
-						</SubmitLink>
-					</LoginBtn>
-					<SignInBtn type="button" onClick={() => logOutUser()}>
-						log out
-					</SignInBtn>
-				</React.Fragment>
-			);
+			return null;
 		} else {
 			return (
 				<React.Fragment>
@@ -242,6 +254,8 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 	return (
 		<Container>
 			<Circle as={Link} to="/" />
+
+			<Title onClick={() => history.push('/')}>fpotfp</Title>
 
 			<Search
 				type="text"
@@ -305,13 +319,25 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 					onMouseLeave={() => setIsProfileDropdownOpen(false)}
 				>
 					{user.isSignedIn ? (
-						<ProfileItem>
-							<div>
-								<SVGlogin as={FaUserCircle} />
-								<p>{user.username}</p>
-							</div>
-						</ProfileItem>
+						<>
+							<ProfileItem>
+								<div>
+									<SVGlogin as={FaUserCircle} />
+									<p>{user.username}</p>
+								</div>
+							</ProfileItem>
+							<ProfileItem
+								action={'true'}
+								onClick={() => history.push('/submit')}
+							>
+								<div>
+									<SVGlogin as={IoIosCreate} />
+									<p>Create Post</p>
+								</div>
+							</ProfileItem>
+						</>
 					) : null}
+
 					<ProfileItem
 						action={'true'}
 						onClick={() =>
