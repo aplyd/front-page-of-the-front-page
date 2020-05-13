@@ -24,7 +24,7 @@
 
 (̶(̶)̶)̶ ̶a̶d̶d̶ ̶"̶n̶o̶ ̶r̶e̶s̶u̶l̶t̶s̶ ̶f̶o̶u̶n̶d̶ ̶i̶n̶ ̶s̶e̶a̶r̶c̶h̶ ̶o̶p̶t̶i̶o̶n̶"̶
 
-((4)) add upvote abilities 
+(̶(̶4̶)̶)̶ ̶a̶d̶d̶ ̶u̶p̶v̶o̶t̶e̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶
     - limit upvotes to +1 -1 
     - store upvoted posts in user object so it displays their upvoted items when logged in
 
@@ -55,6 +55,13 @@
 (()) handle errors logging in by displaying error
 (()) add content to sidebar
 (()) limit displayPosts to most recent 25
+
+((!!)) clean up code
+    - delete all unused variables
+    - remove all log statements
+    - seperate all components from style components and keep in individual files
+    - keep component + styles in own folder
+    
 
 (((!!!))) need to manage network requests (firebase api calls).
             possibly get only a list of posts without replies for the front page and only load
