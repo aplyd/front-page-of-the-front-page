@@ -94,7 +94,7 @@ function App() {
 					.then((res) => {
 						const data = res.data();
 						setUser({
-							username: user.displayName,
+							username: data.username,
 							email: user.email,
 							uid: user.uid,
 							isSignedIn: true,
