@@ -179,7 +179,7 @@ export default function DisplayPost({
 	post,
 	viewPostComments,
 }) {
-	const { setUpdatePosts, user } = useContext(PostContext);
+	const { setUpdatePosts, user, setUser } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
 	const commentCount = post ? countReplies(post) : null;
 	const history = useHistory();
@@ -229,7 +229,10 @@ export default function DisplayPost({
 				.update({
 					votes: newUserVotes,
 				})
-				.then(() => setUserVote(direction))
+				.then(() => {
+					setUserVote(direction);
+					setUser({ ...user, votes: newUserVotes });
+				})
 				.catch((err) => console.log(err));
 
 			//add vote to post document in firebase
