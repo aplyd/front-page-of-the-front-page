@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { PostContext } from '../PostContext';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
@@ -131,8 +131,23 @@ export const Vote = styled.p`
 `;
 
 export const SVG = styled.svg`
+	border-radius: 4px;
+	color: ${(props) => {
+		if (props.direction === props.uservote) {
+			return props.direction === 'up'
+				? props.theme.colors.red
+				: props.theme.colors.blue;
+		}
+	}};
+	background-color: ${(props) =>
+		props.direction === props.uservote
+			? props.theme.colors.lightGray
+			: null};
 	&&:hover {
-		color: ${(props) => props.theme.colors.red};
+		color: ${(props) =>
+			props.direction === 'up'
+				? props.theme.colors.red
+				: props.theme.colors.blue};
 		background-color: ${(props) => props.theme.colors.lightGray};
 		cursor: pointer;
 	}
@@ -164,32 +179,60 @@ export default function DisplayPost({
 	post,
 	viewPostComments,
 }) {
-	const { setUpdatePosts } = useContext(PostContext);
+	const { setUpdatePosts, user } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
 	const commentCount = post ? countReplies(post) : null;
 	const history = useHistory();
+	const [userVote, setUserVote] = useState(null);
 
-	//TODO - make sure user can only up/down vote once
+	// WORKING HERE TO GET USER VOTES AND DISPLAY THEM
+	// BELOW DOESNT WORK
+	useEffect(() => {
+		const checkForUserVote = () => {
+			if (user.votes.hasOwnProperty(id)) {
+				setUserVote(user.votes[id]);
+			}
+		};
+		user.votes && checkForUserVote();
+	}, [userVote, setUserVote, id, user.votes]);
+
 	const castVote = (event, direction) => {
 		event.stopPropagation();
 		let newVoteCount;
 
-		direction === 'up'
-			? (newVoteCount = vote + 1)
-			: (newVoteCount = vote - 1);
+		if (user.votes[id] === direction) {
+			//this block is to filter out double votes
+			console.log('already voted');
+		} else {
+			if (user.votes[id] === 'up') {
+				//this block is to vote down after previously voting up
+				newVoteCount = vote - 2;
+			} else if (user.votes[id] === 'down') {
+				//this block is to vote up after previously voting down
+				newVoteCount = vote + 2;
+			} else {
+				//this block gets the direction for first vote
+				direction === 'up'
+					? (newVoteCount = vote + 1)
+					: (newVoteCount = vote - 1);
+			}
 
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(id)
-			.update({
-				vote: newVoteCount,
-			})
-			.then(() => setUpdatePosts(Date.now()))
-			.catch((err) => console.log(err));
+			user.votes[id] = direction;
+
+			//TODO - also update fb user object && state object with vote
+			firebase
+				.firestore()
+				.collection('posts')
+				.doc(id)
+				.update({
+					vote: newVoteCount,
+				})
+				.then(() => setUpdatePosts(Date.now()))
+				.catch((err) => console.log(err));
+		}
 	};
 
-	const handleClick = (event) => {
+	const handleClick = () => {
 		viewPostComments(post.id);
 		history.push(`/comments/${url}/${post.id}`);
 	};
@@ -198,11 +241,18 @@ export default function DisplayPost({
 		<Container onClick={handleClick}>
 			<VoteArrowContainer>
 				<div>
-					<SVG as={GoArrowUp} onClick={(e) => castVote(e, 'up')} />
+					<SVG
+						as={GoArrowUp}
+						onClick={(e) => castVote(e, 'up')}
+						direction={'up'}
+						uservote={userVote}
+					/>
 					<Vote>{vote}</Vote>
 					<SVG
 						as={GoArrowDown}
 						onClick={(e) => castVote(e, 'down')}
+						direction={'down'}
+						uservote={userVote}
 					/>
 				</div>
 			</VoteArrowContainer>

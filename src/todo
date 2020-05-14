@@ -9,7 +9,6 @@
     -̶ ̶c̶r̶e̶a̶t̶e̶ ̶d̶a̶t̶a̶ ̶s̶t̶r̶u̶c̶t̶u̶r̶e̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶n̶d̶ ̶s̶t̶o̶r̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶
     -̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶f̶t̶e̶r̶ ̶s̶u̶b̶m̶i̶t̶t̶i̶n̶g̶
     - form validation?
-    - in displayComments, show username color black
     -̶ ̶s̶h̶o̶w̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶"̶c̶o̶m̶m̶e̶n̶t̶ ̶a̶s̶ ̶_̶_̶_̶_̶"̶
     -̶ ̶h̶i̶d̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶i̶n̶p̶u̶t̶ ̶u̶n̶l̶e̶s̶s̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
     -̶ ̶l̶i̶n̶e̶ ̶u̶p̶ ̶l̶e̶f̶t̶ ̶e̶d̶g̶e̶ ̶o̶f̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶b̶o̶x̶,̶ ̶p̶o̶s̶t̶ ̶b̶o̶d̶y̶,̶ ̶e̶t̶c̶.̶
@@ -46,6 +45,7 @@
 ((styling))
     - fix comment, share, delete button padding size
     - add icons to comments page
+    - in displayComments, show username color black
 
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
