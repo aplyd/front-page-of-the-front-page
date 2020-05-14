@@ -186,7 +186,6 @@ export default function DisplayPost({
 	const [userVote, setUserVote] = useState(null);
 
 	// WORKING HERE TO GET USER VOTES AND DISPLAY THEM
-	// BELOW DOESNT WORK
 	useEffect(() => {
 		const checkForUserVote = () => {
 			if (user.votes.hasOwnProperty(id)) {
@@ -217,9 +216,24 @@ export default function DisplayPost({
 					: (newVoteCount = vote - 1);
 			}
 
-			user.votes[id] = direction;
+			// should rely on getting this info back from firebase, not manually updating state object
+			// user.votes[id] = direction;
 
-			//TODO - also update fb user object && state object with vote
+			const newUserVotes = { ...user.votes };
+			newUserVotes[id] = direction;
+
+			firebase
+				.firestore()
+				.collection('users')
+				.doc(user.uid)
+				.update({
+					votes: newUserVotes,
+				})
+				.then(() => setUserVote(direction))
+				.catch((err) => console.log(err));
+
+			//add vote to post document in firebase
+			//using date.now with setUpdatePosts to trigger re-render - probably antipattern
 			firebase
 				.firestore()
 				.collection('posts')

@@ -93,19 +93,21 @@ function App() {
 					.get()
 					.then((res) => {
 						const data = res.data();
+						console.log({ data });
 						setUser({
-							username: data.username,
+							username: window.user.displayName,
 							email: user.email,
 							uid: user.uid,
 							isSignedIn: true,
 							isAnonymous: false,
-							posts: data.posts,
-							votes: data.votes,
+							posts: data.posts ? data.posts : [],
+							votes: data.votes ? data.votes : {},
 						});
-					});
+					})
+					.catch((err) => console.log(err));
 			} else {
 				//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
-				// maybe
+				// maybe - probably not though
 			}
 		});
 	}, []);
