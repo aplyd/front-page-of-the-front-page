@@ -110,6 +110,7 @@ export default function SignUp({ showLogIn, closeModal }) {
 					placeholder="Password"
 					vale={password}
 					onChange={(e) => setPassword(e.target.value)}
+					minLength="6"
 					maxLength="128"
 				/>
 				<SignUpBtn type="submit">Sign Up</SignUpBtn>
