@@ -26,6 +26,7 @@
 (̶(̶4̶)̶)̶ ̶a̶d̶d̶ ̶u̶p̶v̶o̶t̶e̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶
     - limit upvotes to +1 -1 
     - store upvoted posts in user object so it displays their upvoted items when logged in
+    - if not logged in, prompt when trying to upvote
 
 ((5)) sort comments via highest upvotes
     -̶ ̶a̶d̶d̶ ̶s̶o̶r̶t̶i̶n̶g̶ ̶a̶b̶i̶l̶i̶t̶y̶
@@ -56,6 +57,9 @@
 (()) add content to sidebar
 (()) limit displayPosts to most recent 25
 
+((May 14th)) - voting for a post changes the vote object into a string "up" which breaks future votes
+                and doesnt display past votes correctly
+
 ((!!)) clean up code
     - delete all unused variables
     - remove all log statements
@@ -70,6 +74,8 @@
 
             - when viewing a post, another firebase request is not needed because i already have the 
             comments stored in posts context
+
+            - only fetch 25 posts at a time, ordered based on sortBy, then fetch 25 more on scroll
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 
