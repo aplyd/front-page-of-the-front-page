@@ -60,13 +60,6 @@ export const LoginBtn = styled.button`
 	}
 `;
 
-const SubmitLink = styled.a`
-	color: ${(props) => props.theme.colors.blue};
-	&&:hover && :active {
-		color: ${(props) => props.theme.colors.blue};
-	}
-`;
-
 export const SignInBtn = styled.button`
 	color: white;
 	background-color: ${(props) => props.theme.colors.blue};

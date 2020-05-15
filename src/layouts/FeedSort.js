@@ -6,10 +6,9 @@ import { BsBarChartFill } from 'react-icons/bs';
 import { RiTimeLine } from 'react-icons/ri';
 
 export const Container = styled.div`
-	grid-column: 1;
-	grid-row: 1;
 	height: 54px;
 	${roundedGreyBorder}
+	margin-bottom: 18px;
 `;
 
 const HiddenInput = styled.input`

@@ -184,6 +184,7 @@ function App() {
 								sortPosts={sortPosts}
 								sortBy={sortBy}
 								viewPostComments={viewPostComments}
+								user={user}
 							/>
 						)}
 					/>

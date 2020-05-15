@@ -37,6 +37,7 @@ export default function FeedContainer({
 	displayFeedSort,
 	children,
 	viewPostComments,
+	user,
 }) {
 	const [width, setWidth] = useState(window.innerWidth);
 	useWindowWidth(setWidth);
@@ -46,22 +47,25 @@ export default function FeedContainer({
 	return (
 		<Container>
 			<MainContainer>
-				{displayFeedSort
-					? [
-							<FeedCreatePost key={'create post'} />,
-							<FeedSort
-								sortPosts={sortPosts}
-								sortBy={sortBy}
-								key={'sort posts'}
-							/>,
-							<Feed
-								redditData={redditData}
-								posts={posts}
-								key={'feed'}
-								viewPostComments={viewPostComments}
-							/>,
-					  ]
-					: null}
+				{displayFeedSort ? (
+					<React.Fragment>
+						{user.isSignedIn ? (
+							<FeedCreatePost key={'create post'} />
+						) : null}
+
+						<FeedSort
+							sortPosts={sortPosts}
+							sortBy={sortBy}
+							key={'sort posts'}
+						/>
+						<Feed
+							redditData={redditData}
+							posts={posts}
+							key={'feed'}
+							viewPostComments={viewPostComments}
+						/>
+					</React.Fragment>
+				) : null}
 				{children}
 			</MainContainer>
 			{width > 960 ? (
