@@ -24,9 +24,9 @@
 (̶(̶)̶)̶ ̶a̶d̶d̶ ̶"̶n̶o̶ ̶r̶e̶s̶u̶l̶t̶s̶ ̶f̶o̶u̶n̶d̶ ̶i̶n̶ ̶s̶e̶a̶r̶c̶h̶ ̶o̶p̶t̶i̶o̶n̶"̶
 
 (̶(̶4̶)̶)̶ ̶a̶d̶d̶ ̶u̶p̶v̶o̶t̶e̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶
-    - limit upvotes to +1 -1 
-    - store upvoted posts in user object so it displays their upvoted items when logged in
-    - if not logged in, prompt when trying to upvote
+    -̶ ̶l̶i̶m̶i̶t̶ ̶u̶p̶v̶o̶t̶e̶s̶ ̶t̶o̶ ̶+̶1̶ ̶-̶1̶ ̶
+    -̶ ̶s̶t̶o̶r̶e̶ ̶u̶p̶v̶o̶t̶e̶d̶ ̶p̶o̶s̶t̶s̶ ̶i̶n̶ ̶u̶s̶e̶r̶ ̶o̶b̶j̶e̶c̶t̶ ̶s̶o̶ ̶i̶t̶ ̶d̶i̶s̶p̶l̶a̶y̶s̶ ̶t̶h̶e̶i̶r̶ ̶u̶p̶v̶o̶t̶e̶d̶ ̶i̶t̶e̶m̶s̶ ̶w̶h̶e̶n̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
+    -̶ ̶i̶f̶ ̶n̶o̶t̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶,̶ ̶p̶r̶o̶m̶p̶t̶ ̶w̶h̶e̶n̶ ̶t̶r̶y̶i̶n̶g̶ ̶t̶o̶ ̶u̶p̶v̶o̶t̶e̶
 
 ((5)) sort comments via highest upvotes
     -̶ ̶a̶d̶d̶ ̶s̶o̶r̶t̶i̶n̶g̶ ̶a̶b̶i̶l̶i̶t̶y̶
@@ -47,6 +47,8 @@
     - fix comment, share, delete button padding size
     - add icons to comments page
     - in displayComments, show username color black
+    - fix spacing around vote arrows
+    - full width post "cards" on mobile
 
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶

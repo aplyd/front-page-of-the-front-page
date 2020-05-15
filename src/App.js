@@ -161,6 +161,7 @@ function App() {
 				user,
 				setUser,
 				setUpdatePosts,
+				setModalContent,
 			}}
 		>
 			<Router>
