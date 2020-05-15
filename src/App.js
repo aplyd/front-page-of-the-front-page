@@ -93,7 +93,6 @@ function App() {
 					.get()
 					.then((res) => {
 						const data = res.data();
-						console.log({ data });
 						setUser({
 							username: window.user.displayName,
 							email: user.email,

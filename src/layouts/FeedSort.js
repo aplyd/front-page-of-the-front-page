@@ -5,9 +5,9 @@ import { GiSevenPointedStar } from 'react-icons/gi';
 import { BsBarChartFill } from 'react-icons/bs';
 import { RiTimeLine } from 'react-icons/ri';
 
-//TODO - conditionally render styles based on input checked
-const Container = styled.div`
+export const Container = styled.div`
 	grid-column: 1;
+	grid-row: 1;
 	height: 54px;
 	${roundedGreyBorder}
 `;

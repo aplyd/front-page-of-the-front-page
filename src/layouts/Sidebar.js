@@ -5,10 +5,7 @@ import SideBarAboutProject from '../components/SidebarAboutProject/SidebarAboutP
 //to keep the S.Component naming convention for styled components consistent
 const S = {};
 
-S.Container = styled.div`
-	grid-column: 2;
-	grid-row: 1 / 3;
-`;
+S.Container = styled.div``;
 
 export default function Sidebar() {
 	//TODO - get user count and post count to display in sidebar

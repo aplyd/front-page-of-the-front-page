@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FeedSort from './FeedSort';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
+import FeedCreatePost from '../components/FeedCreatePost';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 
 const Container = styled.div`
@@ -11,12 +12,21 @@ const Container = styled.div`
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: 1fr 310px;
+	grid-template-rows: auto;
 	grid-gap: 24px;
 	padding-top: 24px;
 	@media (max-width: 960px) {
 		grid-template-columns: 1fr;
 		max-width: 869px;
 	}
+`;
+
+const MainContainer = styled.div`
+	grid-column: 1;
+`;
+
+const SidebarContainer = styled.div`
+	grid-column: 2;
 `;
 
 export default function FeedContainer({
@@ -35,24 +45,30 @@ export default function FeedContainer({
 	//uses this component without FeedSort
 	return (
 		<Container>
-			{displayFeedSort
-				? [
-						<FeedSort
-							sortPosts={sortPosts}
-							sortBy={sortBy}
-							key={'sort posts'}
-						/>,
-						<Feed
-							redditData={redditData}
-							posts={posts}
-							key={'feed'}
-							viewPostComments={viewPostComments}
-						/>,
-				  ]
-				: null}
-
-			{width > 960 ? <Sidebar /> : null}
-			{children}
+			<MainContainer>
+				{displayFeedSort
+					? [
+							<FeedCreatePost key={'create post'} />,
+							<FeedSort
+								sortPosts={sortPosts}
+								sortBy={sortBy}
+								key={'sort posts'}
+							/>,
+							<Feed
+								redditData={redditData}
+								posts={posts}
+								key={'feed'}
+								viewPostComments={viewPostComments}
+							/>,
+					  ]
+					: null}
+				{children}
+			</MainContainer>
+			{width > 960 ? (
+				<SidebarContainer>
+					<Sidebar />
+				</SidebarContainer>
+			) : null}
 		</Container>
 	);
 }
