@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { roundedGreyBorder } from '../GlobalStyle';
@@ -11,7 +11,6 @@ import firebase from '../firebase';
 import { LoginBtn, SignInBtn } from '../layouts/Nav';
 import {
 	VoteArrowContainer,
-	SVG,
 	ContentContainer,
 	InfoContainer,
 	Title,
@@ -20,6 +19,7 @@ import {
 	Vote,
 } from './DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
+import { PostContext } from '../PostContext';
 
 const Container = styled.div`
 	width: 100%;
@@ -69,9 +69,6 @@ export const CommentTextArea = styled.textarea`
 	max-width: 95%;
 	outline: none;
 	border: none;
-	&&:hover {
-		/* TODO try to style comment div with this is focused ???? */
-	}
 `;
 
 export const CommentBtn = styled.button`
@@ -120,6 +117,29 @@ const LoginSigninBtnContainer = styled.div`
 	right: 48px;
 `;
 
+export const SVGarrow = styled.svg`
+	border-radius: 4px;
+	color: ${(props) => {
+		if (props.direction === props.uservote) {
+			return props.direction === 'up'
+				? props.theme.colors.red
+				: props.theme.colors.blue;
+		}
+	}};
+	background-color: ${(props) =>
+		props.direction === props.uservote
+			? props.theme.colors.lightGray
+			: null};
+	&&:hover {
+		color: ${(props) =>
+			props.direction === 'up'
+				? props.theme.colors.red
+				: props.theme.colors.blue};
+		background-color: ${(props) => props.theme.colors.lightGray};
+		cursor: pointer;
+	}
+`;
+
 export default function PostContent({
 	post,
 	user,
@@ -128,7 +148,18 @@ export default function PostContent({
 }) {
 	const [commentInput, setCommentInput] = useState();
 	const [width, setWidth] = useState();
+	const { castPostVote } = useContext(PostContext);
+	const [userVote, setUserVote] = useState();
 	useWindowWidth(setWidth);
+
+	useEffect(() => {
+		const checkForUserVote = () => {
+			if (user.votes.hasOwnProperty(post.id)) {
+				setUserVote(user.votes[post.id]);
+			}
+		};
+		user.votes && checkForUserVote();
+	}, [userVote, setUserVote, post.id, user.votes]);
 
 	const submitTopLevelComment = () => {
 		const { username } = user;
@@ -148,11 +179,35 @@ export default function PostContent({
 		<Container>
 			<VoteArrowContainer>
 				<div>
-					{/* <SVG as={GoArrowUp} onClick={() => castVote('up')} /> */}
-					<SVG as={GoArrowUp} />
-					{/* <Vote>{post.vote}</Vote> */}
-					<SVG as={GoArrowDown} />
-					{/* <SVG as={GoArrowDown} onClick={() => castVote('down')} /> */}
+					<SVGarrow
+						as={GoArrowUp}
+						onClick={(e) =>
+							castPostVote(
+								e,
+								'up',
+								post.id,
+								post.vote,
+								setUserVote
+							)
+						}
+						direction={'up'}
+						uservote={userVote}
+					/>
+					<Vote>{post.vote}</Vote>
+					<SVGarrow
+						as={GoArrowDown}
+						onClick={(e) =>
+							castPostVote(
+								e,
+								'down',
+								post.id,
+								post.vote,
+								setUserVote
+							)
+						}
+						direction={'down'}
+						uservote={userVote}
+					/>
 				</div>
 			</VoteArrowContainer>
 

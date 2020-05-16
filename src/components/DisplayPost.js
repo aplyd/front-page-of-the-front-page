@@ -179,15 +179,13 @@ export default function DisplayPost({
 	post,
 	viewPostComments,
 }) {
-	const { setUpdatePosts, user, setUser, setModalContent } = useContext(
-		PostContext
-	);
+	const { user, castPostVote } = useContext(PostContext);
 	const url = title.replace(/\s+/g, '-').toLowerCase();
 	const commentCount = post ? countReplies(post) : null;
 	const history = useHistory();
 	const [userVote, setUserVote] = useState(null);
 
-	// WORKING HERE TO GET USER VOTES AND DISPLAY THEM
+	//checks through users votes to see if previously voted
 	useEffect(() => {
 		const checkForUserVote = () => {
 			if (user.votes.hasOwnProperty(id)) {
@@ -196,61 +194,6 @@ export default function DisplayPost({
 		};
 		user.votes && checkForUserVote();
 	}, [userVote, setUserVote, id, user.votes]);
-
-	const castVote = (event, direction) => {
-		event.stopPropagation();
-		let newVoteCount;
-
-		if (user.isSignedIn) {
-			if (user.votes[id] === direction) {
-				//do nothing - this block is to filter out double votes
-			} else {
-				if (user.votes[id] === 'up') {
-					//this block is to vote down after previously voting up
-					newVoteCount = vote - 2;
-				} else if (user.votes[id] === 'down') {
-					//this block is to vote up after previously voting down
-					newVoteCount = vote + 2;
-				} else {
-					//this block gets the direction for first vote
-					direction === 'up'
-						? (newVoteCount = vote + 1)
-						: (newVoteCount = vote - 1);
-				}
-
-				const newUserVotes = { ...user.votes };
-				newUserVotes[id] = direction;
-
-				firebase
-					.firestore()
-					.collection('users')
-					.doc(user.uid)
-					.update({
-						votes: newUserVotes,
-					})
-					.then(() => {
-						setUserVote(direction);
-						setUser({ ...user, votes: newUserVotes });
-					})
-					.catch((err) => console.log(err));
-
-				//add vote to post document in firebase
-				//using date.now with setUpdatePosts to trigger re-render - probably antipattern
-				firebase
-					.firestore()
-					.collection('posts')
-					.doc(id)
-					.update({
-						vote: newVoteCount,
-					})
-					.then(() => setUpdatePosts(Date.now()))
-					.catch((err) => console.log(err));
-			}
-		} else {
-			//user is not signed in
-			setModalContent('signup');
-		}
-	};
 
 	const handleClick = () => {
 		viewPostComments(post.id);
@@ -263,14 +206,18 @@ export default function DisplayPost({
 				<div>
 					<SVG
 						as={GoArrowUp}
-						onClick={(e) => castVote(e, 'up')}
+						onClick={(e) =>
+							castPostVote(e, 'up', id, vote, setUserVote)
+						}
 						direction={'up'}
 						uservote={userVote}
 					/>
 					<Vote>{vote}</Vote>
 					<SVG
 						as={GoArrowDown}
-						onClick={(e) => castVote(e, 'down')}
+						onClick={(e) =>
+							castPostVote(e, 'down', id, vote, setUserVote)
+						}
 						direction={'down'}
 						uservote={userVote}
 					/>

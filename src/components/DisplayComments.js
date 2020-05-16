@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
-import { VoteArrowContainer, SVG, ActionButton } from './DisplayPost';
+import { VoteArrowContainer, ActionButton } from './DisplayPost';
+import { SVGarrow } from './PostContent';
 import { v4 as uuidv4 } from 'uuid';
 import { insertReply, Comment, setCommentAsDeleted } from '../utils';
 import firebase from '../firebase';
@@ -73,6 +74,14 @@ const CancelBtn = styled.button`
 	&&:hover {
 		color: ${(props) => props.theme.colors.lightBlue};
 	}
+`;
+
+const Vote = styled.p`
+	font-size: ${(props) => props.theme.font.size.xs};
+	color: black;
+	padding: 6px 0;
+	cursor: default;
+	font-weight: bold;
 `;
 
 export default function DisplayComments({
@@ -152,8 +161,9 @@ export default function DisplayComments({
 			<Card depth={comment.depth}>
 				<VoteArrowContainer>
 					<div>
-						<SVG as={GoArrowUp}></SVG>
-						<SVG as={GoArrowDown}></SVG>
+						<SVGarrow as={GoArrowUp}></SVGarrow>
+						<Vote>{comment.points}</Vote>
+						<SVGarrow as={GoArrowDown}></SVGarrow>
 					</div>
 				</VoteArrowContainer>
 				<ContentContainer>
