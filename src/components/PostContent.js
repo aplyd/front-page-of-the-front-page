@@ -146,6 +146,7 @@ export default function PostContent({
 	setModalContent,
 	viewPostComments,
 	setPostData,
+	setUser,
 }) {
 	const [commentInput, setCommentInput] = useState();
 	const [width, setWidth] = useState();
@@ -291,6 +292,7 @@ export default function PostContent({
 							viewPostComments={viewPostComments}
 							setModalContent={setModalContent}
 							setPostData={setPostData}
+							setUser={setUser}
 						/>
 					);
 				})}

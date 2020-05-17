@@ -97,6 +97,7 @@ export default function DisplayComments({
 	viewPostComments,
 	setModalContent,
 	setPostData,
+	setUser,
 }) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
@@ -106,7 +107,6 @@ export default function DisplayComments({
 		const depth = comment.depth + 1;
 		const commentInput = replyInput;
 		const username = user.username;
-		const id = post.id;
 		const newComment = Comment({ commentInput, username, depth });
 		//insert reply function finds the correct id and adds the new comment to its replies
 		const withNewReply = insertReply(post, comment.id, newComment);
@@ -138,16 +138,40 @@ export default function DisplayComments({
 
 		if (user.isSignedIn) {
 			const newVoteCount = getNewVoteCount(
-				user,
-				post.id,
+				user.commentVotes,
+				comment.id,
 				direction,
 				comment.points
 			);
 
-			//recursively look through the comments, change, setPostData
-			// const updated = withNewCommentVote(post, post.id, newVoteCount);
-			console.log(post);
-			// setPostData(updated);
+			//update post state object
+			const updated = withNewCommentVote(
+				{ ...post },
+				comment.id,
+				newVoteCount
+			);
+			setPostData(updated);
+
+			//update user state object
+			const newUserVotes = { ...user.commentVotes };
+			newUserVotes[comment.id] = direction;
+			setUser({ ...user, commentVotes: newUserVotes });
+			setUserVote(direction);
+
+			//persist to firebase
+			firebase
+				.firestore()
+				.collection('posts')
+				.doc(post.id)
+				.update({ updated })
+				.catch((err) => console.log(err));
+
+			firebase
+				.firestore()
+				.collection('users')
+				.doc(user.uid)
+				.update({ commentVotes: newUserVotes })
+				.catch((err) => console.log(err));
 		} else {
 			setModalContent('signup');
 		}
@@ -239,6 +263,7 @@ export default function DisplayComments({
 							viewPostComments={viewPostComments}
 							setModalContent={setModalContent}
 							setPostData={setPostData}
+							setUser={setUser}
 						/>
 					);
 				})}

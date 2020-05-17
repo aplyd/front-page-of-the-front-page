@@ -29,7 +29,6 @@ export const Comment = ({
 export const setCommentAsDeleted = (object, targetId) => {
 	if (object.id === targetId) {
 		object.deleted = true;
-		console.log(object);
 	} else {
 		object.replies.forEach((obj) => {
 			setCommentAsDeleted(obj, targetId);
@@ -44,7 +43,7 @@ export const withNewCommentVote = (object, targetId, newVoteCount) => {
 		object.points = newVoteCount;
 	} else {
 		object.replies.forEach((obj) => {
-			withNewCommentVote(obj, targetId);
+			withNewCommentVote(obj, targetId, newVoteCount);
 		});
 	}
 	return object;
@@ -53,7 +52,6 @@ export const withNewCommentVote = (object, targetId, newVoteCount) => {
 export const insertReply = (object, targetId, replyToAdd) => {
 	if (object.id === targetId) {
 		object.replies.push(replyToAdd);
-		console.log(replyToAdd);
 	} else {
 		object.replies.forEach((obj) => {
 			insertReply(obj, targetId, replyToAdd);
@@ -95,7 +93,7 @@ export const filterPosts = (postsArr, search) => {
 export const getNewVoteCount = (votes, id, direction, vote) => {
 	let newVoteCount;
 
-	if (votes && votes[id] === direction) {
+	if (votes[id] === direction) {
 		//do nothing - this block is to filter out double votes
 	} else {
 		if (votes[id] === 'up') {

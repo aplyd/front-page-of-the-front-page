@@ -22,6 +22,7 @@ export default function Comments({
 	postData,
 	viewPostComments,
 	setPostData,
+	setUser = { setUser },
 }) {
 	// const [width, setWidth] = useState(window.innerWidth);
 	// const { postTitle } = useParams();
@@ -44,6 +45,7 @@ export default function Comments({
 					setModalContent={setModalContent}
 					viewPostComments={viewPostComments}
 					setPostData={setPostData}
+					setUser={setUser}
 				/>
 			</FeedContainer>
 		</Container>

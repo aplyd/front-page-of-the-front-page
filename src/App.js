@@ -252,6 +252,7 @@ function App() {
 								postData={postData}
 								viewPostComments={viewPostComments}
 								setPostData={setPostData}
+								setUser={setUser}
 							/>
 						)}
 					/>
