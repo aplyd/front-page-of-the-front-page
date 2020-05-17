@@ -9,6 +9,7 @@ import {
 	Comment,
 	setCommentAsDeleted,
 	getNewVoteCount,
+	withNewCommentVote,
 } from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
@@ -95,6 +96,7 @@ export default function DisplayComments({
 	user,
 	viewPostComments,
 	setModalContent,
+	setPostData,
 }) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
@@ -107,7 +109,7 @@ export default function DisplayComments({
 		const id = post.id;
 		const newComment = Comment({ commentInput, username, depth });
 		//insert reply function finds the correct id and adds the new comment to its replies
-		const withNewReply = insertReply(post, id, newComment);
+		const withNewReply = insertReply(post, comment.id, newComment);
 
 		firebase
 			.firestore()
@@ -131,6 +133,7 @@ export default function DisplayComments({
 	};
 
 	const castCommentVote = (e, direction) => {
+		console.log('cast');
 		e.stopPropagation();
 
 		if (user.isSignedIn) {
@@ -140,7 +143,11 @@ export default function DisplayComments({
 				direction,
 				comment.points
 			);
-			console.log(newVoteCount);
+
+			//recursively look through the comments, change, setPostData
+			// const updated = withNewCommentVote(post, post.id, newVoteCount);
+			console.log(post);
+			// setPostData(updated);
 		} else {
 			setModalContent('signup');
 		}
@@ -231,6 +238,7 @@ export default function DisplayComments({
 							user={user}
 							viewPostComments={viewPostComments}
 							setModalContent={setModalContent}
+							setPostData={setPostData}
 						/>
 					);
 				})}

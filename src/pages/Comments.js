@@ -21,6 +21,7 @@ export default function Comments({
 	currentPost,
 	postData,
 	viewPostComments,
+	setPostData,
 }) {
 	// const [width, setWidth] = useState(window.innerWidth);
 	// const { postTitle } = useParams();
@@ -32,7 +33,7 @@ export default function Comments({
 		if (!postData) {
 			viewPostComments(id);
 		}
-	}, [id, postData]);
+	}, [id, postData, viewPostComments]);
 
 	return (
 		<Container>
@@ -42,6 +43,7 @@ export default function Comments({
 					user={user}
 					setModalContent={setModalContent}
 					viewPostComments={viewPostComments}
+					setPostData={setPostData}
 				/>
 			</FeedContainer>
 		</Container>

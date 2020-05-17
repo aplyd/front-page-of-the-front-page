@@ -39,6 +39,17 @@ export const setCommentAsDeleted = (object, targetId) => {
 	return object.replies;
 };
 
+export const withNewCommentVote = (object, targetId, newVoteCount) => {
+	if (object.id === targetId) {
+		object.points = newVoteCount;
+	} else {
+		object.replies.forEach((obj) => {
+			withNewCommentVote(obj, targetId);
+		});
+	}
+	return object;
+};
+
 export const insertReply = (object, targetId, replyToAdd) => {
 	if (object.id === targetId) {
 		object.replies.push(replyToAdd);

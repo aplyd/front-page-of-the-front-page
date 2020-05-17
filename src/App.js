@@ -251,6 +251,7 @@ function App() {
 								setModalContent={setModalContent}
 								postData={postData}
 								viewPostComments={viewPostComments}
+								setPostData={setPostData}
 							/>
 						)}
 					/>
