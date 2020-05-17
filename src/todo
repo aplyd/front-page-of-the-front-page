@@ -63,7 +63,7 @@
 (()) handle errors logging in by displaying error
 (()) add content to sidebar
 (()) limit displayPosts to most recent 25
-
+(()) be able to delete post? it should actually remove it from firebase or set some flag so its not displayed
 
 ((last)) 
     - clean up code

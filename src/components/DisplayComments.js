@@ -181,7 +181,7 @@ export default function DisplayComments({
 					.firestore()
 					.collection('posts')
 					.doc(post.id)
-					.update({ updated })
+					.update({ replies: updated.replies })
 					.catch((err) => console.log(err));
 
 				firebase
