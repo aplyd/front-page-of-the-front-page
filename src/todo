@@ -30,7 +30,7 @@
 
 ((5)) add voting to comments (NOW)
     - sort comments via highest upvotes
-    - update vote count right after voting (state + server)
+    -̶ ̶u̶p̶d̶a̶t̶e̶ ̶v̶o̶t̶e̶ ̶c̶o̶u̶n̶t̶ ̶r̶i̶g̶h̶t̶ ̶a̶f̶t̶e̶r̶ ̶v̶o̶t̶i̶n̶g̶ ̶(̶s̶t̶a̶t̶e̶ ̶+̶ ̶s̶e̶r̶v̶e̶r̶)̶
     -̶ ̶a̶d̶d̶ ̶s̶o̶r̶t̶i̶n̶g̶ ̶a̶b̶i̶l̶i̶t̶y̶
 
 ((6)) edit nav for mobile (hide login, signup buttons and instead have user icon)
@@ -62,8 +62,7 @@
 (()) add content to sidebar
 (()) limit displayPosts to most recent 25
 
-((May 14th)) - voting for a post changes the vote object into a string "up" which breaks future votes
-                and doesnt display past votes correctly
+
 
 ((last)) 
     - clean up code
@@ -83,6 +82,8 @@
             comments stored in posts context
 
             - only fetch 25 posts at a time, ordered based on sortBy, then fetch 25 more on scroll
+
+            - FIX updatePosts/setUpdatePosts antipattern!!!
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 

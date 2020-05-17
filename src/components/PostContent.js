@@ -154,12 +154,12 @@ export default function PostContent({
 
 	useEffect(() => {
 		const checkForUserVote = () => {
-			if (user.votes.hasOwnProperty(post.id)) {
-				setUserVote(user.votes[post.id]);
+			if (user.postVotes.hasOwnProperty(post.id)) {
+				setUserVote(user.postVotes[post.id]);
 			}
 		};
-		user.votes && checkForUserVote();
-	}, [userVote, setUserVote, post.id, user.votes]);
+		user.postVotes && checkForUserVote();
+	}, [userVote, setUserVote, post.id, user.postVotes]);
 
 	const submitTopLevelComment = () => {
 		const { username } = user;
@@ -288,6 +288,7 @@ export default function PostContent({
 							post={post}
 							user={user}
 							viewPostComments={viewPostComments}
+							setModalContent={setModalContent}
 						/>
 					);
 				})}

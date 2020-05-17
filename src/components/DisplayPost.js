@@ -188,12 +188,12 @@ export default function DisplayPost({
 	//checks through users votes to see if previously voted
 	useEffect(() => {
 		const checkForUserVote = () => {
-			if (user.votes.hasOwnProperty(id)) {
-				setUserVote(user.votes[id]);
+			if (user.postVotes.hasOwnProperty(id)) {
+				setUserVote(user.postVotes[id]);
 			}
 		};
-		user.votes && checkForUserVote();
-	}, [userVote, setUserVote, id, user.votes]);
+		user.postVotes && checkForUserVote();
+	}, [userVote, setUserVote, id, user.postVotes]);
 	//maybe add post to dep array
 
 	const handleClick = () => {

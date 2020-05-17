@@ -4,7 +4,12 @@ import styled from 'styled-components';
 import { VoteArrowContainer, ActionButton } from './DisplayPost';
 import { SVGarrow } from './PostContent';
 import { v4 as uuidv4 } from 'uuid';
-import { insertReply, Comment, setCommentAsDeleted } from '../utils';
+import {
+	insertReply,
+	Comment,
+	setCommentAsDeleted,
+	getNewVoteCount,
+} from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
 import {
@@ -89,9 +94,11 @@ export default function DisplayComments({
 	post,
 	user,
 	viewPostComments,
+	setModalContent,
 }) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
+	const [userVote, setUserVote] = useState(null);
 
 	const submitReply = () => {
 		const depth = comment.depth + 1;
@@ -106,9 +113,7 @@ export default function DisplayComments({
 			.firestore()
 			.collection('posts')
 			.doc(post.id)
-			.update({
-				replies: withNewReply,
-			})
+			.update({ replies: withNewReply })
 			.then(() => viewPostComments(post.id))
 			.catch((err) => console.log(err));
 	};
@@ -123,6 +128,22 @@ export default function DisplayComments({
 			.update({ replies: withDeleted })
 			.then(() => viewPostComments(post.id))
 			.catch((err) => console.log(err));
+	};
+
+	const castCommentVote = (e, direction) => {
+		e.stopPropagation();
+
+		if (user.isSignedIn) {
+			const newVoteCount = getNewVoteCount(
+				user,
+				post.id,
+				direction,
+				comment.points
+			);
+			console.log(newVoteCount);
+		} else {
+			setModalContent('signup');
+		}
 	};
 
 	const displayReplyContainer = () => {
@@ -161,9 +182,19 @@ export default function DisplayComments({
 			<Card depth={comment.depth}>
 				<VoteArrowContainer>
 					<div>
-						<SVGarrow as={GoArrowUp}></SVGarrow>
+						<SVGarrow
+							as={GoArrowUp}
+							onClick={(e) => castCommentVote(e, 'up')}
+							direction="up"
+							uservote={userVote}
+						></SVGarrow>
 						<Vote>{comment.points}</Vote>
-						<SVGarrow as={GoArrowDown}></SVGarrow>
+						<SVGarrow
+							as={GoArrowDown}
+							onClick={(e) => castCommentVote(e, 'down')}
+							direction="down"
+							uservote={userVote}
+						></SVGarrow>
 					</div>
 				</VoteArrowContainer>
 				<ContentContainer>
@@ -199,6 +230,7 @@ export default function DisplayComments({
 							post={post}
 							user={user}
 							viewPostComments={viewPostComments}
+							setModalContent={setModalContent}
 						/>
 					);
 				})}

@@ -117,7 +117,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 					],
 				});
 
-			//is this neeeded????
+			//TODO - is this neeeded????
 			firebase
 				.firestore()
 				.collection('users')

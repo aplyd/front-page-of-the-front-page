@@ -11,7 +11,7 @@ import Submit from './pages/Submit';
 import Home from './pages/Home';
 import Comments from './pages/Comments';
 import { PostContext } from './PostContext';
-import { SORT_OPTIONS } from './utils';
+import { SORT_OPTIONS, getNewVoteCount } from './utils';
 import Nav from './layouts/Nav';
 import Modal from './components/Modal';
 import LogIn from './components/LogIn';
@@ -41,6 +41,7 @@ function App() {
 	useEffect(() => {
 		const newPosts = [];
 		const subscribe = () => {
+			console.log('subscribing, dont let this happen a lot');
 			firebase
 				.firestore()
 				.collection('posts')
@@ -83,7 +84,10 @@ function App() {
 							isSignedIn: true,
 							isAnonymous: false,
 							posts: data.posts ? data.posts : [],
-							votes: data.votes ? data.votes : {},
+							postVotes: data.postVotes ? data.postVotes : {},
+							commentVotes: data.commentVotes
+								? data.commentVotes
+								: {},
 						});
 					})
 					.catch((err) => console.log(err));
@@ -109,85 +113,66 @@ function App() {
 		setUpdatePosts(Date.now());
 	};
 
-	const castPostVote = (
+	function castPostVote(
 		event,
 		direction,
 		id,
 		vote,
 		setUserVote,
 		homeOrCommentsFlag
-	) => {
+	) {
 		event.stopPropagation();
-		let newVoteCount;
 
 		if (user.isSignedIn) {
-			if (user.votes[id] === direction) {
-				//do nothing - this block is to filter out double votes
-			} else {
-				if (user.votes[id] === 'up') {
-					//this block is to vote down after previously voting up
-					newVoteCount = vote - 2;
-				} else if (user.votes[id] === 'down') {
-					//this block is to vote up after previously voting down
-					newVoteCount = vote + 2;
-				} else {
-					//this block gets the direction for first vote
-					direction === 'up'
-						? (newVoteCount = vote + 1)
-						: (newVoteCount = vote - 1);
-				}
-
-				// the reason for the homeOrCommentsFlag argument is because different
-				// state needs to be updated depending on where castPostVote is called from
-				if (homeOrCommentsFlag === 'home') {
-					const updatedPosts = posts.map((post) => {
-						if (post.id === id) {
-							post.vote = newVoteCount;
-						}
-						return post;
-					});
-					setPosts(updatedPosts);
-				} else if (homeOrCommentsFlag === 'comments') {
-					const updatedPostData = { ...postData };
-					updatedPostData.vote = newVoteCount;
-					setPostData(updatedPostData);
-				}
-
-				const newUserVotes = { ...user.votes };
-				newUserVotes[id] = direction;
-
-				setUserVote(direction);
-				setUser({ ...user, votes: newUserVotes });
-
-				firebase
-					.firestore()
-					.collection('users')
-					.doc(user.uid)
-					.update({
-						votes: newUserVotes,
-					})
-					// .then(() => {})
-					.catch((err) => console.log(err));
-
-				//add vote to post document in firebase
-				//using date.now with setUpdatePosts to trigger re-render - definitely antipattern will fix later
-				firebase
-					.firestore()
-					.collection('posts')
-					.doc(id)
-					.update({
-						vote: newVoteCount,
-					})
-					.then(() => {
-						// setUpdatePosts(Date.now())
-					})
-					.catch((err) => console.log(err));
+			const newVoteCount = getNewVoteCount(
+				user.postVotes,
+				id,
+				direction,
+				vote
+			);
+			// the reason for the homeOrCommentsFlag argument is because different
+			// state needs to be updated depending on where castPostVote is called from
+			if (homeOrCommentsFlag === 'home') {
+				const updatedPosts = posts.map((post) => {
+					if (post.id === id) {
+						post.vote = newVoteCount;
+					}
+					return post;
+				});
+				setPosts(updatedPosts);
+			} else if (homeOrCommentsFlag === 'comments') {
+				const updatedPostData = { ...postData };
+				updatedPostData.vote = newVoteCount;
+				setPostData(updatedPostData);
 			}
+
+			const newUserVotes = { ...user.postVotes };
+			newUserVotes[id] = direction;
+
+			setUserVote(direction);
+			setUser({ ...user, postVotes: newUserVotes });
+
+			firebase
+				.firestore()
+				.collection('users')
+				.doc(user.uid)
+				.update({ votes: newUserVotes })
+				.catch((err) => console.log(err));
+
+			//add vote to post document in firebase
+			//using date.now with setUpdatePosts to trigger
+			//re-render - definitely antipattern will fix later
+			firebase
+				.firestore()
+				.collection('posts')
+				.doc(id)
+				.update({ vote: newVoteCount })
+				.catch((err) => console.log(err));
 		} else {
 			//user is not signed in
 			setModalContent('signup');
 		}
-	};
+	}
 
 	const displayModal = () => {
 		if (modalContent === 'login') {
