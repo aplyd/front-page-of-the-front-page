@@ -77,17 +77,17 @@ function App() {
 					.get()
 					.then((res) => {
 						const data = res.data();
+						console.log(data.postVotes);
+						console.log(data.username);
 						setUser({
-							username: window.user.displayName,
+							username: data.username,
 							email: user.email,
 							uid: user.uid,
 							isSignedIn: true,
 							isAnonymous: false,
-							posts: data.posts ? data.posts : [],
-							postVotes: data.postVotes ? data.postVotes : {},
-							commentVotes: data.commentVotes
-								? data.commentVotes
-								: {},
+							posts: data.posts,
+							postVotes: data.postVotes,
+							commentVotes: data.commentVotes,
 						});
 					})
 					.catch((err) => console.log(err));
@@ -156,7 +156,7 @@ function App() {
 				.firestore()
 				.collection('users')
 				.doc(user.uid)
-				.update({ votes: newUserVotes })
+				.update({ postVotes: newUserVotes })
 				.catch((err) => console.log(err));
 
 			//add vote to post document in firebase

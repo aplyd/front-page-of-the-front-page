@@ -63,7 +63,6 @@
 (()) limit displayPosts to most recent 25
 
 
-
 ((last)) 
     - clean up code
     - delete all unused variables

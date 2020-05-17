@@ -80,10 +80,11 @@ export const filterPosts = (postsArr, search) => {
 	return results;
 };
 
+//votes - users votes, to check if previously
 export const getNewVoteCount = (votes, id, direction, vote) => {
 	let newVoteCount;
 
-	if (votes[id] === direction) {
+	if (votes && votes[id] === direction) {
 		//do nothing - this block is to filter out double votes
 	} else {
 		if (votes[id] === 'up') {
