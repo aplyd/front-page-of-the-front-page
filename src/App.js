@@ -25,31 +25,13 @@ export const Container = styled.div`
 	padding-top: 48px;
 `;
 
-//TODO - get official reddit api?
-//TODO - if you dont have a reddit account, you can comment anon (CREATE ANON ABILITY)
-//https://www.reddit.com/r/redditdev/comments/34t0df/creating_account_through_api/
-
-const loadRedditData = () => {
-	// firebase.firestore().collection('posts').add({
-	// 	title: 'hahaha',
-	// 	userID: 'fdsafdsafas',
-	// 	vote: 34,
-	// });
-	// useEffect(() => {
-	// 	axios
-	// 		.get('https://www.reddit.com/.json')
-	// 		.then((res) => setRedditData(res.data.data.children))
-	// 		.catch((err) => console.log(err));
-	// }, []);
-};
-
 function App() {
 	const [user, setUser] = useState({});
-	const [redditData, setRedditData] = useState([]);
 	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
-	//this is literally only here to trigger a rerender to
+	//this (setUpdatePosts) is literally only here to trigger a rerender to
 	//correctly display sorted posts - will probably remove when refactored correctly
+	//anti-pattern
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked
@@ -80,6 +62,7 @@ function App() {
 		subscribe();
 		return () => subscribe();
 	}, [sortBy, updatePosts]);
+	//should remove updatePosts from dep array
 
 	//detect user
 	useEffect(() => {
@@ -104,9 +87,6 @@ function App() {
 						});
 					})
 					.catch((err) => console.log(err));
-			} else {
-				//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
-				// maybe - probably not though
 			}
 		});
 	}, []);
@@ -129,7 +109,14 @@ function App() {
 		setUpdatePosts(Date.now());
 	};
 
-	const castPostVote = (event, direction, id, vote, setUserVote) => {
+	const castPostVote = (
+		event,
+		direction,
+		id,
+		vote,
+		setUserVote,
+		homeOrCommentsFlag
+	) => {
 		event.stopPropagation();
 		let newVoteCount;
 
@@ -150,8 +137,27 @@ function App() {
 						: (newVoteCount = vote - 1);
 				}
 
+				// the reason for the homeOrCommentsFlag argument is because different
+				// state needs to be updated depending on where castPostVote is called from
+				if (homeOrCommentsFlag === 'home') {
+					const updatedPosts = posts.map((post) => {
+						if (post.id === id) {
+							post.vote = newVoteCount;
+						}
+						return post;
+					});
+					setPosts(updatedPosts);
+				} else if (homeOrCommentsFlag === 'comments') {
+					const updatedPostData = { ...postData };
+					updatedPostData.vote = newVoteCount;
+					setPostData(updatedPostData);
+				}
+
 				const newUserVotes = { ...user.votes };
 				newUserVotes[id] = direction;
+
+				setUserVote(direction);
+				setUser({ ...user, votes: newUserVotes });
 
 				firebase
 					.firestore()
@@ -160,14 +166,11 @@ function App() {
 					.update({
 						votes: newUserVotes,
 					})
-					.then(() => {
-						setUserVote(direction);
-						setUser({ ...user, votes: newUserVotes });
-					})
+					// .then(() => {})
 					.catch((err) => console.log(err));
 
 				//add vote to post document in firebase
-				//using date.now with setUpdatePosts to trigger re-render - probably antipattern
+				//using date.now with setUpdatePosts to trigger re-render - definitely antipattern will fix later
 				firebase
 					.firestore()
 					.collection('posts')
@@ -175,7 +178,9 @@ function App() {
 					.update({
 						vote: newVoteCount,
 					})
-					.then(() => setUpdatePosts(Date.now()))
+					.then(() => {
+						// setUpdatePosts(Date.now())
+					})
 					.catch((err) => console.log(err));
 			}
 		} else {
@@ -234,9 +239,7 @@ function App() {
 						component={(props) => (
 							<Home
 								{...props}
-								loadRedditData={loadRedditData}
 								posts={posts}
-								redditData={redditData}
 								sortPosts={sortPosts}
 								sortBy={sortBy}
 								viewPostComments={viewPostComments}

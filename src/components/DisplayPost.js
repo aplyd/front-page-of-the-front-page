@@ -194,6 +194,7 @@ export default function DisplayPost({
 		};
 		user.votes && checkForUserVote();
 	}, [userVote, setUserVote, id, user.votes]);
+	//maybe add post to dep array
 
 	const handleClick = () => {
 		viewPostComments(post.id);
@@ -207,7 +208,7 @@ export default function DisplayPost({
 					<SVG
 						as={GoArrowUp}
 						onClick={(e) =>
-							castPostVote(e, 'up', id, vote, setUserVote)
+							castPostVote(e, 'up', id, vote, setUserVote, 'home')
 						}
 						direction={'up'}
 						uservote={userVote}
@@ -216,7 +217,14 @@ export default function DisplayPost({
 					<SVG
 						as={GoArrowDown}
 						onClick={(e) =>
-							castPostVote(e, 'down', id, vote, setUserVote)
+							castPostVote(
+								e,
+								'down',
+								id,
+								vote,
+								setUserVote,
+								'home'
+							)
 						}
 						direction={'down'}
 						uservote={userVote}

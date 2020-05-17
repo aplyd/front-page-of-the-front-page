@@ -187,7 +187,8 @@ export default function PostContent({
 								'up',
 								post.id,
 								post.vote,
-								setUserVote
+								setUserVote,
+								'comments'
 							)
 						}
 						direction={'up'}
@@ -202,7 +203,8 @@ export default function PostContent({
 								'down',
 								post.id,
 								post.vote,
-								setUserVote
+								setUserVote,
+								'comments'
 							)
 						}
 						direction={'down'}
