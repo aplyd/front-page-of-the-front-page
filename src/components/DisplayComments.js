@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import styled from 'styled-components';
 import { VoteArrowContainer, ActionButton } from './DisplayPost';
@@ -103,6 +103,15 @@ export default function DisplayComments({
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
 	const [userVote, setUserVote] = useState(null);
 
+	useEffect(() => {
+		const checkForUserVote = () => {
+			if (user.commentVotes.hasOwnProperty(comment.id)) {
+				setUserVote(user.commentVotes[comment.id]);
+			}
+		};
+		user.commentVotes && checkForUserVote();
+	}, [userVote, setUserVote, comment.id, user.commentVotes]);
+
 	const submitReply = () => {
 		const depth = comment.depth + 1;
 		const commentInput = replyInput;
@@ -133,45 +142,55 @@ export default function DisplayComments({
 	};
 
 	const castCommentVote = (e, direction) => {
-		console.log('cast');
 		e.stopPropagation();
 
 		if (user.isSignedIn) {
-			const newVoteCount = getNewVoteCount(
-				user.commentVotes,
-				comment.id,
-				direction,
-				comment.points
-			);
+			let newVoteCount;
 
-			//update post state object
-			const updated = withNewCommentVote(
-				{ ...post },
-				comment.id,
-				newVoteCount
-			);
-			setPostData(updated);
+			if (user.commentVotes[comment.id] === direction) {
+				//do nothing - this block is to filter out double votes
+			} else {
+				if (user.commentVotes[comment.id] === 'up') {
+					//this block is to vote down after previously voting up
+					newVoteCount = comment.points - 2;
+				} else if (user.commentVotes[comment.id] === 'down') {
+					//this block is to vote up after previously voting down
+					newVoteCount = comment.points + 2;
+				} else {
+					//this block gets the direction for first vote
+					direction === 'up'
+						? (newVoteCount = comment.points + 1)
+						: (newVoteCount = comment.points - 1);
+				}
+				//update post state object
+				const updated = withNewCommentVote(
+					{ ...post },
+					comment.id,
+					newVoteCount
+				);
+				setPostData(updated);
 
-			//update user state object
-			const newUserVotes = { ...user.commentVotes };
-			newUserVotes[comment.id] = direction;
-			setUser({ ...user, commentVotes: newUserVotes });
-			setUserVote(direction);
+				//update user state object
+				const newUserVotes = { ...user.commentVotes };
+				newUserVotes[comment.id] = direction;
+				setUser({ ...user, commentVotes: newUserVotes });
+				setUserVote(direction);
 
-			//persist to firebase
-			firebase
-				.firestore()
-				.collection('posts')
-				.doc(post.id)
-				.update({ updated })
-				.catch((err) => console.log(err));
+				//persist to firebase
+				firebase
+					.firestore()
+					.collection('posts')
+					.doc(post.id)
+					.update({ updated })
+					.catch((err) => console.log(err));
 
-			firebase
-				.firestore()
-				.collection('users')
-				.doc(user.uid)
-				.update({ commentVotes: newUserVotes })
-				.catch((err) => console.log(err));
+				firebase
+					.firestore()
+					.collection('users')
+					.doc(user.uid)
+					.update({ commentVotes: newUserVotes })
+					.catch((err) => console.log(err));
+			}
 		} else {
 			setModalContent('signup');
 		}

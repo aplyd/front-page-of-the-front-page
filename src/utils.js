@@ -88,26 +88,3 @@ export const filterPosts = (postsArr, search) => {
 
 	return results;
 };
-
-//votes - users votes, to check if previously
-export const getNewVoteCount = (votes, id, direction, vote) => {
-	let newVoteCount;
-
-	if (votes[id] === direction) {
-		//do nothing - this block is to filter out double votes
-	} else {
-		if (votes[id] === 'up') {
-			//this block is to vote down after previously voting up
-			newVoteCount = vote - 2;
-		} else if (votes[id] === 'down') {
-			//this block is to vote up after previously voting down
-			newVoteCount = vote + 2;
-		} else {
-			//this block gets the direction for first vote
-			direction === 'up'
-				? (newVoteCount = vote + 1)
-				: (newVoteCount = vote - 1);
-		}
-	}
-	return newVoteCount;
-};

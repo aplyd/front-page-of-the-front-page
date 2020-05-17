@@ -28,7 +28,9 @@
     -̶ ̶s̶t̶o̶r̶e̶ ̶u̶p̶v̶o̶t̶e̶d̶ ̶p̶o̶s̶t̶s̶ ̶i̶n̶ ̶u̶s̶e̶r̶ ̶o̶b̶j̶e̶c̶t̶ ̶s̶o̶ ̶i̶t̶ ̶d̶i̶s̶p̶l̶a̶y̶s̶ ̶t̶h̶e̶i̶r̶ ̶u̶p̶v̶o̶t̶e̶d̶ ̶i̶t̶e̶m̶s̶ ̶w̶h̶e̶n̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
     -̶ ̶i̶f̶ ̶n̶o̶t̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶,̶ ̶p̶r̶o̶m̶p̶t̶ ̶w̶h̶e̶n̶ ̶t̶r̶y̶i̶n̶g̶ ̶t̶o̶ ̶u̶p̶v̶o̶t̶e̶
 
-((5)) add voting to comments (NOW)
+(̶(̶5̶)̶)̶ ̶a̶d̶d̶ ̶v̶o̶t̶i̶n̶g̶ ̶t̶o̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶(̶N̶O̶W̶)̶
+    - display correct comment points
+    -̶ ̶f̶i̶x̶ ̶p̶o̶t̶e̶n̶t̶i̶a̶l̶ ̶d̶u̶p̶l̶i̶c̶a̶t̶e̶ ̶v̶o̶t̶i̶n̶g̶ ̶b̶u̶g̶
     - sort comments via highest upvotes
     -̶ ̶u̶p̶d̶a̶t̶e̶ ̶v̶o̶t̶e̶ ̶c̶o̶u̶n̶t̶ ̶r̶i̶g̶h̶t̶ ̶a̶f̶t̶e̶r̶ ̶v̶o̶t̶i̶n̶g̶ ̶(̶s̶t̶a̶t̶e̶ ̶+̶ ̶s̶e̶r̶v̶e̶r̶)̶
     -̶ ̶a̶d̶d̶ ̶s̶o̶r̶t̶i̶n̶g̶ ̶a̶b̶i̶l̶i̶t̶y̶
@@ -83,6 +85,10 @@
             - only fetch 25 posts at a time, ordered based on sortBy, then fetch 25 more on scroll
 
             - FIX updatePosts/setUpdatePosts antipattern!!!
+
+            - loading comments page, should only call firebase for that single post
+                no need to recall the entire posts document. maybe move that network request
+                out of app, and into the "home" page?
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 
