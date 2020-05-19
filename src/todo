@@ -36,7 +36,7 @@
     -̶ ̶a̶d̶d̶ ̶s̶o̶r̶t̶i̶n̶g̶ ̶a̶b̶i̶l̶i̶t̶y̶
     -̶ ̶a̶d̶d̶ ̶a̶l̶l̶ ̶c̶o̶m̶m̶e̶n̶t̶i̶n̶g̶ ̶s̶o̶r̶t̶i̶n̶g̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶
 
-((6)) edit nav for mobile (hide login, signup buttons and instead have user icon)
+(̶(̶6̶)̶)̶ ̶e̶d̶i̶t̶ ̶n̶a̶v̶ ̶f̶o̶r̶ ̶m̶o̶b̶i̶l̶e̶ ̶(̶h̶i̶d̶e̶ ̶l̶o̶g̶i̶n̶,̶ ̶s̶i̶g̶n̶u̶p̶ ̶b̶u̶t̶t̶o̶n̶s̶ ̶a̶n̶d̶ ̶i̶n̶s̶t̶e̶a̶d̶ ̶h̶a̶v̶e̶ ̶u̶s̶e̶r̶ ̶i̶c̶o̶n̶)̶
     -̶ ̶a̶d̶d̶ ̶u̶s̶e̶r̶ ̶i̶c̶o̶n̶ ̶i̶n̶ ̶n̶a̶v̶b̶a̶r̶ ̶w̶h̶e̶n̶ ̶u̶s̶e̶r̶ ̶i̶s̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
     -̶ ̶s̶m̶a̶l̶l̶ ̶d̶r̶o̶p̶d̶o̶w̶n̶ ̶t̶o̶ ̶l̶o̶g̶ ̶o̶u̶t̶,̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶,̶ ̶e̶t̶c̶.̶
 
@@ -49,6 +49,7 @@
     - add a "more info" with technologies used
 
 ((styling))
+    - set max width/depth for replies (on mobile, replies extend too far right)
     - fix comment, share, delete button padding size
     - add icons to comments page
     - in displayComments, show username color black
@@ -83,7 +84,7 @@
             - when viewing a post, another firebase request is not needed because i already have the 
             comments stored in posts context
 
-            - only fetch 25 posts at a time, ordered based on sortBy, then fetch 25 more on scroll
+            - !!!! only fetch 25 posts at a time, ordered based on sortBy, then fetch 25 more on scroll !!!!!
 
             - FIX updatePosts/setUpdatePosts antipattern!!!
 

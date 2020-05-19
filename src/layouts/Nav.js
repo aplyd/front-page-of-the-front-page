@@ -9,6 +9,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { FiLogIn } from 'react-icons/fi';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoIosCreate } from 'react-icons/io';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 
 const Container = styled.div`
 	background: white;
@@ -187,11 +188,12 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 		searchBarBottom,
 		searchBarLeft,
 	} = useSearchBarPosition(searchBarRef, user.isSignedIn);
-	//dont forget to set back to false
 	const [areSearchResultsOpen, setAreSearchResultsOpen] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
 	const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 	const history = useHistory();
+	const [windowWidth, setWindowWidth] = useState();
+	useWindowWidth(setWindowWidth);
 
 	const handleSearchInput = (input) => {
 		setAreSearchResultsOpen(true);
@@ -224,8 +226,8 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 			);
 	};
 
-	const displayLoggedInStatus = () => {
-		if (user.isSignedIn) {
+	const displayLogInButtons = () => {
+		if (user.isSignedIn || windowWidth < 640) {
 			return null;
 		} else {
 			return (
@@ -248,7 +250,9 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 		<Container>
 			<Circle as={Link} to="/" />
 
-			<Title onClick={() => history.push('/')}>fpotfp</Title>
+			{windowWidth > 480 ? (
+				<Title onClick={() => history.push('/')}>fpotfp</Title>
+			) : null}
 
 			<Search
 				type="text"
@@ -297,7 +301,7 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 				</SearchResultsDropDown>
 			)}
 
-			{displayLoggedInStatus()}
+			{displayLogInButtons()}
 			<ProfileContainer>
 				<SVG
 					as={BsFillPersonFill}
