@@ -1,4 +1,4 @@
-import { insertReply, countReplies, filterPosts } from './sandbox';
+import { insertReply, countReplies, filterPosts, sortReplies } from './sandbox';
 
 const zeroA2 = {
 	id: 7,
@@ -171,6 +171,30 @@ const filteredArr = [
 	},
 ];
 
-test.only('hello its me', () => {
+test('hello its me', () => {
 	expect(filterPosts(postsArr, 'late')).toStrictEqual(filteredArr);
+});
+
+const postObj = {
+	replies: [
+		{ id: 1, vote: 9 },
+		{ id: 2, vote: 12 },
+		{ id: 3, vote: 21 },
+		{ id: 4, vote: 4 },
+		{ id: 5, vote: 46 },
+	],
+};
+
+const sortedPostObj = {
+	replies: [
+		{ id: 5, vote: 46 },
+		{ id: 3, vote: 21 },
+		{ id: 2, vote: 12 },
+		{ id: 1, vote: 9 },
+		{ id: 4, vote: 4 },
+	],
+};
+
+test.only('should sort', () => {
+	expect(sortReplies(postObj)).toStrictEqual(sortedPostObj.replies);
 });

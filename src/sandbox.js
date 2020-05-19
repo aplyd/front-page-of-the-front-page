@@ -44,7 +44,6 @@ export const countReplies = (object) => {
 
 export const filterPosts = (postsArr, search) => {
 	const results = postsArr.filter((post) => {
-		console.log(post.title);
 		if (
 			post.title.indexOf(search) !== -1 ||
 			post.postText.indexOf(search) !== -1
@@ -55,4 +54,22 @@ export const filterPosts = (postsArr, search) => {
 	});
 
 	return results;
+};
+
+export const sortReplies = (postObj) => {
+	function compare(a, b) {
+		if (a.vote < b.vote) {
+			return 1;
+		}
+		if (a.vote > b.vote) {
+			return -1;
+		}
+		return 0;
+	}
+
+	// const sorted = postObj.replies.sort(compare).map((post) => post)
+
+	return { ...postObj }.replies
+		.sort((a, b) => (a.vote < b.vote ? 1 : -1))
+		.map((post) => post);
 };

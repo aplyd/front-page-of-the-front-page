@@ -282,20 +282,23 @@ export default function PostContent({
 			</SortByContainer>
 
 			<CommentContainer>
-				{post.replies.map((comment, index) => {
-					return (
-						<DisplayComments
-							comment={comment}
-							key={uuidv4()}
-							post={post}
-							user={user}
-							viewPostComments={viewPostComments}
-							setModalContent={setModalContent}
-							setPostData={setPostData}
-							setUser={setUser}
-						/>
-					);
-				})}
+				{{ ...post }.replies
+					.sort((a, b) => (a.points < b.points ? 1 : -1))
+					.map((comment, index) => {
+						console.log(comment);
+						return (
+							<DisplayComments
+								comment={comment}
+								key={uuidv4()}
+								post={post}
+								user={user}
+								viewPostComments={viewPostComments}
+								setModalContent={setModalContent}
+								setPostData={setPostData}
+								setUser={setUser}
+							/>
+						);
+					})}
 			</CommentContainer>
 		</Container>
 	);
