@@ -98,6 +98,7 @@ export default function DisplayComments({
 	setModalContent,
 	setPostData,
 	setUser,
+	commentSortMethod,
 }) {
 	const [replyInput, setReplyInput] = useState();
 	const [isReplyContainerOpen, setIsReplyContainerOpen] = useState(false);
@@ -273,22 +274,21 @@ export default function DisplayComments({
 			{/* recursively rendering to display unknown amount of replies */}
 			{/* spreading the comment object because sort() will mutate state*/}
 			{comment.replies &&
-				{ ...comment }.replies
-					.sort((a, b) => (a.points < b.points ? 1 : -1))
-					.map((reply) => {
-						return (
-							<DisplayComments
-								comment={reply}
-								key={uuidv4()}
-								post={post}
-								user={user}
-								viewPostComments={viewPostComments}
-								setModalContent={setModalContent}
-								setPostData={setPostData}
-								setUser={setUser}
-							/>
-						);
-					})}
+				{ ...comment }.replies.sort(commentSortMethod).map((reply) => {
+					return (
+						<DisplayComments
+							comment={reply}
+							key={uuidv4()}
+							post={post}
+							user={user}
+							viewPostComments={viewPostComments}
+							setModalContent={setModalContent}
+							setPostData={setPostData}
+							setUser={setUser}
+							commentSortMethod={commentSortMethod}
+						/>
+					);
+				})}
 		</React.Fragment>
 	);
 }

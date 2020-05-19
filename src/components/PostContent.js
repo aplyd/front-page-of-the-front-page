@@ -20,6 +20,7 @@ import {
 } from './DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
 import { PostContext } from '../PostContext';
+import { TiArrowSortedDown } from 'react-icons/ti';
 
 const Container = styled.div`
 	width: 100%;
@@ -89,10 +90,14 @@ const SortByContainer = styled.div`
 	margin-top: 24px;
 	padding-left: 8px;
 	margin-bottom: 48px;
-	&& > p {
-		font-size: 12px;
+	display: flex;
+	flex-direction: row;
+	&& > p:first-child {
+		font-size: 11px;
 		text-transform: uppercase;
 		color: ${(props) => props.theme.colors.gray};
+		position: relative;
+		top: 3px;
 	}
 `;
 
@@ -140,6 +145,55 @@ export const SVGarrow = styled.svg`
 	}
 `;
 
+const SortOptionsSelect = styled.div`
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	margin-left: 8px;
+	position: relative;
+`;
+const SortP = styled.p`
+	text-transform: uppercase;
+	color: ${(props) => props.theme.colors.gray};
+	font-size: 14px;
+`;
+const SortSVG = styled.svg`
+	color: ${(props) => props.theme.colors.gray};
+	position: relative;
+	top: 2px;
+	padding-left: 4px;
+`;
+const SortOptionsList = styled.div`
+	background: white;
+	position: absolute;
+	top: 22px;
+	width: 80px;
+	border-radius: 4px;
+	z-index: 1001;
+	box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
+	&& > div:first-child {
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+	}
+	&& > div:last-child {
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+	}
+`;
+const SortOption = styled.div`
+	height: 32px;
+	font-size: 14px;
+	color: ${(props) => props.theme.colors.gray};
+	&&:hover {
+		background-color: ${(props) => props.theme.colors.blue};
+		color: white;
+	}
+	&& > p {
+		padding: 8px;
+		text-transform: capitalize;
+	}
+`;
+
 export default function PostContent({
 	post,
 	user,
@@ -153,6 +207,8 @@ export default function PostContent({
 	const { castPostVote } = useContext(PostContext);
 	const [userVote, setUserVote] = useState();
 	useWindowWidth(setWidth);
+	const [commentSortMethod, setCommentSortMethod] = useState('top');
+	const [areSortOptionsVisible, setAreSortOptionsVisible] = useState(false);
 
 	useEffect(() => {
 		const checkForUserVote = () => {
@@ -175,6 +231,12 @@ export default function PostContent({
 			})
 			.then(viewPostComments(post.id))
 			.catch((err) => console.log(err));
+	};
+
+	const commentSortMethods = {
+		top: (a, b) => (a.points <= b.points ? 1 : -1),
+		new: (a, b) => (a.timestamp <= b.timestamp ? 1 : -1),
+		old: (a, b) => (a.timestamp >= b.timestamp ? 1 : -1),
 	};
 
 	return (
@@ -278,14 +340,41 @@ export default function PostContent({
 
 			<SortByContainer>
 				<p>sort by</p>
-				{/* TODO*/}
+				<SortOptionsSelect
+					onClick={() =>
+						setAreSortOptionsVisible(!areSortOptionsVisible)
+					}
+				>
+					<SortP>{commentSortMethod}</SortP>
+					<SortSVG as={TiArrowSortedDown}></SortSVG>
+					{areSortOptionsVisible ? (
+						<SortOptionsList
+							onMouseLeave={() => setAreSortOptionsVisible(false)}
+						>
+							<SortOption
+								onClick={() => setCommentSortMethod('top')}
+							>
+								<p>top</p>
+							</SortOption>
+							<SortOption
+								onClick={() => setCommentSortMethod('new')}
+							>
+								<p>new</p>
+							</SortOption>
+							<SortOption
+								onClick={() => setCommentSortMethod('old')}
+							>
+								<p>old</p>
+							</SortOption>
+						</SortOptionsList>
+					) : null}
+				</SortOptionsSelect>
 			</SortByContainer>
 
 			<CommentContainer>
 				{{ ...post }.replies
-					.sort((a, b) => (a.points < b.points ? 1 : -1))
-					.map((comment, index) => {
-						console.log(comment);
+					.sort(commentSortMethods[commentSortMethod])
+					.map((comment) => {
 						return (
 							<DisplayComments
 								comment={comment}
@@ -296,6 +385,9 @@ export default function PostContent({
 								setModalContent={setModalContent}
 								setPostData={setPostData}
 								setUser={setUser}
+								commentSortMethod={
+									commentSortMethods[commentSortMethod]
+								}
 							/>
 						);
 					})}
