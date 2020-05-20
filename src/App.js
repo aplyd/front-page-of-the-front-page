@@ -11,7 +11,7 @@ import Submit from './pages/Submit';
 import Home from './pages/Home';
 import Comments from './pages/Comments';
 import { PostContext } from './PostContext';
-import { SORT_OPTIONS, getNewVoteCount } from './utils';
+import { SORT_OPTIONS } from './utils';
 import Nav from './layouts/Nav';
 import Modal from './components/Modal';
 import LogIn from './components/LogIn';
@@ -29,19 +29,19 @@ function App() {
 	const [user, setUser] = useState({});
 	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
-	//this (setUpdatePosts) is literally only here to trigger a rerender to
+	//this (updatePosts) is only here to trigger a rerender to
 	//correctly display sorted posts - will probably remove when refactored correctly
-	//anti-pattern
+	//anti-pattern - changing sortBy should trigger rerender automatically
 	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked
 	const [postData, setPostData] = useState();
+	const [lastDocument, setLastDocument] = useState(null);
 
-	//get list of posts from firebase for front page
+	//get list of posts from firebase
 	useEffect(() => {
 		const newPosts = [];
 		const subscribe = () => {
-			console.log('subscribing, dont let this happen a lot');
 			firebase
 				.firestore()
 				.collection('posts')
@@ -49,8 +49,16 @@ function App() {
 					SORT_OPTIONS[sortBy].column,
 					SORT_OPTIONS[sortBy].direction
 				)
+				.limit(10)
 				.get()
 				.then((querySnapshot) => {
+					if (querySnapshot.docs.length === 10) {
+						setLastDocument(
+							querySnapshot.docs[querySnapshot.docs.length - 1]
+						);
+					} else {
+						setLastDocument(null);
+					}
 					querySnapshot.forEach((doc) => {
 						newPosts.unshift({ id: doc.id, ...doc.data() });
 					});
@@ -62,8 +70,37 @@ function App() {
 		};
 		subscribe();
 		return () => subscribe();
-	}, [sortBy, updatePosts]);
+	}, [sortBy]);
 	//should remove updatePosts from dep array
+
+	const getMorePosts = () => {
+		if (lastDocument) {
+			const listOfNewPosts = firebase
+				.firestore()
+				.collection('posts')
+				.orderBy(
+					SORT_OPTIONS[sortBy].column,
+					SORT_OPTIONS[sortBy].direction
+				)
+				.startAfter(lastDocument)
+				.limit(10);
+
+			listOfNewPosts.get().then((documentSnapshot) => {
+				if (documentSnapshot.docs.length === 10) {
+					setLastDocument(
+						documentSnapshot.docs[documentSnapshot.docs.length - 1]
+					);
+				} else {
+					setLastDocument(null);
+				}
+				const moreNewPosts = [];
+				documentSnapshot.forEach((doc) => {
+					moreNewPosts.unshift({ id: doc.id, ...doc.data() });
+				});
+				setPosts([...posts, ...moreNewPosts]);
+			});
+		}
+	};
 
 	//detect user
 	useEffect(() => {
@@ -214,6 +251,7 @@ function App() {
 				setUpdatePosts,
 				setModalContent,
 				castPostVote,
+				getMorePosts,
 			}}
 		>
 			<Router>

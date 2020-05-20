@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import DisplayPost from '../components/DisplayPost';
+import { v4 as uuidv4 } from 'uuid';
 
 const Container = styled.div`
 	grid-column: 1;
 `;
 
-export default function Feed({
-	redditData,
-	posts,
-	children,
-	viewPostComments,
-}) {
+export default function Feed({ posts, children, viewPostComments }) {
 	return (
 		<Container>
 			{/* to display a pinned post in the future 
@@ -28,7 +24,7 @@ export default function Feed({
 						//using the Date.now because without it, im getting duplicate keys when sorting. fix later... hopefully
 						<DisplayPost
 							title={post.title}
-							key={post.id + Date.now()}
+							key={uuidv4()}
 							id={post.id}
 							vote={post.vote}
 							timestamp={post.timestamp}

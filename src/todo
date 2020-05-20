@@ -62,7 +62,7 @@
 (̶(̶)̶)̶ ̶c̶r̶e̶a̶t̶e̶ ̶4̶0̶4̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶F̶e̶e̶d̶S̶o̶r̶t̶ ̶c̶o̶m̶p̶o̶n̶e̶n̶t̶
 (̶(̶)̶)̶ ̶a̶l̶l̶o̶w̶ ̶f̶o̶r̶ ̶d̶e̶l̶e̶t̶i̶n̶g̶ ̶y̶o̶u̶'̶r̶e̶ ̶o̶w̶n̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶b̶y̶ ̶r̶e̶p̶l̶a̶c̶i̶n̶g̶ ̶t̶h̶e̶ ̶t̶e̶x̶t̶ ̶w̶i̶t̶h̶ ̶[̶d̶e̶l̶e̶t̶e̶d̶]̶
-(()) handle errors logging in by displaying error
+(()) handle errors logging in by displaying error - wrong email/password
 (()) add content to sidebar
 (()) limit displayPosts to most recent 25
 (()) be able to delete post? it should actually remove it from firebase or set some flag so its not displayed
@@ -74,6 +74,9 @@
     - seperate all components from style components and keep in individual files
     - keep component + styles in own folder
     - figure out hosting with routing
+
+    - remove all Date.now() for index or uuid
+    - remove updatePosts
     
 
 (((!!!))) need to manage network requests (firebase api calls).

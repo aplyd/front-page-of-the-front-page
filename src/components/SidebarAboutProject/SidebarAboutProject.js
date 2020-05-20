@@ -6,7 +6,7 @@ import { PostContext } from '../../PostContext';
 
 export default function SidebarAboutProject() {
 	const [userCount, setUserCount] = useState();
-	const { posts } = useContext(PostContext);
+	const { getMorePosts } = useContext(PostContext);
 
 	return (
 		<S.AboutContainer>
@@ -61,6 +61,7 @@ export default function SidebarAboutProject() {
 				<S.SVG as={GiCakeSlice} /> <p>Created April 15th, 2020</p>
 			</S.CreationDate>
 			<S.Spacer height={24} />
+			<button onClick={() => getMorePosts()}>paginate me</button>
 		</S.AboutContainer>
 	);
 }

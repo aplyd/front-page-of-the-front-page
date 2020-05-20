@@ -125,8 +125,6 @@ export default function CreatePost({ props, setUpdatePosts }) {
 				.get()
 				.then((res) => {
 					const data = res.data();
-					console.log(data);
-					console.log(user);
 					setUser({
 						...data,
 						isSignedIn: true,
