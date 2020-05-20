@@ -72,7 +72,7 @@ const SubmitBtn = styled.button`
 export default function CreatePost({ props, setUpdatePosts }) {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
-	const { user, setUser } = useContext(PostContext);
+	const { user, setUser, setPosts, posts } = useContext(PostContext);
 	const history = useHistory();
 
 	const onSubmit = (e) => {
@@ -95,8 +95,18 @@ export default function CreatePost({ props, setUpdatePosts }) {
 					id: postID,
 				})
 				.then(() => {
-					//this is probably bad
-					setUpdatePosts(Date.now());
+					setPosts([
+						{
+							title,
+							postText,
+							timestamp,
+							vote: 1,
+							username: user.username,
+							replies: [],
+							id: postID,
+						},
+						...posts,
+					]);
 					history.push('/');
 				});
 
@@ -145,8 +155,27 @@ export default function CreatePost({ props, setUpdatePosts }) {
 			setTitle('');
 			setPostText('');
 		} else {
-			//this shouldn't ever happen because 'create a post' is only visible when signed in
+			//this shouldn't ever happen because 'create a post' is only mounted when signed in
 			alert('you must sign in to create a post :)');
+		}
+	};
+
+	const cancelCreatePost = () => {
+		const cancel = () => {
+			setTitle('');
+			setPostText('');
+			history.push('/');
+		};
+		if (title.length > 0 || postText.length > 0) {
+			if (
+				window.confirm(
+					'Are you sure you want to leave this page? Your post will not be saved.'
+				)
+			) {
+				cancel();
+			}
+		} else {
+			cancel();
 		}
 	};
 
@@ -166,7 +195,9 @@ export default function CreatePost({ props, setUpdatePosts }) {
 				placeholder="Text (optional)"
 				maxLength="1600"
 			></TextInput>
-			<CancelBtn type="button">Cancel</CancelBtn>
+			<CancelBtn type="button" onClick={() => cancelCreatePost()}>
+				Cancel
+			</CancelBtn>
 			<SubmitBtn type="submit">Post</SubmitBtn>
 		</FormContainer>
 	);

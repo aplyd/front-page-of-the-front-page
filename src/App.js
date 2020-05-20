@@ -71,7 +71,7 @@ function App() {
 		subscribe();
 		return () => subscribe();
 	}, [sortBy]);
-	//should remove updatePosts from dep array
+	//should remove updatePosts from dep array - instead, directly update posts state
 
 	const getMorePosts = () => {
 		if (lastDocument) {
@@ -246,6 +246,7 @@ function App() {
 		<PostContext.Provider
 			value={{
 				posts,
+				setPosts,
 				user,
 				setUser,
 				setUpdatePosts,

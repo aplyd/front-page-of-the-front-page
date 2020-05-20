@@ -87,11 +87,11 @@
             - when viewing a post, another firebase request is not needed because i already have the 
             comments stored in posts context
 
-            - !!!! only fetch 25 posts at a time, ordered based on sortBy, then fetch 25 more on scroll !!!!!
+            -̶ ̶o̶n̶l̶y̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶p̶o̶s̶t̶s̶ ̶a̶t̶ ̶a̶ ̶t̶i̶m̶e̶,̶ ̶o̶r̶d̶e̶r̶e̶d̶ ̶b̶a̶s̶e̶d̶ ̶o̶n̶ ̶s̶o̶r̶t̶B̶y̶,̶ ̶t̶h̶e̶n̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶m̶o̶r̶e̶ ̶o̶n̶ ̶s̶c̶r̶o̶l̶l̶
 
-            - FIX updatePosts/setUpdatePosts antipattern!!!
+            -̶ ̶F̶I̶X̶ ̶u̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶/̶s̶e̶t̶U̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶ ̶a̶n̶t̶i̶p̶a̶t̶t̶e̶r̶n̶!̶!̶!̶
 
-            - loading comments page, should only call firebase for that single post
+           ???? - loading comments page, should only call firebase for that single post
                 no need to recall the entire posts document. maybe move that network request
                 out of app, and into the "home" page?
 
