@@ -1,9 +1,24 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export const SORT_OPTIONS = {
-	TIME_ASC: { column: 'timestamp', direction: 'asc' },
-	TIME_DESC: { column: 'timestamp', direction: 'desc' },
-	VOTE_ASC: { column: 'vote', direction: 'asc' },
+	TIME_ASC: {
+		column: 'timestamp',
+		direction: 'asc',
+		column2: 'vote',
+		direction2: 'asc',
+	},
+	TIME_DESC: {
+		column: 'timestamp',
+		direction: 'desc',
+		column2: 'vote',
+		direction2: 'asc',
+	},
+	VOTE_ASC: {
+		column: 'vote',
+		direction: 'asc',
+		column2: 'timestamp',
+		direction2: 'asc',
+	},
 };
 
 export const Comment = ({

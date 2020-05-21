@@ -41,6 +41,10 @@ function App() {
 	//get list of posts from firebase
 	useEffect(() => {
 		const newPosts = [];
+		console.log(
+			SORT_OPTIONS[sortBy].column,
+			SORT_OPTIONS[sortBy].direction
+		);
 		const subscribe = () => {
 			firebase
 				.firestore()
@@ -48,6 +52,10 @@ function App() {
 				.orderBy(
 					SORT_OPTIONS[sortBy].column,
 					SORT_OPTIONS[sortBy].direction
+				)
+				.orderBy(
+					SORT_OPTIONS[sortBy].column2,
+					SORT_OPTIONS[sortBy].direction2
 				)
 				.limit(10)
 				.get()
