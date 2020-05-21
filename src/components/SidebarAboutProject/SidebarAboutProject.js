@@ -61,7 +61,6 @@ export default function SidebarAboutProject() {
 				<S.SVG as={GiCakeSlice} /> <p>Created April 15th, 2020</p>
 			</S.CreationDate>
 			<S.Spacer height={24} />
-			<button onClick={() => getMorePosts()}>paginate me</button>
 		</S.AboutContainer>
 	);
 }

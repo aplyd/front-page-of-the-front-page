@@ -68,7 +68,6 @@ const SubmitBtn = styled.button`
 	}
 `;
 
-//TODO - trigger rerender of App.js after posting ??
 export default function CreatePost({ props, setUpdatePosts }) {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
@@ -81,6 +80,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 		e.preventDefault();
 
 		if (user) {
+			//add post data to firebase and 'posts' state to immediately display
 			firebase
 				.firestore()
 				.collection('posts')
@@ -155,7 +155,7 @@ export default function CreatePost({ props, setUpdatePosts }) {
 			setTitle('');
 			setPostText('');
 		} else {
-			//this shouldn't ever happen because 'create a post' is only mounted when signed in
+			//this block should never be reached because 'create a post' is only mounted when signed in
 			alert('you must sign in to create a post :)');
 		}
 	};
