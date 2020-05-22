@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import DisplayPost from '../components/DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,7 +7,33 @@ const Container = styled.div`
 	grid-column: 1;
 `;
 
+const BackToTopBtn = styled.button`
+	background-color: ${(props) => props.theme.colors.blue};
+	color: white;
+	border-radius: 4px;
+	outline: none;
+	display: block;
+	margin: 32px auto 24px auto;
+	padding: 8px 16px;
+	&&:hover {
+		background-color: ${(props) => props.theme.colors.lightBlue};
+	}
+`;
+
 export default function Feed({ posts, children, viewPostComments }) {
+	const [postRange, setPostRange] = useState(4);
+	const setOfPosts = [...posts].slice(0, postRange);
+
+	const loadMorePosts = () => {
+		setPostRange(postRange + 4);
+	};
+
+	const scrollOptions = {
+		top: 0,
+		left: 0,
+		behavior: 'smooth',
+	};
+
 	return (
 		<Container>
 			{/* to display a pinned post in the future 
@@ -18,13 +44,15 @@ export default function Feed({ posts, children, viewPostComments }) {
 				timestamp={Date.now()}
 				id={'pinned'}
 			/> */}
+			<button type="button" onClick={() => loadMorePosts()}>
+				paginate me
+			</button>
 			{posts &&
-				posts.map((post) => {
+				setOfPosts.map((post, index) => {
 					return (
-						//using the Date.now because without it, im getting duplicate keys when sorting. fix later... hopefully
 						<DisplayPost
 							title={post.title}
-							key={uuidv4()}
+							key={index + post.title}
 							id={post.id}
 							vote={post.vote}
 							timestamp={post.timestamp}
@@ -35,6 +63,13 @@ export default function Feed({ posts, children, viewPostComments }) {
 					);
 				})}
 			{children}
+			{console.log(setOfPosts.length)}
+			{console.log(posts.length)}
+			{setOfPosts && setOfPosts.length === posts.length ? (
+				<BackToTopBtn onClick={() => window.scroll(scrollOptions)}>
+					Back To Top
+				</BackToTopBtn>
+			) : null}
 		</Container>
 	);
 }

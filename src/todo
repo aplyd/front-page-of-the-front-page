@@ -91,9 +91,7 @@
 
             -̶ ̶F̶I̶X̶ ̶u̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶/̶s̶e̶t̶U̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶ ̶a̶n̶t̶i̶p̶a̶t̶t̶e̶r̶n̶!̶!̶!̶
 
-           ???? - loading comments page, should only call firebase for that single post
-                no need to recall the entire posts document. maybe move that network request
-                out of app, and into the "home" page?
+           - no need to fetch comments of a post, already have that data stored in state
 
 [[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 
