@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import DisplayPost from '../components/DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
@@ -63,9 +63,7 @@ export default function Feed({ posts, children, viewPostComments }) {
 					);
 				})}
 			{children}
-			{console.log(setOfPosts.length)}
-			{console.log(posts.length)}
-			{setOfPosts && setOfPosts.length === posts.length ? (
+			{setOfPosts.length === posts.length && setOfPosts.length > 0 ? (
 				<BackToTopBtn onClick={() => window.scroll(scrollOptions)}>
 					Back To Top
 				</BackToTopBtn>
