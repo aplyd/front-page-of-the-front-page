@@ -77,7 +77,6 @@ function App() {
 		subscribe();
 		return () => subscribe();
 	}, [sortBy]);
-	//should remove updatePosts from dep array - instead, directly update posts state
 
 	// saving for future pagination
 	// const getMorePosts = () => {
@@ -91,7 +90,6 @@ function App() {
 	// 			)
 	// 			.startAfter(lastDocument)
 	// 			.limit(10);
-
 	// 		listOfNewPosts.get().then((documentSnapshot) => {
 	// 			if (documentSnapshot.docs.length === 10) {
 	// 				setLastDocument(
@@ -137,17 +135,18 @@ function App() {
 		});
 	}, []);
 
-	//get comments from selected post and
 	const viewPostComments = (id) => {
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(id)
-			.get()
-			.then((content) => {
-				setPostData(content.data());
-			})
-			.catch((err) => console.log('Error getting post data', err));
+		// firebase
+		// 	.firestore()
+		// 	.collection('posts')
+		// 	.doc(id)
+		// 	.get()
+		// 	.then((content) => {
+		// 		setPostData(content.data());
+		// 	})
+		// 	.catch((err) => console.log('Error getting post data', err));
+		const post = posts.filter((post) => post.id === id);
+		setPostData(post[0]);
 	};
 
 	const sortPosts = (sortBy) => {

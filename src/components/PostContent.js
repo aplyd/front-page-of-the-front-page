@@ -210,7 +210,9 @@ export default function PostContent({
 	const [commentSortMethod, setCommentSortMethod] = useState('top');
 	const [areSortOptionsVisible, setAreSortOptionsVisible] = useState(false);
 
+	//detect if user has previously voted on this specific post
 	useEffect(() => {
+		console.log(post);
 		const checkForUserVote = () => {
 			if (user.postVotes.hasOwnProperty(post.id)) {
 				setUserVote(user.postVotes[post.id]);

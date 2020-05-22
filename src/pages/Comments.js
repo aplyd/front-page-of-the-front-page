@@ -22,17 +22,21 @@ export default function Comments({
 	postData,
 	viewPostComments,
 	setPostData,
-	setUser = { setUser },
+	setUser,
 }) {
 	// const [width, setWidth] = useState(window.innerWidth);
 	// const { postTitle } = useParams();
 	const { user } = useContext(PostContext);
-	//id, below, not to be confused with user id or post author id lmao why
 	const { id } = useParams();
 
 	useEffect(() => {
+		// if the user goes to a post without being directed from home page,
+		// this will get the correct data
 		if (!postData) {
 			viewPostComments(id);
+		}
+		if (window.pageYOffset !== 0) {
+			window.scrollTo(0, 0);
 		}
 	}, [id, postData, viewPostComments]);
 
