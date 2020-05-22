@@ -212,14 +212,13 @@ export default function PostContent({
 
 	//detect if user has previously voted on this specific post
 	useEffect(() => {
-		console.log(post);
 		const checkForUserVote = () => {
 			if (user.postVotes.hasOwnProperty(post.id)) {
 				setUserVote(user.postVotes[post.id]);
 			}
 		};
 		user.postVotes && checkForUserVote();
-	}, [userVote, setUserVote, post.id, user.postVotes]);
+	}, [userVote, setUserVote, post, user.postVotes]);
 
 	const submitTopLevelComment = () => {
 		const { username } = user;
@@ -231,7 +230,12 @@ export default function PostContent({
 			.update({
 				replies: [...post.replies, newComment],
 			})
-			.then(viewPostComments(post.id))
+			.then(() => {
+				setPostData({
+					...post,
+					replies: [...post.replies, newComment],
+				});
+			})
 			.catch((err) => console.log(err));
 	};
 

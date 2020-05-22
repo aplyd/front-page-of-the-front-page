@@ -24,8 +24,6 @@ export default function Comments({
 	setPostData,
 	setUser,
 }) {
-	// const [width, setWidth] = useState(window.innerWidth);
-	// const { postTitle } = useParams();
 	const { user } = useContext(PostContext);
 	const { id } = useParams();
 

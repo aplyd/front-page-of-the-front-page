@@ -126,7 +126,7 @@ export default function DisplayComments({
 			.collection('posts')
 			.doc(post.id)
 			.update({ replies: withNewReply })
-			.then(() => viewPostComments(post.id))
+			.then(() => setPostData({ ...post, replies: withNewReply }))
 			.catch((err) => console.log(err));
 	};
 
@@ -138,7 +138,7 @@ export default function DisplayComments({
 			.collection('posts')
 			.doc(post.id)
 			.update({ replies: withDeleted })
-			.then(() => viewPostComments(post.id))
+			.then(() => setPostData({ ...post, replies: withDeleted }))
 			.catch((err) => console.log(err));
 	};
 
