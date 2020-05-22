@@ -123,7 +123,15 @@ const Share = styled(ActionButton)`
 
 export const Vote = styled.p`
 	font-size: ${(props) => props.theme.font.size.xs};
-	color: black;
+	color: ${(props) => {
+		if (props.userVote === 'up') {
+			return props.theme.colors.red;
+		} else if (props.userVote === 'down') {
+			return props.theme.colors.blue;
+		} else {
+			return 'black';
+		}
+	}};
 	padding: 6px 0;
 	cursor: default;
 	font-weight: bold;
@@ -212,7 +220,7 @@ export default function DisplayPost({
 						direction={'up'}
 						uservote={userVote}
 					/>
-					<Vote>{vote}</Vote>
+					<Vote userVote={userVote}>{vote}</Vote>
 					<SVG
 						as={GoArrowDown}
 						onClick={(e) =>

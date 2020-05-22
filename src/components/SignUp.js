@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import useInitialFocus from '../hooks/useInitialFocus';
-import firebase, { createUserAccount } from '../firebase';
+import { createUserAccount } from '../firebase';
 
 const WordsContainer = styled.div`
 	width: 432px;

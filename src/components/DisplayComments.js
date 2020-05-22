@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
+import { FaCommentAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 import { VoteArrowContainer, ActionButton } from './DisplayPost';
 import { SVGarrow } from './PostContent';
@@ -53,7 +54,9 @@ const BtnContainer = styled.div`
 	bottom: 4px;
 	left: 8px;
 `;
-const Btn = styled(ActionButton)``;
+const Btn = styled(ActionButton)`
+	padding: 4px 8px;
+`;
 
 const ReplyInputContainer = styled.div`
 	grid-column: 2;
@@ -83,17 +86,30 @@ const CancelBtn = styled.button`
 
 const Vote = styled.p`
 	font-size: ${(props) => props.theme.font.size.xs};
-	color: black;
+	color: ${(props) => {
+		if (props.userVote === 'up') {
+			return props.theme.colors.red;
+		} else if (props.userVote === 'down') {
+			return props.theme.colors.blue;
+		} else {
+			return 'black';
+		}
+	}};
 	padding: 6px 0;
 	cursor: default;
 	font-weight: bold;
+`;
+
+const CommentSVG = styled.svg`
+	position: relative;
+	top: 2.5px;
+	left: -4px;
 `;
 
 export default function DisplayComments({
 	comment,
 	post,
 	user,
-	viewPostComments,
 	setModalContent,
 	setPostData,
 	setUser,
@@ -238,7 +254,7 @@ export default function DisplayComments({
 							direction="up"
 							uservote={userVote}
 						></SVGarrow>
-						<Vote>{comment.points}</Vote>
+						<Vote userVote={userVote}>{comment.points}</Vote>
 						<SVGarrow
 							as={GoArrowDown}
 							onClick={(e) => castCommentVote(e, 'down')}
@@ -259,6 +275,7 @@ export default function DisplayComments({
 					</CommentBody>
 					<BtnContainer>
 						<Btn onClick={(e) => setIsReplyContainerOpen(true)}>
+							<CommentSVG as={FaCommentAlt} />
 							Reply
 						</Btn>
 						<Btn style={{ cursor: 'no-drop' }}>Share</Btn>
