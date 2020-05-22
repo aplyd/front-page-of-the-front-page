@@ -4,7 +4,6 @@ import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { roundedGreyBorder } from '../GlobalStyle';
 import formatDistance from 'date-fns/formatDistance';
 import DisplayComments from './DisplayComments';
-import useInitialFocus from '../hooks/useInitialFocus';
 import { useWindowWidth } from '../hooks/useWindowWidth';
 import { Comment } from '../utils';
 import firebase from '../firebase';
@@ -198,7 +197,6 @@ export default function PostContent({
 	post,
 	user,
 	setModalContent,
-	viewPostComments,
 	setPostData,
 	setUser,
 }) {
@@ -387,7 +385,6 @@ export default function PostContent({
 								key={uuidv4()}
 								post={post}
 								user={user}
-								viewPostComments={viewPostComments}
 								setModalContent={setModalContent}
 								setPostData={setPostData}
 								setUser={setUser}

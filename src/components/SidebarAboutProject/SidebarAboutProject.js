@@ -1,12 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 // import firebase from '../firebase';
 import { GiCakeSlice } from 'react-icons/gi';
 import * as S from './SidebarAboutProject.style';
-import { PostContext } from '../../PostContext';
 
 export default function SidebarAboutProject() {
-	const [userCount, setUserCount] = useState();
-	const { getMorePosts } = useContext(PostContext);
+	const [userCount] = useState();
 
 	return (
 		<S.AboutContainer>

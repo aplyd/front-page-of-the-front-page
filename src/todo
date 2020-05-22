@@ -8,18 +8,18 @@
 ((2)) a̶d̶d̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶a̶b̶i̶l̶i̶t̶i̶e̶s̶ ̶f̶o̶r̶ ̶u̶s̶e̶r̶s̶
     -̶ ̶c̶r̶e̶a̶t̶e̶ ̶d̶a̶t̶a̶ ̶s̶t̶r̶u̶c̶t̶u̶r̶e̶ ̶i̶n̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶n̶d̶ ̶s̶t̶o̶r̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶
     -̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶f̶t̶e̶r̶ ̶s̶u̶b̶m̶i̶t̶t̶i̶n̶g̶
-    - form validation?
     -̶ ̶s̶h̶o̶w̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶"̶c̶o̶m̶m̶e̶n̶t̶ ̶a̶s̶ ̶_̶_̶_̶_̶"̶
     -̶ ̶h̶i̶d̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶i̶n̶p̶u̶t̶ ̶u̶n̶l̶e̶s̶s̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
     -̶ ̶l̶i̶n̶e̶ ̶u̶p̶ ̶l̶e̶f̶t̶ ̶e̶d̶g̶e̶ ̶o̶f̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶b̶o̶x̶,̶ ̶p̶o̶s̶t̶ ̶b̶o̶d̶y̶,̶ ̶e̶t̶c̶.̶
+    - form validation?
 
 (̶(̶)̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶s̶e̶a̶r̶c̶h̶ ̶i̶n̶p̶u̶t̶!̶!̶
 
 (̶(̶3̶)̶)̶ ̶s̶i̶g̶n̶ ̶u̶p̶ ̶a̶n̶d̶ ̶l̶o̶g̶ ̶i̶n̶ ̶f̶o̶r̶m̶ ̶v̶a̶l̶i̶d̶a̶t̶i̶o̶n̶
     -̶ ̶s̶t̶o̶r̶e̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶s̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶d̶o̶c̶
-    - check firebase to make sure username not taken (oh god)???
     -̶ ̶c̶h̶e̶c̶k̶ ̶l̶e̶n̶g̶t̶h̶ ̶m̶i̶n̶ ̶+̶ ̶m̶a̶x̶
     -̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶n̶a̶v̶ ̶r̶e̶r̶e̶n̶d̶e̶r̶ ̶o̶n̶ ̶l̶o̶g̶ ̶o̶u̶t̶
+    - check firebase to make sure username not taken ??
 
 (̶(̶)̶)̶ ̶a̶d̶d̶ ̶"̶n̶o̶ ̶r̶e̶s̶u̶l̶t̶s̶ ̶f̶o̶u̶n̶d̶ ̶i̶n̶ ̶s̶e̶a̶r̶c̶h̶ ̶o̶p̶t̶i̶o̶n̶"̶
 
@@ -63,9 +63,8 @@
 (̶(̶)̶)̶ ̶c̶r̶e̶a̶t̶e̶ ̶4̶0̶4̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶F̶e̶e̶d̶S̶o̶r̶t̶ ̶c̶o̶m̶p̶o̶n̶e̶n̶t̶
 (̶(̶)̶)̶ ̶a̶l̶l̶o̶w̶ ̶f̶o̶r̶ ̶d̶e̶l̶e̶t̶i̶n̶g̶ ̶y̶o̶u̶'̶r̶e̶ ̶o̶w̶n̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶b̶y̶ ̶r̶e̶p̶l̶a̶c̶i̶n̶g̶ ̶t̶h̶e̶ ̶t̶e̶x̶t̶ ̶w̶i̶t̶h̶ ̶[̶d̶e̶l̶e̶t̶e̶d̶]̶
-(()) handle errors logging in by displaying error - wrong email/password
-(()) add content to sidebar
 (̶(̶)̶)̶ ̶l̶i̶m̶i̶t̶ ̶d̶i̶s̶p̶l̶a̶y̶P̶o̶s̶t̶s̶ ̶t̶o̶ ̶m̶o̶s̶t̶ ̶r̶e̶c̶e̶n̶t̶ ̶1̶0̶
+(()) handle errors logging in by displaying error - wrong email/password, network error, etc.
 (()) be able to delete post? it should actually remove it from firebase or set some flag so its not displayed
 
 ((last)) 
@@ -94,10 +93,10 @@
 
            -̶ ̶n̶o̶ ̶n̶e̶e̶d̶ ̶t̶o̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶o̶f̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶a̶l̶r̶e̶a̶d̶y̶ ̶h̶a̶v̶e̶ ̶t̶h̶a̶t̶ ̶d̶a̶t̶a̶ ̶s̶t̶o̶r̶e̶d̶ ̶i̶n̶ ̶s̶t̶a̶t̶e̶
 
-[[[[[[[]]]]]]] NON-URGENT [[[[[[[]]]]]]]
+[[[[[[[]]]]]]] ROADMAP [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 
 () display imgur photos/gifs
-() handle link sharing?
+() handle link sharing
 () add tensorFlow to detect toxic posts/comments
 () allow for editing comments
 () allow for login via username by getting their email from firebase (make request, search through all user objects to get email)

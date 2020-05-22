@@ -8,7 +8,6 @@ import {
 	insertReply,
 	Comment,
 	setCommentAsDeleted,
-	getNewVoteCount,
 	withNewCommentVote,
 } from '../utils';
 import firebase from '../firebase';
@@ -281,7 +280,6 @@ export default function DisplayComments({
 							key={uuidv4()}
 							post={post}
 							user={user}
-							viewPostComments={viewPostComments}
 							setModalContent={setModalContent}
 							setPostData={setPostData}
 							setUser={setUser}

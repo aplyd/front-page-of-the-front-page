@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 import FeedContainer from '../layouts/FeedContainer';
 import CreatePost from '../components/CreatePost';
-import Feed from '../layouts/Feed';
 
 const CreatePostContainer = styled.div`
 	${roundedGreyBorder};
