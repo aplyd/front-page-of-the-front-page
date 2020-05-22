@@ -25,7 +25,7 @@ export default function Feed({ posts, children, viewPostComments }) {
 	const setOfPosts = [...posts].slice(0, postRange);
 	const lastItem = useRef(null);
 
-	//simulating pagination
+	//simulating pagination for now - to be updated when firestore orderBy() and limit() work
 	useEffect(() => {
 		const item = lastItem.current;
 		const observer = new IntersectionObserver(
@@ -66,9 +66,6 @@ export default function Feed({ posts, children, viewPostComments }) {
 				timestamp={Date.now()}
 				id={'pinned'}
 			/> */}
-			{/* <button type="button" onClick={() => loadMorePosts()}>
-				paginate me
-			</button> */}
 			{posts &&
 				setOfPosts.map((post, index) => {
 					return (
@@ -81,21 +78,16 @@ export default function Feed({ posts, children, viewPostComments }) {
 							username={post.username}
 							post={post}
 							viewPostComments={viewPostComments}
-							// lastItem={
-							// 	index + 1 === setOfPosts.length
-							// 		? lastItem
-							// 		: null
-							// }
 						/>
 					);
 				})}
 			{children}
-			<div ref={lastItem}></div>
 			{setOfPosts.length === posts.length && setOfPosts.length > 0 ? (
 				<BackToTopBtn onClick={() => window.scroll(scrollOptions)}>
 					Back To Top
 				</BackToTopBtn>
 			) : null}
+			<div ref={lastItem}></div>
 		</Container>
 	);
 }
