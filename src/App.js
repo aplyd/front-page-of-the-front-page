@@ -27,6 +27,7 @@ export const Container = styled.div`
 
 function App() {
 	const [user, setUser] = useState({});
+	const [users, setUsers] = useState(null);
 	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
 	//this (updatePosts) is only here to trigger a rerender to
@@ -76,6 +77,19 @@ function App() {
 		subscribe();
 		return () => subscribe();
 	}, [sortBy]);
+
+	useEffect(() => {
+		const listOfUsers = [];
+		firebase
+			.firestore()
+			.collection('users')
+			.get()
+			.then((querySnapshot) => {
+				querySnapshot.forEach((user) => listOfUsers.push(user.data()));
+				setUsers(listOfUsers);
+			})
+			.catch((error) => console.log);
+	}, []);
 
 	// saving for future pagination
 	// const getMorePosts = () => {
@@ -244,6 +258,7 @@ function App() {
 				setPosts,
 				user,
 				setUser,
+				users,
 				setModalContent,
 				castPostVote,
 				// getMorePosts, saving for future pagination

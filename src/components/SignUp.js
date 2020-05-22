@@ -1,8 +1,8 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import useInitialFocus from '../hooks/useInitialFocus';
-import { createUserAccount } from '../firebase';
+import firebase, { createUserAccount } from '../firebase';
 
 const WordsContainer = styled.div`
 	width: 432px;
@@ -61,20 +61,47 @@ const P2 = styled.p`
 	color: ${(props) => props.theme.colors.blue};
 `;
 
+const InvalidInputNotification = styled.p`
+	color: ${(props) => props.theme.colors.red};
+	font-size: ${(props) => props.theme.font.size.xs};
+	padding-bottom: 4px;
+`;
+
+const NotificationSpacer = styled.div`
+	height: 14px;
+	padding-bottom: 4px;
+`;
+
 export default function SignUp({ showLogIn, closeModal }) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
-	const { setUser } = useContext(PostContext);
+	const [isUsernameUnique, setIsUsernameUnique] = useState(true);
+	const { setUser, users } = useContext(PostContext);
 	const input = useRef(null);
 	useInitialFocus(input);
 
+	useEffect(() => {
+		users &&
+			users.forEach((user) => {
+				if (user.username.toLowerCase() === username.toLowerCase()) {
+					setIsUsernameUnique(false);
+					console.log('taken');
+				} else {
+					setIsUsernameUnique(true);
+					console.log('dafe');
+				}
+			});
+	}, [username, users]);
+
 	const createUser = (e) => {
 		e.preventDefault();
-		createUserAccount(username, email, password, setUser);
-		setUsername('');
-		setPassword('');
-		closeModal();
+		if (isUsernameUnique) {
+			createUserAccount(username, email, password, setUser);
+			setUsername('');
+			setPassword('');
+			closeModal();
+		}
 	};
 
 	return (
@@ -84,6 +111,13 @@ export default function SignUp({ showLogIn, closeModal }) {
 				your favorite content.
 			</Title>
 			<form onSubmit={createUser}>
+				{isUsernameUnique ? (
+					<NotificationSpacer />
+				) : (
+					<InvalidInputNotification>
+						Sorry, this username is already taken
+					</InvalidInputNotification>
+				)}
 				<UserNameInput
 					type="text"
 					focus

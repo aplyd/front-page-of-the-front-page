@@ -52,7 +52,7 @@ const Content = styled.div`
 
 const CloseContainer = styled.div`
 	width: 100%;
-	height: 240px;
+	height: 220px;
 	position: relative;
 `;
 

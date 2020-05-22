@@ -69,8 +69,9 @@
 
 ((last)) 
     - clean up code
-    - delete all unused variables
-    - remove all log statements
+    -̶ ̶d̶e̶l̶e̶t̶e̶ ̶a̶l̶l̶ ̶u̶n̶u̶s̶e̶d̶ ̶v̶a̶r̶i̶a̶b̶l̶e̶s̶
+    - go through all comments
+    - remove all console.log() statements
     - seperate all components from style components and keep in individual files
     - keep component + styles in own folder
     - figure out hosting with routing
