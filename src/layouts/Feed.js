@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import DisplayPost from '../components/DisplayPost';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,12 +21,34 @@ const BackToTopBtn = styled.button`
 `;
 
 export default function Feed({ posts, children, viewPostComments }) {
-	const [postRange, setPostRange] = useState(4);
+	const [postRange, setPostRange] = useState(10);
 	const setOfPosts = [...posts].slice(0, postRange);
+	const lastItem = useRef(null);
 
-	const loadMorePosts = () => {
-		setPostRange(postRange + 4);
-	};
+	//simulating pagination
+	useEffect(() => {
+		const item = lastItem.current;
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setPostRange(postRange + 10);
+				}
+			},
+			{
+				root: null,
+				rootMargin: '0px',
+				threshold: 1,
+			}
+		);
+		if (item) {
+			observer.observe(item);
+		}
+		return () => {
+			if (item) {
+				observer.unobserve(item);
+			}
+		};
+	}, [lastItem, postRange]);
 
 	const scrollOptions = {
 		top: 0,
@@ -44,9 +66,9 @@ export default function Feed({ posts, children, viewPostComments }) {
 				timestamp={Date.now()}
 				id={'pinned'}
 			/> */}
-			<button type="button" onClick={() => loadMorePosts()}>
+			{/* <button type="button" onClick={() => loadMorePosts()}>
 				paginate me
-			</button>
+			</button> */}
 			{posts &&
 				setOfPosts.map((post, index) => {
 					return (
@@ -59,10 +81,16 @@ export default function Feed({ posts, children, viewPostComments }) {
 							username={post.username}
 							post={post}
 							viewPostComments={viewPostComments}
+							// lastItem={
+							// 	index + 1 === setOfPosts.length
+							// 		? lastItem
+							// 		: null
+							// }
 						/>
 					);
 				})}
 			{children}
+			<div ref={lastItem}></div>
 			{setOfPosts.length === posts.length && setOfPosts.length > 0 ? (
 				<BackToTopBtn onClick={() => window.scroll(scrollOptions)}>
 					Back To Top
