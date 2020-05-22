@@ -68,7 +68,7 @@ const SubmitBtn = styled.button`
 	}
 `;
 
-export default function CreatePost({ props, setUpdatePosts }) {
+export default function CreatePost({ props }) {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
 	const { user, setUser, setPosts, posts } = useContext(PostContext);

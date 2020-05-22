@@ -36,7 +36,7 @@ const BlueLine = styled.div`
 	margin-bottom: 8px;
 `;
 
-export default function Submit({ setUpdatePosts }) {
+export default function Submit() {
 	return (
 		<Container>
 			<FeedContainer displayFeedSort={false}>
@@ -46,7 +46,7 @@ export default function Submit({ setUpdatePosts }) {
 					<CreatePostContainer>
 						<PostP>Post</PostP>
 						<BlueLine></BlueLine>
-						<CreatePost setUpdatePosts={setUpdatePosts} />
+						<CreatePost />
 					</CreatePostContainer>
 				</div>
 			</FeedContainer>

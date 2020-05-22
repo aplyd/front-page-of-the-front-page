@@ -32,7 +32,6 @@ function App() {
 	//this (updatePosts) is only here to trigger a rerender to
 	//correctly display sorted posts - will probably remove when refactored correctly
 	//anti-pattern - changing sortBy should trigger rerender automatically
-	const [updatePosts, setUpdatePosts] = useState();
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked
 	const [postData, setPostData] = useState();
@@ -136,22 +135,12 @@ function App() {
 	}, []);
 
 	const viewPostComments = (id) => {
-		// firebase
-		// 	.firestore()
-		// 	.collection('posts')
-		// 	.doc(id)
-		// 	.get()
-		// 	.then((content) => {
-		// 		setPostData(content.data());
-		// 	})
-		// 	.catch((err) => console.log('Error getting post data', err));
 		const post = posts.filter((post) => post.id === id);
 		setPostData(post[0]);
 	};
 
 	const sortPosts = (sortBy) => {
 		setSortBy(sortBy);
-		setUpdatePosts(Date.now());
 	};
 
 	function castPostVote(
@@ -255,7 +244,6 @@ function App() {
 				setPosts,
 				user,
 				setUser,
-				setUpdatePosts,
 				setModalContent,
 				castPostVote,
 				// getMorePosts, saving for future pagination
@@ -287,12 +275,7 @@ function App() {
 					<Route
 						exact
 						path="/submit"
-						component={(props) => (
-							<Submit
-								{...props}
-								setUpdatePosts={setUpdatePosts}
-							/>
-						)}
+						component={(props) => <Submit {...props} />}
 					/>
 					<Route
 						exact
