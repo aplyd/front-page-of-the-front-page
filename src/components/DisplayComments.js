@@ -106,6 +106,12 @@ const CommentSVG = styled.svg`
 	left: -4px;
 `;
 
+const VoteContainer = styled.div`
+	&& > div {
+		padding: 2px 0 0 8px;
+	}
+`;
+
 export default function DisplayComments({
 	comment,
 	post,
@@ -246,7 +252,7 @@ export default function DisplayComments({
 	return (
 		<React.Fragment>
 			<Card depth={comment.depth}>
-				<VoteArrowContainer>
+				<VoteContainer as={VoteArrowContainer}>
 					<div>
 						<SVGarrow
 							as={GoArrowUp}
@@ -262,7 +268,7 @@ export default function DisplayComments({
 							uservote={userVote}
 						></SVGarrow>
 					</div>
-				</VoteArrowContainer>
+				</VoteContainer>
 				<ContentContainer>
 					<CommentInfo>
 						{comment.deleted ? '[deleted]' : comment.username}{' '}

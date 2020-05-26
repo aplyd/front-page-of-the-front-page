@@ -26,7 +26,7 @@ export const VoteArrowContainer = styled.div`
 	color: gray;
 	grid-column: 1;
 	&& > div {
-		padding: 20px 0 0 8px;
+		padding: 10px 0 0 8px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

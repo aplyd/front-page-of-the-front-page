@@ -17,7 +17,7 @@ import SignUp from './components/SignUp';
 import notFound404 from './pages/NotFound404';
 
 export const Container = styled.div`
-	width: 100%;
+	width: 100vw;
 	min-height: 100vh;
 	background: ${(props) => props.theme.colors.backgroundBlue};
 	padding-top: 48px;
