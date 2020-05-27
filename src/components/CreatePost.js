@@ -1,12 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import firebase from '../firebase';
-import { useHistory } from 'react-router-dom';
-import { PostContext } from '../PostContext';
-import { v4 as uuidv4 } from 'uuid';
 
 const FormContainer = styled.form`
 	position: relative;
+	background: red;
 `;
 
 const TitleInput = styled.input`
@@ -68,117 +65,18 @@ const SubmitBtn = styled.button`
 	}
 `;
 
-export default function CreatePost({ props }) {
-	const [title, setTitle] = useState('');
-	const [postText, setPostText] = useState('');
-	const { user, setUser, setPosts, posts } = useContext(PostContext);
-	const history = useHistory();
+const MediaInput = styled.input``;
+const LinkInput = styled.input``;
 
-	const onSubmit = (e) => {
-		const timestamp = Date.now();
-		const postID = uuidv4();
-		e.preventDefault();
-
-		if (user) {
-			//add post data to firebase and 'posts' state to immediately display
-			firebase
-				.firestore()
-				.collection('posts')
-				.doc(postID)
-				.set({
-					title,
-					postText,
-					timestamp,
-					vote: 1,
-					username: user.username,
-					replies: [],
-					id: postID,
-				})
-				.then(() => {
-					setPosts([
-						{
-							title,
-							postText,
-							timestamp,
-							vote: 1,
-							username: user.username,
-							replies: [],
-							id: postID,
-						},
-						...posts,
-					]);
-					history.push('/');
-				});
-
-			firebase
-				.firestore()
-				.collection('users')
-				.doc(user.uid)
-				.update({
-					posts: [
-						...user.posts,
-						{
-							title,
-							postText,
-							timestamp,
-							postID,
-							uid: user.uid,
-						},
-					],
-				});
-
-			//TODO - is this neeeded????
-			firebase
-				.firestore()
-				.collection('users')
-				.doc(user.uid)
-				.get()
-				.then((res) => {
-					const data = res.data();
-					setUser({
-						...data,
-						isSignedIn: true,
-						isAnonymous: false,
-						posts: [
-							...user.posts,
-							{
-								postID,
-								postText,
-								title,
-								timestamp,
-								uid: user.uid,
-							},
-						],
-					});
-				});
-
-			setTitle('');
-			setPostText('');
-		} else {
-			//this block should never be reached because 'create a post' is only mounted when signed in
-			alert('you must sign in to create a post :)');
-		}
-	};
-
-	const cancelCreatePost = () => {
-		const cancel = () => {
-			setTitle('');
-			setPostText('');
-			history.push('/');
-		};
-		if (title.length > 0 || postText.length > 0) {
-			if (
-				window.confirm(
-					'Are you sure you want to leave this page? Your post will not be saved.'
-				)
-			) {
-				cancel();
-			}
-		} else {
-			cancel();
-		}
-	};
-
+export default function CreatePost({
+	onSubmit,
+	onCancel,
+	setPostText,
+	setTitle,
+	title,
+	postText,
+	inputShown,
+}) {
 	return (
 		<FormContainer onSubmit={onSubmit}>
 			<TitleInput
@@ -189,13 +87,22 @@ export default function CreatePost({ props }) {
 				placeholder="Title"
 				maxLength="300"
 			></TitleInput>
-			<TextInput
-				value={postText}
-				onChange={(e) => setPostText(e.currentTarget.value)}
-				placeholder="Text (optional)"
-				maxLength="1600"
-			></TextInput>
-			<CancelBtn type="button" onClick={() => cancelCreatePost()}>
+			{inputShown === 'post' && (
+				<TextInput
+					value={postText}
+					onChange={(e) => setPostText(e.currentTarget.value)}
+					placeholder="Text (optional)"
+					maxLength="1600"
+				></TextInput>
+			)}
+			{inputShown === 'media' && (
+				<MediaInput placeholder={'Url'}></MediaInput>
+			)}
+			{inputShown === 'link' && (
+				<LinkInput placeholder={'Url'}></LinkInput>
+			)}
+
+			<CancelBtn type="button" onClick={() => onCancel()}>
 				Cancel
 			</CancelBtn>
 			<SubmitBtn type="submit">Post</SubmitBtn>
