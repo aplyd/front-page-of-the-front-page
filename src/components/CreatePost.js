@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const FormContainer = styled.form`
 	position: relative;
-	background: red;
 `;
 
 const TitleInput = styled.input`
@@ -65,8 +64,12 @@ const SubmitBtn = styled.button`
 	}
 `;
 
-const MediaInput = styled.input``;
-const LinkInput = styled.input``;
+const MediaInput = styled(TextInput)`
+	min-height: 48px;
+`;
+const LinkInput = styled(TextInput)`
+	min-height: 48px;
+`;
 
 export default function CreatePost({
 	onSubmit,
