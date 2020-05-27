@@ -49,12 +49,6 @@ export default function Feed({ posts, children, viewPostComments }) {
 		};
 	}, [lastItem, postRange]);
 
-	const scrollOptions = {
-		top: 0,
-		left: 0,
-		behavior: 'smooth',
-	};
-
 	return (
 		<Container>
 			{posts &&
@@ -74,7 +68,11 @@ export default function Feed({ posts, children, viewPostComments }) {
 				})}
 			{children}
 			{setOfPosts.length === posts.length && setOfPosts.length > 0 ? (
-				<BackToTopBtn onClick={() => window.scroll(scrollOptions)}>
+				<BackToTopBtn
+					onClick={() =>
+						window.scrollTo({ top: 0, behavior: 'smooth' })
+					}
+				>
 					Back To Top
 				</BackToTopBtn>
 			) : null}

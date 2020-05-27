@@ -16,7 +16,7 @@ const Container = styled.div`
 	grid-template-rows: 1fr 32px;
 	margin-bottom: 12px;
 	cursor: pointer;
-	:hover {
+	&&:hover {
 		border: solid 1px rgb(137, 137, 137);
 	}
 `;

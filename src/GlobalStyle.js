@@ -22,9 +22,6 @@ button {
 	text-transform: uppercase;
 	margin: 0 4px;
 	cursor: pointer;
-	&&:hover {
-		cursor: pointer;
-	}
 
 
 input:not([type]), input[type="text"] {

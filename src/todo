@@ -67,6 +67,7 @@
 (()) handle errors logging in by displaying error - wrong email/password, network error, etc.
 (()) be able to delete post? it should actually remove it from firebase or set some flag so its not displayed
 (()) fix auto scrollToTop on commenting and voting
+(()) add delay for simulating pagination
 
 ((last)) 
     - clean up code

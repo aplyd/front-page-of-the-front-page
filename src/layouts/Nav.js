@@ -17,7 +17,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	padding: 0 20px;
+	padding: 0 16px;
 	font-family: ${(props) => props.theme.font.family[0]};
 	position: fixed;
 	top: 0;
@@ -28,9 +28,9 @@ const Container = styled.div`
 
 const Circle = styled.div`
 	border-radius: 50%;
-	height: 38px;
-	width: 38px;
-	min-width: 38px;
+	height: 34px;
+	width: 34px;
+	min-width: 34px;
 	background: rgb(255, 69, 0);
 	margin: 8px 8px 8px 0;
 `;
@@ -138,7 +138,8 @@ const ProfileDropdown = styled.div`
 
 const SVG = styled.svg`
 	color: ${(props) => props.theme.colors.grey};
-	font-size: 32px;
+	margin-right: -8px;
+	font-size: 40px;
 	cursor: pointer;
 `;
 
