@@ -16,7 +16,7 @@ import {
 	ActionContainer,
 	ActionButton,
 	Vote,
-} from './DisplayPost';
+} from './PostPreview';
 import { v4 as uuidv4 } from 'uuid';
 import { PostContext } from '../PostContext';
 import { TiArrowSortedDown } from 'react-icons/ti';

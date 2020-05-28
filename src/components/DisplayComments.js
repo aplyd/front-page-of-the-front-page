@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { FaCommentAlt } from 'react-icons/fa';
 import styled from 'styled-components';
-import { VoteArrowContainer, ActionButton } from './DisplayPost';
+import { VoteArrowContainer, ActionButton } from './PostPreview';
 import { SVGarrow } from './PostContent';
 import { v4 as uuidv4 } from 'uuid';
 import {

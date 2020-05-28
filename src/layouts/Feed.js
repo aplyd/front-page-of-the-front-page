@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import DisplayPost from '../components/DisplayPost';
+import PostPreview from '../components/PostPreview';
 
 const Container = styled.div`
 	grid-column: 1;
@@ -55,7 +55,7 @@ export default function Feed({ posts, children, viewPostComments }) {
 				setOfPosts.map((post, index) => {
 					//display different components based on the post type
 					return (
-						<DisplayPost
+						<PostPreview
 							postType={post.postType}
 							title={post.title}
 							media={post.media ? post.media : null}

@@ -175,7 +175,7 @@ const Pinned = styled.p`
 	padding: 6px 0 6px 8px;
 `;
 
-export default function DisplayPost({
+export default function PostPreview({
 	title,
 	username,
 	vote,
