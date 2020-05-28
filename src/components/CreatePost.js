@@ -99,10 +99,10 @@ export default function CreatePost({
 				></TextInput>
 			)}
 			{inputShown === 'media' && (
-				<MediaInput placeholder={'Url'}></MediaInput>
+				<MediaInput placeholder={'Url'} required></MediaInput>
 			)}
 			{inputShown === 'link' && (
-				<LinkInput placeholder={'Url'}></LinkInput>
+				<LinkInput placeholder={'Url'} required></LinkInput>
 			)}
 
 			<CancelBtn type="button" onClick={() => onCancel()}>

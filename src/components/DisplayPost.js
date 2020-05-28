@@ -178,13 +178,13 @@ const Pinned = styled.p`
 export default function DisplayPost({
 	title,
 	username,
-	preview,
 	vote,
 	id,
 	timestamp,
 	pinned,
 	post,
 	viewPostComments,
+	postType,
 }) {
 	const { user, castPostVote } = useContext(PostContext);
 	const url = title.replace(/\W/g, '').toLowerCase(); //remove all non-alphanumeric characters
@@ -264,10 +264,14 @@ export default function DisplayPost({
 				<Share>share</Share>
 			</ActionContainer>
 
-			{/* <JoinContainer>
-				<JoinBtn>+ Join</JoinBtn>
-				<LinkPreview src={preview ? preview : null}></LinkPreview>
-			</JoinContainer> */}
+			{/* {postType === 'link' ? (
+				<JoinContainer>
+					<JoinBtn>+ Join</JoinBtn>
+					<LinkPreview
+						src={post.preview ? post.preview : null}
+					></LinkPreview>
+				</JoinContainer>
+			) : null} */}
 		</Container>
 	);
 }

@@ -56,7 +56,7 @@ const PostP = styled.p`
 			? props.theme.colors.blue
 			: props.theme.colors.gray};
 	padding-top: 20px;
-	font-size: 15px;
+	font-size: 16px;
 	/* padding: 24px 0 12px 10%; */
 `;
 
@@ -75,7 +75,7 @@ const InputTypeSVG = styled.svg`
 		props.inputshown === props.label
 			? props.theme.colors.blue
 			: props.theme.colors.gray};
-	font-size: 16px;
+	font-size: 18px;
 	padding-top: 21px;
 	padding-right: 8px;
 `;
@@ -83,6 +83,8 @@ const InputTypeSVG = styled.svg`
 export default function Submit() {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
+	const [postMedia, setPostMedia] = useState(null);
+	const [postLink, setPostLink] = useState(null);
 	const [inputShown, setInputShown] = useState('post');
 	const { user, setUser, setPosts, posts } = useContext(PostContext);
 	const history = useHistory();
@@ -99,8 +101,11 @@ export default function Submit() {
 				.collection('posts')
 				.doc(postID)
 				.set({
+					postType: inputShown,
 					title,
 					postText,
+					postMedia,
+					postLink,
 					timestamp,
 					vote: 1,
 					username: user.username,
@@ -110,8 +115,11 @@ export default function Submit() {
 				.then(() => {
 					setPosts([
 						{
+							postType: inputShown,
 							title,
 							postText,
+							postMedia,
+							postLink,
 							timestamp,
 							vote: 1,
 							username: user.username,
@@ -253,6 +261,10 @@ export default function Submit() {
 							setPostText={setPostText}
 							title={title}
 							postText={postText}
+							postMedia={postMedia}
+							setPostMedia={setPostMedia}
+							postLink={postLink}
+							setPostLink={setPostLink}
 							inputShown={inputShown}
 						/>
 					</CreatePostContainer>

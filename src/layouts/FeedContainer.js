@@ -46,8 +46,8 @@ export default function FeedContainer({
 	const [width, setWidth] = useState(window.innerWidth);
 	useWindowWidth(setWidth);
 
-	//conditionally displaying Feed/FeedSort because the Comments page
-	//uses this component without FeedSort
+	// conditionally displaying Feed/FeedSort because the
+	// Comments page uses this component without FeedSort
 	return (
 		<Container>
 			<MainContainer>

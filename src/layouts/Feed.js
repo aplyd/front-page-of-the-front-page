@@ -53,9 +53,13 @@ export default function Feed({ posts, children, viewPostComments }) {
 		<Container>
 			{posts &&
 				setOfPosts.map((post, index) => {
+					//display different components based on the post type
 					return (
 						<DisplayPost
+							postType={post.postType}
 							title={post.title}
+							media={post.media ? post.media : null}
+							link={post.link ? post.link : null}
 							key={index + post.title}
 							id={post.id}
 							vote={post.vote}
