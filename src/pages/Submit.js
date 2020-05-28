@@ -42,7 +42,7 @@ const InputSelectItem = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	min-height: 52px;
+	min-height: 62px;
 	cursor: pointer;
 	&& > div {
 		display: flex;
@@ -55,7 +55,7 @@ const PostP = styled.p`
 		props.inputshown === props.label
 			? props.theme.colors.blue
 			: props.theme.colors.gray};
-	padding-top: 15px;
+	padding-top: 20px;
 	font-size: 15px;
 	/* padding: 24px 0 12px 10%; */
 `;
@@ -76,7 +76,7 @@ const InputTypeSVG = styled.svg`
 			? props.theme.colors.blue
 			: props.theme.colors.gray};
 	font-size: 16px;
-	padding-top: 16px;
+	padding-top: 21px;
 	padding-right: 8px;
 `;
 

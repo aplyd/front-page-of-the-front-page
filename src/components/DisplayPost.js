@@ -187,7 +187,7 @@ export default function DisplayPost({
 	viewPostComments,
 }) {
 	const { user, castPostVote } = useContext(PostContext);
-	const url = title.replace(/\s+/g, '-').toLowerCase();
+	const url = title.replace(/\W/g, '').toLowerCase(); //remove all non-alphanumeric characters
 	const commentCount = post ? countReplies(post) : null;
 	const history = useHistory();
 	const [userVote, setUserVote] = useState(null);
@@ -205,6 +205,7 @@ export default function DisplayPost({
 
 	const handleClick = () => {
 		viewPostComments(post.id);
+		// history.push(`/comments/${url}/${post.id}`);
 		history.push(`/comments/${url}/${post.id}`);
 	};
 

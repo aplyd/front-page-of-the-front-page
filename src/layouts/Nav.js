@@ -270,10 +270,9 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 					left={searchBarLeft}
 					width={searchBarWidth}
 				>
-					{/* this is the least readable code ive ever written */}
 					{/* it checks if there are search results and then */}
 					{/* displays "no results found", the results or nothing */}
-					{/* nested ternary */}
+					{/* sorry future self for the nested ternary */}
 					{searchInput.length > 0 && searchResults.length === 0 ? (
 						<ResultCard key="no-results">
 							<ResultTitle></ResultTitle>
@@ -282,8 +281,8 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 					) : searchInput.length > 0 ? (
 						searchResults.map((post, index) => {
 							const url = post.title
-								.replace(/\s+/g, '-')
-								.toLowerCase();
+								.replace(/\W/g, '')
+								.toLowerCase(); //remove all non-alphanumeric characters
 							return (
 								<ResultCard
 									key={index}
