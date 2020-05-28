@@ -34,7 +34,6 @@ function App() {
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked
 	const [postData, setPostData] = useState();
-	// const [lastDocument, setLastDocument] = useState(null); saving for future pagination
 
 	//get list of posts from firebase
 	useEffect(() => {
@@ -51,18 +50,8 @@ function App() {
 					SORT_OPTIONS[sortBy].column2,
 					SORT_OPTIONS[sortBy].direction2
 				)
-				// .limit(3) limiting stops orderBy from working ?? so i'm simulating
-				// pagination by loading all documents and then displaying them on scroll
 				.get()
 				.then((querySnapshot) => {
-					// saving for future pagination
-					// if (querySnapshot.docs.length === 10) {
-					// 	setLastDocument(
-					// 		querySnapshot.docs[querySnapshot.docs.length - 1]
-					// 	);
-					// } else {
-					// 	setLastDocument(null);
-					// }
 					querySnapshot.forEach((doc) => {
 						newPosts.unshift({ id: doc.id, ...doc.data() });
 					});
@@ -88,35 +77,6 @@ function App() {
 			})
 			.catch((error) => console.log);
 	}, []);
-
-	// saving for future pagination
-	// const getMorePosts = () => {
-	// 	if (lastDocument) {
-	// 		const listOfNewPosts = firebase
-	// 			.firestore()
-	// 			.collection('posts')
-	// 			.orderBy(
-	// 				SORT_OPTIONS[sortBy].column,
-	// 				SORT_OPTIONS[sortBy].direction
-	// 			)
-	// 			.startAfter(lastDocument)
-	// 			.limit(10);
-	// 		listOfNewPosts.get().then((documentSnapshot) => {
-	// 			if (documentSnapshot.docs.length === 10) {
-	// 				setLastDocument(
-	// 					documentSnapshot.docs[documentSnapshot.docs.length - 1]
-	// 				);
-	// 			} else {
-	// 				setLastDocument(null);
-	// 			}
-	// 			const moreNewPosts = [];
-	// 			documentSnapshot.forEach((doc) => {
-	// 				moreNewPosts.unshift({ id: doc.id, ...doc.data() });
-	// 			});
-	// 			setPosts([...posts, ...moreNewPosts]);
-	// 		});
-	// 	}
-	// };
 
 	//detect user
 	useEffect(() => {
@@ -259,7 +219,6 @@ function App() {
 				users,
 				setModalContent,
 				castPostVote,
-				// getMorePosts, saving for future pagination
 			}}
 		>
 			<Router>
