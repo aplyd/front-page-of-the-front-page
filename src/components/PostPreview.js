@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { PostContext } from '../PostContext';
+import MediaPreview from './MediaPreview';
+import LinkPreview from './LinkPreview';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
@@ -38,6 +40,7 @@ export const ContentContainer = styled.div`
 	flex-direction: column;
 	grid-column: 2;
 	grid-row: 1;
+	position: relative;
 `;
 
 export const InfoContainer = styled.div`
@@ -75,16 +78,6 @@ export const JoinBtn = styled.button`
 	border-radius: 4px;
 	margin-bottom: 8px;
 	float: right;
-`;
-
-export const LinkPreview = styled.div`
-	width: 142px;
-	height: 98px;
-	background: lightgray;
-	margin-top: 32px;
-	background: white;
-	border: 1px solid #0079d3;
-	border-radius: 4px;
 `;
 
 export const ActionContainer = styled.div`
@@ -252,7 +245,15 @@ export default function PostPreview({
 					</p>
 				</InfoContainer>
 
-				<Title>{title}</Title>
+				{postType === 'post' && <Title>{title}</Title>}
+				{postType === 'media' && <MediaPreview />}
+				{postType === 'link' && (
+					<LinkPreview
+						title={title}
+						url={post.postLink}
+						preview={post.linkPreview}
+					/>
+				)}
 			</ContentContainer>
 
 			<ActionContainer pinned={pinned}>
@@ -263,15 +264,6 @@ export default function PostPreview({
 				</Comment>
 				<Share>share</Share>
 			</ActionContainer>
-
-			{/* {postType === 'link' ? (
-				<JoinContainer>
-					<JoinBtn>+ Join</JoinBtn>
-					<LinkPreview
-						src={post.preview ? post.preview : null}
-					></LinkPreview>
-				</JoinContainer>
-			) : null} */}
 		</Container>
 	);
 }

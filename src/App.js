@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import styled from 'styled-components';
 import firebase from './firebase';
-
 import { GlobalStyle } from './GlobalStyle';
 import Submit from './pages/Submit';
 import Home from './pages/Home';

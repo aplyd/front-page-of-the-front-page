@@ -75,6 +75,10 @@ export default function CreatePost({
 	onSubmit,
 	onCancel,
 	setPostText,
+	setPostLink,
+	postLink,
+	postMedia,
+	setPostMedia,
 	setTitle,
 	title,
 	postText,
@@ -99,10 +103,20 @@ export default function CreatePost({
 				></TextInput>
 			)}
 			{inputShown === 'media' && (
-				<MediaInput placeholder={'Url'} required></MediaInput>
+				<MediaInput
+					placeholder={'Url'}
+					onChange={(e) => setPostMedia(e.target.value)}
+					value={postMedia}
+					required
+				></MediaInput>
 			)}
 			{inputShown === 'link' && (
-				<LinkInput placeholder={'Url'} required></LinkInput>
+				<LinkInput
+					placeholder={'Url'}
+					onChange={(e) => setPostLink(e.target.value)}
+					value={postLink}
+					required
+				></LinkInput>
 			)}
 
 			<CancelBtn type="button" onClick={() => onCancel()}>

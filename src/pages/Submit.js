@@ -6,11 +6,12 @@ import FeedContainer from '../layouts/FeedContainer';
 import CreatePost from '../components/CreatePost';
 import { useHistory } from 'react-router-dom';
 import { PostContext } from '../PostContext';
-import firebase from '../firebase';
-import { v4 as uuidv4 } from 'uuid';
+import firebase, { LINKPREVIEW_API_KEY } from '../firebase';
 import { TiDocumentText } from 'react-icons/ti';
 import { BsImageFill } from 'react-icons/bs';
 import { RiLinksLine } from 'react-icons/ri';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreatePostContainer = styled.div`
 	${roundedGreyBorder};
@@ -83,18 +84,30 @@ const InputTypeSVG = styled.svg`
 export default function Submit() {
 	const [title, setTitle] = useState('');
 	const [postText, setPostText] = useState('');
-	const [postMedia, setPostMedia] = useState(null);
-	const [postLink, setPostLink] = useState(null);
+	const [postMedia, setPostMedia] = useState('');
+	const [postLink, setPostLink] = useState('');
 	const [inputShown, setInputShown] = useState('post');
 	const { user, setUser, setPosts, posts } = useContext(PostContext);
 	const history = useHistory();
 
-	const onSubmit = (e) => {
-		const timestamp = Date.now();
-		const postID = uuidv4();
+	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		if (user) {
+		const timestamp = Date.now();
+		const postID = uuidv4();
+
+		//fetch post preview
+		const getPreviewImage = async () => {
+			const image = await axios
+				.get(
+					`https://api.linkpreview.net/?key=${LINKPREVIEW_API_KEY}&q=${postLink}`
+				)
+				.then((res) => res.data.image)
+				.catch((err) => console.error(err));
+			return image;
+		};
+
+		const submitPost = (img = null) => {
 			//add post data to firebase and 'posts' state to immediately display
 			firebase
 				.firestore()
@@ -102,6 +115,7 @@ export default function Submit() {
 				.doc(postID)
 				.set({
 					postType: inputShown,
+					linkPreview: img,
 					title,
 					postText,
 					postMedia,
@@ -116,6 +130,7 @@ export default function Submit() {
 					setPosts([
 						{
 							postType: inputShown,
+							linkPreview: img,
 							title,
 							postText,
 							postMedia,
@@ -128,7 +143,6 @@ export default function Submit() {
 						},
 						...posts,
 					]);
-					history.push('/');
 				});
 
 			firebase
@@ -148,7 +162,9 @@ export default function Submit() {
 					],
 				});
 
-			//TODO - is this neeeded????
+			console.log(
+				'//TODO - remove GET request and instead update state directly'
+			);
 			firebase
 				.firestore()
 				.collection('users')
@@ -172,11 +188,22 @@ export default function Submit() {
 						],
 					});
 				});
+		};
 
+		//fetch post preview and save to firebase
+		if (user) {
+			if (inputShown === 'link') {
+				const img = await getPreviewImage();
+				submitPost(img);
+			} else {
+				submitPost();
+			}
+			//add post data to firebase and 'posts' state to immediately display
 			setTitle('');
 			setPostText('');
+			history.push('/');
 		} else {
-			//this block should never be reached because 'create a post' is only mounted when signed in
+			//this block should never be reached because CreatePost component is only mounted when signed in
 			alert('you must sign in to create a post :)');
 		}
 	};

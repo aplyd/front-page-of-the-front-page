@@ -57,6 +57,7 @@
     -̶ ̶f̶u̶l̶l̶ ̶w̶i̶d̶t̶h̶ ̶p̶o̶s̶t̶ ̶"̶c̶a̶r̶d̶s̶"̶ ̶o̶n̶ ̶m̶o̶b̶i̶l̶e̶
     - vote number changes color to match vote (red or blue)
     - double check everything for mobile
+    - change link and media title inputs to textareas
 
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
