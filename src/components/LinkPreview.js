@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { RiLinksLine } from 'react-icons/ri';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Container = styled.div`
 	padding: 4px 164px 20px 8px;
@@ -32,8 +33,19 @@ const LinkTitle = styled.h2`
 	font-size: 20px;
 `;
 
-const SVG = styled.svg`
+const LinkIcon = styled.svg`
 	font-size: 24px;
+`;
+
+const GoToIcon = styled.svg`
+	background-color: ${(props) => props.theme.colors.blue};
+	padding: 5px;
+	color: white;
+	font-size: 9px;
+	border-top-left-radius: 4px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
 `;
 
 const Link = styled.a`
@@ -50,7 +62,6 @@ export default function LinkPreview({ title, url, preview }) {
 	const [img, setImg] = useState(null);
 
 	useEffect(() => {
-		console.log(preview);
 		if (preview !== null || preview !== undefined) {
 			setImg(preview);
 		}
@@ -60,10 +71,13 @@ export default function LinkPreview({ title, url, preview }) {
 		<Container>
 			<LinkTitle>{title}</LinkTitle>
 			{preview ? (
-				<PreviewImage img={img}></PreviewImage>
+				<PreviewImage img={img}>
+					<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
+				</PreviewImage>
 			) : (
 				<PreviewImageFallback>
-					<SVG as={RiLinksLine} />{' '}
+					<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
+					<LinkIcon as={RiLinksLine} />{' '}
 				</PreviewImageFallback>
 			)}
 			<Link

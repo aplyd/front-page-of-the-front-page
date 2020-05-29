@@ -246,7 +246,9 @@ export default function PostPreview({
 				</InfoContainer>
 
 				{postType === 'post' && <Title>{title}</Title>}
-				{postType === 'media' && <MediaPreview />}
+				{postType === 'media' && (
+					<MediaPreview title={title} image={post.postMedia} />
+				)}
 				{postType === 'link' && (
 					<LinkPreview
 						title={title}
