@@ -4,7 +4,7 @@ import { RiLinksLine } from 'react-icons/ri';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Container = styled.div`
-	padding: 4px 164px 20px 8px;
+	padding: 4px 164px 24px 8px;
 	display: flex;
 	flex-direction: column;
 `;

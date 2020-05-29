@@ -130,7 +130,7 @@ export default function SignUp({ showLogIn, closeModal }) {
 				/>
 
 				<EmailInput
-					type="text"
+					type="email"
 					focus
 					required
 					placeholder="Email"

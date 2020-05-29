@@ -65,6 +65,7 @@
 (()) fix auto scrollToTop on commenting and voting
 (()) add delay for simulating pagination ?? or remove fake pagination altogether
 (()) instead of fetching all users data when creating a new account - only check if that username is available
+(()) finish and test validateMediaLink 
 
 ((last)) 
     - clean up code

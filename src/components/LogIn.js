@@ -82,7 +82,7 @@ export default function LogIn({ showSignUp, closeModal }) {
 			<Title>Sign In</Title>
 			<form onSubmit={logInUser}>
 				<EmailInput
-					type="text"
+					type="email"
 					focus
 					required
 					placeholder="Email"
