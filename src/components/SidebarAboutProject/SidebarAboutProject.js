@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import firebase from '../firebase';
 import { GiCakeSlice } from 'react-icons/gi';
 import * as S from './SidebarAboutProject.style';
 
 export default function SidebarAboutProject() {
-	const [userCount] = useState();
-
 	return (
 		<S.AboutContainer>
 			<S.AboutProjectDiv>
@@ -43,7 +41,7 @@ export default function SidebarAboutProject() {
 				</a>
 				.
 			</S.Description>
-			<div>
+			{/* <div>
 				<S.UserCount>
 					<S.MembersNum>{userCount ? userCount : '2'}</S.MembersNum>
 					<S.Members>Members</S.Members>
@@ -52,7 +50,7 @@ export default function SidebarAboutProject() {
 					<S.PostsNum>16</S.PostsNum>
 					<S.Posts>Posts</S.Posts>
 				</S.PostCount>
-			</div>
+			</div> */}
 
 			<S.Spacer height={12} />
 			<S.CreationDate>

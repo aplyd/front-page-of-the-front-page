@@ -64,19 +64,6 @@ function App() {
 		return () => subscribe();
 	}, [sortBy]);
 
-	useEffect(() => {
-		const listOfUsers = [];
-		firebase
-			.firestore()
-			.collection('users')
-			.get()
-			.then((querySnapshot) => {
-				querySnapshot.forEach((user) => listOfUsers.push(user.data()));
-				setUsers(listOfUsers);
-			})
-			.catch((error) => console.log);
-	}, []);
-
 	//detect user
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged(function (user) {
