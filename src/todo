@@ -65,7 +65,8 @@
 (()) fix auto scrollToTop on commenting and voting
 (()) add delay for simulating pagination ?? or remove fake pagination altogether
 (()) instead of fetching all users data when creating a new account - only check if that username is available
-(()) finish and test validateMediaLink 
+(̶(̶)̶)̶ ̶f̶i̶n̶i̶s̶h̶ ̶a̶n̶d̶ ̶t̶e̶s̶t̶ ̶v̶a̶l̶i̶d̶a̶t̶e̶M̶e̶d̶i̶a̶L̶i̶n̶k̶ ̶
+(()) upvoting shouldn't reload the images - maybe store image in ref ?
 
 ((last)) 
     - clean up code
@@ -75,7 +76,7 @@
     - seperate all components from style components and keep in individual files
     - keep component + styles in own folder
     - figure out hosting with routing
-
+    - delete sandbox.js and test
     -̶ ̶r̶e̶m̶o̶v̶e̶ ̶a̶l̶l̶ ̶D̶a̶t̶e̶.̶n̶o̶w̶(̶)̶ ̶f̶o̶r̶ ̶i̶n̶d̶e̶x̶ ̶o̶r̶ ̶u̶u̶i̶d̶
     -̶ ̶r̶e̶m̶o̶v̶e̶ ̶u̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶
     
@@ -102,8 +103,8 @@
 
 [[[[[[[]]]]]]] ROADMAP [[[[[[[]]]]]]]
 () refactor all components to have seperate .style file and in their own folder 
-() display imgur photos/gifs
-() handle images
+(̶)̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶i̶m̶g̶u̶r̶ ̶p̶h̶o̶t̶o̶s̶/̶g̶i̶f̶s̶
+(̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶i̶m̶a̶g̶e̶s̶
 (̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶l̶i̶n̶k̶ ̶s̶h̶a̶r̶i̶n̶g̶
 () add tensorFlow to detect toxic posts/comments
 () allow for editing comments

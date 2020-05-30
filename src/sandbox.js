@@ -73,3 +73,60 @@ export const sortReplies = (postObj) => {
 		.sort((a, b) => (a.vote < b.vote ? 1 : -1))
 		.map((post) => post);
 };
+
+export const validateMediaLink = (url) => {
+	//validate image works
+	function testImage(url, timeoutT) {
+		return new Promise(function (resolve, reject) {
+			console.log('in promise');
+			var timeout = timeoutT || 5000;
+			var timer,
+				img = new Image();
+			img.onerror = img.onabort = function () {
+				clearTimeout(timer);
+				reject('error');
+			};
+			img.onload = function () {
+				clearTimeout(timer);
+				resolve({ mediaType: 'image', url });
+			};
+			timer = setTimeout(function () {
+				//set .src to invalid jpg so it fails
+				img.src = '//!!!!/test.jpg';
+				reject('timeout');
+			}, timeout);
+			img.src = url;
+		});
+	}
+
+	function getYoutubeId(url) {
+		const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+		const match = url.match(regExp);
+
+		return match && match[2].length === 11 ? match[2] : null;
+	}
+
+	//check if image
+	if (url.match(/\.(jpeg|jpg|gif|png)$/) !== null) {
+		console.log('is image');
+		return testImage(url)
+			.then((url) => url)
+			.catch((err) => console.log(err));
+	}
+
+	//if video, check it's youtube and then return with embed link
+	if (url.includes('youtube') || url.includes('youtu.be')) {
+		const id = getYoutubeId(url);
+
+		if (id) {
+			return Promise.resolve({
+				mediaType: 'video',
+				url: 'https://www.youtube.com/embed/' + id,
+			});
+		} else {
+			console.log('bad');
+			return Promise.resolve(false);
+		}
+	}
+	return Promise.resolve(false);
+};

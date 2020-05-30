@@ -1,4 +1,10 @@
-import { insertReply, countReplies, filterPosts, sortReplies } from './sandbox';
+import {
+	insertReply,
+	countReplies,
+	filterPosts,
+	sortReplies,
+	validateMediaLink,
+} from './sandbox';
 
 const zeroA2 = {
 	id: 7,
@@ -195,6 +201,38 @@ const sortedPostObj = {
 	],
 };
 
-test.only('should sort', () => {
+test('should sort', () => {
 	expect(sortReplies(postObj)).toStrictEqual(sortedPostObj.replies);
+});
+
+test('standard', () => {
+	const url = 'https://youtu.be/yVpbFMhOAwE';
+	const response = validateMediaLink(url);
+	expect(response).toBeTruthy();
+});
+
+test('variant', () => {
+	const url = 'https://www.youtube.com/watch?v=8Z5EjAmZS1o';
+	const response = validateMediaLink(url);
+	expect(response).toBeTruthy();
+});
+
+test('embed', () => {
+	const url = 'https://www.youtube.com/embed/yVpbFMhOAwE';
+	const response = validateMediaLink(url);
+	expect(response).toBeTruthy();
+});
+
+test('shouldnt return iframe', () => {
+	const url =
+		'<iframe width="560" height="315" src="https://www.youtube.com/embed/Tlf00NT6mig" frameborder="0" allowfullscreen></iframe>';
+	expect.assertions(1);
+	return validateMediaLink(url).then((res) => res);
+});
+
+test('valid image', () => {
+	const url = 'https://i.redd.it/w4y5n0m5e7p41.png';
+	const response = validateMediaLink(url).then((res) => res);
+	console.log(response);
+	expect(response).toBeTruthy();
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { validateMediaLink } from '../utils';
 
 const FormContainer = styled.form`
 	position: relative;
@@ -84,8 +85,25 @@ export default function CreatePost({
 	postText,
 	inputShown,
 }) {
+	const validateMediaBeforeSubmit = (e) => {
+		e.preventDefault();
+		if (inputShown === 'media') {
+			validateMediaLink(postMedia).then((res) => {
+				if (res) {
+					onSubmit(res);
+				} else {
+					alert(
+						'invalid media, only youtube links and image formats (.jpeg, .jpg, .png, .gif) currently supported '
+					);
+				}
+			});
+		} else {
+			onSubmit(e);
+		}
+	};
+
 	return (
-		<FormContainer onSubmit={onSubmit}>
+		<FormContainer onSubmit={validateMediaBeforeSubmit}>
 			<TitleInput
 				type="text"
 				value={title}

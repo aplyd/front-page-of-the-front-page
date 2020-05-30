@@ -103,35 +103,55 @@ export const filterPosts = (postsArr, search) => {
 
 	return results;
 };
-
-const validateMediaLink = (url) => {
+export const validateMediaLink = (url) => {
 	//validate image works
-	async function testImage(url, timeoutT) {
-		const result = new Promise(function (resolve, reject) {
+	function testImage(url, timeoutT) {
+		return new Promise(function (resolve, reject) {
+			console.log('in promise');
 			var timeout = timeoutT || 5000;
 			var timer,
 				img = new Image();
 			img.onerror = img.onabort = function () {
 				clearTimeout(timer);
-				reject('error');
+				resolve(false);
 			};
 			img.onload = function () {
 				clearTimeout(timer);
-				resolve('success');
+				resolve({ mediaType: 'image', url });
 			};
 			timer = setTimeout(function () {
-				// reset .src to invalid URL so it stops previous
-				// loading, but doesn't trigger new load
+				//set .src to invalid jpg so it fails
 				img.src = '//!!!!/test.jpg';
-				reject('timeout');
+				resolve(false);
 			}, timeout);
 			img.src = url;
 		});
 	}
 
-	//check if image
-	if (url.match(/\.(jpeg|jpg|gif|png)$/) !== null) {
+	function getYoutubeId(url) {
+		const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+		const match = url.match(regExp);
+
+		return match && match[2].length === 11 ? match[2] : null;
 	}
 
-	//if video, make sure it's youtube and the embed link
+	//check if image
+	if (url.match(/\.(jpeg|jpg|gif|png)$/) !== null) {
+		return testImage(url).catch((err) => console.log(err));
+	}
+
+	//if video, check it's youtube and then return with embed link
+	if (url.includes('youtube') || url.includes('youtu.be')) {
+		const id = getYoutubeId(url);
+
+		if (id) {
+			return Promise.resolve({
+				mediaType: 'video',
+				url: 'https://www.youtube.com/embed/' + id,
+			});
+		} else {
+			return Promise.resolve(false);
+		}
+	}
+	return Promise.resolve(false);
 };

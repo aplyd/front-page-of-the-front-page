@@ -12,6 +12,7 @@ import { BsImageFill } from 'react-icons/bs';
 import { RiLinksLine } from 'react-icons/ri';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { validateMediaLink } from '../utils';
 
 const CreatePostContainer = styled.div`
 	${roundedGreyBorder};
@@ -90,13 +91,13 @@ export default function Submit() {
 	const { user, setUser, setPosts, posts } = useContext(PostContext);
 	const history = useHistory();
 
-	const onSubmit = async (e) => {
-		e.preventDefault();
-
+	console.log('TODO - this probably doesnt need to be async');
+	const onSubmit = async (media = null) => {
 		const timestamp = Date.now();
 		const postID = uuidv4();
 
 		//fetch post preview
+		//TODO - this probably doesn't need to be async either
 		const getPreviewImage = async () => {
 			const image = await axios
 				.get(
@@ -118,7 +119,7 @@ export default function Submit() {
 					linkPreview: img,
 					title,
 					postText,
-					postMedia,
+					postMedia: media,
 					postLink,
 					timestamp,
 					vote: 1,
@@ -133,7 +134,7 @@ export default function Submit() {
 							linkPreview: img,
 							title,
 							postText,
-							postMedia,
+							postMedia: media,
 							postLink,
 							timestamp,
 							vote: 1,
