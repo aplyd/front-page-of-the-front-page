@@ -58,8 +58,24 @@ const Link = styled.a`
 	}
 `;
 
+const LinkContainer = styled.div`
+	cursor: pointer;
+	&& > svg {
+		font-size: 10px;
+		color: ${(props) => props.theme.colors.blue};
+	}
+	&& > p {
+		font-size: 12px;
+		color: ${(props) => props.theme.colors.blue};
+		display: inline;
+	}
+`;
+
 export default function LinkPreview({ title, url, preview }) {
 	const [img, setImg] = useState(null);
+	const shortenedUrl = url
+		.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
+		.split('/')[0];
 
 	useEffect(() => {
 		if (preview !== null || preview !== undefined) {
@@ -80,13 +96,17 @@ export default function LinkPreview({ title, url, preview }) {
 					<LinkIcon as={RiLinksLine} />{' '}
 				</PreviewImageFallback>
 			)}
-			<Link
-				href={url}
-				target="_blank"
-				onClick={(e) => e.stopPropagation()}
-			>
-				{url}
-			</Link>
+			<LinkContainer>
+				<Link
+					href={url}
+					target="_blank"
+					onClick={(e) => e.stopPropagation()}
+				>
+					{shortenedUrl}
+				</Link>
+				<p>/... </p>
+				<FaExternalLinkAlt />
+			</LinkContainer>
 		</Container>
 	);
 }

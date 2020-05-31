@@ -9,14 +9,13 @@ import { Comment } from '../utils';
 import firebase from '../firebase';
 import { LoginBtn, SignInBtn } from '../layouts/Nav';
 import {
-	VoteArrowContainer,
 	ContentContainer,
 	InfoContainer,
 	Title,
 	ActionContainer,
 	ActionButton,
-	Vote,
-} from './PostPreview';
+} from './PreviewContent';
+import { Container as VoteArrowContainer, Vote } from './VoteContainer';
 import { v4 as uuidv4 } from 'uuid';
 import { PostContext } from '../PostContext';
 import { TiArrowSortedDown } from 'react-icons/ti';

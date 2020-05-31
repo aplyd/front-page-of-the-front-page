@@ -81,6 +81,7 @@ export default function SignUp({ showLogIn, closeModal }) {
 	const input = useRef(null);
 	useInitialFocus(input);
 
+	//TODO - remove, pulling in all user data is a privacy issue
 	useEffect(() => {
 		users &&
 			users.forEach((user) => {

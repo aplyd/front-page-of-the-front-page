@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PostPreview from '../components/PostPreview';
+import PreviewContent from '../components/PreviewContent';
+import VoteContainer from '../components/VoteContainer';
 
 const Container = styled.div`
 	grid-column: 1;
@@ -56,18 +58,18 @@ export default function Feed({ posts, children, viewPostComments }) {
 					//display different components based on the post type
 					return (
 						<PostPreview
-							postType={post.postType}
-							title={post.title}
-							media={post.media ? post.media : null}
-							link={post.link ? post.link : null}
-							key={index + post.title}
-							id={post.id}
-							vote={post.vote}
-							timestamp={post.timestamp}
-							username={post.username}
-							post={post}
+							key={index + post.id}
 							viewPostComments={viewPostComments}
-						/>
+							title={post.title}
+							id={post.id}
+						>
+							<VoteContainer vote={post.vote} id={post.id} />
+							<PreviewContent
+								username={post.username}
+								timestamp={post.timestamp}
+								post={post}
+							/>
+						</PostPreview>
 					);
 				})}
 			{children}

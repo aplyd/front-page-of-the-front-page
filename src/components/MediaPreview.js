@@ -39,6 +39,7 @@ const VideoContainer = styled.div`
 
 const LinkContainer = styled.div`
 	cursor: pointer;
+	padding-bottom: 12px;
 	&& > a {
 		color: ${(props) => props.theme.colors.blue};
 		font-size: 12px;
@@ -53,6 +54,9 @@ const LinkContainer = styled.div`
 `;
 
 export default function MediaPreview({ title, media }) {
+	const [mediaSrc] = useState(media.url);
+
+	console.log(mediaSrc);
 	const shortenedUrl = media.url
 		.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
 		.split('/')[0];
@@ -63,18 +67,18 @@ export default function MediaPreview({ title, media }) {
 
 			{media.mediaType === 'image' && (
 				<ImageContainer>
-					<Image src={media.url} alt={title} />
+					<Image src={mediaSrc} alt={title} />
 				</ImageContainer>
 			)}
 			{media.mediaType === 'video' && (
 				<React.Fragment>
 					<LinkContainer>
-						<a href={media.url}>{shortenedUrl} </a>
+						<a href={mediaSrc}>{shortenedUrl} </a>
 						<FaExternalLinkAlt />
 					</LinkContainer>
 					<VideoContainer>
 						<Video
-							src={media.url}
+							src={mediaSrc}
 							width="100%"
 							padding-top="100%"
 							scrolling="no"
