@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, memo, useRef } from 'react';
 import styled from 'styled-components';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
@@ -53,10 +53,8 @@ const LinkContainer = styled.div`
 	}
 `;
 
-export default function MediaPreview({ title, media }) {
-	const [mediaSrc] = useState(media.url);
-
-	console.log(mediaSrc);
+export const MediaPreview = memo(({ title, media }) => {
+	const mediaUrl = useRef(media.url);
 	const shortenedUrl = media.url
 		.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
 		.split('/')[0];
@@ -67,18 +65,18 @@ export default function MediaPreview({ title, media }) {
 
 			{media.mediaType === 'image' && (
 				<ImageContainer>
-					<Image src={mediaSrc} alt={title} />
+					<Image src={mediaUrl.current} alt={title} />
 				</ImageContainer>
 			)}
 			{media.mediaType === 'video' && (
 				<React.Fragment>
 					<LinkContainer>
-						<a href={mediaSrc}>{shortenedUrl} </a>
+						<a href={mediaUrl.current}>{shortenedUrl} </a>
 						<FaExternalLinkAlt />
 					</LinkContainer>
 					<VideoContainer>
 						<Video
-							src={mediaSrc}
+							src={mediaUrl.current}
 							width="100%"
 							padding-top="100%"
 							scrolling="no"
@@ -91,4 +89,4 @@ export default function MediaPreview({ title, media }) {
 			)}
 		</Container>
 	);
-}
+});

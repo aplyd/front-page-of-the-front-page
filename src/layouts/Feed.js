@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PostPreview from '../components/PostPreview';
-import PreviewContent from '../components/PreviewContent';
+import { PreviewContent } from '../components/PreviewContent';
 import VoteContainer from '../components/VoteContainer';
 
 const Container = styled.div`
@@ -21,7 +21,7 @@ const BackToTopBtn = styled.button`
 	}
 `;
 
-export default function Feed({ posts, children, viewPostComments }) {
+export default function Feed({ posts, children, viewPostComments, postVotes }) {
 	const [postRange, setPostRange] = useState(10);
 	const setOfPosts = [...posts].slice(0, postRange);
 	const lastItem = useRef(null);

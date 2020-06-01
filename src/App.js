@@ -27,16 +27,15 @@ function App() {
 	const [users, setUsers] = useState(null);
 	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
-	//this (updatePosts) is only here to trigger a rerender to
-	//correctly display sorted posts - will probably remove when refactored correctly
-	//anti-pattern - changing sortBy should trigger rerender automatically
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked
 	const [postData, setPostData] = useState();
+	const [postVotes, setPostVotes] = useState(null);
 
 	//get list of posts from firebase
 	useEffect(() => {
 		const newPosts = [];
+		let postVotesObj = {};
 		const subscribe = () => {
 			firebase
 				.firestore()
@@ -52,13 +51,14 @@ function App() {
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
-						newPosts.unshift({ id: doc.id, ...doc.data() });
+						const post = doc.data();
+						newPosts.unshift({ id: doc.id, ...post });
+						postVotesObj[post.id] = post.vote;
 					});
-				})
-				.catch((err) => console.log(err))
-				.finally(() => {
 					setPosts(newPosts);
-				});
+					setPostVotes(postVotesObj);
+				})
+				.catch((err) => console.log(err));
 		};
 		subscribe();
 		return () => subscribe();
@@ -227,6 +227,7 @@ function App() {
 								sortBy={sortBy}
 								viewPostComments={viewPostComments}
 								user={user}
+								postVotes={postVotes}
 							/>
 						)}
 					/>

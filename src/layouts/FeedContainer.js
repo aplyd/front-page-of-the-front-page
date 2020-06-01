@@ -42,6 +42,7 @@ export default function FeedContainer({
 	children,
 	viewPostComments,
 	user,
+	postVotes,
 }) {
 	const [width, setWidth] = useState(window.innerWidth);
 	useWindowWidth(setWidth);
@@ -67,6 +68,7 @@ export default function FeedContainer({
 							posts={posts}
 							key={'feed'}
 							viewPostComments={viewPostComments}
+							postVotes={postVotes}
 						/>
 					</React.Fragment>
 				) : null}
