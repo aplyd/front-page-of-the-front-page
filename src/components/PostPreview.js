@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 import { useHistory } from 'react-router-dom';
 
 const Container = styled.div`
 	width: 100%;
+	min-height: 152px;
 	${roundedGreyBorder}
 	display: grid;
 	grid-template-columns: 40px 1fr;
@@ -16,7 +17,7 @@ const Container = styled.div`
 	}
 `;
 
-export default function PostPreview({ title, id, viewPostComments, children }) {
+const PostPreview = memo(({ title, id, viewPostComments, children }) => {
 	const history = useHistory();
 	const url = title.replace(/\W/g, '').toLowerCase();
 
@@ -26,4 +27,6 @@ export default function PostPreview({ title, id, viewPostComments, children }) {
 	};
 
 	return <Container onClick={handleClick}>{children}</Container>;
-}
+});
+
+export default PostPreview;

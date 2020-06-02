@@ -23,7 +23,6 @@ export default function Home({
 				user={user}
 				postVotes={postVotes}
 			></FeedContainer>
-			{console.log(postVotes)}
 		</Container>
 	);
 }

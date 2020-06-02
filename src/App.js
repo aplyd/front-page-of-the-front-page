@@ -35,7 +35,7 @@ function App() {
 	//get list of posts from firebase
 	useEffect(() => {
 		const newPosts = [];
-		let postVotesObj = {};
+		let newPostVotes = [];
 		const subscribe = () => {
 			firebase
 				.firestore()
@@ -52,11 +52,11 @@ function App() {
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
 						const post = doc.data();
+						newPostVotes.unshift({ [post.id]: post.vote });
 						newPosts.unshift({ id: doc.id, ...post });
-						postVotesObj[post.id] = post.vote;
 					});
+					setPostVotes(newPostVotes);
 					setPosts(newPosts);
-					setPostVotes(postVotesObj);
 				})
 				.catch((err) => console.log(err));
 		};
@@ -132,13 +132,16 @@ function App() {
 				// the reason for the homeOrCommentsFlag argument is because different
 				// state needs to be updated depending on where castPostVote is called from
 				if (homeOrCommentsFlag === 'home') {
-					const updatedPosts = posts.map((post) => {
-						if (post.id === id) {
-							post.vote = newVoteCount;
-						}
-						return post;
-					});
-					setPosts(updatedPosts);
+					// const updatedPosts = posts.map((post) => {
+					// 	if (post.id === id) {
+					// 		post.vote = newVoteCount;
+					// 	}
+					// 	return post;
+					// });
+					// setPosts(updatedPosts);
+					let newPostVotes = { ...postVotes };
+					newPostVotes[id] = newVoteCount;
+					setPostVotes(newPostVotes);
 				} else if (homeOrCommentsFlag === 'comments') {
 					const updatedPostData = { ...postData };
 					updatedPostData.vote = newVoteCount;

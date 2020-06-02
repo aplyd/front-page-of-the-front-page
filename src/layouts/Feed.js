@@ -1,11 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import PostPreview from '../components/PostPreview';
+// import PostPreview from '../components/PostPreview';
 import { PreviewContent } from '../components/PreviewContent';
 import VoteContainer from '../components/VoteContainer';
+import { roundedGreyBorder } from '../GlobalStyle';
+import { useHistory } from 'react-router-dom';
 
 const Container = styled.div`
 	grid-column: 1;
+`;
+
+const PreviewContainer = styled.div`
+	width: 100%;
+	min-height: 152px;
+	${roundedGreyBorder}
+	display: grid;
+	grid-template-columns: 40px 1fr;
+	grid-template-rows: 1fr 32px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	&&:hover {
+		border: solid 1px rgb(137, 137, 137);
+	}
 `;
 
 const BackToTopBtn = styled.button`
@@ -25,6 +41,7 @@ export default function Feed({ posts, children, viewPostComments, postVotes }) {
 	const [postRange, setPostRange] = useState(10);
 	const setOfPosts = [...posts].slice(0, postRange);
 	const lastItem = useRef(null);
+	const history = useHistory();
 
 	//simulating pagination for now - to be updated when firestore orderBy() and limit() work
 	useEffect(() => {
@@ -51,27 +68,38 @@ export default function Feed({ posts, children, viewPostComments, postVotes }) {
 		};
 	}, [lastItem, postRange]);
 
+	const handleClick = (id, url) => {
+		viewPostComments(id);
+		history.push(`/comments/${url}/${id}`);
+	};
+
 	return (
 		<Container>
 			{posts &&
+				postVotes &&
 				setOfPosts.map((post, index) => {
-					//display different components based on the post type
+					const url = post.title.replace(/\W/g, '').toLowerCase();
+					//using index in vote container
+					console.log(Object.keys(postVotes));
 					return (
-						<PostPreview
-							key={index + post.id}
-							viewPostComments={viewPostComments}
-							title={post.title}
-							id={post.id}
+						<PreviewContainer
+							key={index}
+							onClick={() => handleClick(post.id, url)}
 						>
-							<VoteContainer vote={post.vote} id={post.id} />
 							<PreviewContent
 								username={post.username}
 								timestamp={post.timestamp}
 								post={post}
 							/>
-						</PostPreview>
+
+							<VoteContainer
+								vote={Object.keys(postVotes[index])[1]}
+								id={Object.keys(postVotes[index])[0]}
+							/>
+						</PreviewContainer>
 					);
 				})}
+
 			{children}
 			{setOfPosts.length === posts.length && setOfPosts.length > 0 ? (
 				<BackToTopBtn
