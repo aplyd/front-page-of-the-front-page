@@ -79,8 +79,8 @@ export default function Feed({ posts, children, viewPostComments, postVotes }) {
 				postVotes &&
 				setOfPosts.map((post, index) => {
 					const url = post.title.replace(/\W/g, '').toLowerCase();
-					//using index in vote container
-					console.log(Object.keys(postVotes));
+					//using index in vote containes
+
 					return (
 						<PreviewContainer
 							key={index}
@@ -93,8 +93,8 @@ export default function Feed({ posts, children, viewPostComments, postVotes }) {
 							/>
 
 							<VoteContainer
-								vote={Object.keys(postVotes[index])[1]}
-								id={Object.keys(postVotes[index])[0]}
+								vote={postVotes[index].vote}
+								id={postVotes[index].id}
 							/>
 						</PreviewContainer>
 					);

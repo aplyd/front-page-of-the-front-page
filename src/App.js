@@ -52,7 +52,7 @@ function App() {
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
 						const post = doc.data();
-						newPostVotes.unshift({ [post.id]: post.vote });
+						newPostVotes.unshift({ vote: post.vote, id: post.id });
 						newPosts.unshift({ id: doc.id, ...post });
 					});
 					setPostVotes(newPostVotes);
@@ -139,8 +139,11 @@ function App() {
 					// 	return post;
 					// });
 					// setPosts(updatedPosts);
-					let newPostVotes = { ...postVotes };
-					newPostVotes[id] = newVoteCount;
+					const newPostVotes = postVotes.map((post) => {
+						if (post.id === id) {
+							post.vote = newVoteCount;
+						}
+					});
 					setPostVotes(newPostVotes);
 				} else if (homeOrCommentsFlag === 'comments') {
 					const updatedPostData = { ...postData };
