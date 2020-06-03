@@ -70,6 +70,9 @@
 (()) upvoting shouldn't reload the images - maybe store image in ref ?
 (()) handle click events on link previews (open post vs go to link)
 
+(()) state change shouldn't reload images
+(()) opening modal shouldn't scroll to top
+
 ((last)) 
     - clean up code
     - delete all unused variables

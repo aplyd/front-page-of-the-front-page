@@ -26,9 +26,10 @@ const PreviewContainer = styled.div`
 
 const BackToTopBtn = styled.button`
 	background-color: ${(props) => props.theme.colors.blue};
+	border-color: ${(props) => props.theme.colors.blue};
 	color: white;
 	border-radius: 4px;
-	outline: none;
+	border: none;
 	display: block;
 	margin: 32px auto 24px auto;
 	padding: 8px 16px;
@@ -38,35 +39,35 @@ const BackToTopBtn = styled.button`
 `;
 
 export default function Feed({ posts, children, viewPostComments, postVotes }) {
-	const [postRange, setPostRange] = useState(10);
-	const setOfPosts = [...posts].slice(0, postRange);
-	const lastItem = useRef(null);
+	// const [postRange, setPostRange] = useState(10);
+	// const setOfPosts = [...posts].slice(0, postRange);
+	// const lastItem = useRef(null);
 	const history = useHistory();
 
 	//simulating pagination for now - to be updated when firestore orderBy() and limit() work
-	useEffect(() => {
-		const item = lastItem.current;
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					setPostRange(postRange + 10);
-				}
-			},
-			{
-				root: null,
-				rootMargin: '0px',
-				threshold: 1,
-			}
-		);
-		if (item) {
-			observer.observe(item);
-		}
-		return () => {
-			if (item) {
-				observer.unobserve(item);
-			}
-		};
-	}, [lastItem, postRange]);
+	// useEffect(() => {
+	// 	const item = lastItem.current;
+	// 	const observer = new IntersectionObserver(
+	// 		([entry]) => {
+	// 			if (entry.isIntersecting) {
+	// 				setPostRange(postRange + 10);
+	// 			}
+	// 		},
+	// 		{
+	// 			root: null,
+	// 			rootMargin: '0px',
+	// 			threshold: 1,
+	// 		}
+	// 	);
+	// 	if (item) {
+	// 		observer.observe(item);
+	// 	}
+	// 	return () => {
+	// 		if (item) {
+	// 			observer.unobserve(item);
+	// 		}
+	// 	};
+	// }, [lastItem, postRange]);
 
 	const handleClick = (id, url) => {
 		viewPostComments(id);
@@ -77,7 +78,7 @@ export default function Feed({ posts, children, viewPostComments, postVotes }) {
 		<Container>
 			{posts &&
 				postVotes &&
-				setOfPosts.map((post, index) => {
+				posts.map((post, index) => {
 					const url = post.title.replace(/\W/g, '').toLowerCase();
 					//using index in vote containes
 
@@ -101,16 +102,14 @@ export default function Feed({ posts, children, viewPostComments, postVotes }) {
 				})}
 
 			{children}
-			{setOfPosts.length === posts.length && setOfPosts.length > 0 ? (
-				<BackToTopBtn
-					onClick={() =>
-						window.scrollTo({ top: 0, behavior: 'smooth' })
-					}
-				>
-					Back To Top
-				</BackToTopBtn>
-			) : null}
-			<div ref={lastItem}></div>
+			{/* {setOfPosts.length === posts.length && setOfPosts.length > 0 ? ( */}
+			<BackToTopBtn
+				onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+			>
+				Back To Top
+			</BackToTopBtn>
+			{/* ) : null} */}
+			{/* <div ref={lastItem}></div> */}
 		</Container>
 	);
 }

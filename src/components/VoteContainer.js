@@ -58,8 +58,8 @@ const VoteContainer = memo(({ id, vote }) => {
 	const { castPostVote, user } = useContext(PostContext);
 	const [userVote, setUserVote] = useState(null);
 
-	// console.log({ id });
-	// console.log({ vote });
+	console.log({ id });
+	console.log({ vote });
 	useEffect(() => {
 		const checkForUserVote = () => {
 			if (user.postVotes.hasOwnProperty(id)) {

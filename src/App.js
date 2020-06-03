@@ -132,18 +132,13 @@ function App() {
 				// the reason for the homeOrCommentsFlag argument is because different
 				// state needs to be updated depending on where castPostVote is called from
 				if (homeOrCommentsFlag === 'home') {
-					// const updatedPosts = posts.map((post) => {
-					// 	if (post.id === id) {
-					// 		post.vote = newVoteCount;
-					// 	}
-					// 	return post;
-					// });
-					// setPosts(updatedPosts);
 					const newPostVotes = postVotes.map((post) => {
 						if (post.id === id) {
 							post.vote = newVoteCount;
 						}
+						return post;
 					});
+
 					setPostVotes(newPostVotes);
 				} else if (homeOrCommentsFlag === 'comments') {
 					const updatedPostData = { ...postData };
