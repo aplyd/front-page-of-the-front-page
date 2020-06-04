@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, memo } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { PostContext } from '../PostContext';
@@ -54,7 +54,7 @@ export const Vote = styled.p`
 	font-weight: bold;
 `;
 
-const VoteContainer = memo(({ id, vote }) => {
+const VoteContainer = ({ id, vote }) => {
 	const { castPostVote, user } = useContext(PostContext);
 	const [userVote, setUserVote] = useState(null);
 
@@ -92,6 +92,6 @@ const VoteContainer = memo(({ id, vote }) => {
 			</div>
 		</Container>
 	);
-});
+};
 
 export default VoteContainer;

@@ -53,7 +53,7 @@ const LinkContainer = styled.div`
 	}
 `;
 
-export const MediaPreview = memo(({ title, media }) => {
+const MediaPreview = ({ title, media }) => {
 	const mediaUrl = useRef(media.url);
 	const shortenedUrl = media.url
 		.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
@@ -89,4 +89,6 @@ export const MediaPreview = memo(({ title, media }) => {
 			)}
 		</Container>
 	);
-});
+};
+
+export default MediaPreview;

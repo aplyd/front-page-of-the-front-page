@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { MediaPreview } from './MediaPreview';
+import MediaPreview from './MediaPreview';
 import LinkPreview from './LinkPreview';
 import formatDistance from 'date-fns/formatDistance';
 import { FaCommentAlt } from 'react-icons/fa';
@@ -107,7 +107,7 @@ const CommentSVG = styled.svg`
 	left: 0px;
 `;
 
-export const PreviewContent = memo(({ pinned, username, timestamp, post }) => {
+const PreviewContent = ({ pinned, username, timestamp, post }) => {
 	const commentCount = post ? countReplies(post) : null;
 
 	return (
@@ -147,4 +147,6 @@ export const PreviewContent = memo(({ pinned, username, timestamp, post }) => {
 			</ActionContainer>
 		</React.Fragment>
 	);
-});
+};
+
+export default PreviewContent;

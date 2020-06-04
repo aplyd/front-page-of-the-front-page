@@ -73,6 +73,8 @@
 (()) state change shouldn't reload images
 (()) opening modal shouldn't scroll to top
 
+(()) handle when user logs in and the sign up modal (right now is still signs them in without showing error)
+
 ((last)) 
     - clean up code
     - delete all unused variables
