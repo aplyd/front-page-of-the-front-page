@@ -30,7 +30,6 @@ function App() {
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked
 	const [postData, setPostData] = useState();
-	const [postVotes, setPostVotes] = useState(null);
 
 	//get list of posts from firebase
 	useEffect(() => {
@@ -55,7 +54,6 @@ function App() {
 						newPostVotes.unshift({ vote: post.vote, id: post.id });
 						newPosts.unshift({ id: doc.id, ...post });
 					});
-					setPostVotes(newPostVotes);
 					setPosts(newPosts);
 				})
 				.catch((err) => console.log(err));
@@ -132,14 +130,14 @@ function App() {
 				// the reason for the homeOrCommentsFlag argument is because different
 				// state needs to be updated depending on where castPostVote is called from
 				if (homeOrCommentsFlag === 'home') {
-					const newPostVotes = postVotes.map((post) => {
+					const newPosts = posts.map((post) => {
 						if (post.id === id) {
 							post.vote = newVoteCount;
 						}
 						return post;
 					});
 
-					setPostVotes(newPostVotes);
+					setPosts(newPosts);
 				} else if (homeOrCommentsFlag === 'comments') {
 					const updatedPostData = { ...postData };
 					updatedPostData.vote = newVoteCount;
@@ -228,7 +226,6 @@ function App() {
 								sortBy={sortBy}
 								viewPostComments={viewPostComments}
 								user={user}
-								postVotes={postVotes}
 							/>
 						)}
 					/>

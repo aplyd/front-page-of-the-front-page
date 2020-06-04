@@ -9,7 +9,6 @@ export default function Home({
 	sortBy,
 	viewPostComments,
 	user,
-	postVotes,
 }) {
 	return (
 		<Container>
@@ -21,7 +20,6 @@ export default function Home({
 				displayFeedSort={true}
 				viewPostComments={viewPostComments}
 				user={user}
-				postVotes={postVotes}
 			></FeedContainer>
 		</Container>
 	);

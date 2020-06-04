@@ -38,7 +38,7 @@ const BackToTopBtn = styled.button`
 	}
 `;
 
-const Feed = memo(({ posts, children, viewPostComments, postVotes }) => {
+const Feed = ({ posts, children, viewPostComments }) => {
 	// const [postRange, setPostRange] = useState(10);
 	// const setOfPosts = [...posts].slice(0, postRange);
 	// const lastItem = useRef(null);
@@ -77,7 +77,6 @@ const Feed = memo(({ posts, children, viewPostComments, postVotes }) => {
 	return (
 		<Container>
 			{posts &&
-				postVotes &&
 				posts.map((post, index) => {
 					const url = post.title.replace(/\W/g, '').toLowerCase();
 					//using index in vote containes
@@ -92,11 +91,7 @@ const Feed = memo(({ posts, children, viewPostComments, postVotes }) => {
 								timestamp={post.timestamp}
 								post={post}
 							/>
-
-							<VoteContainer
-								vote={postVotes[index].vote}
-								id={postVotes[index].id}
-							/>
+							<VoteContainer vote={post.vote} id={post.id} />
 						</PreviewContainer>
 					);
 				})}
@@ -112,6 +107,6 @@ const Feed = memo(({ posts, children, viewPostComments, postVotes }) => {
 			{/* <div ref={lastItem}></div> */}
 		</Container>
 	);
-});
+};
 
 export default Feed;

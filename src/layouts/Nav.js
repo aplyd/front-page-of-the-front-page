@@ -233,12 +233,19 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 		} else {
 			return (
 				<React.Fragment>
-					<LoginBtn type="button" onClick={() => openModal('login')}>
+					<LoginBtn
+						type="button"
+						onClick={() => {
+							openModal('login');
+						}}
+					>
 						log in
 					</LoginBtn>
 					<SignInBtn
 						type="button"
-						onClick={() => openModal('signup')}
+						onClick={() => {
+							openModal('signup');
+						}}
 					>
 						sign up
 					</SignInBtn>

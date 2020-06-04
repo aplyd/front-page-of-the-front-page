@@ -64,13 +64,13 @@ const P2 = styled.p`
 export default function LogIn({ showSignUp, closeModal }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { setUser } = useContext(PostContext);
+	const { setUser, user } = useContext(PostContext);
 	const input = useRef(null);
 	useInitialFocus(input);
 
 	const logInUser = (e) => {
 		e.preventDefault();
-		logInExistingUser(email, password, setUser);
+		logInExistingUser(email, password, setUser, user);
 
 		setEmail('');
 		setPassword('');

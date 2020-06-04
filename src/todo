@@ -55,6 +55,8 @@
     - handle link/image post viewing for mobile
     - fix chrome button styling
 
+((current)) instead of fetching all users data when creating a new account - only check if that username is available
+
 (̶(̶)̶)̶ ̶s̶t̶y̶l̶e̶ ̶s̶u̶b̶m̶i̶t̶ ̶p̶o̶s̶t̶ ̶p̶a̶g̶e̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶c̶r̶e̶a̶t̶e̶ ̶p̶o̶s̶t̶ ̶l̶o̶g̶ ̶u̶s̶e̶r̶ ̶o̶u̶t̶ ̶b̶u̶g̶
 (̶(̶)̶)̶ ̶c̶r̶e̶a̶t̶e̶ ̶4̶0̶4̶ ̶p̶a̶g̶e̶
@@ -64,15 +66,11 @@
 (()) handle errors logging in by displaying error - wrong email/password, network error, etc.
 (()) be able to delete post? it should actually remove it from firebase or set some flag so its not displayed
 (()) fix auto scrollToTop on commenting and voting
-(()) add delay for simulating pagination ?? or remove fake pagination altogether
-(()) instead of fetching all users data when creating a new account - only check if that username is available
 (̶(̶)̶)̶ ̶f̶i̶n̶i̶s̶h̶ ̶a̶n̶d̶ ̶t̶e̶s̶t̶ ̶v̶a̶l̶i̶d̶a̶t̶e̶M̶e̶d̶i̶a̶L̶i̶n̶k̶ ̶
 (()) upvoting shouldn't reload the images - maybe store image in ref ?
 (()) handle click events on link previews (open post vs go to link)
-
 (()) state change shouldn't reload images
 (()) opening modal shouldn't scroll to top
-
 (()) handle when user logs in and the sign up modal (right now is still signs them in without showing error)
 
 ((last)) 
@@ -109,9 +107,7 @@
     - add a "more info" with technologies used
 
 [[[[[[[]]]]]]] ROADMAP [[[[[[[]]]]]]]
-(̶)̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶i̶m̶g̶u̶r̶ ̶p̶h̶o̶t̶o̶s̶/̶g̶i̶f̶s̶
-(̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶i̶m̶a̶g̶e̶s̶
-(̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶l̶i̶n̶k̶ ̶s̶h̶a̶r̶i̶n̶g̶
+() pagination
 () add tensorFlow to detect toxic posts/comments
 () allow for editing comments
 () allow for login via username by getting their email from firebase (make request, search through all user objects to get email)

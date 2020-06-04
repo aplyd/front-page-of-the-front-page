@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import useInitialFocus from '../hooks/useInitialFocus';
 import { createUserAccount } from '../firebase';
+import firebase from '../firebase';
 
 const WordsContainer = styled.div`
 	width: 432px;
@@ -77,31 +78,34 @@ export default function SignUp({ showLogIn, closeModal }) {
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
 	const [isUsernameUnique, setIsUsernameUnique] = useState(true);
-	const { setUser, users } = useContext(PostContext);
+	const { setUser } = useContext(PostContext);
 	const input = useRef(null);
 	useInitialFocus(input);
 
-	//TODO - remove, pulling in all user data is a privacy issue
-	useEffect(() => {
-		users &&
-			users.forEach((user) => {
-				if (user.username.toLowerCase() === username.toLowerCase()) {
-					setIsUsernameUnique(false);
-					console.log('taken');
-				} else {
-					setIsUsernameUnique(true);
-					console.log('dafe');
-				}
-			});
-	}, [username, users]);
-
 	const createUser = (e) => {
+		//check username here
 		e.preventDefault();
 		if (isUsernameUnique) {
 			createUserAccount(username, email, password, setUser);
 			setUsername('');
 			setPassword('');
 			closeModal();
+		}
+	};
+
+	const checkUsernameAvailable = () => {
+		if (username.length >= 1) {
+			firebase
+				.firestore()
+				.collection('users')
+				.doc(username)
+				.get()
+				.then((doc) =>
+					doc.exists
+						? setIsUsernameUnique(false)
+						: setIsUsernameUnique(true)
+				)
+				.catch((err) => console.log(err));
 		}
 	};
 
@@ -126,7 +130,11 @@ export default function SignUp({ showLogIn, closeModal }) {
 					placeholder="Username"
 					vale={username}
 					ref={input}
-					onChange={(e) => setUsername(e.target.value)}
+					onChange={(e) => {
+						setUsername(e.target.value);
+						setIsUsernameUnique(true);
+					}}
+					onBlur={() => checkUsernameAvailable()}
 					maxLength="15"
 				/>
 
