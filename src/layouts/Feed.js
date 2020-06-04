@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import styled from 'styled-components';
 // import PostPreview from '../components/PostPreview';
 import PreviewContent from '../components/PreviewContent';
@@ -38,7 +38,7 @@ const BackToTopBtn = styled.button`
 	}
 `;
 
-const Feed = ({ posts, children, viewPostComments, postVotes }) => {
+const Feed = memo(({ posts, children, viewPostComments, postVotes }) => {
 	// const [postRange, setPostRange] = useState(10);
 	// const setOfPosts = [...posts].slice(0, postRange);
 	// const lastItem = useRef(null);
@@ -112,6 +112,6 @@ const Feed = ({ posts, children, viewPostComments, postVotes }) => {
 			{/* <div ref={lastItem}></div> */}
 		</Container>
 	);
-};
+});
 
 export default Feed;

@@ -19,6 +19,8 @@ import { Container as VoteArrowContainer, Vote } from './VoteContainer';
 import { v4 as uuidv4 } from 'uuid';
 import { PostContext } from '../PostContext';
 import { TiArrowSortedDown } from 'react-icons/ti';
+import MediaPreview from './MediaPreview';
+import LinkPreview from './LinkPreview';
 
 const Container = styled.div`
 	width: 100%;
@@ -293,7 +295,18 @@ export default function PostContent({
 					</p>
 				</InfoContainer>
 				<Title>{post.title}</Title>
-				<Body>{post.postText}</Body>
+				{/* <Body>{post.postText}</Body> */}
+				{post.postType === 'post' && <Title>{post.title}</Title>}
+				{post.postType === 'media' && (
+					<MediaPreview title={post.title} media={post.postMedia} />
+				)}
+				{post.postType === 'link' && (
+					<LinkPreview
+						title={post.title}
+						url={post.postLink}
+						preview={post.linkPreview}
+					/>
+				)}
 			</ContentContainer>
 
 			<ActionContainer>
