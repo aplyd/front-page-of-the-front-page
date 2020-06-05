@@ -70,12 +70,12 @@ function App() {
 				firebase
 					.firestore()
 					.collection('users')
-					.doc(window.user.uid)
+					.doc(window.user.displayName)
 					.get()
 					.then((res) => {
 						const data = res.data();
 						setUser({
-							username: data.username,
+							username: user.username,
 							email: user.email,
 							uid: user.uid,
 							isSignedIn: true,

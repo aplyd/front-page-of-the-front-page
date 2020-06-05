@@ -74,6 +74,7 @@ export const CommentTextArea = styled.textarea`
 
 export const CommentBtn = styled.button`
 	position: absolute;
+	border: none;
 	bottom: 8px;
 	right: 8px;
 	color: white;
