@@ -1,4 +1,4 @@
-import React, { useState, memo, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 

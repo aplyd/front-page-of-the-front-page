@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { IoMdClose } from 'react-icons/io';
 
 const Background = styled.div`
-	height: 100%;
+	height: 120vh;
 	width: 100%;
 	position: absolute;
 	top: 0;

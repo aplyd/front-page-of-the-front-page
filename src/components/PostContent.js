@@ -294,7 +294,6 @@ export default function PostContent({
 						ago
 					</p>
 				</InfoContainer>
-				<Title>{post.title}</Title>
 				{/* <Body>{post.postText}</Body> */}
 				{post.postType === 'post' && <Title>{post.title}</Title>}
 				{post.postType === 'media' && (
