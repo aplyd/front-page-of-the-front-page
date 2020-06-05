@@ -110,12 +110,34 @@ const CommentSVG = styled.svg`
 const PreviewContent = ({ pinned, username, timestamp, post }) => {
 	const commentCount = post ? countReplies(post) : null;
 
+	const displayPreviewType = () => {
+		if (post.deleted) {
+			return <Title>[deleted]</Title>;
+		} else if (post.postType === 'post') {
+			return <Title>{post.title}</Title>;
+		} else if (post.postType === 'media') {
+			return <MediaPreview title={post.title} media={post.postMedia} />;
+		} else if (post.postType === 'link') {
+			return (
+				<LinkPreview
+					title={post.title}
+					url={post.postLink}
+					preview={post.linkPreview}
+				/>
+			);
+		}
+	};
+
 	return (
 		<React.Fragment>
 			<ContentContainer>
 				{pinned ? <Pinned>Pinned by moderators</Pinned> : null}
 				<InfoContainer>
-					<p>Posted by {username}</p>
+					{post.deleted ? (
+						<p>Posted by [deleted]</p>
+					) : (
+						<p>Posted by {username}</p>
+					)}
 					<p>
 						{formatDistance(Date.now(), timestamp, {
 							includeSeconds: true,
@@ -124,17 +146,7 @@ const PreviewContent = ({ pinned, username, timestamp, post }) => {
 					</p>
 				</InfoContainer>
 
-				{post.postType === 'post' && <Title>{post.title}</Title>}
-				{post.postType === 'media' && (
-					<MediaPreview title={post.title} media={post.postMedia} />
-				)}
-				{post.postType === 'link' && (
-					<LinkPreview
-						title={post.title}
-						url={post.postLink}
-						preview={post.linkPreview}
-					/>
-				)}
+				{displayPreviewType()}
 			</ContentContainer>
 
 			<ActionContainer pinned={pinned}>

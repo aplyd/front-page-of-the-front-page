@@ -33,6 +33,7 @@ const Container = styled.div`
 
 const CommentAction = styled(ActionButton)``;
 const Share = styled(ActionButton)``;
+const Delete = styled(ActionButton)``;
 
 const Body = styled.p`
 	padding: 4px 64px 8px 8px;
@@ -204,7 +205,7 @@ export default function PostContent({
 }) {
 	const [commentInput, setCommentInput] = useState();
 	const [width, setWidth] = useState();
-	const { castPostVote } = useContext(PostContext);
+	const { castPostVote, posts, setPosts } = useContext(PostContext);
 	const [userVote, setUserVote] = useState();
 	useWindowWidth(setWidth);
 	const [commentSortMethod, setCommentSortMethod] = useState('top');
@@ -243,6 +244,57 @@ export default function PostContent({
 		top: (a, b) => (a.points <= b.points ? 1 : -1),
 		new: (a, b) => (a.timestamp <= b.timestamp ? 1 : -1),
 		old: (a, b) => (a.timestamp >= b.timestamp ? 1 : -1),
+	};
+
+	const deletePost = () => {
+		const response = window.confirm(
+			'Are you sure you want to delete this post? There is no undo.'
+		);
+		if (response) {
+			const withPostDeleted = posts.map((p) => {
+				if (p.id === post.id) {
+					p.deleted = true;
+				}
+				return p;
+			});
+
+			setPosts(withPostDeleted);
+
+			firebase
+				.firestore()
+				.collection('posts')
+				.doc(post.id)
+				.update({ deleted: true })
+				.catch((err) => console.log(err));
+		}
+	};
+
+	const displayPostType = () => {
+		if (post.deleted) {
+			return (
+				<React.Fragment>
+					<Title>[deleted]</Title>
+					<Body>[deleted]</Body>
+				</React.Fragment>
+			);
+		} else if (post.postType === 'post') {
+			return (
+				<React.Fragment>
+					<Title>{post.title}</Title>
+					<Body>{post.postText}</Body>
+				</React.Fragment>
+			);
+		} else if (post.postType === 'media') {
+			return <MediaPreview title={post.title} media={post.postMedia} />;
+		} else if (post.postType === 'link') {
+			return (
+				<LinkPreview
+					title={post.title}
+					url={post.postLink}
+					preview={post.linkPreview}
+				/>
+			);
+		}
 	};
 
 	return (
@@ -296,17 +348,7 @@ export default function PostContent({
 					</p>
 				</InfoContainer>
 				{/* <Body>{post.postText}</Body> */}
-				{post.postType === 'post' && <Title>{post.title}</Title>}
-				{post.postType === 'media' && (
-					<MediaPreview title={post.title} media={post.postMedia} />
-				)}
-				{post.postType === 'link' && (
-					<LinkPreview
-						title={post.title}
-						url={post.postLink}
-						preview={post.linkPreview}
-					/>
-				)}
+				{displayPostType()}
 			</ContentContainer>
 
 			<ActionContainer>
@@ -315,6 +357,7 @@ export default function PostContent({
 					{post.replies.length === 1 ? 'comment' : 'comments'}
 				</CommentAction>
 				<Share>share</Share>
+				<Delete onClick={() => deletePost()}>Delete</Delete>
 			</ActionContainer>
 
 			{user.isSignedIn ? (

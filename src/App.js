@@ -75,7 +75,7 @@ function App() {
 					.then((res) => {
 						const data = res.data();
 						setUser({
-							username: user.username,
+							username: window.user.displayName,
 							email: user.email,
 							uid: user.uid,
 							isSignedIn: true,

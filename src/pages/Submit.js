@@ -12,7 +12,6 @@ import { BsImageFill } from 'react-icons/bs';
 import { RiLinksLine } from 'react-icons/ri';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { validateMediaLink } from '../utils';
 
 const CreatePostContainer = styled.div`
 	${roundedGreyBorder};
@@ -108,7 +107,7 @@ export default function Submit() {
 			return image;
 		};
 
-		const submitPost = (img = null) => {
+		const submitPost = (img = null, media = null) => {
 			//add post data to firebase and 'posts' state to immediately display
 			firebase
 				.firestore()
@@ -126,6 +125,7 @@ export default function Submit() {
 					username: user.username,
 					replies: [],
 					id: postID,
+					deleted: false,
 				})
 				.then(() => {
 					setPosts([
@@ -141,6 +141,7 @@ export default function Submit() {
 							username: user.username,
 							replies: [],
 							id: postID,
+							deleted: false,
 						},
 						...posts,
 					]);
