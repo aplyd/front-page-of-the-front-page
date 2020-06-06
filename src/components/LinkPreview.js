@@ -21,12 +21,14 @@ const PreviewImage = styled.div`
 	background-image: ${(props) => 'url(' + props.img + ')'};
 	background-size: contain;
 	background-position: center;
+	cursor: pointer;
 `;
 
 const PreviewImageFallback = styled(PreviewImage)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 `;
 
 const LinkTitle = styled.h2`
@@ -87,11 +89,22 @@ export default function LinkPreview({ title, url, preview }) {
 		<Container>
 			<LinkTitle>{title}</LinkTitle>
 			{preview ? (
-				<PreviewImage img={img}>
+				<PreviewImage
+					img={img}
+					onClick={(e) => {
+						e.stopPropagation();
+						window.open(url, '_blank');
+					}}
+				>
 					<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
 				</PreviewImage>
 			) : (
-				<PreviewImageFallback>
+				<PreviewImageFallback
+					onClick={(e) => {
+						e.stopPropagation();
+						window.open(url, '_blank');
+					}}
+				>
 					<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
 					<LinkIcon as={RiLinksLine} />{' '}
 				</PreviewImageFallback>

@@ -5,7 +5,7 @@ import { IoMdClose } from 'react-icons/io';
 const Background = styled.div`
 	height: 120vh;
 	width: 100%;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -15,7 +15,7 @@ const Background = styled.div`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	z-index: 1000;
+	z-index: 1005;
 `;
 const Foreground = styled.div`
 	height: 550px;

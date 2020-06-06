@@ -33,9 +33,9 @@ export default function Comments({
 		if (!postData) {
 			viewPostComments(id);
 		}
-		if (window.pageYOffset !== 0) {
-			window.scrollTo(0, 0);
-		}
+		// if (window.pageYOffset !== 0) {
+		// 	window.scrollTo(0, 0);
+		// }
 	}, [id, postData, viewPostComments]);
 
 	return (

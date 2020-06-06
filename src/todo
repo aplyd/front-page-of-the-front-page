@@ -11,7 +11,7 @@
     -̶ ̶s̶h̶o̶w̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶f̶o̶r̶ ̶"̶c̶o̶m̶m̶e̶n̶t̶ ̶a̶s̶ ̶_̶_̶_̶_̶"̶
     -̶ ̶h̶i̶d̶e̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶i̶n̶p̶u̶t̶ ̶u̶n̶l̶e̶s̶s̶ ̶l̶o̶g̶g̶e̶d̶ ̶i̶n̶
     -̶ ̶l̶i̶n̶e̶ ̶u̶p̶ ̶l̶e̶f̶t̶ ̶e̶d̶g̶e̶ ̶o̶f̶ ̶c̶o̶m̶m̶e̶n̶t̶ ̶b̶o̶x̶,̶ ̶p̶o̶s̶t̶ ̶b̶o̶d̶y̶,̶ ̶e̶t̶c̶.̶
-    - form validation?
+    -̶ ̶f̶o̶r̶m̶ ̶v̶a̶l̶i̶d̶a̶t̶i̶o̶n̶?̶
 
 (̶(̶)̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶s̶e̶a̶r̶c̶h̶ ̶i̶n̶p̶u̶t̶!̶!̶
 
@@ -50,9 +50,9 @@
     -̶ ̶f̶i̶x̶ ̶s̶p̶a̶c̶i̶n̶g̶ ̶a̶r̶o̶u̶n̶d̶ ̶v̶o̶t̶e̶ ̶a̶r̶r̶o̶w̶s̶
     -̶ ̶f̶u̶l̶l̶ ̶w̶i̶d̶t̶h̶ ̶p̶o̶s̶t̶ ̶"̶c̶a̶r̶d̶s̶"̶ ̶o̶n̶ ̶m̶o̶b̶i̶l̶e̶
     -̶ ̶v̶o̶t̶e̶ ̶n̶u̶m̶b̶e̶r̶ ̶c̶h̶a̶n̶g̶e̶s̶ ̶c̶o̶l̶o̶r̶ ̶t̶o̶ ̶m̶a̶t̶c̶h̶ ̶v̶o̶t̶e̶ ̶(̶r̶e̶d̶ ̶o̶r̶ ̶b̶l̶u̶e̶)̶
+    -̶ ̶f̶i̶x̶ ̶c̶h̶r̶o̶m̶e̶ ̶b̶u̶t̶t̶o̶n̶ ̶s̶t̶y̶l̶i̶n̶g̶
     - double check everything for mobile
     - handle link/image post viewing for mobile
-    - fix chrome button styling
 
 ̶
 (̶(̶)̶)̶ ̶i̶n̶s̶t̶e̶a̶d̶ ̶o̶f̶ ̶f̶e̶t̶c̶h̶i̶n̶g̶ ̶a̶l̶l̶ ̶u̶s̶e̶r̶s̶ ̶d̶a̶t̶a̶ ̶w̶h̶e̶n̶ ̶c̶r̶e̶a̶t̶i̶n̶g̶ ̶a̶ ̶n̶e̶w̶ ̶a̶c̶c̶o̶u̶n̶t̶ ̶-̶ ̶o̶n̶l̶y̶ ̶c̶h̶e̶c̶k̶ ̶i̶f̶ ̶t̶h̶a̶t̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶s̶ ̶a̶v̶a̶i̶l̶a̶b̶l̶e̶
@@ -63,15 +63,15 @@
 (̶(̶)̶)̶ ̶a̶l̶l̶o̶w̶ ̶f̶o̶r̶ ̶d̶e̶l̶e̶t̶i̶n̶g̶ ̶y̶o̶u̶'̶r̶e̶ ̶o̶w̶n̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶b̶y̶ ̶r̶e̶p̶l̶a̶c̶i̶n̶g̶ ̶t̶h̶e̶ ̶t̶e̶x̶t̶ ̶w̶i̶t̶h̶ ̶[̶d̶e̶l̶e̶t̶e̶d̶]̶
 (̶(̶)̶)̶ ̶l̶i̶m̶i̶t̶ ̶d̶i̶s̶p̶l̶a̶y̶P̶o̶s̶t̶s̶ ̶t̶o̶ ̶m̶o̶s̶t̶ ̶r̶e̶c̶e̶n̶t̶ ̶1̶0̶
 (̶(̶)̶)̶ ̶f̶i̶n̶i̶s̶h̶ ̶a̶n̶d̶ ̶t̶e̶s̶t̶ ̶v̶a̶l̶i̶d̶a̶t̶e̶M̶e̶d̶i̶a̶L̶i̶n̶k̶ ̶
+(̶(̶)̶)̶ ̶o̶p̶e̶n̶i̶n̶g̶ ̶m̶o̶d̶a̶l̶ ̶s̶h̶o̶u̶l̶d̶n̶'̶t̶ ̶s̶c̶r̶o̶l̶l̶ ̶t̶o̶ ̶t̶o̶p̶
+(̶(̶)̶)̶ ̶b̶e̶ ̶a̶b̶l̶e̶ ̶t̶o̶ ̶d̶e̶l̶e̶t̶e̶ ̶p̶o̶s̶t̶?̶ ̶i̶t̶ ̶s̶h̶o̶u̶l̶d̶ ̶a̶c̶t̶u̶a̶l̶l̶y̶ ̶r̶e̶m̶o̶v̶e̶ ̶i̶t̶ ̶f̶r̶o̶m̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶o̶r̶ ̶s̶e̶t̶ ̶s̶o̶m̶e̶ ̶f̶l̶a̶g̶ ̶s̶o̶ ̶i̶t̶s̶ ̶n̶o̶t̶ ̶d̶i̶s̶p̶l̶a̶y̶e̶d̶  
+(̶(̶)̶)̶ ̶f̶i̶x̶ ̶a̶u̶t̶o̶ ̶s̶c̶r̶o̶l̶l̶T̶o̶T̶o̶p̶ ̶o̶n̶ ̶c̶o̶m̶m̶e̶n̶t̶i̶n̶g̶ ̶a̶n̶d̶ ̶v̶o̶t̶i̶n̶g̶
+(̶(̶)̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶c̶l̶i̶c̶k̶ ̶e̶v̶e̶n̶t̶s̶ ̶o̶n̶ ̶l̶i̶n̶k̶ ̶p̶r̶e̶v̶i̶e̶w̶s̶ ̶(̶o̶p̶e̶n̶ ̶p̶o̶s̶t̶ ̶v̶s̶ ̶g̶o̶ ̶t̶o̶ ̶l̶i̶n̶k̶)̶
+(̶(̶)̶)̶ ̶f̶i̶x̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶p̶r̶o̶f̶i̶l̶e̶ ̶d̶r̶o̶p̶d̶o̶w̶n̶
 (()) handle errors logging in by displaying error - wrong email/password, network error, etc.
-(()) be able to delete post? it should actually remove it from firebase or set some flag so its not displayed  
-(()) fix auto scrollToTop on commenting and voting
+(()) handle when user logs in accidentally on the sign up modal (right now is still signs them in without showing error)
 (()) upvoting shouldn't reload the images
-(()) state change shouldn't reload images
-(()) handle click events on link previews (open post vs go to link)
-(()) opening modal shouldn't scroll to top
-(()) handle when user logs in and the sign up modal (right now is still signs them in without showing error)
-(()) fix display username in profile dropdown
+(()) state change shouldn't reload images (opening modal)
 
 ((last)) 
     -̶ ̶r̶e̶m̶o̶v̶e̶ ̶a̶l̶l̶ ̶D̶a̶t̶e̶.̶n̶o̶w̶(̶)̶ ̶f̶o̶r̶ ̶i̶n̶d̶e̶x̶ ̶o̶r̶ ̶u̶u̶i̶d̶

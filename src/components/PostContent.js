@@ -248,7 +248,7 @@ export default function PostContent({
 
 	const deletePost = () => {
 		const response = window.confirm(
-			'Are you sure you want to delete this post? There is no undo.'
+			'Are you sure you want to delete this post? This cannot be undone.'
 		);
 		if (response) {
 			const withPostDeleted = posts.map((p) => {
