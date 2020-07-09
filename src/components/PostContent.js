@@ -357,7 +357,9 @@ export default function PostContent({
 					{post.replies.length === 1 ? 'comment' : 'comments'}
 				</CommentAction>
 				<Share>share</Share>
-				<Delete onClick={() => deletePost()}>Delete</Delete>
+				{user.username === post.username ? (
+					<Delete onClick={() => deletePost()}>Delete</Delete>
+				) : null}
 			</ActionContainer>
 
 			{user.isSignedIn ? (
