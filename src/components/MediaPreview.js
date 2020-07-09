@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { FaExternalLinkAlt } from 'react-icons/fa';
@@ -89,6 +90,14 @@ const MediaPreview = ({ title, media }) => {
 			)}
 		</Container>
 	);
+};
+
+MediaPreview.propTypes = {
+	media: PropTypes.shape({
+		mediaType: PropTypes.string,
+		url: PropTypes.string,
+	}),
+	title: PropTypes.string,
 };
 
 export default MediaPreview;

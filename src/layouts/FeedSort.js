@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
@@ -134,3 +135,8 @@ export default function FeedSort({ sortPosts, sortBy }) {
 		</Container>
 	);
 }
+
+FeedSort.propTypes = {
+	sortBy: PropTypes.any,
+	sortPosts: PropTypes.func,
+};

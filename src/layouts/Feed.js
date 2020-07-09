@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 // import PostPreview from '../components/PostPreview';
 import PreviewContent from '../components/PreviewContent';
@@ -107,6 +108,12 @@ const Feed = ({ posts, children, viewPostComments }) => {
 			{/* <div ref={lastItem}></div> */}
 		</Container>
 	);
+};
+
+Feed.propTypes = {
+	children: PropTypes.node,
+	posts: PropTypes.any,
+	viewPostComments: PropTypes.func,
 };
 
 export default Feed;

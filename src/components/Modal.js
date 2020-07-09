@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { IoMdClose } from 'react-icons/io';
@@ -89,3 +90,8 @@ export default function Modal({ closeModal, children }) {
 		</Background>
 	);
 }
+
+Modal.propTypes = {
+	children: PropTypes.node,
+	closeModal: PropTypes.func,
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import { FaCommentAlt } from 'react-icons/fa';
@@ -314,3 +315,29 @@ export default function DisplayComments({
 		</React.Fragment>
 	);
 }
+
+DisplayComments.propTypes = {
+	comment: PropTypes.shape({
+		commentInput: PropTypes.string,
+		deleted: PropTypes.bool,
+		depth: PropTypes.number,
+		id: PropTypes.string,
+		points: PropTypes.number,
+		replies: PropTypes.array,
+		timestamp: PropTypes.number,
+		username: PropTypes.string,
+	}),
+	commentSortMethod: PropTypes.func,
+	post: PropTypes.shape({
+		id: PropTypes.string,
+	}),
+	setModalContent: PropTypes.func,
+	setPostData: PropTypes.func,
+	setUser: PropTypes.func,
+	user: PropTypes.shape({
+		commentVotes: PropTypes.object,
+		isSignedIn: PropTypes.bool,
+		uid: PropTypes.string,
+		username: PropTypes.string,
+	}),
+};

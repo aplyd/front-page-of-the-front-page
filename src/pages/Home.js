@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Container } from '../App';
 import FeedContainer from '../layouts/FeedContainer';
 
 export default function Home({
-	redditData,
 	posts,
 	sortPosts,
 	sortBy,
@@ -13,7 +13,6 @@ export default function Home({
 	return (
 		<Container>
 			<FeedContainer
-				redditData={redditData}
 				posts={posts}
 				sortPosts={sortPosts}
 				sortBy={sortBy}
@@ -24,3 +23,11 @@ export default function Home({
 		</Container>
 	);
 }
+
+Home.propTypes = {
+	posts: PropTypes.array,
+	sortBy: PropTypes.string,
+	sortPosts: PropTypes.func,
+	user: PropTypes.object,
+	viewPostComments: PropTypes.func,
+};

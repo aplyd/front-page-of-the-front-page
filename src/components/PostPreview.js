@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
 	width: 100%;
@@ -29,4 +30,10 @@ const PostPreview = memo(({ title, id, viewPostComments, children }) => {
 	return <Container onClick={handleClick}>{children}</Container>;
 });
 
+PostPreview.propTypes = {
+	title: PropTypes.string,
+	id: PropTypes.string,
+	viewPostComments: PropTypes.func,
+	children: PropTypes.node,
+};
 export default PostPreview;

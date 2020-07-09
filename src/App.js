@@ -24,7 +24,7 @@ export const Container = styled.div`
 
 function App() {
 	const [user, setUser] = useState({});
-	const [users, setUsers] = useState(null);
+	const [users] = useState(null);
 	const [modalContent, setModalContent] = useState(null);
 	const [posts, setPosts] = useState([]);
 	const [sortBy, setSortBy] = useState('TIME_ASC');

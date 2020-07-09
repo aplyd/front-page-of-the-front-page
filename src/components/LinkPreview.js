@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { RiLinksLine } from 'react-icons/ri';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Container = styled.div`
-	padding: 4px 164px 24px 8px;
+	padding: 4px 0px 24px 8px;
 	display: flex;
 	flex-direction: column;
 `;
@@ -123,3 +124,9 @@ export default function LinkPreview({ title, url, preview }) {
 		</Container>
 	);
 }
+
+LinkPreview.propTypes = {
+	preview: PropTypes.string,
+	title: PropTypes.string,
+	url: PropTypes.string,
+};

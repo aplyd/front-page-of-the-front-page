@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
@@ -106,3 +107,8 @@ export default function LogIn({ showSignUp, closeModal }) {
 		</WordsContainer>
 	);
 }
+
+LogIn.propTypes = {
+	closeModal: PropTypes.func,
+	showSignUp: PropTypes.func,
+};

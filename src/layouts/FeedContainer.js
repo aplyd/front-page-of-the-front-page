@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import FeedSort from './FeedSort';
@@ -9,7 +10,7 @@ import { useWindowWidth } from '../hooks/useWindowWidth';
 const Container = styled.div`
 	width: calc(100% - 32px);
 	max-width: 960px;
-	min-width: 360px;
+	/* min-width: 360px; */
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: 1fr 310px;
@@ -20,7 +21,7 @@ const Container = styled.div`
 		grid-template-columns: 1fr;
 		max-width: 869px;
 	}
-	@media screen and (max-width: 480px) {
+	@media screen and (max-width: 600px) {
 		width: 100%;
 	}
 `;
@@ -34,7 +35,6 @@ const SidebarContainer = styled.div`
 `;
 
 export default function FeedContainer({
-	redditData,
 	posts,
 	sortPosts,
 	sortBy,
@@ -63,7 +63,6 @@ export default function FeedContainer({
 							key={'sort posts'}
 						/>
 						<Feed
-							redditData={redditData}
 							posts={posts}
 							key={'feed'}
 							viewPostComments={viewPostComments}
@@ -80,3 +79,15 @@ export default function FeedContainer({
 		</Container>
 	);
 }
+
+FeedContainer.propTypes = {
+	children: PropTypes.node,
+	displayFeedSort: PropTypes.bool,
+	posts: PropTypes.any,
+	sortBy: PropTypes.any,
+	sortPosts: PropTypes.func,
+	user: PropTypes.shape({
+		isSignedIn: PropTypes.bool,
+	}),
+	viewPostComments: PropTypes.func,
+};

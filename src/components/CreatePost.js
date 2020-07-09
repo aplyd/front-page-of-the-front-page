@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { validateMediaLink } from '../utils';
@@ -144,3 +145,17 @@ export default function CreatePost({
 		</FormContainer>
 	);
 }
+
+CreatePost.propTypes = {
+	inputShown: PropTypes.string,
+	onCancel: PropTypes.func,
+	onSubmit: PropTypes.func,
+	postLink: PropTypes.string,
+	postMedia: PropTypes.string,
+	postText: PropTypes.string,
+	setPostLink: PropTypes.func,
+	setPostMedia: PropTypes.func,
+	setPostText: PropTypes.func,
+	setTitle: PropTypes.func,
+	title: PropTypes.string,
+};

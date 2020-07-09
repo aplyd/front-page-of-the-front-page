@@ -1,4 +1,5 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import useInitialFocus from '../hooks/useInitialFocus';
@@ -163,3 +164,8 @@ export default function SignUp({ showLogIn, closeModal }) {
 		</WordsContainer>
 	);
 }
+
+SignUp.propTypes = {
+	closeModal: PropTypes.func,
+	showLogIn: PropTypes.func,
+};

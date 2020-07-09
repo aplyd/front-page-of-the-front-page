@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
@@ -362,3 +363,9 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 		</Container>
 	);
 }
+
+Nav.propTypes = {
+	closeModal: PropTypes.func,
+	openModal: PropTypes.func,
+	viewPostComments: PropTypes.func,
+};

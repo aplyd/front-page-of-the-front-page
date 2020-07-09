@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
@@ -89,6 +90,11 @@ const VoteContainer = ({ id, vote }) => {
 			</div>
 		</Container>
 	);
+};
+
+VoteContainer.propTypes = {
+	id: PropTypes.string,
+	vote: PropTypes.number,
 };
 
 export default VoteContainer;

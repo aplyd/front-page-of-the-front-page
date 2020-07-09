@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import MediaPreview from './MediaPreview';
@@ -159,6 +160,20 @@ const PreviewContent = ({ pinned, username, timestamp, post }) => {
 			</ActionContainer>
 		</React.Fragment>
 	);
+};
+
+PreviewContent.propTypes = {
+	pinned: PropTypes.bool,
+	post: PropTypes.shape({
+		deleted: PropTypes.bool,
+		linkPreview: PropTypes.string,
+		postLink: PropTypes.string,
+		postMedia: PropTypes.any,
+		postType: PropTypes.string,
+		title: PropTypes.string,
+	}),
+	timestamp: PropTypes.number,
+	username: PropTypes.string,
 };
 
 export default PreviewContent;

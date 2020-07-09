@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useContext } from 'react';
 // import { useParams } from 'react-router-dom';
 import FeedContainer from '../layouts/FeedContainer';
@@ -53,3 +54,12 @@ export default function Comments({
 		</Container>
 	);
 }
+
+Comments.propTypes = {
+	currentPost: PropTypes.object,
+	postData: PropTypes.object,
+	setModalContent: PropTypes.func,
+	setPostData: PropTypes.func,
+	setUser: PropTypes.func,
+	viewPostComments: PropTypes.func,
+};

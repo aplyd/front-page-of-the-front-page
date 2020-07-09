@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { GoArrowDown, GoArrowUp } from 'react-icons/go';
@@ -455,3 +456,28 @@ export default function PostContent({
 		</Container>
 	);
 }
+
+PostContent.propTypes = {
+	post: PropTypes.shape({
+		deleted: PropTypes.bool,
+		id: PropTypes.any,
+		linkPreview: PropTypes.string,
+		postLink: PropTypes.string,
+		postMedia: PropTypes.any,
+		postText: PropTypes.string,
+		postType: PropTypes.string,
+		replies: PropTypes.array,
+		timestamp: PropTypes.any,
+		title: PropTypes.string,
+		username: PropTypes.string,
+		vote: PropTypes.number,
+	}),
+	setModalContent: PropTypes.func,
+	setPostData: PropTypes.func,
+	setUser: PropTypes.func,
+	user: PropTypes.shape({
+		isSignedIn: PropTypes.bool,
+		postVotes: PropTypes.object,
+		username: PropTypes.string,
+	}),
+};

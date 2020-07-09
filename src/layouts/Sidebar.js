@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import SideBarAboutProject from '../components/SidebarAboutProject/SidebarAboutProject';
+import SideBarAboutProject from '../components/SidebarAboutProject';
 
-//to keep the S.Component naming convention for styled components consistent
-const S = {};
-
-S.Container = styled.div``;
+const Container = styled.div`
+	grid-column: 2;
+	grid-row: 1 / 3;
+`;
 
 export default function Sidebar() {
 	return (
-		<S.Container>
+		<Container>
 			<SideBarAboutProject />
-		</S.Container>
+		</Container>
 	);
 }
