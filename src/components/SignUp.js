@@ -17,7 +17,7 @@ const Input = styled.input`
 	font-size: ${(props) => props.theme.font.size.m};
 	width: 392px;
 	padding: 8px 24px 8px 16px;
-	border-radius: 4px;
+	border-radius: 4px; 
 	text-indent: 10px;
 	outline: none;
 	border: 0.5px solid ${(props) => props.theme.colors.lightGray};
