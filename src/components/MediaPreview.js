@@ -9,17 +9,26 @@ const ImageContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-top: 12px;
+	padding-top: 16px;
+	@media screen and (max-width: 640px) {
+		padding-top: 32px;
+	}
 `;
 
-const MediaTitle = styled.h2`
-	font-size: 20px;
-`;
-
+//TODO - change the `padding-right` property for mobile
 const Image = styled.img`
 	max-height: 512px;
 	max-width: 640px;
 	padding-right: 40px;
+	@media screen and (max-width: 620px) {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+`;
+
+const MediaTitle = styled.h2`
+	font-size: 20px;
 `;
 
 const Video = styled.iframe`

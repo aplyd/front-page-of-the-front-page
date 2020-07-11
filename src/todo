@@ -52,7 +52,7 @@
     -̶ ̶v̶o̶t̶e̶ ̶n̶u̶m̶b̶e̶r̶ ̶c̶h̶a̶n̶g̶e̶s̶ ̶c̶o̶l̶o̶r̶ ̶t̶o̶ ̶m̶a̶t̶c̶h̶ ̶v̶o̶t̶e̶ ̶(̶r̶e̶d̶ ̶o̶r̶ ̶b̶l̶u̶e̶)̶
     -̶ ̶f̶i̶x̶ ̶c̶h̶r̶o̶m̶e̶ ̶b̶u̶t̶t̶o̶n̶ ̶s̶t̶y̶l̶i̶n̶g̶
     - double check everything for mobile
-    - handle link/image post viewing for mobile 
+    - handle link/i̶m̶a̶g̶e̶ post viewing for mobile 
 
 ̶
 (̶(̶)̶)̶ ̶i̶n̶s̶t̶e̶a̶d̶ ̶o̶f̶ ̶f̶e̶t̶c̶h̶i̶n̶g̶ ̶a̶l̶l̶ ̶u̶s̶e̶r̶s̶ ̶d̶a̶t̶a̶ ̶w̶h̶e̶n̶ ̶c̶r̶e̶a̶t̶i̶n̶g̶ ̶a̶ ̶n̶e̶w̶ ̶a̶c̶c̶o̶u̶n̶t̶ ̶-̶ ̶o̶n̶l̶y̶ ̶c̶h̶e̶c̶k̶ ̶i̶f̶ ̶t̶h̶a̶t̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶s̶ ̶a̶v̶a̶i̶l̶a̶b̶l̶e̶
@@ -114,5 +114,5 @@
 
 {{{{{{{{{{{{{{ TODO BEFORE SHIPPING }}}}}}}}}}}}}}
 
-([]) fix css for mobile layout
+(̶[̶]̶)̶ ̶f̶i̶x̶ ̶c̶s̶s̶ ̶f̶o̶r̶ ̶m̶o̶b̶i̶l̶e̶ ̶l̶a̶y̶o̶u̶t̶
 ([]) only allow for one vote on each post

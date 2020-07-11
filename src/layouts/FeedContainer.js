@@ -10,7 +10,6 @@ import { useWindowWidth } from '../hooks/useWindowWidth';
 const Container = styled.div`
 	width: calc(100% - 32px);
 	max-width: 960px;
-	/* min-width: 360px; */
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: 1fr 310px;

@@ -32,6 +32,7 @@ export const Title = styled.h2`
 	padding: 4px 8px 20px 8px;
 	font-size: 20px;
 	color: black;
+	word-break: break-all;
 `;
 
 export const ActionContainer = styled.div`

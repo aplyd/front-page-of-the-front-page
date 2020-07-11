@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { RiLinksLine } from 'react-icons/ri';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 
 const Container = styled.div`
 	padding: 4px 0px 24px 8px;
@@ -76,6 +77,8 @@ const LinkContainer = styled.div`
 
 export default function LinkPreview({ title, url, preview }) {
 	const [img, setImg] = useState(null);
+	const [width, setWidth] = useState(0);
+	useWindowWidth(setWidth);
 	const shortenedUrl = url
 		.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
 		.split('/')[0];
@@ -89,6 +92,7 @@ export default function LinkPreview({ title, url, preview }) {
 	return (
 		<Container>
 			<LinkTitle>{title}</LinkTitle>
+
 			{preview ? (
 				<PreviewImage
 					img={img}

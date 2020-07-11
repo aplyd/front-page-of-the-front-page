@@ -49,8 +49,8 @@ input {
 
 #root {
 	height: 100%;
-	width: 100vw;
-	overflow-x: hidden;
+	/* width: 100vw; */
+	/* overflow-x: hidden; */
 	overflow-y: scroll;
 	left: 0;
 }
