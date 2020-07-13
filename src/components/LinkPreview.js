@@ -35,6 +35,10 @@ const PreviewImageFallback = styled(PreviewImage)`
 
 const LinkTitle = styled.h2`
 	font-size: 20px;
+	margin-right: 162px;
+	@media only screen and (max-width: 475px) {
+		margin-right: 8px;
+	}
 `;
 
 const LinkIcon = styled.svg`
