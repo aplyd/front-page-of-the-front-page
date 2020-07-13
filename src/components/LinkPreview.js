@@ -89,31 +89,42 @@ export default function LinkPreview({ title, url, preview }) {
 		}
 	}, [preview]);
 
+	const displayPreview = () => {
+		if (width > 475) {
+			if (preview) {
+				return (
+					<PreviewImage
+						img={img}
+						onClick={(e) => {
+							e.stopPropagation();
+							window.open(url, '_blank');
+						}}
+					>
+						<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
+					</PreviewImage>
+				);
+			} else {
+				return (
+					<PreviewImageFallback
+						onClick={(e) => {
+							e.stopPropagation();
+							window.open(url, '_blank');
+						}}
+					>
+						<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
+						<LinkIcon as={RiLinksLine} />{' '}
+					</PreviewImageFallback>
+				);
+			}
+		}
+	};
+
 	return (
 		<Container>
 			<LinkTitle>{title}</LinkTitle>
 
-			{preview ? (
-				<PreviewImage
-					img={img}
-					onClick={(e) => {
-						e.stopPropagation();
-						window.open(url, '_blank');
-					}}
-				>
-					<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
-				</PreviewImage>
-			) : (
-				<PreviewImageFallback
-					onClick={(e) => {
-						e.stopPropagation();
-						window.open(url, '_blank');
-					}}
-				>
-					<GoToIcon as={FaExternalLinkAlt}></GoToIcon>
-					<LinkIcon as={RiLinksLine} />{' '}
-				</PreviewImageFallback>
-			)}
+			{displayPreview()}
+
 			<LinkContainer>
 				<Link
 					href={url}
