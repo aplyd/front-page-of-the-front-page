@@ -91,7 +91,7 @@ export const logInExistingUser = async (email, password, setUser, user) => {
 	await firebase
 		.firestore()
 		.collection('users')
-		.doc(window.user.displayName)
+		.doc(window.user.uid)
 		.get()
 		.then((res) => {
 			data = res.data();
