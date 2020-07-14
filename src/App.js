@@ -155,7 +155,10 @@ function App() {
 					.collection('users')
 					.doc(user.uid)
 					.update({ postVotes: newUserVotes })
-					.catch((err) => console.log(err));
+					.catch((err) => {
+						console.log(err);
+						console.log('updated post votes in firebase');
+					});
 
 				firebase
 					.firestore()

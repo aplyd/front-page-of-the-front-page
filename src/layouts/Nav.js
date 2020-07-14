@@ -255,6 +255,16 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 		}
 	};
 
+	const handleProfileClick = () => {
+		if (user.isSignedIn) {
+			logOutUser();
+			setIsProfileDropdownOpen(false);
+		} else {
+			openModal('login');
+			setIsProfileDropdownOpen(false);
+		}
+	};
+
 	return (
 		<Container>
 			<Circle as={Link} to="/" />
@@ -333,7 +343,10 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 							</ProfileItem>
 							<ProfileItem
 								action={'true'}
-								onClick={() => history.push('/submit')}
+								onClick={() => {
+									history.push('/submit');
+									setIsProfileDropdownOpen(false);
+								}}
 							>
 								<div>
 									<SVGlogin as={IoIosCreate} />
@@ -345,9 +358,7 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 
 					<ProfileItem
 						action={'true'}
-						onClick={() =>
-							user.isSignedIn ? logOutUser() : openModal('login')
-						}
+						onClick={() => handleProfileClick()}
 					>
 						<div>
 							<SVGlogin as={FiLogIn} />

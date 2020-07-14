@@ -85,8 +85,6 @@ FeedContainer.propTypes = {
 	posts: PropTypes.any,
 	sortBy: PropTypes.any,
 	sortPosts: PropTypes.func,
-	user: PropTypes.shape({
-		isSignedIn: PropTypes.bool,
-	}),
+	user: PropTypes.any,
 	viewPostComments: PropTypes.func,
 };

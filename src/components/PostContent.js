@@ -475,9 +475,5 @@ PostContent.propTypes = {
 	setModalContent: PropTypes.func,
 	setPostData: PropTypes.func,
 	setUser: PropTypes.func,
-	user: PropTypes.shape({
-		isSignedIn: PropTypes.bool,
-		postVotes: PropTypes.object,
-		username: PropTypes.string,
-	}),
+	user: PropTypes.any,
 };

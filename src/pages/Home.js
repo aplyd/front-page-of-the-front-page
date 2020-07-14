@@ -28,6 +28,6 @@ Home.propTypes = {
 	posts: PropTypes.array,
 	sortBy: PropTypes.string,
 	sortPosts: PropTypes.func,
-	user: PropTypes.object,
+	user: PropTypes.any,
 	viewPostComments: PropTypes.func,
 };
