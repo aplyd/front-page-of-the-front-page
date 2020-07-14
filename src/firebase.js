@@ -47,7 +47,7 @@ export const createUserAccount = async (username, email, password, setUser) => {
 	await firebase
 		.firestore()
 		.collection('users')
-		.doc(username)
+		.doc(window.user.uid)
 		.set({
 			username,
 			uid: window.user.uid,
@@ -69,17 +69,25 @@ export const createUserAccount = async (username, email, password, setUser) => {
 			});
 		})
 		.catch((err) => console.log(err));
+
+	//store username
+	firebase
+		.firestore()
+		.collection('usernames')
+		.doc(username)
+		.set({
+			username,
+		})
+		.catch((err) => console.log(err));
 };
 
 //login, save userObj to state
 export const logInExistingUser = async (email, password, setUser, user) => {
 	let data;
-
 	await firebase
 		.auth()
 		.signInWithEmailAndPassword(email, password)
 		.catch((err) => console.log(err.code, err.message));
-
 	await firebase
 		.firestore()
 		.collection('users')
@@ -88,7 +96,6 @@ export const logInExistingUser = async (email, password, setUser, user) => {
 		.then((res) => {
 			data = res.data();
 		});
-
 	await setUser({
 		email,
 		uid: data.uid,

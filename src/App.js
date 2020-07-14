@@ -70,7 +70,7 @@ function App() {
 				firebase
 					.firestore()
 					.collection('users')
-					.doc(window.user.displayName)
+					.doc(window.user.uid)
 					.get()
 					.then((res) => {
 						const data = res.data();

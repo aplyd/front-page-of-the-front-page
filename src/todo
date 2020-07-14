@@ -52,7 +52,7 @@
     -̶ ̶v̶o̶t̶e̶ ̶n̶u̶m̶b̶e̶r̶ ̶c̶h̶a̶n̶g̶e̶s̶ ̶c̶o̶l̶o̶r̶ ̶t̶o̶ ̶m̶a̶t̶c̶h̶ ̶v̶o̶t̶e̶ ̶(̶r̶e̶d̶ ̶o̶r̶ ̶b̶l̶u̶e̶)̶
     -̶ ̶f̶i̶x̶ ̶c̶h̶r̶o̶m̶e̶ ̶b̶u̶t̶t̶o̶n̶ ̶s̶t̶y̶l̶i̶n̶g̶
     - double check everything for mobile
-    - handle link/i̶m̶a̶g̶e̶ post viewing for mobile 
+    -̶ ̶h̶a̶n̶d̶l̶e̶ ̶l̶i̶n̶k̶/̶i̶m̶a̶g̶e̶ ̶p̶o̶s̶t̶ ̶v̶i̶e̶w̶i̶n̶g̶ ̶f̶o̶r̶ ̶m̶o̶b̶i̶l̶e̶ ̶
 
 ̶
 (̶(̶)̶)̶ ̶i̶n̶s̶t̶e̶a̶d̶ ̶o̶f̶ ̶f̶e̶t̶c̶h̶i̶n̶g̶ ̶a̶l̶l̶ ̶u̶s̶e̶r̶s̶ ̶d̶a̶t̶a̶ ̶w̶h̶e̶n̶ ̶c̶r̶e̶a̶t̶i̶n̶g̶ ̶a̶ ̶n̶e̶w̶ ̶a̶c̶c̶o̶u̶n̶t̶ ̶-̶ ̶o̶n̶l̶y̶ ̶c̶h̶e̶c̶k̶ ̶i̶f̶ ̶t̶h̶a̶t̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶s̶ ̶a̶v̶a̶i̶l̶a̶b̶l̶e̶
@@ -72,6 +72,8 @@
 (()) handle when user logs in accidentally on the sign up modal (right now is still signs them in without showing error)
 (()) upvoting shouldn't reload the images
 (()) state change shouldn't reload images (opening modal)
+
+(()) when creating a user, store the username in a seperate list so that list can be checked later to avoid duplicate names
 
 ((last)) 
     -̶ ̶r̶e̶m̶o̶v̶e̶ ̶a̶l̶l̶ ̶D̶a̶t̶e̶.̶n̶o̶w̶(̶)̶ ̶f̶o̶r̶ ̶i̶n̶d̶e̶x̶ ̶o̶r̶ ̶u̶u̶i̶d̶
