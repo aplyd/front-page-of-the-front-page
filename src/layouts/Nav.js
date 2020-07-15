@@ -287,6 +287,7 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 					top={searchBarBottom}
 					left={searchBarLeft}
 					width={searchBarWidth}
+					onMouseLeave={() => setAreSearchResultsOpen(false)}
 				>
 					{/* it checks if there are search results and then */}
 					{/* displays "no results found", the results or nothing */}
