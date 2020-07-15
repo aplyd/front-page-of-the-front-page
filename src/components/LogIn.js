@@ -6,17 +6,35 @@ import { logInExistingUser } from '../firebase';
 
 import useInitialFocus from '../hooks/useInitialFocus';
 
-const WordsContainer = styled.div`
-	width: 432px;
+const Container = styled.div`
 	left: 0;
+	right: 0;
+	height: 100%;
+`;
+
+const FormContainer = styled.div`
+	width: 100%;
 	height: 100%;
 	padding-left: 24px;
+	max-width: 432px;
+
+	@media screen and (max-width: 500px) {
+		margin: 0 auto;
+		padding: 8px 0 8px 0;
+		width: calc(100% - 24px);
+	}
+`;
+
+const Form = styled.form`
+	width: 100%;
 `;
 
 const Input = styled.input`
 	font-size: ${(props) => props.theme.font.size.m};
-	width: 392px;
-	padding: 8px 24px 8px 16px;
+	width: 100%;
+	max-width: calc(100% - 34px);
+	display: block;
+	padding: 8px 16px 8px 16px;
 	border-radius: 4px;
 	text-indent: 10px;
 	outline: none;
@@ -79,32 +97,34 @@ export default function LogIn({ showSignUp, closeModal }) {
 	};
 
 	return (
-		<WordsContainer>
-			<Title>Sign In</Title>
-			<form onSubmit={logInUser}>
-				<EmailInput
-					type="email"
-					focus
-					required
-					placeholder="Email"
-					vale={email}
-					onChange={(e) => setEmail(e.target.value)}
-					ref={input}
-					maxLength="64"
-				/>
-				<PasswordInput
-					type="password"
-					required
-					placeholder="Password"
-					vale={password}
-					onChange={(e) => setPassword(e.target.value)}
-					maxLength="128"
-				/>
-				<SignInBtn type="submit">Sign In</SignInBtn>
-			</form>
-			<P1>Don't have an account?</P1>
-			<P2 onClick={() => showSignUp()}>SIGN UP</P2>
-		</WordsContainer>
+		<Container>
+			<FormContainer>
+				<Title>Sign In</Title>
+				<Form onSubmit={logInUser}>
+					<EmailInput
+						type="email"
+						focus
+						required
+						placeholder="Email"
+						vale={email}
+						onChange={(e) => setEmail(e.target.value)}
+						ref={input}
+						maxLength="64"
+					/>
+					<PasswordInput
+						type="password"
+						required
+						placeholder="Password"
+						vale={password}
+						onChange={(e) => setPassword(e.target.value)}
+						maxLength="128"
+					/>
+					<SignInBtn type="submit">Sign In</SignInBtn>
+				</Form>
+				<P1>Don't have an account?</P1>
+				<P2 onClick={() => showSignUp()}>SIGN UP</P2>
+			</FormContainer>
+		</Container>
 	);
 }
 

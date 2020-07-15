@@ -58,6 +58,9 @@ const PostP = styled.p`
 			: props.theme.colors.gray};
 	padding-top: 20px;
 	font-size: 16px;
+	@media screen and (max-width: 400px) {
+		padding-bottom: 16px;
+	}
 	/* padding: 24px 0 12px 10%; */
 `;
 
@@ -90,13 +93,11 @@ export default function Submit() {
 	const { user, setUser, setPosts, posts } = useContext(PostContext);
 	const history = useHistory();
 
-	console.log('TODO - this probably doesnt need to be async');
 	const onSubmit = async (media = null) => {
 		const timestamp = Date.now();
 		const postID = uuidv4();
 
 		//fetch post preview
-		//TODO - this probably doesn't need to be async either
 		const getPreviewImage = async () => {
 			const image = await axios
 				.get(

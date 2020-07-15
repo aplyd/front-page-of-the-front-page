@@ -45,6 +45,11 @@ const CommentInputContainer = styled.div`
 	margin-right: 64px;
 	margin-top: 16px;
 	padding-left: 8px;
+	outline: red solid 1px;
+	@media screen and (max-width: 475px) {
+		grid-column: 1 / 3;
+		margin-right: 8px;
+	}
 `;
 
 const CommentAsDisplayName = styled.p`
@@ -72,6 +77,10 @@ export const CommentTextArea = styled.textarea`
 	max-width: 95%;
 	outline: none;
 	border: none;
+	@media screen and (max-width: 420px) {
+		padding-left: 0;
+		max-width: 96%;
+	}
 `;
 
 export const CommentBtn = styled.button`

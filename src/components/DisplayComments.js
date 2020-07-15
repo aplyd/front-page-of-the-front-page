@@ -15,11 +15,7 @@ import {
 } from '../utils';
 import firebase from '../firebase';
 import formatDistance from 'date-fns/formatDistance';
-import {
-	CommentTextAreaContainer,
-	CommentTextArea,
-	CommentBtn,
-} from './PostContent';
+import { CommentTextArea, CommentBtn } from './PostContent';
 
 const Card = styled.div`
 	display: grid;
@@ -69,6 +65,23 @@ const ReplyInputContainer = styled.div`
 		val = val.toString() + 'px';
 		return val;
 	}};
+	@media screen and (max-width: 600px) {
+		margin-right: 8px;
+		padding-left: 40px;
+	}
+	outline: solid blue 1px;
+`;
+
+const ReplyTextAreaContainer = styled.div`
+	margin-top: 4px;
+	padding-left: 8px;
+	border-radius: 4px;
+	&&:hover {
+		border: solid 0.5px black;
+	}
+	border: solid 0.5px black;
+	position: relative;
+	outline: solid red 1px;
 `;
 
 const CancelBtn = styled.button`
@@ -154,15 +167,21 @@ export default function DisplayComments({
 	};
 
 	const deleteComment = () => {
-		const withDeleted = setCommentAsDeleted(post, comment.id);
+		const confirm = window.confirm(
+			'Are you sure you want to delete this comment? There is no undo.'
+		);
 
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.update({ replies: withDeleted })
-			.then(() => setPostData({ ...post, replies: withDeleted }))
-			.catch((err) => console.log(err));
+		if (confirm) {
+			const withDeleted = setCommentAsDeleted(post, comment.id);
+
+			firebase
+				.firestore()
+				.collection('posts')
+				.doc(post.id)
+				.update({ replies: withDeleted })
+				.then(() => setPostData({ ...post, replies: withDeleted }))
+				.catch((err) => console.log(err));
+		}
 	};
 
 	const castCommentVote = (e, direction) => {
@@ -221,10 +240,14 @@ export default function DisplayComments({
 	};
 
 	const displayReplyContainer = () => {
-		if (user.isSignedIn) {
+		if (comment.depth >= 3) {
+			return alert(
+				'Sorry, deeply nested replies are currently disabled.'
+			);
+		} else if (user.isSignedIn) {
 			return (
 				<ReplyInputContainer depth={comment.depth}>
-					<CommentTextAreaContainer>
+					<ReplyTextAreaContainer>
 						<CommentTextArea
 							placeholder="What are your thoughts?"
 							value={replyInput}
@@ -243,11 +266,11 @@ export default function DisplayComments({
 						>
 							comment
 						</CommentBtn>
-					</CommentTextAreaContainer>
+					</ReplyTextAreaContainer>
 				</ReplyInputContainer>
 			);
 		} else {
-			return null;
+			setModalContent('signup');
 		}
 	};
 
@@ -281,12 +304,13 @@ export default function DisplayComments({
 					<CommentBody>
 						{comment.deleted ? '[deleted]' : comment.commentInput}
 					</CommentBody>
+
 					<BtnContainer>
 						<Btn onClick={(e) => setIsReplyContainerOpen(true)}>
 							<CommentSVG as={FaCommentAlt} />
 							Reply
 						</Btn>
-						<Btn style={{ cursor: 'no-drop' }}>Share</Btn>
+						{/* <Btn style={{ cursor: 'no-drop' }}>Share</Btn> */}
 						{user.username === comment.username ? (
 							<Btn onClick={() => deleteComment()}>Delete</Btn>
 						) : null}

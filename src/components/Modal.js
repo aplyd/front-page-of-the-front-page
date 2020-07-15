@@ -20,10 +20,17 @@ const Background = styled.div`
 `;
 const Foreground = styled.div`
 	height: 550px;
-	width: 750px;
+	width: 100%;
+	max-width: 750px;
 	margin: auto;
 	border-radius: 4px;
 	background: white;
+	@media screen and (max-width: 750px) {
+		width: calc(100% - 32px);
+	}
+	@media screen and (max-width: 375px) {
+		width: calc(100% - 16px);
+	}
 `;
 
 const Container = styled.div`
@@ -41,6 +48,9 @@ const Art = styled.div`
 	background-color: lightgrey;
 	border-top-left-radius: 4px;
 	border-bottom-left-radius: 4px;
+	@media screen and (max-width: 600px) {
+		display: none;
+	}
 `;
 
 const Content = styled.div`
