@@ -94,7 +94,7 @@ export default function CreatePost({
 					onSubmit(res);
 				} else {
 					alert(
-						'invalid media, only youtube links and image formats (.jpeg, .jpg, .png, .gif) currently supported '
+						'Invalid media, only youtube links and image formats (.jpeg, .jpg, .png, .gif) currently supported'
 					);
 				}
 			});

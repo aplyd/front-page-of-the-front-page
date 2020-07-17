@@ -108,7 +108,7 @@ export default function Submit() {
 			return image;
 		};
 
-		const submitPost = (img = null, media = null) => {
+		const submitPost = ({ img = null, media = null }) => {
 			//add post data to firebase and 'posts' state to immediately display
 			firebase
 				.firestore()
@@ -148,6 +148,7 @@ export default function Submit() {
 					]);
 				});
 
+			// add post to user profile
 			firebase
 				.firestore()
 				.collection('users')
@@ -165,6 +166,7 @@ export default function Submit() {
 					],
 				});
 
+			// get added users
 			firebase
 				.firestore()
 				.collection('users')
@@ -196,7 +198,7 @@ export default function Submit() {
 				const img = await getPreviewImage();
 				submitPost(img);
 			} else {
-				submitPost();
+				submitPost({ media });
 			}
 			//add post data to firebase and 'posts' state to immediately display
 			setTitle('');

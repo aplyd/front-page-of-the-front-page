@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
@@ -63,10 +63,9 @@ const LinkContainer = styled.div`
 `;
 
 const MediaPreview = ({ title, media }) => {
-	const mediaUrl = useRef(media.url);
-	const shortenedUrl = media.url
-		.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
-		.split('/')[0];
+	const shortenedUrl =
+		media &&
+		media.url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0];
 
 	return (
 		<Container>
@@ -74,18 +73,18 @@ const MediaPreview = ({ title, media }) => {
 
 			{media.mediaType === 'image' && (
 				<ImageContainer>
-					<Image src={mediaUrl.current} alt={title} />
+					<Image src={media.url} alt={title} />
 				</ImageContainer>
 			)}
 			{media.mediaType === 'video' && (
 				<React.Fragment>
 					<LinkContainer>
-						<a href={mediaUrl.current}>{shortenedUrl} </a>
+						<a href={media.url}>{shortenedUrl} </a>
 						<FaExternalLinkAlt />
 					</LinkContainer>
 					<VideoContainer>
 						<Video
-							src={mediaUrl.current}
+							src={media.url}
 							width="100%"
 							padding-top="100%"
 							scrolling="no"
