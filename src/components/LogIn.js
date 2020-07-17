@@ -3,6 +3,7 @@ import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../PostContext';
 import { logInExistingUser } from '../firebase';
+import { InvalidInputNotification, NotificationSpacer } from './SignUp';
 
 import useInitialFocus from '../hooks/useInitialFocus';
 
@@ -80,7 +81,14 @@ const P2 = styled.p`
 	color: ${(props) => props.theme.colors.blue};
 `;
 
-export default function LogIn({ showSignUp, closeModal }) {
+export default function LogIn({
+	showSignUp,
+	closeModal,
+	setModalContent,
+	isAuthErrorShown,
+	setIsAuthErrorShown,
+}) {
+	// pass open modal here
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const { setUser, user } = useContext(PostContext);
@@ -89,11 +97,24 @@ export default function LogIn({ showSignUp, closeModal }) {
 
 	const logInUser = (e) => {
 		e.preventDefault();
-		logInExistingUser(email, password, setUser, user);
+		logInExistingUser(
+			email,
+			password,
+			setUser,
+			user,
+			setModalContent,
+			setIsAuthErrorShown
+		); // replace null with modal open
 
 		setEmail('');
 		setPassword('');
 		closeModal();
+	};
+
+	const resetAuthError = () => {
+		if (isAuthErrorShown) {
+			setIsAuthErrorShown(false);
+		}
 	};
 
 	return (
@@ -101,13 +122,23 @@ export default function LogIn({ showSignUp, closeModal }) {
 			<FormContainer>
 				<Title>Sign In</Title>
 				<Form onSubmit={logInUser}>
+					{isAuthErrorShown ? (
+						<InvalidInputNotification>
+							Password and/or email incorrect.
+						</InvalidInputNotification>
+					) : (
+						<NotificationSpacer />
+					)}
 					<EmailInput
 						type="email"
 						focus
 						required
 						placeholder="Email"
 						vale={email}
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={(e) => {
+							setEmail(e.target.value);
+							resetAuthError();
+						}}
 						ref={input}
 						maxLength="64"
 					/>
@@ -116,7 +147,10 @@ export default function LogIn({ showSignUp, closeModal }) {
 						required
 						placeholder="Password"
 						vale={password}
-						onChange={(e) => setPassword(e.target.value)}
+						onChange={(e) => {
+							setPassword(e.target.value);
+							resetAuthError();
+						}}
 						maxLength="128"
 					/>
 					<SignInBtn type="submit">Sign In</SignInBtn>

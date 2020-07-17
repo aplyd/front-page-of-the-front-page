@@ -63,13 +63,13 @@ const P2 = styled.p`
 	color: ${(props) => props.theme.colors.blue};
 `;
 
-const InvalidInputNotification = styled.p`
+export const InvalidInputNotification = styled.p`
 	color: ${(props) => props.theme.colors.red};
 	font-size: ${(props) => props.theme.font.size.xs};
 	padding-bottom: 4px;
 `;
 
-const NotificationSpacer = styled.div`
+export const NotificationSpacer = styled.div`
 	height: 14px;
 	padding-bottom: 4px;
 `;

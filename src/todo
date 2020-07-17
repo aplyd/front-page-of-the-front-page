@@ -79,13 +79,17 @@
             -̶ ̶o̶n̶l̶y̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶p̶o̶s̶t̶s̶ ̶a̶t̶ ̶a̶ ̶t̶i̶m̶e̶,̶ ̶o̶r̶d̶e̶r̶e̶d̶ ̶b̶a̶s̶e̶d̶ ̶o̶n̶ ̶s̶o̶r̶t̶B̶y̶,̶ ̶t̶h̶e̶n̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶m̶o̶r̶e̶ ̶o̶n̶ ̶s̶c̶r̶o̶l̶l̶
             -̶ ̶F̶I̶X̶ ̶u̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶/̶s̶e̶t̶U̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶ ̶a̶n̶t̶i̶p̶a̶t̶t̶e̶r̶n̶!̶!̶!̶
            -̶ ̶n̶o̶ ̶n̶e̶e̶d̶ ̶t̶o̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶o̶f̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶a̶l̶r̶e̶a̶d̶y̶ ̶h̶a̶v̶e̶ ̶t̶h̶a̶t̶ ̶d̶a̶t̶a̶ ̶s̶t̶o̶r̶e̶d̶ ̶i̶n̶ ̶s̶t̶a̶t̶e̶
+(̶(̶)̶)̶ ̶w̶h̶e̶n̶ ̶c̶r̶e̶a̶t̶i̶n̶g̶ ̶a̶ ̶u̶s̶e̶r̶,̶ ̶s̶t̶o̶r̶e̶ ̶t̶h̶e̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶a̶ ̶s̶e̶p̶e̶r̶a̶t̶e̶ ̶l̶i̶s̶t̶ ̶s̶o̶ ̶t̶h̶a̶t̶ ̶l̶i̶s̶t̶ ̶c̶a̶n̶ ̶b̶e̶ ̶c̶h̶e̶c̶k̶e̶d̶ ̶l̶a̶t̶e̶r̶ ̶t̶o̶ ̶a̶v̶o̶i̶d̶ ̶d̶u̶p̶l̶i̶c̶a̶t̶e̶ ̶n̶a̶m̶e̶s̶
 
-(()) handle errors logging in by displaying error - wrong email/password, network error, etc.
+
+(̶(̶)̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶e̶r̶r̶o̶r̶s̶ ̶l̶o̶g̶g̶i̶n̶g̶ ̶i̶n̶ ̶b̶y̶ ̶d̶i̶s̶p̶l̶a̶y̶i̶n̶g̶ ̶e̶r̶r̶o̶r̶ ̶-̶ ̶w̶r̶o̶n̶g̶ ̶e̶m̶a̶i̶l̶/̶p̶a̶s̶s̶w̶o̶r̶d̶,̶ ̶n̶e̶t̶w̶o̶r̶k̶ ̶e̶r̶r̶o̶r̶,̶ ̶e̶t̶c̶.̶
 (()) handle when user logs in accidentally on the sign up modal (right now is still signs them in without showing error)
-(()) upvoting shouldn't reload the images
-(()) state change shouldn't reload images (opening modal)
 
-(()) when creating a user, store the username in a seperate list so that list can be checked later to avoid duplicate names
+(()) finish sidebar content
+    - load user and post count to display
+    - when on mobile, sidebar becomes a pinned posts
+    - add a "more resources" section for links to social media
+    - add a "more info" with technologies used
 
 ((last)) 
     -̶ ̶r̶e̶m̶o̶v̶e̶ ̶a̶l̶l̶ ̶D̶a̶t̶e̶.̶n̶o̶w̶(̶)̶ ̶f̶o̶r̶ ̶i̶n̶d̶e̶x̶ ̶o̶r̶ ̶u̶u̶i̶d̶
@@ -99,15 +103,9 @@
     - figure out hosting with routing
     - delete sandbox.js and test
 
-(()) finish sidebar content
-    - load user and post count to display
-    - when on mobile, sidebar becomes a pinned posts
-    - add a "more resources" section for links to social media
-    - add a "more info" with technologies used
-
 [[[[[[[]]]]]]] ROADMAP [[[[[[[]]]]]]]
 () pagination
-() fix image/iframe re-renders on state change (modal open, voting, etc.)
+() fix performance state performance issues. ie. image & iframe re-renders on state change (modal open, voting, etc.)
 () add tensorFlow to detect toxic posts/comments
 () allow for editing comments
 () allow for login via username by getting their email from firebase (make request, search through all user objects to get email)

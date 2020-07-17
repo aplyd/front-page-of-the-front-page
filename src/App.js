@@ -30,6 +30,7 @@ function App() {
 	const [sortBy, setSortBy] = useState('TIME_ASC');
 	//adding this to fetch the needed post comments when clicked
 	const [postData, setPostData] = useState();
+	const [isAuthErrorShown, setIsAuthErrorShown] = useState(false);
 
 	//get list of posts from firebase
 	useEffect(() => {
@@ -180,6 +181,9 @@ function App() {
 					<LogIn
 						showSignUp={() => setModalContent('signup')}
 						closeModal={() => setModalContent(null)}
+						setModalContent={setModalContent}
+						isAuthErrorShown={isAuthErrorShown}
+						setIsAuthErrorShown={setIsAuthErrorShown}
 					/>
 				</Modal>
 			);
@@ -189,6 +193,7 @@ function App() {
 					<SignUp
 						showLogIn={() => setModalContent('login')}
 						closeModal={() => setModalContent(null)}
+						setModalContent={setModalContent}
 					/>
 				</Modal>
 			);
