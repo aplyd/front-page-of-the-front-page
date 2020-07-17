@@ -99,7 +99,7 @@ export default function CreatePost({
 				}
 			});
 		} else {
-			onSubmit(e);
+			onSubmit();
 		}
 	};
 
