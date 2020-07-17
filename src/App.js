@@ -209,7 +209,7 @@ function App() {
 				castPostVote,
 			}}
 		>
-			<Router>
+			<Router basename="fpotfp">
 				<GlobalStyle />
 				{displayModal()}
 				<Nav

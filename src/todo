@@ -68,6 +68,18 @@
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶a̶u̶t̶o̶ ̶s̶c̶r̶o̶l̶l̶T̶o̶T̶o̶p̶ ̶o̶n̶ ̶c̶o̶m̶m̶e̶n̶t̶i̶n̶g̶ ̶a̶n̶d̶ ̶v̶o̶t̶i̶n̶g̶
 (̶(̶)̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶c̶l̶i̶c̶k̶ ̶e̶v̶e̶n̶t̶s̶ ̶o̶n̶ ̶l̶i̶n̶k̶ ̶p̶r̶e̶v̶i̶e̶w̶s̶ ̶(̶o̶p̶e̶n̶ ̶p̶o̶s̶t̶ ̶v̶s̶ ̶g̶o̶ ̶t̶o̶ ̶l̶i̶n̶k̶)̶
 (̶(̶)̶)̶ ̶f̶i̶x̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶u̶s̶e̶r̶n̶a̶m̶e̶ ̶i̶n̶ ̶p̶r̶o̶f̶i̶l̶e̶ ̶d̶r̶o̶p̶d̶o̶w̶n̶
+    
+
+(̶(̶(̶!̶!̶!̶)̶)̶)̶ ̶n̶e̶e̶d̶ ̶t̶o̶ ̶m̶a̶n̶a̶g̶e̶ ̶n̶e̶t̶w̶o̶r̶k̶ ̶r̶e̶q̶u̶e̶s̶t̶s̶ ̶(̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶p̶i̶ ̶c̶a̶l̶l̶s̶)̶.̶
+            p̶o̶s̶s̶i̶b̶l̶y̶ ̶g̶e̶t̶ ̶o̶n̶l̶y̶ ̶a̶ ̶l̶i̶s̶t̶ ̶o̶f̶ ̶p̶o̶s̶t̶s̶ ̶w̶i̶t̶h̶o̶u̶t̶ ̶r̶e̶p̶l̶i̶e̶s̶ ̶f̶o̶r̶ ̶t̶h̶e̶ ̶f̶r̶o̶n̶t̶ ̶p̶a̶g̶e̶ ̶a̶n̶d̶ ̶o̶n̶l̶y̶ ̶l̶o̶a̶d̶
+            r̶e̶p̶l̶i̶e̶s̶ ̶w̶h̶e̶n̶ ̶p̶o̶s̶t̶ ̶i̶s̶ ̶c̶l̶i̶c̶k̶e̶d̶.̶ ̶a̶l̶s̶o̶,̶ ̶f̶i̶g̶u̶r̶e̶ ̶o̶u̶t̶ ̶h̶o̶w̶ ̶t̶o̶ ̶u̶s̶e̶ ̶t̶h̶e̶ ̶s̶n̶a̶p̶s̶h̶o̶t̶ ̶t̶o̶ ̶l̶i̶s̶t̶e̶n̶ ̶f̶o̶r̶ ̶u̶p̶d̶a̶t̶e̶s̶
+            a̶s̶ ̶o̶p̶p̶o̶s̶e̶d̶ ̶t̶o̶ ̶f̶o̶r̶c̶i̶n̶g̶ ̶a̶p̶i̶ ̶r̶e̶q̶u̶e̶s̶t̶s̶.̶ ̶
+            -̶ ̶w̶h̶e̶n̶ ̶v̶i̶e̶w̶i̶n̶g̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶a̶n̶o̶t̶h̶e̶r̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶r̶e̶q̶u̶e̶s̶t̶ ̶i̶s̶ ̶n̶o̶t̶ ̶n̶e̶e̶d̶e̶d̶ ̶b̶e̶c̶a̶u̶s̶e̶ ̶i̶ ̶a̶l̶r̶e̶a̶d̶y̶ ̶h̶a̶v̶e̶ ̶t̶h̶e̶ ̶
+            c̶o̶m̶m̶e̶n̶t̶s̶ ̶s̶t̶o̶r̶e̶d̶ ̶i̶n̶ ̶p̶o̶s̶t̶s̶ ̶c̶o̶n̶t̶e̶x̶t̶
+            -̶ ̶o̶n̶l̶y̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶p̶o̶s̶t̶s̶ ̶a̶t̶ ̶a̶ ̶t̶i̶m̶e̶,̶ ̶o̶r̶d̶e̶r̶e̶d̶ ̶b̶a̶s̶e̶d̶ ̶o̶n̶ ̶s̶o̶r̶t̶B̶y̶,̶ ̶t̶h̶e̶n̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶m̶o̶r̶e̶ ̶o̶n̶ ̶s̶c̶r̶o̶l̶l̶
+            -̶ ̶F̶I̶X̶ ̶u̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶/̶s̶e̶t̶U̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶ ̶a̶n̶t̶i̶p̶a̶t̶t̶e̶r̶n̶!̶!̶!̶
+           -̶ ̶n̶o̶ ̶n̶e̶e̶d̶ ̶t̶o̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶o̶f̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶a̶l̶r̶e̶a̶d̶y̶ ̶h̶a̶v̶e̶ ̶t̶h̶a̶t̶ ̶d̶a̶t̶a̶ ̶s̶t̶o̶r̶e̶d̶ ̶i̶n̶ ̶s̶t̶a̶t̶e̶
+
 (()) handle errors logging in by displaying error - wrong email/password, network error, etc.
 (()) handle when user logs in accidentally on the sign up modal (right now is still signs them in without showing error)
 (()) upvoting shouldn't reload the images
@@ -86,17 +98,6 @@
     - keep component + styles in own folder
     - figure out hosting with routing
     - delete sandbox.js and test
-    
-
-(̶(̶(̶!̶!̶!̶)̶)̶)̶ ̶n̶e̶e̶d̶ ̶t̶o̶ ̶m̶a̶n̶a̶g̶e̶ ̶n̶e̶t̶w̶o̶r̶k̶ ̶r̶e̶q̶u̶e̶s̶t̶s̶ ̶(̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶a̶p̶i̶ ̶c̶a̶l̶l̶s̶)̶.̶
-            p̶o̶s̶s̶i̶b̶l̶y̶ ̶g̶e̶t̶ ̶o̶n̶l̶y̶ ̶a̶ ̶l̶i̶s̶t̶ ̶o̶f̶ ̶p̶o̶s̶t̶s̶ ̶w̶i̶t̶h̶o̶u̶t̶ ̶r̶e̶p̶l̶i̶e̶s̶ ̶f̶o̶r̶ ̶t̶h̶e̶ ̶f̶r̶o̶n̶t̶ ̶p̶a̶g̶e̶ ̶a̶n̶d̶ ̶o̶n̶l̶y̶ ̶l̶o̶a̶d̶
-            r̶e̶p̶l̶i̶e̶s̶ ̶w̶h̶e̶n̶ ̶p̶o̶s̶t̶ ̶i̶s̶ ̶c̶l̶i̶c̶k̶e̶d̶.̶ ̶a̶l̶s̶o̶,̶ ̶f̶i̶g̶u̶r̶e̶ ̶o̶u̶t̶ ̶h̶o̶w̶ ̶t̶o̶ ̶u̶s̶e̶ ̶t̶h̶e̶ ̶s̶n̶a̶p̶s̶h̶o̶t̶ ̶t̶o̶ ̶l̶i̶s̶t̶e̶n̶ ̶f̶o̶r̶ ̶u̶p̶d̶a̶t̶e̶s̶
-            a̶s̶ ̶o̶p̶p̶o̶s̶e̶d̶ ̶t̶o̶ ̶f̶o̶r̶c̶i̶n̶g̶ ̶a̶p̶i̶ ̶r̶e̶q̶u̶e̶s̶t̶s̶.̶ ̶
-            -̶ ̶w̶h̶e̶n̶ ̶v̶i̶e̶w̶i̶n̶g̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶a̶n̶o̶t̶h̶e̶r̶ ̶f̶i̶r̶e̶b̶a̶s̶e̶ ̶r̶e̶q̶u̶e̶s̶t̶ ̶i̶s̶ ̶n̶o̶t̶ ̶n̶e̶e̶d̶e̶d̶ ̶b̶e̶c̶a̶u̶s̶e̶ ̶i̶ ̶a̶l̶r̶e̶a̶d̶y̶ ̶h̶a̶v̶e̶ ̶t̶h̶e̶ ̶
-            c̶o̶m̶m̶e̶n̶t̶s̶ ̶s̶t̶o̶r̶e̶d̶ ̶i̶n̶ ̶p̶o̶s̶t̶s̶ ̶c̶o̶n̶t̶e̶x̶t̶
-            -̶ ̶o̶n̶l̶y̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶p̶o̶s̶t̶s̶ ̶a̶t̶ ̶a̶ ̶t̶i̶m̶e̶,̶ ̶o̶r̶d̶e̶r̶e̶d̶ ̶b̶a̶s̶e̶d̶ ̶o̶n̶ ̶s̶o̶r̶t̶B̶y̶,̶ ̶t̶h̶e̶n̶ ̶f̶e̶t̶c̶h̶ ̶1̶0̶ ̶m̶o̶r̶e̶ ̶o̶n̶ ̶s̶c̶r̶o̶l̶l̶
-            -̶ ̶F̶I̶X̶ ̶u̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶/̶s̶e̶t̶U̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶ ̶a̶n̶t̶i̶p̶a̶t̶t̶e̶r̶n̶!̶!̶!̶
-           -̶ ̶n̶o̶ ̶n̶e̶e̶d̶ ̶t̶o̶ ̶f̶e̶t̶c̶h̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶o̶f̶ ̶a̶ ̶p̶o̶s̶t̶,̶ ̶a̶l̶r̶e̶a̶d̶y̶ ̶h̶a̶v̶e̶ ̶t̶h̶a̶t̶ ̶d̶a̶t̶a̶ ̶s̶t̶o̶r̶e̶d̶ ̶i̶n̶ ̶s̶t̶a̶t̶e̶
 
 (()) finish sidebar content
     - load user and post count to display
@@ -110,11 +111,3 @@
 () add tensorFlow to detect toxic posts/comments
 () allow for editing comments
 () allow for login via username by getting their email from firebase (make request, search through all user objects to get email)
-
-
-
-
-{{{{{{{{{{{{{{ TODO BEFORE SHIPPING }}}}}}}}}}}}}}
-
-(̶[̶]̶)̶ ̶f̶i̶x̶ ̶c̶s̶s̶ ̶f̶o̶r̶ ̶m̶o̶b̶i̶l̶e̶ ̶l̶a̶y̶o̶u̶t̶
-([]) only allow for one vote on each post
