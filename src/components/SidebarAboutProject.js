@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import firebase from '../firebase';
+import React from 'react';
 import { GiCakeSlice } from 'react-icons/gi';
 import styled from 'styled-components';
 import { roundedGreyBorder } from '../GlobalStyle';
+// import { PostContext } from './PostContext';
 
-const AboutContainer = styled.div`
+export const AboutContainer = styled.div`
 	background: white;
 	${roundedGreyBorder};
 `;
 
-const AboutProjectDiv = styled.div`
+export const AboutProjectDiv = styled.div`
 	background: ${(props) => props.theme.colorlightGray};
 	border-top-right-radius: 4px;
 	border-top-left-radius: 4px;
@@ -19,7 +19,7 @@ const AboutProjectDiv = styled.div`
 	}
 `;
 
-const Description = styled.p`
+export const Description = styled.p`
 	padding: 0 12px 12px 12px;
 	color: black;
 	font-size: 13px;
@@ -30,7 +30,7 @@ const Description = styled.p`
 	}
 `;
 
-const CreationDate = styled.div`
+export const CreationDate = styled.div`
 	display: inline;
 	padding: 12px 12px 0 12px;
 	&& > p {
@@ -38,15 +38,17 @@ const CreationDate = styled.div`
 	}
 `;
 
-const SVG = styled.svg`
+export const SVG = styled.svg`
 	transform: scaleX(-1);
 `;
 
-const Spacer = styled.div`
+export const Spacer = styled.div`
 	height: ${(props) => props.height + 'px'};
 `;
 
 export default function SidebarAboutProject() {
+	// const {listOfUsernames} = useContext(PostContext)
+
 	return (
 		<AboutContainer>
 			<AboutProjectDiv>

@@ -59,7 +59,9 @@ function App() {
 				})
 				.catch((err) => console.log(err));
 		};
+
 		subscribe();
+
 		return () => subscribe();
 	}, [sortBy]);
 
@@ -158,7 +160,6 @@ function App() {
 					.update({ postVotes: newUserVotes })
 					.catch((err) => {
 						console.log(err);
-						console.log('updated post votes in firebase');
 					});
 
 				firebase
@@ -214,7 +215,7 @@ function App() {
 				castPostVote,
 			}}
 		>
-			<Router basename="fpotfp">
+			<Router basename="front-page-of-the-front-page">
 				<GlobalStyle />
 				{displayModal()}
 				<Nav

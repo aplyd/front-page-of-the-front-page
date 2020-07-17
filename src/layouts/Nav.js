@@ -218,7 +218,6 @@ export default function Nav({ openModal, closeModal, viewPostComments }) {
 			.signOut()
 			.then(
 				() => {
-					console.log('Signed Out', user);
 					closeModal(null);
 					setUser(false);
 				},

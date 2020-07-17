@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-// import PostPreview from '../components/PostPreview';
 import PreviewContent from '../components/PreviewContent';
 import VoteContainer from '../components/VoteContainer';
 import { roundedGreyBorder } from '../GlobalStyle';

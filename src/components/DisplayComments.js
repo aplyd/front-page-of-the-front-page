@@ -69,7 +69,6 @@ const ReplyInputContainer = styled.div`
 		margin-right: 8px;
 		padding-left: 40px;
 	}
-	outline: solid blue 1px;
 `;
 
 const ReplyTextAreaContainer = styled.div`
@@ -81,7 +80,6 @@ const ReplyTextAreaContainer = styled.div`
 	}
 	border: solid 0.5px black;
 	position: relative;
-	outline: solid red 1px;
 `;
 
 const CancelBtn = styled.button`

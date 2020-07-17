@@ -83,25 +83,19 @@
 
 
 (̶(̶)̶)̶ ̶h̶a̶n̶d̶l̶e̶ ̶e̶r̶r̶o̶r̶s̶ ̶l̶o̶g̶g̶i̶n̶g̶ ̶i̶n̶ ̶b̶y̶ ̶d̶i̶s̶p̶l̶a̶y̶i̶n̶g̶ ̶e̶r̶r̶o̶r̶ ̶-̶ ̶w̶r̶o̶n̶g̶ ̶e̶m̶a̶i̶l̶/̶p̶a̶s̶s̶w̶o̶r̶d̶,̶ ̶n̶e̶t̶w̶o̶r̶k̶ ̶e̶r̶r̶o̶r̶,̶ ̶e̶t̶c̶.̶
-(()) handle when user logs in accidentally on the sign up modal (right now is still signs them in without showing error)
 
-(()) finish sidebar content
-    - load user and post count to display
-    - when on mobile, sidebar becomes a pinned posts
-    - add a "more resources" section for links to social media
-    - add a "more info" with technologies used
+    -̶ ̶l̶o̶a̶d̶ ̶u̶s̶e̶r̶ ̶a̶n̶d̶ ̶p̶o̶s̶t̶ ̶c̶o̶u̶n̶t̶ ̶t̶o̶ ̶d̶i̶s̶p̶l̶a̶y̶
+    -̶ ̶w̶h̶e̶n̶ ̶o̶n̶ ̶m̶o̶b̶i̶l̶e̶,̶ ̶s̶i̶d̶e̶b̶a̶r̶ ̶b̶e̶c̶o̶m̶e̶s̶ ̶a̶ ̶p̶i̶n̶n̶e̶d̶ ̶p̶o̶s̶t̶s̶
+    -̶ ̶a̶d̶d̶ ̶a̶ ̶"̶m̶o̶r̶e̶ ̶r̶e̶s̶o̶u̶r̶c̶e̶s̶"̶ ̶s̶e̶c̶t̶i̶o̶n̶ ̶f̶o̶r̶ ̶l̶i̶n̶k̶s̶ ̶t̶o̶ ̶s̶o̶c̶i̶a̶l̶ ̶m̶e̶d̶i̶a̶
+    -̶ ̶a̶d̶d̶ ̶a̶ ̶"̶m̶o̶r̶e̶ ̶i̶n̶f̶o̶"̶ ̶w̶i̶t̶h̶ ̶t̶e̶c̶h̶n̶o̶l̶o̶g̶i̶e̶s̶ ̶u̶s̶e̶d̶
 
 ((last)) 
     -̶ ̶r̶e̶m̶o̶v̶e̶ ̶a̶l̶l̶ ̶D̶a̶t̶e̶.̶n̶o̶w̶(̶)̶ ̶f̶o̶r̶ ̶i̶n̶d̶e̶x̶ ̶o̶r̶ ̶u̶u̶i̶d̶
     -̶ ̶r̶e̶m̶o̶v̶e̶ ̶u̶p̶d̶a̶t̶e̶P̶o̶s̶t̶s̶
-    - clean up code
-    - delete all unused variables
-    - go through all comments (search TODO)
-    - remove all console.log() statements
-    - seperate all components from style components and keep in individual files
-    - keep component + styles in own folder
-    - figure out hosting with routing
-    - delete sandbox.js and test
+    -̶ ̶c̶l̶e̶a̶n̶ ̶u̶p̶ ̶c̶o̶d̶e̶
+    -̶ ̶d̶e̶l̶e̶t̶e̶ ̶a̶l̶l̶ ̶u̶n̶u̶s̶e̶d̶ ̶v̶a̶r̶i̶a̶b̶l̶e̶s̶
+    -̶ ̶g̶o̶ ̶t̶h̶r̶o̶u̶g̶h̶ ̶a̶l̶l̶ ̶c̶o̶m̶m̶e̶n̶t̶s̶ ̶(̶s̶e̶a̶r̶c̶h̶ ̶T̶O̶D̶O̶)̶
+    -̶ ̶r̶e̶m̶o̶v̶e̶ ̶a̶l̶l̶ ̶c̶o̶n̶s̶o̶l̶e̶.̶l̶o̶g̶(̶)̶ ̶s̶t̶a̶t̶e̶m̶e̶n̶t̶s̶
 
 [[[[[[[]]]]]]] ROADMAP [[[[[[[]]]]]]]
 () pagination
@@ -109,3 +103,5 @@
 () add tensorFlow to detect toxic posts/comments
 () allow for editing comments
 () allow for login via username by getting their email from firebase (make request, search through all user objects to get email)
+() handle when user logs in accidentally on the sign up modal (right now is still signs them in without showing error)
+() finish sidebar content?

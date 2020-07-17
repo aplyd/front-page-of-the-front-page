@@ -15,7 +15,6 @@ const ImageContainer = styled.div`
 	}
 `;
 
-//TODO - change the `padding-right` property for mobile
 const Image = styled.img`
 	max-height: 512px;
 	max-width: 640px;

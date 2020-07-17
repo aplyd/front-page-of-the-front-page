@@ -107,7 +107,6 @@ export const validateMediaLink = (url) => {
 	//validate image works
 	function testImage(url, timeoutT) {
 		return new Promise(function (resolve, reject) {
-			console.log('in promise');
 			var timeout = timeoutT || 5000;
 			var timer,
 				img = new Image();

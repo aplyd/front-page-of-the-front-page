@@ -165,9 +165,6 @@ export default function Submit() {
 					],
 				});
 
-			console.log(
-				'//TODO - remove GET request and instead update state directly'
-			);
 			firebase
 				.firestore()
 				.collection('users')

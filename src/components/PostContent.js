@@ -45,7 +45,6 @@ const CommentInputContainer = styled.div`
 	margin-right: 64px;
 	margin-top: 16px;
 	padding-left: 8px;
-	outline: red solid 1px;
 	@media screen and (max-width: 475px) {
 		grid-column: 1 / 3;
 		margin-right: 8px;
